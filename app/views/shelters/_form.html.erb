@@ -1,0 +1,71 @@
+<%= form_for(:shelter, method: :create) do |f| %>
+
+<!--쉘터이름,자기소개,쉘터위치,쉘터종류 입력-->
+<div class="row">
+  <div class="col-lg-4 shelter_left_form">
+    <div class="field">
+
+      <%= f.label :name,"쉘터이름" %>
+      <br>
+      <%= f.text_field :name ,class:"form-control"%>
+    </div>
+    <div class="field">
+      <%= f.label :introduce,"자기소개" %>
+      <br>
+      <%= f.text_field :introduce ,class:"form-control"%>
+    </div>
+    
+    <div class="field">
+      <%= f.label :lonlat,"쉘터위치" %>
+      <br>
+      <%= f.text_field :lonlat, id: "lonlat",class:"form-control"%>
+    </div>
+    <div class="field">
+      <%= f.label :kind,"쉘터종류" %>
+      <br>
+      <%= f.select :kind, options_for_select([['블로그', 'blog'], ['커머스', 'commerce']], 1), {}, { :class => 'form-control' } %>
+    </div>
+  </div>
+  <!--쉘터이름,자기소개,쉘터위치,쉘터종류 입력 end-->
+<script type="text/javascript">
+/*$('#map_div').click(function() {
+SetLonlatEvents();
+});*/
+$(SetLonlatEvents);
+$(document).on('page:load',SetLonlatEvents);
+function SetLonlatEvents(){//쉘터 생성할때 좌표 지정하기 위한 메서드
+map.events.register("click", map, onClickMap);
+};
+function onClickMap(e){
+markers.clearMarkers();
+lonlat = map.getLonLatFromViewPortPx(e.xy);
+//lonlat.transform(pr_3857, pr_4326);//좌표변환하면 마커가 생성이 안된다.
+alert(lonlat);
+$("#lonlat").val(lonlat);
+/*addMarker(lonlat);*/
+/*marker*/
+var size = new Tmap.Size(21,25);
+var offset = new Tmap.Pixel(-(size.w/2), -size.h);
+var icon = new Tmap.Icon('<img src="123.jpg" style="z-index:9999px"/>',size,offset);
+/*var icon = new Tmap.IconHtml('<div class="shelter" style="border:10px solid black;"><div onClick="test1()" style="text-decoration: none; color: RED; font-size: 9pt;">AAAAAAAAA</div><div onClick="test2()"><img src="img/d.png" /></div><div onClick="test3()" style="text-decoration: none; color: BLUE; font-size: 9pt;">QQQQQQQQQQQQQQQQQQQqQ</div></div>',size,offset);*/
+var marker = new Tmap.Marker(lonlat,icon);
+markers.addMarker(marker);
+}
+</script>
+<!--쉘터등록map-->
+<div class="col-lg-8 shelter_right_form">
+  <div id="map_div" style="position:relative; width:100%px; height:400px; "></div>
+  <div class="field" style="display:none;">
+    <% Shelter.all.each do |shelter| %>
+    <div class="shelter_lonlat">
+      <%=shelter.lonlat%>
+    </div>
+    <% end %>
+  </div>
+</div>
+<!--쉘터등록map end-->
+</div>
+<div class="actions">
+  <%= f.submit("쉘터등록!_!", class:"btn btn-default btn-round btn-line shelter_reg_btn") %>
+</div>
+<% end %>

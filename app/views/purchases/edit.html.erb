@@ -1,0 +1,47 @@
+<h1>Editing purchase</h1>
+
+<%= form_for(@purchase) do |f| %>
+  <% if @purchase.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
+
+      <ul>
+      <% @purchase.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+
+      </ul>
+    </div>
+      
+  <% end %>
+
+         <%= f.hidden_field :product_id, class: 'form-control' %>
+         <%= f.hidden_field :user_id, class: 'form-control' %>
+          <%= f.label :수취인 %>
+         <%= f.label @purchase.receive_name, class: 'form-control' %>
+          <%= f.label :주소 %>
+         <%= f.label @purchase.addr, class: 'form-control' %>
+         <%= f.label :전화번호 %>
+          <%= f.label @purchase.phone %>
+         <%= f.label :phone, class: 'form-control' %>
+         
+         <%= f.label :memo, class: 'form-control' %>
+          <%= f.label @purchase.memo %>
+          <%= f.label :total_cost %>
+         <%= f.label :total_cost, class: 'form-control' %>
+          <%= f.label :trade_type %>
+         <%= f.label :trade_type, class: 'form-control' %>
+          <%= f.label :payer %>
+         <%= f.label :payer, class: 'form-control' %>
+          <%= f.label :status %>
+          <%= f.text_field :status %>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Show', @purchase %> |
+<%= link_to 'Back', purchases_path %>

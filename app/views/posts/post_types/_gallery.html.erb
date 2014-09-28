@@ -1,0 +1,24 @@
+<!--갤러리형 게시판-->
+<h2><%= params[:bulletin_id] %></h2><%= link_to '설정', edit_bulletin_path(params[:bulletin_id])%></small><!--보기방식 설정-->
+
+<% @posts.each do | post | %>
+    <div class='gallery'>
+      <!--<div class='picture'><#%= image_tag(post.picture_url) if post.picture? %></div>--><!--image_tag와 같은 tag관련 내용은 공식홈페이지에 잘 나와있다-->
+      <div class="picture"><%= image_tag(post.picture_url(:thumb)) if post.picture? %></div><!--썸네일 형식으로 호출-->
+      <div class='title'><%= post.title %> <small>( <%= post.comments.size %> )</small></div>
+      <div class='content'><%= simple_format post.content %></div>
+      <% if post.tag_list.size > 0 %>
+      <div class='tag_list'><%= icon('tags') + " " + tag_icons(post.tag_list) %></div>
+      <% end %>
+      <div>
+          <%= link_to 'Show', [post.bulletin, post], class:'btn btn-default' %>
+          <%= link_to 'Edit', edit_bulletin_post_path(post.bulletin, post), class:'btn btn-default' %>
+          <%= link_to 'Destroy', [post.bulletin, post], method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-default' %>
+      </div>
+    </div>
+<% end %>
+
+<br>
+
+<%= link_to 'New Post', new_bulletin_post_path, class: 'btn btn-default' %>
+

@@ -1,0 +1,12 @@
+.popup_modal_wrap{
+	position: fixed;
+	/* left: 100px; */
+	/* top:-150px; */
+	/* margin: 100px auto; */
+	width:200px;
+	height:64px;
+	border-radius:5px;
+	z-index: 3000;
+	opacity: 0.95;
+	background-color: black;
+}

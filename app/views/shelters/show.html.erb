@@ -1,0 +1,52 @@
+<div class="content_ab">	
+	<div class="row">
+		<!--profile_wrap 김수겸 19.09.21-->
+		<div class="col-lg-2">
+			<%= render 'profile/profile'%>
+		</div>
+		<!--profile_wrap end-->
+
+		<!--myhouse_wrap 김수겸 19.09.21-->
+		<div class="col-lg-9">
+			<div class="house_wrap">
+				<div class="house_head">
+					<h2 style="float:left;"><strong><%= @shelter.name %></strong></h2>
+					<div class="shelter_status">
+						<p >위치 : <strong><%= @shelter.lonlat %></strong></p>
+						<p >쉘터타입 : <strong><%= @shelter.kind %></strong></p>			
+					</div>
+				</div>
+				<div class="house_body">
+					<div class="labels">
+
+				<div id="label1" class="label" href="#">					
+					<%= link_to '내게시판',shelter_bulletins_path(@shelter) %>
+					
+				</div>
+				<div id="label2" class="label">
+					<%=link_to "내커머스",commerce_path%>
+				</div>
+				<div id="label3" class="label" href="#">
+					<%= link_to '내블로그', blog_url%>
+					
+				</div>
+				<div id="label4" class="label" href="#"><a href="">호핀</a>
+					
+				</div>
+				<div id="label5" class="label" href="#"><a href="">멜론</a>
+					
+				</div>
+				<div id="label6" class="label" href="#"><a href="">Safe Room</a>					
+				</div>				
+			</div>			
+				</div>				
+			</div>
+			
+		</div>
+		<!--myhouse_wrap end-->
+		<script type="text/javascript">
+		
+		</script>		
+	</div>
+</div>
+

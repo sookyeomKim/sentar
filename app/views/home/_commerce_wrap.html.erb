@@ -1,0 +1,136 @@
+<div id="commerce_wrap" class="" style="display:block;">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="navbar navbar-default list_bar" role="navigation">
+        <div class="">
+          <ul class="nav nav-pills">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown">전체 </a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown">지역 <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">Action</a>
+                </li>
+                <li>
+                  <a href="#">Another action</a>
+                </li>
+                <li>
+                  <a href="#">Something else here</a>
+                </li>
+                <li>
+                  <a href="#">Separated link</a>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown">패션&#149;뷰티 <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">Action</a>
+                </li>
+                <li>
+                  <a href="#">Another action</a>
+                </li>
+                <li>
+                  <a href="#">Something else here</a>
+                </li>
+                <li>
+                  <a href="#">Separated link</a>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown">쇼핑 <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">Action</a>
+                </li>
+                <li>
+                  <a href="#">Another action</a>
+                </li>
+                <li>
+                  <a href="#">Something else here</a>
+                </li>
+                <li>
+                  <a href="#">Separated link</a>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown">컬쳐&#149;스포츠 <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">Action</a>
+                </li>
+                <li>
+                  <a href="#">Another action</a>
+                </li>
+                <li>
+                  <a href="#">Something else here</a>
+                </li>
+                <li>
+                  <a href="#">Separated link</a>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle"
+              data-toggle="dropdown">여행&#149;레저 <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">Action</a>
+                </li>
+                <li>
+                  <a href="#">Another action</a>
+                </li>
+                <li>
+                  <a href="#">Something else here</a>
+                </li>
+                <li>
+                  <a href="#">Separated link</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--<hr>-->
+  <div class="row">
+    <div class="col-md-3 col-md-offset-1">
+      <a href="#" class="btn btn-warning btn-line btn-sm">주변검색</a>
+    </div>
+    <div class="col-md-5 col-md-offset-3">
+      <div class="horizon_array_menu_v">
+        <ul>
+          <li>
+            <div class="common_select_btn_100px">
+              <%= select_tag"select_commerce_query", options_for_select([["최신등록순",0],["댓글순",1],["추천순",2]]),class:'btn btn-sm btn-default'%>
+            </div>
+          </li>
+          <li>
+            <div class="common_select_btn_100px">
+              <%= select_tag "select_commerce_query_secon",options_for_select([["전체보기",0],["판매자랭킹순",1],["높은가격순",2],["낮은가격순",3],["할인율높은순",4]]), class: 'btn btn-sm btn-default'%>
+              <!--<%= select(:item, :item_type, options_for_select([["전체보기",1],["가격높은순",2],["추천순",3]],params[:per_page].to_i), {}, :class => "myclass") %>-->
+              <!--<%= select_tag "people", "<option>David</option>".html_safe %>-->
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="vertical_array_menu">
+    <ul>
+    <%= render @products %>
+</ul>
+  </div>
+</div>

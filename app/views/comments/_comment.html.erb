@@ -1,0 +1,9 @@
+<li id="comment_<%=comment.id %>">
+  <%= comment.body %>,
+  <%= time_ago_in_words(comment.created_at) %> ago
+  <%= link_to icon('remove-circle'), [comment.post, comment], method: :delete, remote: true, data: { confirm: "Are you sure?" } %><!--댓글 제거를 위한 링크. remote: true 옵션 사용
+                                                                                                                                      comments#destroy 액션이 호출된 후 
+                                                                                                                                      destroy.js.erb 파일을 렌더링한 후 
+                                                                                                                                      destroy.js 파일을 응답-->
+                                                                                                                                    <!--icon 헬퍼 메소드 app/helpers/application_helper.rb-->
+</li>

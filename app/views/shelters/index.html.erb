@@ -1,0 +1,30 @@
+<div class="shelter_wrap">
+  <div class="shelter_create_wrap">
+<table>
+  <thead style="display:none;">
+    <tr>
+      <th>Name</th>
+      <th>Introduce</th>
+      <th>Lonlat</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shelters.each do |shelter| %>
+      <tr>
+        <td><%= shelter.name %></td>
+        <td><%= shelter.introduce %></td>
+        <td><%= shelter.lonlat %></td>
+        <td><%= shelter.kind %></td>
+        <td><%= link_to 'Show', shelter %></td>
+        <td><%= link_to 'Edit', edit_shelter_path(shelter) %></td>
+        <td><%= link_to 'Destroy', shelter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to '쉘터만들기', new_shelter_path, class:"btn btn-default btn-round btn-line btn-lg"%>
+</div>
+</div>

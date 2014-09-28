@@ -1,0 +1,7 @@
+<!--새로고침을 하지않고 새 댓글을 표시-->
+<% if @comment.errors.size == 0 %><!--에러가 없을시-->
+  $('<%=j render @comment %>').appendTo($("#comments_list_<%=@post.id %>")).hide().fadeIn('fast');<!--삽입-->
+  $("#comments_form_<%=@post.id %> form")[0].reset();
+<% else %>
+  alert("Please submit after commenting...");
+<% end %>

@@ -1,0 +1,105 @@
+<!--main wrap 김수겸 14.09.11-->
+<div class="content_ab">
+	<!-- 여기 tmap호환문제 있어서 코드 추가합니다. 우리 수겸이 여기 shelter이미지 만들어야됭-->
+x <script type="text/javascript">
+
+ </script>
+	<!-- tmap div 김수겸 14.09.11-->
+	<div id="map_div" class="map_wrap">
+		<!-- 전체,커머스,블로그 버튼 김수겸 14.09.11 -->
+		<div class="nav_btn" id="type_btn">
+			<div class="btn-group">
+				<a type="button" class="btn btn-default"
+				onclick="view_all();return false;">전체</a>
+				<a type="button" class="btn btn-default"
+				onclick="view_commerce();return false;">커머스</a>
+				<a type="button" class="btn btn-default"
+				onclick="view_blog();return false;">블로그</a>
+			</div>
+		</div>
+		<!-- 잔체,커머스,블로그 버튼 end -->
+
+		<!--전체,커머스,블로그 버튼 JS 김수겸 14.09.12-->
+		<script type="text/javascript" >
+			function view_all() {
+				$(this).click(function() {
+					$("#all_wrap").show();
+					$("#commerce_wrap").hide();
+					$("#blog_wrap").hide();
+					$('#map_div').css('width', '45%');
+					$('#list_wrap').css('width', '55%');
+				});
+			}
+
+			function view_commerce() {
+				$(this).click(function() {
+					$("#all_wrap").hide();
+					$("#commerce_wrap").show();
+					$("#blog_wrap").hide();
+					$('#map_div').css('width', '45%');
+					$('#list_wrap').css('width', '55%');
+				});
+			}
+
+			function view_blog() {
+				$(this).click(function() {
+					$("#all_wrap").hide();
+					$("#blog_wrap").show();
+					$("#commerce_wrap").hide();
+					$('#map_div').css('width', '45%');
+					$('#list_wrap').css('width', '55%');
+				});
+			}
+		</script>
+		<!--전체,커머스,블로그 버튼 JS end-->
+
+		<!--<button id="fold_list"class="btn btn-info fold_btn" style="display:block;">지도확대</button>
+		<script type="text/javascript">
+		$(function() {
+		var state = true;
+		var map_width;
+		$( "#fold_list" ).click(function() {
+		if ( state ) {
+		$("#list_wrap").hide( "slide", { direction: "right" }, 200 );
+		map_width=setTimeout("$('#map_div').css( 'width', '100%' )", 200);
+		} else {
+		$('#map_div').css( 'width', '45%' )
+		$("#list_wrap").show( "slide", { direction: "right" }, 200 );
+
+		}
+		state = !state;
+		});
+		});
+		</script>-->
+	</div>
+	<!--tmap div 김수겸 end-->
+
+	<!--list_wrap 김수겸 14.09.11-->
+	<div class="list_wrap content">
+		<!--전체-->
+		<%= render 'all_wrap'%>
+		<!--전체 end-->
+
+		<!--커머스-->
+		<%= render 'commerce_wrap'%>
+		<!--커머스 end-->
+
+		<!--블로그-->
+		<%= render 'blog_wrap'%>
+		<!--블로그 end-->
+	</div>
+	<!--list_wrap end-->
+	
+</div>
+<!--main wrap end-->	
+
+
+
+
+<div class="field" style="display: hidden;"><!-- 이거 나중에 바꾸자. 반드시 -->
+  <% @shelters.each do |shelter| %>
+    <div class="shelter_lonlat">
+      <%=shelter.lonlat%>
+    </div>
+  <% end %>
+</div>

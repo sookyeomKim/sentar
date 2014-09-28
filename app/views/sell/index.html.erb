@@ -1,0 +1,27 @@
+<h1>Listing purchases</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @purchases.each do |purchase| %>
+      <tr>
+      	<br>
+      	<br>
+      	<td>주문 번호<%=purchase.id %></td>
+      	<td>주문자 : <%=purchase.user.name %></td>
+      
+      	<td>주소<%=purchase.addr %></td>
+           <td>전화번호:<%=purchase.phone %></td>
+      	
+        <td><%= link_to 'Show', purchase %></td>
+        <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
+        <td><%= link_to 'Destroy', purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

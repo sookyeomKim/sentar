@@ -1,0 +1,33 @@
+.mini_nav_wrap{
+	position: fixed;
+	left: 0;
+	top:180px;
+	width:140px;
+	height:220px;
+	border-radius:5px;
+	z-index: 1000;
+	opacity: 0.8;
+	background-color: black;
+}
+
+.mini_nav {
+	margin:10px;
+}
+.mini_nav ul{
+	display:table;
+}
+.mini_nav li{
+	display:table-row;
+}
+
+/*#mini_nav {
+	width: 300px;
+	margin: 100px auto;
+}
+*/
+.mini_nav_list {
+	width: 130px;
+	border-radius:0;
+	color:#FFF;
+}
+

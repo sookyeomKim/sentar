@@ -1,0 +1,84 @@
+<div id="blog_wrap" class="" style="display:none;">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="navbar navbar-default list_bar" role="navigation">
+				<div class="">
+					<ul class="nav nav-pills">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">모든 주제<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#">Action</a>
+								</li>
+								<li>
+									<a href="#">Another action</a>
+								</li>
+								<li>
+									<a href="#">Something else here</a>
+								</li>
+								<li>
+									<a href="#">Separated link</a>
+								</li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">영화</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">요리</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">책</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">여행</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--<hr>-->
+	<div class="row">
+		<div class="col-md-3 col-md-offset-1">
+			<a href="#" class="btn btn-warning btn-line btn-sm">주변검색</a>
+		</div>
+		<div class="col-md-5 col-md-offset-3">
+			<div class="horizon_array_menu">
+				<div class="common_select_btn_100px">
+					<%= select_tag"select_commerce_query", options_for_select([["최신등록순",0],["댓글순",1],["추천순",2]]),class:'btn btn-sm btn-default'%>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr>
+	
+	<ul>
+		<% @blogs.each do |blog|   %>
+		<li id="micropost-<%= blog.id %>">
+  <%= link_to gravatar_for(blog.user), blog.user %>
+  <span class="user"><%= link_to blog.user.name, blog.user %></span>
+  <span class="content">
+  <%= blog.content %>
+  <%= image_tag blog.picture.url if blog.picture? %>
+
+ </span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(blog.created_at) %> ago.
+     <% if current_user?(blog.user) %>
+      <%= link_to "delete", blog, method: :delete,
+                                       data: { confirm: "You sure?" },
+                                       title: blog.content %>
+    <% end %>
+  </span>
+</li>
+<% end %>
+	</ul>
+	<hr>
+
+</div>

@@ -1,0 +1,155 @@
+<!-- 미니네비게이션 wrap 김수겸 14.09.01-->
+<div>
+<!-- 미니네비게이션  김수겸 14.09.01-->
+<div id="mini_nav_toggle" class="mini_nav_wrap" style="display:none;">
+	<div class="mini_nav">
+		<ul>
+			<li>
+				<a class="mini_nav_list btn btn-primary" href="home/buy_basket">
+					장바구니
+				</a>
+			</li>			
+			<li>
+				<a class="mini_nav_list btn btn-primary" href="home/sell_reg"
+				>
+					사고팔기
+				</a>
+			</li>
+			<li>
+				<%= link_to '포스팅하기', blog_new_path,class:"mini_nav_list btn btn-primary"%>
+				
+			</li>
+			<li>
+				<a class="mini_nav_list btn btn-primary">
+					메신저
+				</a>
+			</li>
+			<li>
+				<a class="mini_nav_list btn btn-primary" data-toggle="modal"
+				data-target="#mySetup">
+					설정
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<!-- 미니네비게이션 end -->
+
+<!-- 위시리스트 modal 김수겸 14.09.01 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 900px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">
+					×
+				</button>
+				<h4 class="modal-title">위시리스트</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<c:forEach begin="1" end="10" step="1">
+						<div class="col-sm-6 col-md-4">
+							<div class="thumbnail">
+								<img data-src="holder.js/300x200" alt="...">
+								<div class="caption">
+									<h3>물품이름</h3>
+									<p>
+										물품정보
+									</p>
+									<p>
+										<a href="#" class="btn btn-primary">장바구니</a><a href="#"
+										class="btn btn-default">삭제</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					Close
+				</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- 위시리스트 modal end -->
+
+<!-- 설정 modal 김수겸 14.09.01 -->
+<div class="modal fade" id="mySetup" tabindex="-1" role="dialog"
+aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">
+					×
+				</button>
+				<h4 class="modal-title">설정</h4>
+			</div>
+			<div class="modal-body">
+				...
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					Close
+				</button>
+				<button type="button" class="btn btn-primary">
+					Save changes
+				</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- 설정 modal end -->
+
+<!-- 장바구니,포스팅,사고팔기 링크 JS 김수겸 14.09.01 -->
+<script type="text/javascript">
+/*	function basket() {
+		location.href = "buy_and_sell.do?method=shopping_basket";
+	}
+
+	function posting_form() {
+		location.href = "posting_form.do";
+	}
+
+	function buy_and_sell() {
+		location.href = "buy_and_sell.do";
+	}*/
+</script>
+<!-- 장바구니,포스팅,사고팔기 링크 JS end -->
+
+<!-- 미니 네비게이션 JS 김수겸 14.09.01 -->
+<script type="text/javascript">
+	var eventClientX;
+	$(function() {
+		$("div").mousemove(function(event) {
+			eventClientX = event.clientX;
+			if (eventClientX == 0) {
+				/*eventInterval = setTimeout("$(function(){$('#mini_nav_toggle').show('slide',{direction:'left'},500)})", 500);*/
+				$(function() {
+					$('#mini_nav_toggle').show('slide', {
+						direction : 'left'
+					}, 200)
+				});
+				return;
+			}
+		});
+
+		$("#mini_nav_toggle").mouseleave(function() {
+			$(this).hide('slide', {
+				direction : 'left'
+			}, 200)
+		});
+	}); 
+</script>
+<!-- 미니 네비게이션 JS end -->
+</div>
+<!-- 미니네비게이션 wrap end-->

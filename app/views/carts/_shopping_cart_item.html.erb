@@ -1,0 +1,17 @@
+<div>
+  <%=link_to shopping_cart_item.item.name , product_path(shopping_cart_item.item.id) %>
+  <%=number_with_delimiter shopping_cart_item.item.price %>원
+  <%= shopping_cart_item.quantity%>개
+
+
+
+
+
+<!-- <td><%= link_to '제거', "http://localhost:3000/cart/#{@user.id}",  method: :delete   %></td> -->
+ 
+<!--  <div><%= link_to '제거', cart_path(:id => 1) , method: :delete  %></div>
+ -->
+   <%= button_to "제거", { action: "destroy", id: shopping_cart_item.item.id , amount: 1},
+                                method: :delete, data: { confirm: "Are you sure?" } %>
+
+</div>e

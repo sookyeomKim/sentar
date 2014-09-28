@@ -1,0 +1,12 @@
+<% comment = @post.comments.new %>
+<div id="comments_form_<%=@post.id%>">
+<%= simple_form_for([@post, comment], remote: true ) do | f | %> <!--폼 데이터를 ajax로 서밋하기 위해서 simple_form_for 메소드에 remote: true 옵션을 지정-->
+                                                                 <!--서밋 액션이 일어날 경우 comments#create 액션이 호출된 후 create.html.erb 파일 대신에 
+                                                                 create.js.erb 파일이 렌더링되고
+                                                                 최종적으로 create.js 자바스크립트 파일을 응답으로 클라언트로 보낸다.-->
+  <div class='form-group'>
+    <%= f.input :body, label: false, placeholder: 'Add a comment.',  input_html: { class: 'form-control', rows: 5 } %>
+  </div>
+  <%= f.button :submit, class: 'btn btn-default' %>
+<% end %>
+</div>

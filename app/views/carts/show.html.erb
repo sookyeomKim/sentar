@@ -1,0 +1,8 @@
+<h1>Shopping Cart</h1>
+
+<%= render :partial => 'shopping_cart_item', :collection => @cart.shopping_cart_items %>
+
+<div>
+  <div><b>합계</b><%= number_with_precision @cart.subtotal , precision: 0 %></div>
+  <div><b>부가세:</b><%=number_with_precision @cart.taxes, precision: 0 %></div>
+  <div><b>총 :</b><%= number_with_precision @cart.total, precision: 0, delimiter: "," %>원</div>

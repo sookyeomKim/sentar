@@ -1,0 +1,102 @@
+<!-- 버튼 이미지 -->
+
+<img class='imgSelect' src='../images/button.gif' alt="버튼1" />
+
+<img class='imgSelect' src='../images/button.gif' alt="버튼2" />
+
+<img class='imgSelect' src='../images/button.gif' alt="버튼3" />
+
+<!-- //버튼 이미지 -->
+
+<!-- 폼 레이어  -->
+
+
+	<!-- shelter_view 김수겸 14.09.23 -->
+			
+	<div id="shelter_view" class="panel panel-default shelter_view">
+        <div class="panel-heading">
+            사용자님의 목록
+        </div>
+        <div class="panel-body">
+	        <div class="user_item_list">
+	          <a >
+				<div class="media my_media">
+					<a class="pull-left" href="#"> <%= image_tag '11111.PNG',size:'50x50'%> </a>
+					<div class="media-body">
+						샬라샬라
+					</div>
+				</div>
+			</a>
+		   </div>	 
+        </div>
+        <div class="panel-footer btn btn-default">
+            집 놀러가볼까
+        </div>
+     </div>
+		
+	
+	<!-- shelter_view end -->
+	<style>
+		.shelter_view {
+			position: absolute;			
+			display: none;
+			width: 300px;			
+			z-index: 2000;
+		}
+		.panel-heading{
+			padding: 3px !important;
+		}
+		
+		.panel-body{
+			padding: 0 !important;
+			height: 300px;
+			overflow-y: scroll;
+		}
+
+		.panel-footer{
+			text-align: center;
+			width: 100%;
+		}
+
+		.user_item_list{
+			margin-bottom: 0.2em; 
+			margin-top: : 0.2em;
+			background-color: rgba(160,160,160,0.1);
+		}
+		.user_item_list:hover{
+			margin-bottom: 0.4em; 
+			margin-top: : 0.4em;
+			background-color: rgba(10,10,10,0.1);
+		}
+
+		.my_media{
+			margin-top: 0 !important;
+		}
+	</style>
+
+<!-- //폼 레이어  -->
+
+<script type="text/javascript">
+	//-- 버튼 클릭시 버튼을 클릭한 위치 근처에 레이어 생성 --//
+$(function(){
+	$('.imgSelect').click(function(e) {
+
+		var divTop = e.clientY-10;
+		//상단 좌표
+
+		var divLeft = e.clientX-10;
+		//좌측 좌표
+
+		$('#shelter_view').css({
+
+			"top" : divTop,
+			"left" : divLeft,
+			"position" : "absolute"
+
+		}).show();
+	});
+	$('#shelter_view').mouseleave(function(){
+		$("#shelter_view").hide();		
+	});
+});
+</script>

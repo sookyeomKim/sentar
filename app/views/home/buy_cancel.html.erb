@@ -1,0 +1,152 @@
+<%= render 'snb_category'%>
+<div id="content">
+	<!-- 이것도 나눌 것 -->
+	<div class="buy_list_top">
+		<p>
+			<span>사용자</span>님 방가방가
+		</p>
+		<table>
+			<tbody>
+				<tr>
+					<th>배송중</th>
+					<th>포인트</th>
+					<th>할인쿠폰</th>
+				</tr>
+				<tr>
+					<td><div>
+							<a href="#"><strong>0</strong><span>건</span></a>
+						</div></td>
+					<td><div>
+							<a href="#"><strong>0</strong><span>점</span></a>
+						</div></td>
+					<td><div>
+							<a href="#"><strong>0</strong><span>장</span></a>
+						</div></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script type="text/javascript">
+		var d = new Date();
+		var m = d.getMonth();
+
+		window.onload = function() {
+			for (var n = 1; n < 6; n++) {
+				var month = document.getElementById("month" + n + "ago");
+				var strong = document.createElement("strong");
+				var textnode = document.createTextNode("월");
+
+				strong.innerHTML = m--;
+
+				month.appendChild(strong);
+				month.appendChild(textnode);
+			}
+			/* month.innerHTML = "월"; */
+		}
+
+		$(function() {
+			$(".from").datepicker({
+				defaultDate : "+1w",
+				changeMonth : true,
+				numberOfMonths : 2,
+				onClose : function(selectedDate) {
+					$(".to").datepicker("option", "minDate", selectedDate);
+				}
+			});
+			$(".to").datepicker(
+					{
+						defaultDate : "+1w",
+						changeMonth : true,
+						numberOfMonths : 2,
+						onClose : function(selectedDate) {
+							$(".from").datepicker("option", "maxDate",
+									selectedDate);
+						}
+					});
+		});
+	</script>
+
+	<div class="date_sort">
+		<p>
+			<span>기간별 조회</span>
+		</p>
+		<ul>
+			<li><a href="#" onclick=""><strong>1</strong>주일</a></li>
+			<li><a href="#" onclick=""><strong>15</strong>일</a></li>
+			<li><a href="#" onclick=""><strong>1</strong>개월</a></li>
+		</ul>
+		<ul>
+			<li><a id="month1ago" href="#" onclick=""></a></li>
+			<li><a id="month2ago" href="#" onclick=""></a></li>
+			<li><a id="month3ago" href="#" onclick=""></a></li>
+			<li><a id="month4ago" href="#" onclick=""></a></li>
+			<li><a id="month5ago" href="#" onclick=""></a></li>
+		</ul>
+		<ul>
+			<li><input type="text" id="from_date" name="from_date"
+				class="from" value="" readonly="true"></li>
+			<li>~</li>
+			<li><input type="text" id="to_date" name="to_date" class="to"
+				value="" readonly="true"></li>
+		</ul>
+		<a id="btn_search"><span>조회하기</span></a>
+	</div>
+
+	<div class="buy_list_main">
+
+
+		<div class="buy_list_table">
+			<c:if test="${list eq null }">
+				<span>취소/반품 내역이 없습니다.</span>
+			</c:if>
+			<c:if test="${list ne null }">
+				<table>
+					<thead>
+						<tr>
+							<th>구매정보</th>
+							<th>접수번호</th>
+							<th>상품명/옵션정보</th>
+							<th>취소수량/금액</th>
+							<th colspan="2">진행상태</th>
+						</tr>
+					</thead>
+
+					<c:forEach begin="1" end="5" step="1">
+						<tbody>
+							<tr>
+								<td>
+									<div class="date">
+										날짜<br> <a href="">제품번호</a>
+									</div>
+								</td>
+								<td><span>접수번호</span></td>
+								<td><a href="#">상품제목</a>
+									<div>
+										<span>옵션제목<b>2</b>개
+										</span>
+									</div></td>
+								<td><b>13,000</b>원 <span>
+										<button>배송지변경</button>
+								</span>
+									<div>
+										<a href="">상세정보</a>
+									</div></td>
+								<td class="status"><div>결제완료</div></td>
+								<td>
+									<div>
+										<a onclick="">즉시취소</a>
+									</div>
+									<div>
+										<a onclick="">배송조회</a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</c:forEach>
+
+				</table>
+			</c:if>
+		</div>
+	</div>
+</div>

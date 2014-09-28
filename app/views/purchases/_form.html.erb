@@ -1,0 +1,37 @@
+<%= form_for(@purchase) do |f| %>
+  <% if @purchase.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
+
+      <ul>
+      <% @purchase.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+
+      </ul>
+    </div>
+      
+  <% end %>
+
+         <%= f.hidden_field :product_id, class: 'form-control' %>
+         <%= f.hidden_field :user_id, class: 'form-control' %>
+          <%= f.label :수취인 %>
+         <%= f.text_field :receive_name, class: 'form-control' %>
+          <%= f.label :주소 %>
+         <%= f.text_field :addr, class: 'form-control' %>
+          <%= f.label :phone %>
+         <%= f.text_field :phone, class: 'form-control' %>
+          <%= f.label :memo %>
+         <%= f.text_field :memo, class: 'form-control' %>
+          <%= f.label :total_cost %>
+         <%= f.text_field :total_cost, class: 'form-control' %>
+          <%= f.label :trade_type %>
+         <%= f.text_field :trade_type, class: 'form-control' %>
+          <%= f.label :payer %>
+         <%= f.text_field :payer, class: 'form-control' %>
+          <%= f.label :status %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

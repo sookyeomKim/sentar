@@ -1,0 +1,34 @@
+<div class="profile_wrap">
+	<p>
+		<span><strong><%= current_user.name %></strong>님의 프로필</span>
+	</p>
+	<a href="" class="profile"> <%= gravatar_for current_user , size: 220   %></a>
+	<!--설정버튼-->
+	<script type="text/javascript">
+		$(function() {
+			$(".tfs_tooltip").tooltip();
+		});
+	</script>
+	<%= link_to '', edit_shelter_path(@shelter),class:"fa fa-cog tfs_tooltip",style: 'position: absolute; top: 0; right: 0; text-decoration:none;margin:5px;',data: {toggle: 'tooltip', placement: 'bottom'},title:'프로필 설정' %>
+	<!--설정버튼 end-->
+
+	<!--자기소개-->
+	<div class="caption">
+
+		<p class="well">
+			<span><%= current_user.shelter.introduce %></span>
+		</p>
+		
+		<div class="profile_btn">
+			<p>
+				<!-- <a href="#" class="btn btn-default btn-line">친구추가</a><a href="#" class="btn btn-default btn-line">즐겨찾기</a> -->
+				<% @user ||= current_user %>
+				<div class="stats">
+					<a href="<%= following_user_path(@user) %>"> <strong id="following" class="stat"> <%= @user.following.count %> </strong> following </a>
+					<a href="<%= followers_user_path(@user) %>"> <strong id="followers" class="stat"> <%= @user.followers.count %> </strong> followers </a>
+				</div>
+			</p>			
+		</div>
+	</div>
+	<!--자기소개 end-->
+</div>

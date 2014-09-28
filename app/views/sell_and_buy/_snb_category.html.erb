@@ -1,0 +1,116 @@
+<div id="left">
+	<ul class="nav nav-tabs">
+		<li class="active snb_info_menu_head">
+			<a href="#buy" data-toggle="tab">구매</a>
+		</li>
+		<li class="snb_info_menu_head">
+			<a href="#sell" data-toggle="tab">판매</a>
+		</li>
+
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane fade active in" id="buy">
+			<div class="vertical_array_menu">
+				<ul class="">
+					<li class="">
+						<span>입금전 : </span>
+						<span><strong>0</strong>건</span>
+					</li>
+					<li class="">
+						<span>배송중 : </span>
+						<span><strong>0</strong>건</span>
+
+					</li>
+					<li class="">
+						<span>포인트 : </span>
+						<span><strong>0</strong>점</span>
+
+					</li>
+					<li class="">
+						<span>할인쿠폰 : </span>
+						<span><strong>0</strong>장</span>
+
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="tab-pane fade" id="sell">
+			<div class="vertical_array_menu">
+				<ul class="">
+					<li>
+						<span>긴급! : </span>
+						<span><strong>0</strong>건</span>
+
+					</li>
+					<hr>
+					<li>
+						<span>신규주문 : </span>
+						<span><strong>0</strong>건</span>
+
+					</li>
+					<li>
+						<span>발송요청 : </span>
+						<span><strong>0</strong>건</span>
+
+					</li>
+					<li>
+						<span>상품미수령 : </span>
+						<span><strong>0</strong>건</span>
+
+					</li>
+					<hr>
+					<li>
+						<span>교환요청 : </span>
+						<span><strong>0</strong>건</span>
+
+					</li>
+					<li>
+						<span>취소요청 : </span>
+						<span><strong>0</strong>건</span>
+
+					</li>
+					<li>
+						<span>반품요청 : </span>
+						<span><strong>0</strong>건</span>
+
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+
+	<ul id="menu" class="collapse">
+		<li class="panel ">
+			<a  data-parent="#menu"
+			data-toggle="collapse" class="accordion-toggle"
+			data-target="#component-nav">구매<span class="pull-right"> <i class="icon-angle-left"></i> </span> &nbsp; <span class="label label-default">10</span>&nbsp; </a>
+			<ul class="collapse" id="component-nav">
+
+				<li class="">
+					<%=link_to "구매목록/배송조회", buy_list_path%>				
+				</li>
+				<li class="">
+					<%=link_to "장바구니", cart_path%>					
+				</li>
+				
+			</ul>
+		</li>
+
+		<li class="panel ">
+			<a  data-parent="#menu"
+			data-toggle="collapse" class="accordion-toggle collapsed"
+			data-target="#form-nav">판매<span class="pull-right"> <i
+				class="icon-angle-left"></i> </span> &nbsp; <span class="label label-success">5</span>&nbsp; </a>
+			<ul class="collapse" id="form-nav">				
+				<li class="">	
+				<%=link_to "상품관리",myproduct_url%>							
+				</li>
+				<li class="">
+					<%=link_to "상품등록",new_product_path%>					
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+</div>

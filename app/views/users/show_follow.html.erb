@@ -1,0 +1,37 @@
+<% provide(:title, @title) %>
+<div class="content_re">  
+  <div class="row">
+    <!--profile_wrap 김수겸 19.09.21-->
+    <div class="col-lg-2">
+          <%= render 'profile/profile'%>
+    </div>
+    <!--profile_wrap end-->
+
+    <!--myhouse_wrap 김수겸 19.09.21-->
+    <div class="col-lg-9">
+      <div class="follow_wrap">
+        <div class="follow_head">
+          <h2><strong><%= @title %></strong></h2>
+          <div class="shelter_status">
+            <span><%= link_to "내집가기", shelter_path,class:"btn btn-round btn-success btn-line",style:'top:0; right:0; position:absolute; margin:4px;' %></span>      
+          </div>
+        </div>
+        <div class="follow_body">
+        <% if @users.any? %>
+        <div class="vertical_array_menu">
+      <ul class="users">
+        <%= render @users %>
+      </ul>
+      </div>
+      <%= will_paginate %>
+    <% end %>    
+    </div>    
+      </div>      
+    </div>
+    <!--myhouse_wrap end-->
+   
+  </div>
+</div>
+
+
+

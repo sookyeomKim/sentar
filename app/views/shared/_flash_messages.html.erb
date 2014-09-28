@@ -1,0 +1,7 @@
+<!--flash message. 한번 사용하고 사라진다.-->
+<% flash.each do |type, message| %><!--요소의 키는 type, 값은 message 블록변수로 받아 블록 내에서 사용-->
+  <div class="alert <%= bootstrap_class_for(type) %> alert-dismissable fade in"><!--type 변수 값에 따라 CSS 클래스를 달리 지정 app/helpers/application_helper.rb-->
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <%= message %>
+  </div>
+<% end %>

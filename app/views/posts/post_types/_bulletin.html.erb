@@ -1,0 +1,39 @@
+<!--일반형 게시판-->
+<h1>Listing posts</h1><%= link_to '설정', edit_bulletin_path(params[:bulletin_id])%></small><!--보기방식 설정-->
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <!--<#% @posts.each do |post| %>
+      <tr>
+        <td><#%= post.title %></td>
+        <td><#%= post.content %></td>
+        <td><#%= link_to 'Show', post %></td>
+        <td><#%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><#%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <#% end %>-->
+    <% @posts.each do |post| %><!--리시버의 각 요소를 하나씩 반복해서 post로 넘겨 준다-->
+      <tr>
+        <td><%= post.title %> <small>( <%= post.comments.size %> )</small></td>
+        <td>
+          <%= link_to 'Show', [post.bulletin, post], class:'btn btn-default' %><!--post의 bulletin 외례키와 post의 값을 파라미터로 넘겨줌-->
+          <%= link_to 'Edit', edit_bulletin_post_path(post.bulletin, post), class:'btn btn-default' %> <!--rake routes를 보면 prefix참조할 수 있다-->
+          <%= link_to 'Destroy', [post.bulletin, post], method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-default' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<!--<#%= link_to 'New Post', new_post_path, class: 'btn btn-default' %>-->
+<%= link_to 'New Post', new_bulletin_post_path, class: 'btn btn-default' %> <!--게시판 형태에 따라 다른 view딴을 띄워 줄것이므로 path를 적절하게 잡아줘야된다.-->

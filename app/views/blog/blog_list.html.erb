@@ -1,0 +1,638 @@
+<!-- 블로그 리스트 김수겸 14.09.19 -->
+<div class="content_re">
+	<div class="row">
+		<!-- blog side 김수겸 14.09.19 -->
+		<div class="col-lg-2">
+			<div class="left_wrap">
+				<!--profile 김수겸 14.09.18-->
+				<div class="row">
+					<div class="col-lg-12">
+						<%= render 'profile' %>
+					</div>
+				</div>
+				<!--profile end-->
+
+				<!--blog_map js 김수겸 14.09.16-->
+				<script>
+					$(function() {
+						var state = true;
+						$("#spread_btn").click(function() {
+							if (state) {
+								$("#map_div").animate({
+									height : 300
+								}, 500);
+							} else {
+								$("#map_div").animate({
+									height : 200
+								}, 500);
+							}
+							state = !state;
+						});
+					});
+				</script>
+				<!--blog_map js end-->
+
+				<!--blgo_map 김수겸 14.09.18-->
+				<div class="row">
+					<div class="col-lg-12">
+						<div id="map_div" class="blog_map">
+							<span class="spread_btn"><i id="spread_btn"class="fa fa-plus-square-o"></i></span>
+						</div>
+					</div>
+				</div>
+				<!--blog_map end-->
+
+				<!--blog_category 김수겸 14.09.18-->
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="blog_category">
+							<ul class="list-group">
+								<li class="list-group-item btn btn-default">
+									전체<i class="fa fa-chevron-left" style="float:right; margin-top:7px;"></i>
+								</li>
+								<li class="list-group-item btn btn-default">
+									내일상<i class="fa fa-chevron-left" style="float:right; margin-top:7px;"></i>
+								</li>
+								<li class="list-group-item btn btn-default">
+									요리<i class="fa fa-chevron-left" style="float:right; margin-top:7px;"></i>
+								</li>
+								<li class="list-group-item btn btn-default">
+									맛집<i class="fa fa-chevron-left" style="float:right; margin-top:7px;"></i>
+								</li>
+								<li class="list-group-item btn btn-default">
+									여행<i class="fa fa-chevron-left" style="float:right; margin-top:7px;"></i>
+								</li>
+								<li class="list-group-item btn btn-default">
+									쇼핑<i class="fa fa-chevron-left" style="float:right; margin-top:7px;"></i>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!--blog_category end-->
+			</div>
+		</div>
+		<!-- blog side end -->
+
+		<!--blog_list_wrap 김수겸 14.09.19-->
+		<div class="col-lg-10">
+			<div class="right_wrap">
+				<div class="row">
+					<div class="col-lg-12">
+						<!--blog_list_top 김수겸 14.09.19-->	
+						<div class="blog_list_top">
+							<span>쇼핑</span>
+							<div class="common_select_btn_150px blog_select_option">
+								<%= select_tag"select_blog_query", options_for_select([["최신등록순",0],["댓글순",1],["추천순",2]]),class:'btn btn-sm btn-default'%>
+							</div>
+
+							<script type="text/javascript">
+								$(function() {
+									$(".tfs_tooltip").tooltip();
+								});
+							</script>
+							<div class="horizon_array_menu_h blog_menu">
+								<ul>
+									<li>
+										<a id="type_image"class="tfs_tooltip" data-toggle="tooltip" data-placement="bottom" title="이미지형"> <i class="fa fa-th-large"></i> </a>
+									</li>
+									<li>
+										<a id="type_list"class="tfs_tooltip" data-toggle="tooltip" data-placement="bottom" title="목록형"> <i class="fa fa-th-list"></i> </a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!--blog_list_top end-->	
+						<hr style="margin-top:0;">
+
+						<!--blog_list_content image 김수겸 14.09.19-->
+						<div class="blog_list_content_image" style="display:block;">
+							<div class="row">
+								<div class="col-sm-6 col-md-2">
+									<div class="image_info_toggle">
+										<a href="#" class="thumbnail image_info" > <%= image_tag "11111.PNG",size:"200x200"  %> </a>
+										<div class="image_info_hover" style="display:none;">
+											<div>
+												<p>
+													<strong>슬렉스 면바지 후기!!!</strong>
+												</p>
+											</div>
+											<div class="info_text">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-2">
+									<div class="image_info_toggle">
+										<a href="#" class="thumbnail image_info" > <%= image_tag "11111.PNG",size:"200x200"  %> </a>
+										<div class="image_info_hover" style="display:none;">
+											<div>
+												<p>
+													<strong>슬렉스 면바지 후기!!!</strong>
+												</p>
+											</div>
+											<div class="info_text">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>256</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>40</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-2">
+									<div class="image_info_toggle">
+										<a href="#" class="thumbnail image_info" > <%= image_tag "11111.PNG",size:"200x200"  %> </a>
+										<div class="image_info_hover" style="display:none;">
+											<div>
+												<p>
+													<strong>슬렉스 면바지 후기!!!</strong>
+												</p>
+											</div>
+											<div class="info_text">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>31</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>80</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-2">
+									<div class="image_info_toggle">
+										<a href="#" class="thumbnail image_info" > <%= image_tag "11111.PNG",size:"200x200"  %> </a>
+										<div class="image_info_hover" style="display:none;">
+											<div>
+												<p>
+													<strong>슬렉스 면바지 후기!!!</strong>
+												</p>
+											</div>
+											<div class="info_text">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-2">
+									<div class="image_info_toggle">
+										<a href="#" class="thumbnail image_info" > <%= image_tag "11111.PNG",size:"200x200"  %> </a>
+										<div class="image_info_hover" style="display:none;">
+											<div>
+												<p>
+													<strong>슬렉스 면바지 후기!!!</strong>
+												</p>
+											</div>
+											<div class="info_text">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-2">
+									<div class="image_info_toggle">
+										<a href="#" class="thumbnail image_info" > <%= image_tag "11111.PNG",size:"200x200"  %> </a>
+										<div class="image_info_hover" style="display:none;">
+											<div>
+												<p>
+													<strong>슬렉스 면바지 후기!!!</strong>
+												</p>
+											</div>
+											<div class="info_text">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-2">
+									<div class="image_info_toggle">
+										<a href="#" class="thumbnail image_info" > <%= image_tag "11111.PNG",size:"200x200"  %> </a>
+										<div class="image_info_hover" style="display:none;">
+											<div>
+												<p>
+													<strong>슬렉스 면바지 후기!!!</strong>
+												</p>
+											</div>
+											<div class="info_text">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-2">
+									<div class="image_info_toggle">
+										<a href="#" class="thumbnail image_info" > <%= image_tag "11111.PNG",size:"200x200"  %> </a>
+										<div class="image_info_hover" style="display:none;">
+											<div>
+												<p>
+													<strong>슬렉스 면바지 후기!!!</strong>
+												</p>
+											</div>
+											<div class="info_text">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<!--blog_list_content image end-->
+
+						<!--blog_list_content image js 김수겸 14.09.19-->
+						<script type="text/javascript">
+							$(function() {
+								$(".image_info_toggle").mouseenter(function(evnet) {
+									var a = $(event.currentTarget);
+									a.find(".image_info_hover").fadeIn(100);
+								});
+								$(".image_info_toggle").mouseleave(function() {
+									$(".image_info_hover").fadeOut(100);
+								});
+							});
+						</script>
+						<!--blog_list_content image js end-->
+
+						<!--blog_list_content list 김수겸 14.09.18-->
+						<div class="blog_list_content_list" style="display:none;">
+							<div class="media blog_list_item">
+								<a class="pull-left" href="#"> <%= image_tag "11111.PNG",size:"60x60"  %> </a>
+								</a>
+								<div class="media-body">
+									<div class="row">
+										<div class="col-lg-10">
+											<h4 class="media-heading">슬렉스 면바지 후기!!!! </a></h4>
+											오늘 온 따끈한 신상^_^ 역시 택배 오는 날은 항상 설레는 군요
+										</div>
+										<div class="col-lg-2">
+											<div class="">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="media blog_list_item">
+								<a class="pull-left" href="#"> <%= image_tag "11111.PNG",size:"60x60"  %> </a>
+								</a>
+								<div class="media-body">
+									<div class="row">
+										<div class="col-lg-10">
+											<h4 class="media-heading">슬렉스 면바지 후기!!!! </a></h4>
+											오늘 온 따끈한 신상^_^ 역시 택배 오는 날은 항상 설레는 군요
+										</div>
+										<div class="col-lg-2">
+											<div class="">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="media blog_list_item">
+								<a class="pull-left" href="#"> <%= image_tag "11111.PNG",size:"60x60"  %> </a>
+								</a>
+								<div class="media-body">
+									<div class="row">
+										<div class="col-lg-10">
+											<h4 class="media-heading">슬렉스 면바지 후기!!!! </a></h4>
+											오늘 온 따끈한 신상^_^ 역시 택배 오는 날은 항상 설레는 군요
+										</div>
+										<div class="col-lg-2">
+											<div class="">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="media blog_list_item">
+								<a class="pull-left" href="#"> <%= image_tag "11111.PNG",size:"60x60"  %> </a>
+								</a>
+								<div class="media-body">
+									<div class="row">
+										<div class="col-lg-10">
+											<h4 class="media-heading">슬렉스 면바지 후기!!!! </a></h4>
+											오늘 온 따끈한 신상^_^ 역시 택배 오는 날은 항상 설레는 군요
+										</div>
+										<div class="col-lg-2">
+											<div class="">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="media blog_list_item">
+								<a class="pull-left" href="#"> <%= image_tag "11111.PNG",size:"60x60"  %> </a>
+								</a>
+								<div class="media-body">
+									<div class="row">
+										<div class="col-lg-10">
+											<h4 class="media-heading">슬렉스 면바지 후기!!!! </a></h4>
+											오늘 온 따끈한 신상^_^ 역시 택배 오는 날은 항상 설레는 군요
+										</div>
+										<div class="col-lg-2">
+											<div class="">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="media blog_list_item">
+								<a class="pull-left" href="#"> <%= image_tag "11111.PNG",size:"60x60"  %> </a>
+								</a>
+								<div class="media-body">
+									<div class="row">
+										<div class="col-lg-10">
+											<h4 class="media-heading">슬렉스 면바지 후기!!!! </a></h4>
+											오늘 온 따끈한 신상^_^ 역시 택배 오는 날은 항상 설레는 군요
+										</div>
+										<div class="col-lg-2">
+											<div class="">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="media blog_list_item">
+								<a class="pull-left" href="#"> <%= image_tag "11111.PNG",size:"60x60"  %> </a>
+								</a>
+								<div class="media-body">
+									<div class="row">
+										<div class="col-lg-10">
+											<h4 class="media-heading">슬렉스 면바지 후기!!!! </a></h4>
+											오늘 온 따끈한 신상^_^ 역시 택배 오는 날은 항상 설레는 군요
+										</div>
+										<div class="col-lg-2">
+											<div class="">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="media blog_list_item">
+								<a class="pull-left" href="#"> <%= image_tag "11111.PNG",size:"60x60"  %> </a>
+								</a>
+								<div class="media-body">
+									<div class="row">
+										<div class="col-lg-10">
+											<h4 class="media-heading">슬렉스 면바지 후기!!!! </a></h4>
+											오늘 온 따끈한 신상^_^ 역시 택배 오는 날은 항상 설레는 군요
+										</div>
+										<div class="col-lg-2">
+											<div class="">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="media blog_list_item">
+								<a class="pull-left" href="#"> <%= image_tag "11111.PNG",size:"60x60"  %> </a>
+								</a>
+								<div class="media-body">
+									<div class="row">
+										<div class="col-lg-10">
+											<h4 class="media-heading">슬렉스 면바지 후기!!!! </a></h4>
+											오늘 온 따끈한 신상^_^ 역시 택배 오는 날은 항상 설레는 군요
+										</div>
+										<div class="col-lg-2">
+											<div class="">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="media blog_list_item">
+								<a class="pull-left" href="#"> <%= image_tag "11111.PNG",size:"60x60"  %> </a>
+								</a>
+								<div class="media-body">
+									<div class="row">
+										<div class="col-lg-10">
+											<h4 class="media-heading">슬렉스 면바지 후기!!!! </a></h4>
+											오늘 온 따끈한 신상^_^ 역시 택배 오는 날은 항상 설레는 군요
+										</div>
+										<div class="col-lg-2">
+											<div class="">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="media blog_list_item">
+								<a class="pull-left" href="#"> <%= image_tag "11111.PNG",size:"60x60"  %> </a>
+								</a>
+								<div class="media-body">
+									<div class="row">
+										<div class="col-lg-10">
+											<h4 class="media-heading">슬렉스 면바지 후기!!!! </a></h4>
+											오늘 온 따끈한 신상^_^ 역시 택배 오는 날은 항상 설레는 군요
+										</div>
+										<div class="col-lg-2">
+											<div class="">
+												<div >
+													<span>2014/09/18 09:00</span>
+												</div>
+												<div >
+													<span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+													<span>2331</span>
+													&nbsp;
+													<span ><strong><i class="fa fa-comment"></i></strong></span>
+													<span>20</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--blog_list_content list end -->
+
+						<!-- blog_list_content js 김수겸 14.09.18 -->
+						<script type="text/javascript">
+							$(function() {
+								$("#type_image").click(function() {
+									$(".blog_list_content_image").show();
+									$(".blog_list_content_list").hide();
+								});
+								$("#type_list").click(function() {
+									$(".blog_list_content_list").show();
+									$(".blog_list_content_image").hide();
+								});
+							});
+						</script>
+						<!-- bloh_list_content js ned-->
+						<hr>
+						<div class="blog_lsit_bottom">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--blog_list_wrap end-->
+	</div>
+</div>
+<!-- 블로그 리스트 end -->s

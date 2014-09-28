@@ -1,0 +1,6 @@
+<h2><%= params[:bulletin_id] %></h2>
+
+<%= render 'form' %>
+
+<!--<#%= link_to 'Back', posts_path, class: 'btn btn-default' %>--> <!--rake routes를 보면 prefix참조할 수 있다-->
+<%= link_to 'Back', bulletin_posts_path, class: 'btn btn-default' %> <!--rake routes를 보면 prefix참조할 수 있다-->

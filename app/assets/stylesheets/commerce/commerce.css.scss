@@ -1,0 +1,67 @@
+.buy_wrap , .sell_wrap{
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+
+.snb_info_menu_head{
+	width: 50%;
+	text-align: center;
+}
+
+.status_table{
+	
+}
+.status_table>thead>tr>th{
+	font-size: 20px;
+}
+
+.date_sort{
+	margin: 0 auto;
+}
+
+.date_sort_menu{
+	color: #000;
+	float: left;
+	position: relative;
+	margin: 10px;
+}
+.date_sort_menu>ul>li>a{
+	margin: 5px;
+	color: #000;
+}
+
+.buy_list_main{
+	padding: 17px;
+}
+.buy_list_table thead th{
+	text-align: center;
+}
+
+.basket_table{
+	text-align: center;
+}
+
+.basket_table input{
+	width: 50px;
+	text-align: center;
+}
+
+.left_text_align{
+	text-align: left !important;
+}
+
+.buy_order_btn{
+	
+}
+
+
+.buy_order_btn>a{
+	width: 100px;
+	margin: 2px;	
+}
+
+.price_wrap span{
+	font-size: 30px;
+	margin: 10px;
+}

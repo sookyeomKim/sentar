@@ -1,0 +1,8 @@
+<h2><%= params[:bulletin_id] %></h2>
+
+<%= render 'form' %>
+
+<!--<#%= link_to 'Show', @post, class: 'btn btn-default' %>--> <!--@post를 잡은 이유는 post컨트롤러에서 넘어온 파라미터값이 게시판글의 아이디를 포함하고 있으므로 그 값 그대로 넘겨주기 위함이다.-->
+<!--<#%= link_to 'Back', posts_path, class: 'btn btn-default' %>--> <!--rake routes를 보면 prefix참조할 수 있다-->
+<%= link_to 'Show', [@post.bulletin, @post] , class: 'btn btn-default' %> | <!--post의 bulletin 외례키와 post의 값을 파라미터로 넘겨줌-->
+<%= link_to 'Back', bulletin_posts_path, class: 'btn btn-default'  %> <!--rake routes를 보면 prefix참조할 수 있다-->

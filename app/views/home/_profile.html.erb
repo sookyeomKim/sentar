@@ -1,0 +1,21 @@
+<div class="profile_wrap">
+	<a href="" class="profile"> <%= gravatar_for current_user , size: 220   %> </a>
+	<!--i-->
+	<script type="text/javascript">
+		$(function() {
+			$(".tfs_tooltip").tooltip();
+		});
+	</script>
+	<a class="tfs_tooltip" href="#" data-toggle="tooltip" data-placement="bottom" title="프로필 설정" style="position:absolute; top:0; right:0;"><i class="fa fa-cog"></i></a>
+	<!--i-->
+	<div class="caption">
+		<p>
+			<%= current_user.name %>
+		</p>		
+		<div class="profile_btn">
+			<p>
+				<!-- <a href="#" class="btn btn-default btn-line">친구추가</a><a href="#" class="btn btn-default btn-line">즐겨찾기</a> -->
+			</p>
+		</div>
+	</div>
+</div>
