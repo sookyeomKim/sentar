@@ -17,15 +17,16 @@
     <%= f.text_area :content, class: 'form-control' %>
     <%= f.label :category %>
     <%= f.select :category, options_for_select([['음식', '음식'], ['옷', '옷'],['가구', '가구'],['가전', '가전']], 1), {}, { :class => 'form-control' } %>
-    div class="fileupload fileupload-new" data-provides="fileupload">
+    
+   <div class="fileupload fileupload-new" data-provides="fileupload">
               <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
               <div>
                 <span class="btn btn-file btn-success"><span class="fileupload-new">이미지선택</span><span class="fileupload-exists">수정</span><%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %></span>
                 <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">삭제</a>
               </div>
-            </div>
+  </div>
     <%= f.submit "상품등록", class: "btn btn-primary" %>
-   
+   <% end %>
 
   </div>
 </div>
@@ -42,4 +43,3 @@
 
 <% end %>
 
-<% end %>
