@@ -11,8 +11,9 @@
   <span class="timestamp">
     updated <%= time_ago_in_words(product.created_at) %> ago.
  <div><%= link_to '카트에 담기', cart_path(:id => product.id  ,:amount => 1) , method: :post  %></div>
- <div><%= link_to '구매하기', new_purchase_path(:id => product.id )  %></div>  
-   </span>
+ <div><%= link_to '구매하기', new_purchase_path(:id => product.id )  %></div>   
+   
+  </span>
  
 </li>
 

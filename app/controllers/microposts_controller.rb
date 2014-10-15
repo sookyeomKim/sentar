@@ -5,8 +5,12 @@ class MicropostsController < ApplicationController
 
   def create
   @micropost = current_user.microposts.build(micropost_params)
+  
+  # 에러 발생시
+  #  $ sudo apt-get update
+  # $ sudo apt-get install imagemagick --fix-missing
     if @micropost.save
-      flash[:success] = "Micropost created!"
+      flash[:success] = "게시글이 등록되었습니다.!"
       redirect_to blog_path
     else
       @feed_items = []
@@ -16,7 +20,7 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy
-    flash[:success] = "Micropost deleted"
+    flash[:success] = "게시글이 삭제 되었습니다."
     redirect_to blog_path
   end
 

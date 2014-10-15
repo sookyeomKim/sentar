@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
       end
     else
       # Create an error message.
-      flash.now[:danger] = 'Invalid email/password combination' # Not quite right!
+      flash.now[:danger] = '존재하지 않는 email이거나 잘못된 비밀번호 입니다' # Not quite right!
       render 'new'
     end
   end

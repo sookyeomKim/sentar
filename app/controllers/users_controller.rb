@@ -23,6 +23,7 @@ def create
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email  #계정 활성화 이메일 발송
+      Shelter.create!(user_id: @user.id, introduce: "설정에서 변경해주세요", lonlat: 0000) #회원가입후 기본 쉘터 생성
       flash[:info] = "메일을 발송하였습니다 확인해 주세요."
       redirect_to root_url
     else

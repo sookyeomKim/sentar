@@ -26,9 +26,12 @@ gem 'friendly_id', '~> 5.0.0' #id값 대신에 특정 속성값으로 호출을 
 #유저과정
 gem 'bcrypt',         '3.1.7'
 gem 'faker',          '1.4.2' # make sample users with semi-realistic names and email addresses
+
+#-------------------------------------
 gem 'carrierwave',             '0.10.0'
 gem 'mini_magick',             '3.8.0'
 gem 'fog',                     '1.23.0'
+#--------------------------------------- 포스팅 이미지
 gem 'will_paginate',           '3.0.7' # 페이징 
 gem 'bootstrap-will_paginate', '0.0.10' # 페이징 스타일 in 부트스트랩
 gem 'tzinfo-data', platforms: [:mingw, :mswin]

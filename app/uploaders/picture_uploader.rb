@@ -41,7 +41,7 @@ class PictureUploader < CarrierWave::Uploader::Base
     storage :file
 end
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "#{Rails.root}/public/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
   def extension_white_list #업로드할 수 있는 파일 포맷 지정
