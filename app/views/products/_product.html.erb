@@ -8,12 +8,15 @@
   <span class="price"><%= product.price %></span>
   <span class="category"><%= product.category %></span>
   <%= image_tag product.picture.url if product.picture? %>
+  <span class="content">내용:<%= product.content %></span>
   <span class="timestamp">
     updated <%= time_ago_in_words(product.created_at) %> ago.
+      </span>
+    
  <div><%= link_to '카트에 담기', cart_path(:id => product.id  ,:amount => 1) , method: :post  %></div>
  <div><%= link_to '구매하기', new_purchase_path(:id => product.id )  %></div>   
    
-  </span>
+
  
 </li>
 

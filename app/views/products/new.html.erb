@@ -13,8 +13,8 @@
     <%= f.label :price %>
     <%= f.text_field :price, class: 'form-control' %>
 
-    <%= f.label :content %>
-    <%= f.text_area :content, class: 'form-control' %>
+    <%= f.label '내용' %>
+    <%= f.text_area :content , class: 'form-control' %>
     <%= f.label :category %>
     <%= f.select :category, options_for_select([['음식', '음식'], ['옷', '옷'],['가구', '가구'],['가전', '가전']], 1), {}, { :class => 'form-control' } %>
     

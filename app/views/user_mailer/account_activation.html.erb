@@ -1,12 +1,12 @@
-<h1>Sample App</h1>
+<h1>247(Twenty Four Seven)</h1>
 
-<p>Hi <%= @user.name %>,</p>
+<p>안녕하세요 <%= @user.name %>님,</p>
 
 <p>
-Welcome to the Sample App! Click on the link below to activate your account:
+247 홈페이지에 회원가입을 환영합니다. 아래 링크로 접속을 해주세요
 </p>
 
-<%= link_to "Activate", edit_account_activation_url(@user.activation_token,
+<%= link_to "활성화 하기", edit_account_activation_url(@user.activation_token,
                                                     email: @user.email)%>
 
 
