@@ -273,8 +273,9 @@ function shelterLoader(){
 
 			/*좌표변환해서 넣어야한다*/
 			/*var trLonLat = get3857LonLat(coordX, coordY);*/
+
 //icon img넣는 곳
-	var shelterIcon = new Tmap.IconHtml("<img src='assets/images/shelter/123.jpg'/>", size, offset);//marker
+	var shelterIcon = new Tmap.IconHtml("<img src='assets/shelter/shelter.PNG'/>", size, offset);//marker
 
 	var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
 
@@ -336,7 +337,7 @@ function onClickMap(e){
 	/*marker*/
 	var size = new Tmap.Size(21,25);
 	var offset = new Tmap.Pixel(-(size.w/2), -size.h);
-	var icon = new Tmap.Icon('<img src="123.jpg" style="z-index:9999px"/>',size,offset);
+	var icon = new Tmap.IconHtml('<img src="assets/shelter/shelter.PNG" style="z-index:9999px"/>',size,offset);
 	/*var icon = new Tmap.IconHtml('<div class="shelter" style="border:10px solid black;"><div onClick="test1()" style="text-decoration: none;	color: RED;	font-size: 9pt;">AAAAAAAAA</div><div onClick="test2()"><img src="img/d.png" /></div><div onClick="test3()" style="text-decoration: none;	color: BLUE;	font-size: 9pt;">QQQQQQQQQQQQQQQQQQQqQ</div></div>',size,offset);*/
 	var marker = new Tmap.Marker(lonlat,icon);
 	markers.addMarker(marker);

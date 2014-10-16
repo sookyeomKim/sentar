@@ -1,4 +1,4 @@
-<%= form_for(@shelter) do |f| %>
+<%= form_for(:shelter, method: :create) do |f| %>
 
 <!--쉘터이름,자기소개,쉘터위치,쉘터종류 입력-->
 <div class="row">
@@ -27,43 +27,6 @@
     </div>
   </div>
   <!--쉘터이름,자기소개,쉘터위치,쉘터종류 입력 end-->
-
-<!-- 쉘터 생성시 좌표값 받기 위한 자바스크립트 -->
-<script type="text/javascript">
-
-function SetLonlatEvents(){//쉘터 생성할때 좌표 지정하기 위한 메서드
-  map.events.register("click", map, onClickMap);
-};
-
-function onClickMap(e){ 
-  markers.clearMarkers();
-  
-  lonlat = map.getLonLatFromViewPortPx(e.xy);
-  //lonlat.transform(pr_3857, pr_4326);//좌표변환하면 마커가 생성이 안된다.
-  alert(lonlat); 
-
-
-  /*$("#lon").val(lonlat.)
-  $("#lat").val(lonlat.)*/
-  $("#lonlat").val(lonlat);
-  /*addMarker(lonlat);*/
-
-
-
-  /*marker*/
-  var size = new Tmap.Size(21,25);
-  var offset = new Tmap.Pixel(-(size.w/2), -size.h);
-  var icon = new Tmap.Icon('<img src="123.jpg" style="z-index:9999px"/>',size,offset);
-  /*var icon = new Tmap.IconHtml('<div class="shelter" style="border:10px solid black;"><div onClick="test1()" style="text-decoration: none;  color: RED; font-size: 9pt;">AAAAAAAAA</div><div onClick="test2()"><img src="img/d.png" /></div><div onClick="test3()" style="text-decoration: none;  color: BLUE;  font-size: 9pt;">QQQQQQQQQQQQQQQQQQQqQ</div></div>',size,offset);*/
-  var marker = new Tmap.Marker(lonlat,icon);
-  markers.addMarker(marker);
-}
-
-$(SetLonlatEvents);
-$(document).on('page:load',SetLonlatEvents);
-
-</script>
-
 
   <!--쉘터등록map-->
   <div class="col-lg-8 shelter_right_form">
