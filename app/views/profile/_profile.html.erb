@@ -2,7 +2,10 @@
 	<p>
 		<span><strong><%= current_user.name %></strong>님의 프로필</span>
 	</p>
-	<a href="" class="profile"> <%= gravatar_for current_user , size: 220   %></a>
+	<!--이미지-->
+	<a href="" class="profile"> <%= gravatar_for current_user , size: 210   %></a>
+	<!--이미지 end-->
+
 	<!--설정버튼-->
 	<script type="text/javascript">
 		$(function() {
@@ -14,7 +17,6 @@
 
 	<!--자기소개-->
 	<div class="caption">
-
 		<p class="well">
 			<span><%= current_user.shelter.introduce %></span>
 		</p>

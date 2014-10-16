@@ -5,15 +5,10 @@
 	<div class="mini_nav">
 		<ul>
 			<li>
-				<a class="mini_nav_list btn btn-primary" href="home/buy_basket">
-					장바구니
-				</a>
+				<%=link_to "장바구니", cart_path,class:"mini_nav_list btn btn-primary"%>
 			</li>			
 			<li>
-				<a class="mini_nav_list btn btn-primary" href="home/sell_reg"
-				>
-					사고팔기
-				</a>
+				<%=link_to "상품등록",new_product_path,class:"mini_nav_list btn btn-primary"%>
 			</li>
 			<li>
 				<%= link_to '포스팅하기', blog_new_path,class:"mini_nav_list btn btn-primary"%>

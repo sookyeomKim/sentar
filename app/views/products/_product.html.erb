@@ -1,24 +1,31 @@
 
 <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
+<div class="alert alert-<%= message_type %>"><%= message %></div>
 <% end %>
 
-<li id="product_<%= product.id %>">
-  <span class="product"><%= link_to product.name, controller: "products", action: "show", id: product.id %></span>
-  <span class="price"><%= product.price %></span>
-  <span class="category"><%= product.category %></span>
-  <%= image_tag product.picture.url if product.picture? %>
-  <span class="content">내용:<%= product.content %></span>
-  <span class="timestamp">
-    updated <%= time_ago_in_words(product.created_at) %> ago.
-      </span>
-    
- <div><%= link_to '카트에 담기', cart_path(:id => product.id  ,:amount => 1) , method: :post  %></div>
- <div><%= link_to '구매하기', new_purchase_path(:id => product.id )  %></div>   
-   
-
- 
-</li>
+<div id="product_<%= product.id %>" class="col-sm-6 col-md-4">
+	<div class="thumbnail">
+		<!-- <span class="category"><%= product.category %></span> -->
+		<!--<%= link_to '+product.name+', controller: "products", action: "show", id: product.id %>-->
+		<a href="/home/item_info_view"style="cursor:pointer;"><%= image_tag product.picture.url if product.picture? %>
+			</a>
+		<div class="caption">
+		<h3><%= link_to product.name, controller: "products", action: "show", id: product.id %></h3>
+		<p>
+            <strong><%= product.price %></strong>원
+          </p>
+          <p>
+          	<%= link_to '카트에 담기', cart_path(:id => product.id  ,:amount => 1) , method: :post,class:'btn btn-primary'  %>
+          	<%= link_to '구매하기', new_purchase_path(:id => product.id),class:'btn btn-primary'  %>            
+          </p>
+          <p><span
+			class="timestamp"> updated <%= time_ago_in_words(product.created_at) %>
+			ago.
+		</span></p>
+		</div>
+		<!-- <span class="content">내용:<%= product.content %></span> --> 		
+	</div>
+</div>
 
 
 
