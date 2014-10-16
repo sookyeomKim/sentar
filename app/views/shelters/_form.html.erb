@@ -45,3 +45,14 @@
   <%= f.submit("쉘터설정", class:"btn btn-default btn-round btn-line shelter_reg_btn") %>
 </div>
 <% end %>
+
+
+<script>
+var SetLonlatMethod = function(){
+  function SetLonlatEvents(){//쉘터 생성할때 좌표 지정하기 위한 메서드
+  map.events.register("click", map, onClickMap);
+};
+}
+$(SetLonlatMethod);
+$(document).on('page:load',SetLonlatMethod);
+</script>
