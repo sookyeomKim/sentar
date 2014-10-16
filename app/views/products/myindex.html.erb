@@ -1,27 +1,24 @@
-<%= render 'sell_and_buy/snb_category'%> 
+<%=render 'sell_and_buy/snb_category'%>
 
 <div id="content">
     <div class="inner">
         <!-- sell_list 김수겸 14.09.24 -->
         <div class="sell_list">
-            <div class="sell_list_head">
-
-            </div>
+            <div class="sell_list_head"></div>
             <div class="sell_list_body">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                판매목록
-                            </div>
+                            <div class="panel-heading">판매목록</div>
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover" id="dataTables">
+                                    <table class="table table-striped table-bordered table-hover"
+                                        id="dataTables">
                                         <thead>
                                             <tr>
-                                                <th>상품번호</th>
+                                                <th>id</th>
                                                 <th>상품명</th>
-                                                <th>가격</th>                                     
+                                                <th>가격</th>
                                             </tr>
                                         </thead>
 
@@ -29,14 +26,14 @@
 
                                         </tbody>
 
-                                        <tfoot >
+                                        <tfoot>
                                             <tr>
-                                                <th>상품번호</th>
+                                                <th>id</th>
                                                 <th>상품명</th>
-                                                <th>가격</th>                                     
+                                                <th>가격</th>
                                             </tr>
                                         </tfoot>
-                                       
+
                                     </table>
                                 </div>
                             </div>
@@ -45,76 +42,124 @@
                 </div>
             </div>
             <!-- sell_list end -->
-            
-            <!-- sell_list js 김수겸 14.09.24 -->
-            <script type="text/Javascript">
-                var sell_list = function() {
-                    var table = $('#dataTables').DataTable({
-                        "lengthMenu" : [[10, 25, 50, 75, -1], [10, 25, 50, 75, "All"]],
-                     /*   "data" : [{
-                            "product_name" : "슬랙스 면바지",
-                            "product_price" : "23000",
-                            "product_quantity" : "20",
-                            "product_info" : "100%면",
-                            "ship_office" : '한진택배',
-                            "ship_select" : '무료',
-                            "product_adress" : "경기도 평택시 합정동 주공아파트 308동 202호",
-                            "product_image" : "11111.PNG",
-                            "product_status" : "신규주문",
-                            "product_date" : "09/23/2014"
-                        }, {
-                            "product_name" : "슬랙스 반바지",
-                            "product_price" : "1200",
-                            "product_quantity" : "20",
-                            "product_info" : "100%면",
-                            "ship_office" : '한진택배',
-                            "ship_select" : '무료',
-                            "product_adress" : "경기도 평택시 합정동 주공아파트 308동 202호",
-                            "product_image" : "11111.PNG",
-                            "product_status" : "배송중",
-                            "product_date" : "09/23/2014"
-                        }, {
-                            "product_name" : "스웨터",
-                            "product_price" : "123000",
-                            "product_quantity" : "20",
-                            "product_info" : "100%면",
-                            "ship_office" : 'cj택배',
-                            "ship_select" : '무료',
-                            "product_adress" : "경기도 평택시 합정동 주공아파트 308동 202호",
-                            "product_image" : "11111.PNG",
-                            "product_status" : "취소요청",
-                            "product_date" : "09/23/2014"
-                        }],*/
-                        "ajax": "products.json"
-                        ,
-                        "columns" : [{
-                            "title" : "상품번호",
-                            "data" : "id"
-                        },{
-                            "title" : "상품명",
-                            "data" : "name"
-                        }, {
-                            "title" : "가격",
-                            "data" : "price"
-                        }],
-                        "stateSave" : true
-                    });
+        </div>
+    </div>
+</div>
+<!-- sell_list js 김수겸 14.09.24 -->
+<script type="text/Javascript">
+    var sell_list = function() {
+        $('#dataTables')
+                .DataTable(
+                        {
+                            "lengthMenu" : [ [ 10, 25, 50, 75, -1 ],
+                                    [ 10, 25, 50, 75, "All" ] ],
+                            "ajax" : "products.json",
+                            "columns" : [ {
+                                "title" : "상품명",
+                                "data" : "id"
+                            }, {
+                                "title" : "상품명",
+                                "data" : "name"
+                            }, {
+                                "title" : "가격",
+                                "data" : "price"
+                            } ],
+                            "stateSave" : true,
+                            initComplete : function() {
+                                var api = this.api();
 
-                    $("#dataTables tfoot th").each(function(i) {
-                        var title = $('#dataTables thead th').eq( $(this).index() ).text();
-                        var select = $('<select><option value="">-'+title+'-</option></select>').appendTo($(this).empty()).on('change', function() {
-                            var val = $(this).val();
+                                api
+                                        .columns()
+                                        .indexes()
+                                        .flatten()
+                                        .each(
+                                                function(i) {
+                                                    var column = api.column(i);
+                                                    var title = $(
+                                                            '#dataTables thead th')
+                                                            .eq($(this).index())
+                                                            .text();
+                                                    var select = $(
+                                                            '<select><option value="">-'
+                                                                    + title
+                                                                    + '-</option></select>')
+                                                            .appendTo(
+                                                                    $(
+                                                                            column
+                                                                                    .footer())
+                                                                            .empty())
+                                                            .on(
+                                                                    'change',
+                                                                    function() {
+                                                                        var val = $(
+                                                                                this)
+                                                                                .val();
 
-                            table.column(i).search( val ? '^' + $(this).val() + '$' : val, true, false).draw();
+                                                                        column
+                                                                                .search(
+                                                                                        val ? '^'
+                                                                                                + val
+                                                                                                + '$'
+                                                                                                : '',
+                                                                                        true,
+                                                                                        false)
+                                                                                .draw();
+                                                                    });
+
+                                                    column
+                                                            .data()
+                                                            .unique()
+                                                            .sort()
+                                                            .each(
+                                                                    function(d,
+                                                                            j) {
+                                                                        select
+                                                                                .append('<option value="'+d+'">'
+                                                                                        + d
+                                                                                        + '</option>')
+                                                                    });
+                                                });
+                            }
                         });
+    }
+    $(document).ready(sell_list);
+    $(document).on('page:change', sell_list);
 
-                        table.column(i).data().unique().sort().each(function(d, j) {
-                            select.append('<option value="' + d + '">' + d + '</option>')
-                        });
-                    });
-                };
-                $(document).ready(sell_list);
-                $(document).on('page:change', sell_list);
-            </script>
-            <!-- sell_list js end -->
+    /*  var sell_list = function() {
+          var table = $('#dataTables').DataTable({
+              "lengthMenu" : [[10, 25, 50, 75, -1], [10, 25, 50, 75, "All"]],                     
+              "ajax": "products.json"
+              ,
+              "columns" : [{
+                  "title" : "상품명",
+                  "data" : "id"
+              },{
+                  "title" : "상품명",
+                  "data" : "name"
+              }, {
+                  "title" : "가격",
+                  "data" : "price"
+              }],
+              "stateSave" : true
+          });
+
+          $("#dataTables tfoot th").each(function(i) {
+              var title = $('#dataTables thead th').eq( $(this).index() ).text();
+              var select = $('<select><option value="">-'+title+'-</option></select>').appendTo($(this).empty()).on('change', function() {
+                  var val = $(this).val();
+
+                  table.column(i).search( val ? '^' + $(this).val() + '$' : val, true, false).draw();
+              });
+
+              table.column(i).data().unique().sort().each(function(d, j) {
+                  select.append('<option value="' + d + '">' + d + '</option>')
+              });
+          });
+      };
+      $(document).ready(sell_list);
+      $(document).on('page:change', sell_list);*/
+</script>
+<!-- sell_list js end -->
+
+
 
