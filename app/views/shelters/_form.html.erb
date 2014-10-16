@@ -49,10 +49,7 @@
 
 <script>
 var SetLonlatMethod = function(){
-  function SetLonlatEvents(){//쉘터 생성할때 좌표 지정하기 위한 메서드
-  map.events.register("click", map, onClickMap);
-};
-}
+SetLonlatEvents();
 $(SetLonlatMethod);
-$(document).on('page:change',SetLonlatMethod);
+$(document).on('page:load',SetLonlatMethod);
 </script>
