@@ -9,19 +9,13 @@
   <%= render 'layouts/shim' %>
 </head>
 <body class="padTop53">
-	
-
-<div id="wrap">
-	
+<div id="wrap">	
 <%= render "layouts/header"  %>
-<div class="container">
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
       <% end %>
 <%= yield %>
 <%= render "layouts/mini_nav"  %>
-
 </div>
-
 </body>
 </html>
