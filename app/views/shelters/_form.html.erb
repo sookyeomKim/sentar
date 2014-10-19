@@ -26,7 +26,10 @@
     </div>
   </div>
   <!--쉘터이름,자기소개,쉘터위치,쉘터종류 입력 end-->
-
+<script>
+$(SetLonlatEvents);
+$(document).on('page:load',SetLonlatEvents);
+</script>
   <!--쉘터등록map-->
   <div class="col-lg-8 shelter_right_form">
     <div id="map_div" style="position:relative; width:100%px; height:400px; "></div>
@@ -47,10 +50,3 @@
 <% end %>
 
 
-<script>
-var SetLonlatMethod = function(){
-SetLonlatEvents();
-}
-$(SetLonlatMethod);
-$(document).on('page:load',SetLonlatMethod);
-</script>

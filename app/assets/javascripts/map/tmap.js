@@ -315,7 +315,9 @@ function onShelterClick(e){
 
 
 
-
+function SetLonlatEvents(){//쉘터 생성할때 좌표 지정하기 위한 메서드
+	map.events.register("click", map, onClickMap);
+};
 
 function onClickMap(e){ 
 	markers.clearMarkers();
