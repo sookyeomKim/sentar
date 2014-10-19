@@ -1,17 +1,65 @@
-<div>
-  <%=link_to shopping_cart_item.item.name , product_path(shopping_cart_item.item.id) %>
-  <%=number_with_delimiter shopping_cart_item.item.price %>원
-  <%= shopping_cart_item.quantity%>개
+<tr class='deal_length' data-deal_id="<%= shopping_cart_item.item.id%>"
+	data-deal_qty="<%= shopping_cart_item.quantity%>"
+	data-deal_price='<%=number_with_delimiter shopping_cart_item.item.price %>'>
+	<td><input type="checkbox" name="opt[selected][]"
+		data-deal_id="<%= shopping_cart_item.item.id%>" class="sub_checkbox"
+		value="" point_benefit="0" checked="checked"></td>
 
+	<td class="left_text_align">
+		<div class="media">
+			<a class="pull-left" href="#"> <%= image_tag '11111.PNG',size:'60x60'%>
+			</a>
+			<div class="media-body">
+				<div>
+					<%=link_to shopping_cart_item.item.name , product_path(shopping_cart_item.item.id) %>
+				</div>
+				<div class="vertical_array_menu">
+					<ul>
+						<li><a href="" class="btn btn-default btn-xs">옵션변경/추가</a></li>
+						<li><span><strong>[옵션1]</strong></span> <span>개당 : <strong
+								class="apop_price"
+								data-deal_id="<%= shopping_cart_item.item.id%>"></strong>원
+						</span></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</td>
+	<td>
+		<div>
+			<input type="text" readonly="true" name="opt[qty][]" id="modi_qty"
+				data-deal_id="<%= shopping_cart_item.item.id%>" value="1" title="수량">
+		</div>
+		<div>
+			<a class="btn btn-default btn-sm qty_change"
+				data-deal_id="<%= shopping_cart_item.item.id%>">변경</a>
+		</div>
+	</td>
+	<td>
+		<div>
+			<span><strong class="total_price"
+				data-deal_id="<%= shopping_cart_item.item.id%>"></strong>원</span>
+		</div>
+	</td>
+	<td>
+		<div>
+			<span class="deal_ship_price_<%= shopping_cart_item.item.id%>"></span>
+		</div>
+		<div>
+			<a href="">sellername</a>
+		</div>
+	</td>
 
-
-
-
-<!-- <td><%= link_to '제거', "http://localhost:3000/cart/#{@user.id}",  method: :delete   %></td> -->
- 
-<!--  <div><%= link_to '제거', cart_path(:id => 1) , method: :delete  %></div>
- -->
-   <%= button_to "제거", { action: "destroy", id: shopping_cart_item.item.id , amount: 1},
-                                method: :delete, data: { confirm: "Are you sure?" } %>
-
-</div>e
+	<td>
+		<div class="buy_order_btn">
+			<a href="" class="btn btn-warning btn-xs">주문하기</a>
+		</div>
+		<div class="buy_order_btn">
+			<a href="" class="btn btn-default btn-xs">위시리스트</a>
+		</div>
+		<div class="buy_order_btn">
+			<%= button_to "제거", { action: "destroy", id: shopping_cart_item.item.id , amount: 1},
+                                method: :delete, data: { confirm: "Are you sure?" },class:'btn btn-default btn-xs' %>
+		</div>
+	</td>
+</tr>
