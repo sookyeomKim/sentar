@@ -115,7 +115,15 @@ blog_list
  }
  
  
-
+/* main */
  .blog_timestamp{
  	float: right;
+ }
+ a[target]{
+ 	color: black; 	
+ }
+ a[target]:hover{
+ 	color: white;
+ 	text-decoration: none;
+ 	cursor: pointer;
  }

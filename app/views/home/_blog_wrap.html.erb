@@ -41,49 +41,58 @@
 	<hr>
 
 	<!-- blog list -->
+	<div class="panel-group" id="accordion">
 	<%@blogs.each do |blog|	%>
-	<div class="media blog_list_item" id="micropost-<%=blog.id%>">
-		<%=link_to gravatar_for(blog.user), blog_path,class:'pull-left'%>	
-		<div class="media-body">
-			<div class="row">
-				<div class="col-lg-9">
-					<h4 class="media-heading">
-						<%=link_to blog.user.name, blog_path%>
-					</h4>
-					<%=blog.title%><!-- <%=blog.content%> <%=image_tag blog.picture.url if blog.picture?%> -->
-				</div>
-				<div class="col-lg-3">
-					<div class="">
-						<div>
-							<span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span>2331</span>
-							&nbsp; <span><strong><i class="fa fa-comment"></i></strong></span>
-							<span>20</span>
-						</div>
-						<div>
-							<span class="blog_timestamp"><%=time_ago_in_words(blog.created_at)%> ago</span>
-						</div>					
-						<div>
-							<span>
-								<%if current_user?(blog.user)%>
-							<%=link_to "삭제", blog, method: :delete,
-	                                       data: { confirm: "You sure?" },
-	                                       title: blog.content,class:'btn btn-default btn-xs'%> 
-	                            <%end%>
-							</span>
+	  <div class="panel panel-default">
+	  	<div class="media blog_list_item" id="micropost-<%=blog.id%>">
+			<%=link_to gravatar_for(blog.user), blog_path,class:'pull-left'%>	
+			<div class="media-body">
+				<div class="row">
+					<div class="col-lg-9">
+						<h4 class="media-heading">
+							<%=link_to blog.user.name, blog_path,target:''%>
+						</h4>
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<%=blog.id%>" target>
+				          <%=blog.title%>
+				        </a>					
+					</div>
+					<div class="col-lg-3">
+						<div class="">
+							<div>
+								<span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span>2331</span>
+								&nbsp; <span><strong><i class="fa fa-comment"></i></strong></span>
+								<span>20</span>
+							</div>
+							<div>
+								<span class="blog_timestamp"><%=time_ago_in_words(blog.created_at)%> ago</span>
+							</div>					
+							<div>
+								<span>
+									<%if current_user?(blog.user)%>
+								<%=link_to "삭제", blog, method: :delete,
+		                                       data: { confirm: "You sure?" },
+		                                       title: blog.content,class:'btn btn-default btn-xs'%> 
+		                            <%end%>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	        
+	    <div id="collapse<%=blog.id%>" class="panel-collapse collapse">
+	      <div class="panel-body">
+	        <div>
+				<%=image_tag blog.picture.url if blog.picture?%>	
+			</div>
+			<div>
+				<%=blog.content%>	
+			</div>	
+	      </div>
+	    </div>
+	  </div> 
+	<%end%> 
 	</div>
-	<div>
-		<div>
-			<%=image_tag blog.picture.url if blog.picture?%>	
-		</div>
-		<div>
-			<%=blog.content%>	
-		</div>		
-	</div>
-	<%end%>
 	<!-- blog list end-->	
 </div>
