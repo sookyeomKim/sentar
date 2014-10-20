@@ -17,9 +17,7 @@ blog_view
 	overflow-y: scroll;
 	padding: 2px;
 }
-.profile>img{
 
-}
 
 .profile_btn>p>a{
 	width:50%;
@@ -34,9 +32,7 @@ blog_view
 	right: 0;
 }
 
-.blog_category{
-	
-}
+
 .blog_category>ul{
 	
 	width: 100%;
@@ -119,3 +115,7 @@ blog_list
  }
  
  
+
+ .blog_timestamp{
+ 	float: right;
+ }

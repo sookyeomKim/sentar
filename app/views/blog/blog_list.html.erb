@@ -12,25 +12,7 @@
 				</div>
 				<!--profile end-->
 
-				<!--blog_map js 김수겸 14.09.16-->
-				<script>
-					$(function() {
-						var state = true;
-						$("#spread_btn").click(function() {
-							if (state) {
-								$("#map_div").animate({
-									height : 300
-								}, 500);
-							} else {
-								$("#map_div").animate({
-									height : 200
-								}, 500);
-							}
-							state = !state;
-						});
-					});
-				</script>
-				<!--blog_map js end-->
+				
 
 				<!--blgo_map 김수겸 14.09.18-->
 				<div class="row">
@@ -41,6 +23,28 @@
 					</div>
 				</div>
 				<!--blog_map end-->
+
+				<!--blog_map js 김수겸 14.09.16-->
+				<script>
+					$(function() {
+						var state = true;
+						$("#spread_btn").click(function() {
+							if (state) {
+								$("#map_div").animate({
+									height : 300,
+									width: 100%
+								}, 500);
+							} else {
+								$("#map_div").animate({
+									height : 200,
+									width: 100%									
+								}, 500);
+							}
+							state = !state;
+						});
+					});
+				</script>
+				<!--blog_map js end-->
 
 				<!--blog_category 김수겸 14.09.18-->
 				<div class="row">
