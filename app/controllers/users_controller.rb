@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy # destroy action은 관리자만 가능
 
   def new
-    @user = User.new
+    @user = User.new # views/users/new.html.erb에서 form_for method 를 사용하기 위해 객체 생성 필요
   end
   
   
@@ -27,7 +27,7 @@ def create
       flash[:info] = "메일을 발송하였습니다 확인해 주세요."
       redirect_to root_url
     else
-      render 'new'
+      render 'new' #render는 컨트롤러에서도 사용가능
     end
   end
   
@@ -68,7 +68,7 @@ def create
 
   private
 
-    def user_params
+    def user_params #strong parameters rails4.0 부터 필요함
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
     end

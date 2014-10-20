@@ -3,7 +3,9 @@
   <aside class="col-md-4">
     <section>
       <h1>
-        <%= gravatar_for @user , size: 100   %>
+
+        <%= gravatar_for @user , size: 100   %> 
+        <!-- 그라바타에 있는 이미지 이용, gravata_for 메서드는 users_helper에 구현  -->
         <%= @user.name %>
       </h1>
     </section>

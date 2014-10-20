@@ -1,0 +1,15 @@
+one:
+  follower: gyotaek
+  followed: lana
+
+two:
+  follower: gyotaek
+  followed: mallory
+
+three:
+  follower: lana
+  followed: gyotaek
+
+four:
+  follower: archer
+  followed: gyotaek
