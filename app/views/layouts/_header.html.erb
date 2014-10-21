@@ -11,27 +11,25 @@
             <%= link_to 'SENTAR', root_path,class:'navbar-brand custom_brand' %>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <div class="serch_bar">
-                <form class="navbar-form navbar-left" role="search">
+            <div class="search_bar">
+                <form class="navbar-form navbar-left" role="search" id="main_search"><!-- id 값줬다 -->
                     <select class="btn btn-info btn-line">
                         <option value="전체">전체</option>
                         <option value="커머스">커머스</option>
                         <option value="블로그">블로그</option>
                     </select>
                     <div class="form-group" id="serch_horizon">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="Search" id="searchText"><!-- 수정 : id 추가 -->
                     </div>
-                    <button type="submit" class="btn btn-info btn-line">
+                    <a class="btn btn-info btn-line" onClick="tMapPoi()"> <!-- 수정 : onClick추가 -->
                         검색
-                    </button>
+                    </a>
                 </form>
             </div>
 
             <% if logged_in? %>
             <!-- 알람,딴집가기,내집가기  김수겸 14.09.01-->
-            <ul class="nav navbar-nav navbar-right">
-
-                
+            <ul class="nav navbar-nav navbar-right">                
                 <!--알람-->
                 <li class="dropdown">
                     <a class="dropdown-toggle"

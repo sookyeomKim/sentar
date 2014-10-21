@@ -67,23 +67,30 @@ function get3857LonLat(coordX, coordY){//좌표변환메서드
 }
 
 function onMarkerOver(e){//쉘터마커오버이벤트
-
+alert('gggg');
 }
 function onMarkerOut(e){//쉘터마커아웃이벤트
 
 }
 
+
+/*tmap poi method*/
 function tMapPoi(){//Poi매서드, 쉘터를 Poi를 이용해 띄워주자
-	tData = new Tmap.TData();//response parameter를 받아주는 클래스
-	tData.events.register("onComplete", tData, onCompleteLoadGetPOIDataFromSearch);
-	tData.events.register("onProgress", tData, onProgressLoadPoiData);
+	tData = new Tmap.TData();//response parameter를 *respnse parameter:sk서버내에 저장되어있는 map정보를 핸들링해줌
+	/*가져온 데이터를 어떻게 처리할지 결정*/
+	tData.events.register("onComplete", tData, onCompleteLoadGetPOIDataFromSearch);/*tData를 이용하여 oncompleete(100%)됐을 때 onCompleteLoadGetPOIDataFromSearch이용하여 처리*/
+	tData.events.register("onProgress", tData, onProgressLoadPoiData);/**/
 	tData.events.register("onError", tData, onErrorLoadPoiData);
 
+	/*마크업에서의 검색값 */
 	var searchText = $('#searchText').val();
+	/*한글깨짐방지*/
 	var encodingSearchText = encodeURIComponent(searchText);
+
 
 	if (searchText != '') {//검색값이 공백이 아닐 때
 		var options = {version : 1}
+		/*poi관련된 값들을 처리해주는 method*/
 		tData.getPOIDataFromSearch(encodingSearchText, options);
 		$('#searchResult').css("display", "block");
 	} else {
@@ -101,7 +108,9 @@ function onErrorLoadPoiData() {
 }
 
 
+/**/
 function onCompleteLoadGetPOIDataFromSearch() {
+	/*html공간선언*/
 	$("#searchResult").html("");//수정 : 이부분 커머스 검색라인으로 옴기자
 	var size = new Tmap.Size(22, 30);
 	var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
@@ -133,8 +142,9 @@ function onCompleteLoadGetPOIDataFromSearch() {
 					"lowerBizName").text();
 
 				var detailBizName = $(this).find(
-					"detailBizName").text();
+					"detailBizName").text();				
 
+				/*shelter에 대한 정보값도 받아와야 함 딱히 할 필요 엄슬 듯*/
 				var coordX = $(this).find("frontLon")
 				.text();
 
@@ -200,6 +210,7 @@ function onCompleteLoadGetPOIDataFromSearch() {
 
 					var marker = new Tmap.Markers(new Tmap.LonLat(coordX, coordY), icon, label)
 
+					/*재검색했을 때 마커 클리어*/
 					if(markers!=null){
 						markers.clearMarkers();
 					}
@@ -228,6 +239,8 @@ function onCompleteLoadGetPOIDataFromSearch() {
 
 }
 
+
+/*검색시 줌 설정*/
 if ($(this.responseXML).find("searchPoiInfo pois poi").text() != '') {
 
 	map.zoomToExtent(markers.getDataExtent());
@@ -250,9 +263,9 @@ function shelterLoader(){
 	var size = new Tmap.Size(22, 30);
 	var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
 
-
-	var other_shelter;
 	/*다른사용자들쉘터좌표값받아오기*/
+	var other_shelter;
+	
 	var shelter_cool_length = $(".shelter_lonlat").length;
 	$(".shelter_lonlat").addClass(function(index) {
 		return "shelter_lonlat" + index;
