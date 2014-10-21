@@ -14,6 +14,8 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
     
   end
+
+  
   
   
   test "login with remembering" do
