@@ -5,49 +5,20 @@
 		<!-- 전체,커머스,블로그 버튼 김수겸 14.09.11 -->
 		<div class="nav_btn" id="type_btn">
 			<div class="btn-group">
-				<a type="button" class="btn btn-default"
+				<!-- <a type="button" class="btn btn-default"
 				onclick="view_all();return false;">전체</a>
 				<a type="button" class="btn btn-default"
 				onclick="view_commerce();return false;">커머스</a>
 				<a type="button" class="btn btn-default"
-				onclick="view_blog();return false;">블로그</a>
+				onclick="view_blog();return false;">블로그</a> -->
+				<a class="btn btn-default"href="#all_wrap" data-toggle="tab">전체</a>
+				<a class="btn btn-default"href="#commerce_wrap" data-toggle="tab">커머스</a>
+				<a class="btn btn-default"href="#blog_wrap" data-toggle="tab">블로그</a>
 			</div>
-		</div>
+		</div>		
 		<!-- 잔체,커머스,블로그 버튼 end -->
 
-		<!--전체,커머스,블로그 버튼 JS 김수겸 14.09.12-->
-		<script type="text/javascript" >
-			function view_all() {
-				$(this).click(function() {
-					$("#all_wrap").show();
-					$("#commerce_wrap").hide();
-					$("#blog_wrap").hide();
-					$('#map_div').css('width', '45%');
-					$('#list_wrap').css('width', '55%');
-				});
-			}
-
-			function view_commerce() {
-				$(this).click(function() {
-					$("#all_wrap").hide();
-					$("#commerce_wrap").show();
-					$("#blog_wrap").hide();
-					$('#map_div').css('width', '45%');
-					$('#list_wrap').css('width', '55%');
-				});
-			}
-
-			function view_blog() {
-				$(this).click(function() {
-					$("#all_wrap").hide();
-					$("#blog_wrap").show();
-					$("#commerce_wrap").hide();
-					$('#map_div').css('width', '45%');
-					$('#list_wrap').css('width', '55%');
-				});
-			}
-		</script>
-		<!--전체,커머스,블로그 버튼 JS end-->
+		
 
 		<!--<button id="fold_list"class="btn btn-info fold_btn" style="display:block;">지도확대</button>
 		<script type="text/javascript">
@@ -72,6 +43,7 @@
 
 	<!--list_wrap 김수겸 14.09.11-->
 	<div class="list_wrap content">
+		<div class="tab-content" style="padding:0 !important;">
 		<!--전체-->
 		<%= render 'all_wrap'%>
 		<!--전체 end-->
@@ -83,6 +55,7 @@
 		<!--블로그-->
 		<%= render 'blog_wrap'%>
 		<!--블로그 end-->
+		</div>
 	</div>
 	<!--list_wrap end-->
 	
