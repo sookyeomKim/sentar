@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   #end
   #resources :shelters
 resources :shelters, only: [:create, :index, :show, :new]
-
 get    'sell_lists'     => 'sell#index'
 #유저
   #root                 'static_pages#home'
