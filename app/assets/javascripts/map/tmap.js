@@ -337,7 +337,7 @@ function onClickMap(e){
 	
 	lonlat = map.getLonLatFromViewPortPx(e.xy);
 	//lonlat.transform(pr_3857, pr_4326);//좌표변환하면 마커가 생성이 안된다.
-	alert(lonlat); 
+	/*alert(lonlat);*/ 
 
 
 	/*$("#lon").val(lonlat.)
