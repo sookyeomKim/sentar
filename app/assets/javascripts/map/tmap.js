@@ -286,8 +286,8 @@ function shelterLoader(){
 		dataType: "json",             
 		success: function(data){
 		    	var shelter_length = data.shelter;
-		    	//for (var i=0; i<shelter_length.length; i++){
-		    	for (var i=0; i<1; i++){
+		    	for (var i=0; i<shelter_length.length; i++){
+		    	//for (var i=0; i<1; i++){
 		    		//icon img넣는 곳 
 		    		var id =data.id;               				                	
 		        	var name = data.name;
