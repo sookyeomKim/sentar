@@ -281,7 +281,7 @@ function shelterLoader(){
 
 	/*ajax쉘터 정보들 받아오기*/
 	$.ajax({
-		url: "/shelter.json",
+		url: "/shelters.json",
 		type:"POST",
 		dataType: "json",             
 		success: function(data){
