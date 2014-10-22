@@ -93,4 +93,12 @@ class UserTest < ActiveSupport::TestCase
     end
   end
   
+    test "유저 삭제시 관련된 포스트들도 삭제" do
+    @user.save
+    @user.microposts.create!(title: "로렘 입숩", content: "로렘 입숩") #글 생성
+    assert_difference 'Micropost.count', -1 do 
+      @user.destroy #유저가 삭제 될 경우 해당 글이 삭제되는지 확인
+    end
+  end
+
 end
