@@ -285,7 +285,8 @@ function shelterLoader(){
 		type:"POST",
 		dataType: "json",             
 		success: function(data){
-		    	var shelter_length = data.shelter;
+		    	var shelter_length = data.id;
+		    	alert(shelter_length);
 		    	for (var i=0; i<shelter_length.length; i++){
 		    	//for (var i=0; i<1; i++){
 		    		//icon img넣는 곳 
