@@ -279,22 +279,24 @@ function shelterLoader(){
 		});
 	};*/
 
+    
 	/*ajax쉘터 정보들 받아오기*/
 	$.ajax({
-		url: "/shelters.json",
 		type:"POST",
+		url: "shelters.json",		
+		async:false,
 		dataType: "json",             
-		success: function(data){
-		    	var shelter_length = data.id;
-		    	alert(shelter_length);
-		    	for (var i=0; i<shelter_length.length; i++){
+		success: /*response_json*/
+
+		function(data){
+		  	for (var i=0; i<5; i++){
 		    	//for (var i=0; i<1; i++){
 		    		//icon img넣는 곳 
 		    		var id =data.id;               				                	
 		        	var name = data.name;
 		        	var introduce = data.introduce;
 		        	var lonlat = data.lonlat;
-
+				
 		        	var lonlat_split = lonlat.replace(/lon=/gi,'');
 				lonlat_split = lonlat_split.replace(/lat=/gi,'');
 				lonlat_split = lonlat_split.replace(/\n/gi,'');
@@ -324,10 +326,14 @@ function shelterLoader(){
 				shelterMarker.events.register('click', shelterMarker, onShelterClick);
 		       } 
 		},
-		error: function(xhr, message, errorThrown){
+		error: function(){
 		    	alert("error");
 		}
 	});
+	/*function response_json(json){
+		
+	}*/
+	
 	/*ajax쉘터 정보들 받아오기 end*/
 
 }
