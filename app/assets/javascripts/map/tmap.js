@@ -238,7 +238,7 @@ if ($(this.responseXML).find("searchPoiInfo pois poi").text() != '') {
 /*좌표값말고 다른것도 받아도된다*/
 function shelterLoader(){
 
-	var size = new Tmap.Size(22, 30);
+	var size = new Tmap.Size(300, 300);
 	var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
 
 	/*다른사용자들쉘터좌표값받아오기*/
@@ -358,7 +358,7 @@ function shelterLoader(){
 			+"<span>"+shelter_name+"</span>"
 			+"<span>"+shelter_introduce+"</span>"
 			+"</div>"
-			+"</div>", offset);//marker					
+			+"</div>", size,offset);//marker					
 			var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
 
 			
