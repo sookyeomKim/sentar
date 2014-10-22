@@ -279,17 +279,16 @@ function shelterLoader(){
 		});
 	};*/
 
-    
 	/*ajax쉘터 정보들 받아오기*/
 	$.ajax({
-		type:"POST",
-		url: "shelters.json",		
+		type:"GET",
+		url: "/shelters.json",		
 		async:false,
 		dataType: "json",             
-		success: /*response_json*/
+		success: response_json
 
-		function(data){
-		  	for (var i=0; i<5; i++){
+		/*function(data){
+		  	for (var i=0; i<shelter_length.length; i++){
 		    	//for (var i=0; i<1; i++){
 		    		//icon img넣는 곳 
 		    		var id =data.id;               				                	
@@ -325,14 +324,55 @@ function shelterLoader(){
 
 				shelterMarker.events.register('click', shelterMarker, onShelterClick);
 		       } 
-		},
-		error: function(){
+		}*/,
+		error: function(e){
 		    	alert("error");
 		}
 	});
-	/*function response_json(json){
-		
-	}*/
+	function response_json(json){
+		var shelter_list = json.shelters;
+
+		var shelters_count=shelter_list.length;
+		alert(shelters_count);
+		$.each(shelter_list,function(key){
+			var shelter_info = shelter_list[key].Shelter;
+
+			var shelter_id = shelter_info.id;		                	
+	        	var shelter_name = shelter_info.name;
+	        	var shelter_introduce = shelter_info.introduce;
+	        	var shelter_lonlat = shelter_info.lonlat;
+			
+	        	var lonlat_split = shelter_lonlat.replace(/lon=/gi,'');
+			lonlat_split = lonlat_split.replace(/lat=/gi,'');
+			lonlat_split = lonlat_split.replace(/\n/gi,'');
+			lonlat_split = lonlat_split.replace(/^\s+|\s+$/gi,'');
+			lonlat_split_arr = lonlat_split.split(',');
+			
+			var lon = lonlat_split_arr[0];
+			var lat = lonlat_split_arr[1];
+
+			//icon img넣는 곳
+			var shelterIcon = new Tmap.IconHtml("<div>"
+			+"<div id='shelter_id_"+shelter_id+"'>"
+			+"<img src='assets/shelter/shelter.PNG'/>"
+			+"<span>"+shelter_name+"</span>"
+			+"<span>"+shelter_introduce+"</span>"
+			+"</div>"
+			+"</div>", offset);//marker					
+			var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
+
+			
+			markers.addMarker(shelterMarker);
+
+			shelterMarker.events.register('mouseover', shelterMarker, onShelterOver);
+
+			shelterMarker.events.register('mouseout', shelterMarker, onShelterOut);
+
+			shelterMarker.events.register('click', shelterMarker, onShelterClick);
+
+			
+		});
+	}
 	
 	/*ajax쉘터 정보들 받아오기 end*/
 
