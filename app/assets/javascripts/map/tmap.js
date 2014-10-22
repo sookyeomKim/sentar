@@ -333,9 +333,9 @@ function shelterLoader(){
 		var shelter_list = json.shelters;
 
 		var shelters_count=shelter_list.length;
-		alert(shelters_count);
-		$.each(shelter_list,function(key){
-			var shelter_info = shelter_list[key].Shelter;
+		
+		$.each(shelter_list,function(index){
+			var shelter_info = shelter_list[index].Shelter;
 
 			var shelter_id = shelter_info.id;		                	
 	        	var shelter_name = shelter_info.name;
