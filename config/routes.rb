@@ -84,7 +84,7 @@ root 'home#index'
   #resources :bulletins
   #resources :posts
   #중첩 라우팅. RESTful URI로 들어오는 값을 중첩시킴
-  resource :shelter do
+  resources :shelters do
     resources :bulletins do #bulletins/:bulletin_id/posts(.:format) 요청에 따라 심볼에 매칭되는 부분은 params[]해쉬의 키로 사용되어 해당 파라미터의 값을 불러올 수 있게 된다. 여기선 params[:bulletin_id]
       resources :posts #post 모델 생성 라우팅 선언(리소스 라우팅이라고 함) - rake routes로 사용할 수 있는 라우트 확인
     end

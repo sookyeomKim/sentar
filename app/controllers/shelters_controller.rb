@@ -10,8 +10,7 @@ class SheltersController < ApplicationController
   # GET /shelters
   # GET /shelters.json
   def index
-    @user = User.find(current_user.id)
-    @shelters = @user.shelters
+    @shelters = Shelter.all
     unless @shelters.nil?
       render show
   end
