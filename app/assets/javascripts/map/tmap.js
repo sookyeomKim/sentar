@@ -7,30 +7,14 @@ var zoom, mapW, mapH, mapDiv; //맵 초기화시 사용상수
 var lonlat, pr_3857, pr_4326; //좌표변환 관련 상수
 var markers; //레이어 관련 변수
 
-
-/*function initialize() {
-	setVariables(); //상수값 설정 기능 실행
-	map = new Tmap.Map({div : mapDiv}); //map 객체 생성
-	map.setCenter(lonlat,zoom);//중심 좌표 설정
-	setLayers(); //레이어 생성
-}*/
-
-/*$( document ).ready(function(){
-	initialize();
-});*/
-
 var initialize = function(){
 	setVariables();
 	map = new Tmap.Map({div:mapDiv});
 	map.ctrl_panzoom.div.style.top= "50px"
 	//map_shelter_create = new Tmap.Map({div:mapDiv_shelter_create});
 	setLayers();
-
-	
-
 	shelterLoader();
 };
-
 $(initialize);
 $(document).on('page:load',initialize);
 
@@ -41,8 +25,6 @@ function setVariables(){
 	pr_4326 = new Tmap.Projection("EPSG:4326");
 	lonlat = new Tmap.LonLat(14135893.887852,4518348.1852606);
 	zoom = 16;
-	/*mapW = '900px';    
-	mapH = '500px';*/    
 	mapDiv = 'map_div';
 	//mapDiv_shelter_create = 'map_div_shelter_create';
 }
@@ -57,9 +39,6 @@ function setLayers(){
 	markers = new Tmap.Layer.Markers("MarkerLayer");
 	map.addLayer(markers);
 }
-
-
-
 
 function get3857LonLat(coordX, coordY){//좌표변환메서드
 	lonlat = map.getLonLatFromViewPortPx(coordX, coordY);
@@ -251,8 +230,7 @@ if ($(this.responseXML).find("searchPoiInfo pois poi").text() != '') {
 
 	markers.clearMarkers();
 
-}
-
+	}
 }
 
 
@@ -264,7 +242,7 @@ function shelterLoader(){
 	var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
 
 	/*다른사용자들쉘터좌표값받아오기*/
-	var other_shelter;
+	/*var other_shelter;
 	
 	var shelter_cool_length = $(".shelter_lonlat").length;
 	$(".shelter_lonlat").addClass(function(index) {
@@ -273,38 +251,84 @@ function shelterLoader(){
 	for (var i = 0; i < shelter_cool_length; i++) {
 		$(".shelter_lonlat"+i).each(function(){
 			other_shelter = $(".shelter_lonlat"+i).text();
-			/*alert(other_shelter);*/
-
+			alert(other_shelter);
 			var other_shelter_split = other_shelter.replace(/lon=/gi,'');
 			other_shelter_split = other_shelter_split.replace(/lat=/gi,'');
 			other_shelter_split = other_shelter_split.replace(/\n/gi,'');
 			other_shelter_split = other_shelter_split.replace(/^\s+|\s+$/gi,'');
 			other_shelter_split_arr = other_shelter_split.split(',');
-			/*alert(other_shelter_split_arr[0]);*/
+			
 			var lon = other_shelter_split_arr[0];
 			var lat = other_shelter_split_arr[1];
+			alert(lon);
 
-			/*좌표변환해서 넣어야한다*/
-			/*var trLonLat = get3857LonLat(coordX, coordY);*/
+			//icon img넣는 곳
+			var shelterIcon = new Tmap.IconHtml("<div>"
+			+"<img src='assets/shelter/shelter.PNG'/>"
+			+"</div>", size, offset);//marker
 
-//icon img넣는 곳
-	var shelterIcon = new Tmap.IconHtml("<img src='assets/shelter/shelter.PNG'/>", size, offset);//marker
+			var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
 
-	var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
+			markers.addMarker(shelterMarker);
 
-	/*if(markers!=null){
-		markers.clearMarkers();
-	}*/
-	markers.addMarker(shelterMarker);
+			shelterMarker.events.register('mouseover', shelterMarker, onShelterOver);
 
-	shelterMarker.events.register('mouseover', shelterMarker, onShelterOver);
+			shelterMarker.events.register('mouseout', shelterMarker, onShelterOut);
 
-	shelterMarker.events.register('mouseout', shelterMarker, onShelterOut);
+			shelterMarker.events.register('click', shelterMarker, onShelterClick);
+		});
+	};*/
 
-	shelterMarker.events.register('click', shelterMarker, onShelterClick);
+	/*ajax쉘터 정보들 받아오기*/
+	$.ajax({
+		url: "/shelter.json",
+		type:"POST",
+		dataType: "json",             
+		success: function(data){
+		    	var shelter_length = data.shelter;
+		    	//for (var i=0; i<shelter_length.length; i++){
+		    	for (var i=0; i<1; i++){
+		    		//icon img넣는 곳 
+		    		var id =data.id;               				                	
+		        	var name = data.name;
+		        	var introduce = data.introduce;
+		        	var lonlat = data.lonlat;
 
+		        	var lonlat_split = lonlat.replace(/lon=/gi,'');
+				lonlat_split = lonlat_split.replace(/lat=/gi,'');
+				lonlat_split = lonlat_split.replace(/\n/gi,'');
+				lonlat_split = lonlat_split.replace(/^\s+|\s+$/gi,'');
+				lonlat_split_arr = lonlat_split.split(',');
+				
+				var lon = lonlat_split_arr[0];
+				var lat = lonlat_split_arr[1];
+
+				//icon img넣는 곳
+				var shelterIcon = new Tmap.IconHtml("<div>"
+				+"<div id='shelter_id_"+id+"'>"
+				+"<img src='assets/shelter/shelter.PNG'/>"
+				+"<span>"+name+"</span>"
+				+"<span>"+introduce+"</span>"
+				+"</div>"
+				+"</div>", offset);//marker					
+				var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
+
+				
+				markers.addMarker(shelterMarker);
+
+				shelterMarker.events.register('mouseover', shelterMarker, onShelterOver);
+
+				shelterMarker.events.register('mouseout', shelterMarker, onShelterOut);
+
+				shelterMarker.events.register('click', shelterMarker, onShelterClick);
+		       } 
+		},
+		error: function(xhr, message, errorThrown){
+		    	alert("error");
+		}
 	});
-};
+	/*ajax쉘터 정보들 받아오기 end*/
+
 }
 
 
@@ -318,15 +342,8 @@ function onShelterOut(e){
 
 function onShelterClick(e){
 	/*여기에 쉘터마커 클릭했을 때 쉘터로 이동하는거 만들기*/
+	alert("gkgkgk");
 }
-
-
-
-
-
-
-
-
 
 function SetLonlatEvents(){//쉘터 생성할때 좌표 지정하기 위한 메서드
 	map.events.register("click", map, onClickMap);
@@ -337,7 +354,7 @@ function onClickMap(e){
 	
 	lonlat = map.getLonLatFromViewPortPx(e.xy);
 	//lonlat.transform(pr_3857, pr_4326);//좌표변환하면 마커가 생성이 안된다.
-	alert(lonlat); 
+	/*alert(lonlat);*/ 
 
 
 	/*$("#lon").val(lonlat.)
@@ -355,3 +372,4 @@ function onClickMap(e){
 	var marker = new Tmap.Marker(lonlat,icon);
 	markers.addMarker(marker);
 }
+
