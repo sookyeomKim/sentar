@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20141023062754) do
 
   add_index "carts", ["user_id"], name: "index_carts_on_user_id"
 
-  create_table "comments", force: true do |t|
+  create_table "micropost_comments", force: true do |t|
     t.string   "user_name"
     t.text     "content"
     t.integer  "micropost_id"
