@@ -35,10 +35,7 @@ $(document).on('page:load',SetLonlatEvents);
     <div id="map_div" style="position:relative; width:100%px; height:400px; "></div>
     <div class="field" style="display:none;">
       <% Shelter.all.each do |shelter| %>
-      <div class="shelter_lonlat">
-        <%=shelter.name%>
-        <%=shelter.introduce%>
-        <%=shelter.kind%>
+      <div class="shelter_lonlat">        
         <%=shelter.lonlat%>
         <!--쉘터의정보-->
       </div>

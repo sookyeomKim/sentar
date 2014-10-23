@@ -46,7 +46,6 @@ function get3857LonLat(coordX, coordY){//좌표변환메서드
 }
 
 function onMarkerOver(e){//쉘터마커오버이벤트
-alert('gggg');
 }
 function onMarkerOut(e){//쉘터마커아웃이벤트
 
@@ -251,7 +250,6 @@ function shelterLoader(){
 	for (var i = 0; i < shelter_cool_length; i++) {
 		$(".shelter_lonlat"+i).each(function(){
 			other_shelter = $(".shelter_lonlat"+i).text();
-			alert(other_shelter);
 			var other_shelter_split = other_shelter.replace(/lon=/gi,'');
 			other_shelter_split = other_shelter_split.replace(/lat=/gi,'');
 			other_shelter_split = other_shelter_split.replace(/\n/gi,'');
@@ -260,12 +258,9 @@ function shelterLoader(){
 			
 			var lon = other_shelter_split_arr[0];
 			var lat = other_shelter_split_arr[1];
-			alert(lon);
 
 			//icon img넣는 곳
-			var shelterIcon = new Tmap.IconHtml("<div>"
-			+"<img src='assets/shelter/shelter.PNG'/>"
-			+"</div>", size, offset);//marker
+			var shelterIcon = new Tmap.IconHtml("<img src='../../assets/shelter/shelter.PNG'/>", size, offset);//marker
 
 			var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
 
@@ -285,55 +280,23 @@ function shelterLoader(){
 		url: "/shelters.json",		
 		async:false,
 		dataType: "json",             
-		success: response_json
-
-		/*function(data){
-		  	for (var i=0; i<shelter_length.length; i++){
-		    	//for (var i=0; i<1; i++){
-		    		//icon img넣는 곳 
-		    		var id =data.id;               				                	
-		        	var name = data.name;
-		        	var introduce = data.introduce;
-		        	var lonlat = data.lonlat;
-				
-		        	var lonlat_split = lonlat.replace(/lon=/gi,'');
-				lonlat_split = lonlat_split.replace(/lat=/gi,'');
-				lonlat_split = lonlat_split.replace(/\n/gi,'');
-				lonlat_split = lonlat_split.replace(/^\s+|\s+$/gi,'');
-				lonlat_split_arr = lonlat_split.split(',');
-				
-				var lon = lonlat_split_arr[0];
-				var lat = lonlat_split_arr[1];
-
-				//icon img넣는 곳
-				var shelterIcon = new Tmap.IconHtml("<div>"
-				+"<div id='shelter_id_"+id+"'>"
-				+"<img src='assets/shelter/shelter.PNG'/>"
-				+"<span>"+name+"</span>"
-				+"<span>"+introduce+"</span>"
-				+"</div>"
-				+"</div>", offset);//marker					
-				var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
-
-				
-				markers.addMarker(shelterMarker);
-
-				shelterMarker.events.register('mouseover', shelterMarker, onShelterOver);
-
-				shelterMarker.events.register('mouseout', shelterMarker, onShelterOut);
-
-				shelterMarker.events.register('click', shelterMarker, onShelterClick);
-		       } 
-		}*/,
+		success: response_json,
 		error: function(e){
 		    	alert("error");
 		}
 	});
 	function response_json(json){
+		var main_location = location.toString().length;
+		alert(main_location);
+		if(main_location===22){
+			alert('test');
+		}else if(main_location==='http://localhost:3000/shelters/2/edit'){
+			
+		}
 		var shelter_list = json.shelters;
 
 		var shelters_count=shelter_list.length;
-		
+
 		$.each(shelter_list,function(index){
 			var shelter_info = shelter_list[index].Shelter;
 
@@ -354,7 +317,7 @@ function shelterLoader(){
 			//icon img넣는 곳
 			var shelterIcon = new Tmap.IconHtml("<div>"
 			+"<div id='shelter_id_"+shelter_id+"'>"
-			+"<img src='assets/shelter/shelter.PNG'/>"
+			+"<img src='./assets/shelter/shelter.PNG'/>"
 			+"<span>"+shelter_name+"</span>"
 			+"<span>"+shelter_introduce+"</span>"
 			+"</div>"
@@ -372,8 +335,7 @@ function shelterLoader(){
 
 			
 		});
-	}
-	
+	}	
 	/*ajax쉘터 정보들 받아오기 end*/
 
 }
@@ -389,7 +351,6 @@ function onShelterOut(e){
 
 function onShelterClick(e){
 	/*여기에 쉘터마커 클릭했을 때 쉘터로 이동하는거 만들기*/
-	alert("gkgkgk");
 }
 
 function SetLonlatEvents(){//쉘터 생성할때 좌표 지정하기 위한 메서드
@@ -414,7 +375,7 @@ function onClickMap(e){
 	/*marker*/
 	var size = new Tmap.Size(21,25);
 	var offset = new Tmap.Pixel(-(size.w/2), -size.h);
-	var icon = new Tmap.IconHtml('<img src="assets/shelter/shelter.PNG" style="z-index:9999px"/>',size,offset);
+	var icon = new Tmap.IconHtml('<img src="../../assets/shelter/shelter.PNG" style="z-index:9999px"/>',size,offset);
 	/*var icon = new Tmap.IconHtml('<div class="shelter" style="border:10px solid black;"><div onClick="test1()" style="text-decoration: none;	color: RED;	font-size: 9pt;">AAAAAAAAA</div><div onClick="test2()"><img src="img/d.png" /></div><div onClick="test3()" style="text-decoration: none;	color: BLUE;	font-size: 9pt;">QQQQQQQQQQQQQQQQQQQqQ</div></div>',size,offset);*/
 	var marker = new Tmap.Marker(lonlat,icon);
 	markers.addMarker(marker);
