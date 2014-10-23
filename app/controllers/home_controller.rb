@@ -3,9 +3,13 @@ class HomeController < ApplicationController
 
   def index
   	@shelters = Shelter.all
-  	@blogs= Micropost.all
+  	
   	@user = User.find(current_user.id)
-	@products = @user.productFeed
+  	@microposts= Micropost.from_users_followed_by(@user)
+  	@micropost = current_user.microposts.build 
+  	@comments = @micropost.comments.all
+   @comment = @micropost.comments.build
+   @products = @user.productFeed
   end
 
 end

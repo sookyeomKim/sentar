@@ -1,98 +1,138 @@
 <div class="tab-pane fade" id="blog_wrap">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="navbar navbar-default list_bar" role="navigation">
-				<div class="">
-					<ul class="nav nav-pills">
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">모든 주제<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li><a href="#">Separated link</a></li>
-							</ul></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">영화</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">요리</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">책</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">여행</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--<hr>-->
-	<div class="row">
-		<div class="col-md-3 col-md-offset-1">
-			<a href="#" class="btn btn-warning btn-line btn-sm">주변검색</a>
-		</div>
-		<div class="col-md-5 col-md-offset-3">
-			<div class="horizon_array_menu">
-				<div class="common_select_btn_100px">
-					<%=select_tag"select_commerce_query", options_for_select([["최신등록순",0],["댓글순",1],["추천순",2]]),class:'btn btn-sm btn-default'%>
-				</div>
-			</div>
-		</div>
-	</div>
-	<hr>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="navbar navbar-default list_bar" role="navigation">
+                <div class="">
+                    <ul class="nav nav-pills">
+                        <li class="dropdown"><a href="#" class="dropdown-toggle"
+                            data-toggle="dropdown">모든 주제<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul></li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle"
+                            data-toggle="dropdown">영화</a></li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle"
+                            data-toggle="dropdown">요리</a></li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle"
+                            data-toggle="dropdown">책</a></li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle"
+                            data-toggle="dropdown">여행</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<hr>-->
+    <div class="row">
+        <div class="col-md-3 col-md-offset-1">
+            <a href="#" class="btn btn-warning btn-line btn-sm">주변검색</a>
+        </div>
+        <div class="col-md-5 col-md-offset-3">
+            <div class="horizon_array_menu">
+                <div class="common_select_btn_100px">
+                    <%=select_tag"select_commerce_query", options_for_select([["최신등록순",0],["댓글순",1],["추천순",2]]),class:'btn btn-sm btn-default'%>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
 
-	<!-- blog list -->
-	<div class="panel-group" id="arcodian">
-	<%@blogs.each do |blog|	%>
-	  <div class="panel panel-default">
-	  	<div class="media blog_list_item" id="micropost-<%=blog.id%>">
-			<%=link_to gravatar_for(blog.user), blog_path,class:'pull-left'%>	
-			<div class="media-body">
-				<div class="row">
-					<div class="col-lg-9">
-						<h4 class="media-heading">
-							<%=link_to blog.user.name, blog_path,target:''%>
-						</h4>
-						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<%=blog.id%>" target>
-				          <%=blog.title%>
-				        </a>					
-					</div>
-					<div class="col-lg-3">
-						<div class="">
-							<div>
-								<span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span>2331</span>
-								&nbsp; <span><strong><i class="fa fa-comment"></i></strong></span>
-								<span>20</span>
-							</div>
-							<div>
-								<span class="blog_timestamp"><%=time_ago_in_words(blog.created_at)%> ago</span>
-							</div>					
-							<div>
-								<span>
-									<%if current_user?(blog.user)%>
-								<%=link_to "삭제", blog, method: :delete,
-		                                       data: { confirm: "You sure?" },
-		                                       title: blog.content,class:'btn btn-default btn-xs'%> 
-		                            <%end%>
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	        
-	    <div id="collapse<%=blog.id%>" class="panel-collapse collapse">
-	      <div class="panel-body">
-	        <div>
-				<%=image_tag blog.picture.url if blog.picture?%>	
-			</div>
-			<div>
-				<%=blog.content%>	
-			</div>	
-	      </div>
-	    </div>
-	  </div> 
-	<%end%> 
-	</div>
-	<!-- blog list end-->	
+    <!-- blog list -->
+    <div class="panel-group" id="arcodian">
+    <%@microposts.each do |micropost| %>
+      <div class="panel panel-default">
+        <div class="media blog_list_item" id="micropost-<%=micropost.id%>">
+            <%=link_to gravatar_for(micropost.user), blog_path,class:'pull-left'%>   
+            <div class="media-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <h4 class="media-heading">
+                            <%=link_to micropost.user.name, blog_path,target:''%>
+                        </h4>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<%=micropost.id%>" target>
+                          <%=micropost.title%>
+                        </a>                    
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="">
+                            <div>
+                                <span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span>2331</span>
+                                &nbsp; <span><strong><i class="fa fa-comment"></i></strong></span>
+                                <span><%= micropost.comments.count %></span>
+                            </div>
+                            <div>
+                                <span class="blog_timestamp"><%=time_ago_in_words(micropost.created_at)%> ago</span>
+                            </div>                  
+                            <div>
+                                <span>
+                                    <%if current_user?(micropost.user)%>
+                                <%=link_to "삭제", micropost, method: :delete,
+                                               data: { confirm: "You sure?" },
+                                               title: micropost.content,class:'btn btn-default btn-xs'%> 
+                                    <%end%>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        <div id="collapse<%=micropost.id%>" class="panel-collapse collapse">
+          <div class="panel-body">
+            <div>
+                <%=image_tag micropost.picture.url if micropost.picture?%>    
+            </div>
+            <div>
+                <%=micropost.content%>   
+                <% micropost.comments.each do |comment| %>
+            <div>
+                <strong><%= comment.user_name %></strong>
+                <br />
+                <p><%= comment.content %></p>
+                <p><%= link_to '삭제', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+            </div>
+          <% end %>
+                <h1>댓글달기</h1>
+  <%= form_for(@comment) do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_name %><br>
+    <%= f.text_field :user_name %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </div>
+   <%= f.hidden_field :micropost_id, value: micropost.id  %>
+
+
+  <div class="actions">
+    <% store_location %>
+    <%= f.submit %>
+
+  </div>
+<% end %>
+
+            </div>  
+          </div>
+        </div>
+      </div> 
+    <%end%> 
+    </div>
+    <!-- blog list end-->   
 </div>

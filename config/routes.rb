@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :comments
+
   get 'sell_and_buy/main'
 
 #쉘터
