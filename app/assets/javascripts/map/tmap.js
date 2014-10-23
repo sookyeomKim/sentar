@@ -311,17 +311,19 @@ function shelterLoader(){
 			var lat = lonlat_split_arr[1];
 
 			//icon img넣는 곳
-			var shelterIcon = new Tmap.IconHtml("<div>"
-			+"<div id='shelter_id_"+shelter_id+"'>"
+			var html;
+			html+="<div>";
+			html+="<div id='shelter_id_"+shelter_id+"'>";
 			if(main_location<=44){
-			+"<img src='assets/shelter/shelter.PNG'/>"
+				html+="<img src='assets/shelter/shelter.PNG'/>";
 			}else if(main_location>=55){
-			+"<img src='../../assets/shelter/shelter.PNG'/>"	
-			}
-			+"<span>"+shelter_name+"</span>"
-			+"<span>"+shelter_introduce+"</span>"
-			+"</div>"
-			+"</div>", size,offset);//marker					
+				html+="<img src='../../assets/shelter/shelter.PNG'/>";
+			}			
+			html+="<span>"+shelter_name+"</span>";
+			html+="<span>"+shelter_introduce+"</span>";
+			html+="</div>";
+			html+="</div>";
+			var shelterIcon = new Tmap.IconHtml(html, size,offset);//marker					
 			var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
 
 			
