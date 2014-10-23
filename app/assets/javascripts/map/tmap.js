@@ -237,7 +237,7 @@ if ($(this.responseXML).find("searchPoiInfo pois poi").text() != '') {
 /*좌표값말고 다른것도 받아도된다*/
 function shelterLoader(){
 
-	var size = new Tmap.Size(300, 300);
+	var size = new Tmap.Size(35, 35);
 	var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
 
 	/*다른사용자들쉘터좌표값받아오기*/
@@ -287,7 +287,6 @@ function shelterLoader(){
 	});
 	function response_json(json){
 		var main_location = location.toString().length;
-		alert(main_location);
 		
 		var shelter_list = json.shelters;
 
@@ -311,30 +310,40 @@ function shelterLoader(){
 			var lat = lonlat_split_arr[1];
 
 			//icon img넣는 곳
-			var html;
-			html+="<div>";
-			html+="<div id='shelter_id_"+shelter_id+"'>";
 			if(main_location<=44){
-				html+="<img src='assets/shelter/shelter.PNG'/>";
+				var shelterIcon = new Tmap.IconHtml("<img src='assets/shelter/shelter.PNG'/>",size,offset);//marker					
 			}else if(main_location>=55){
-				html+="<img src='../../assets/shelter/shelter.PNG'/>";
-			}			
-			html+="<span>"+shelter_name+"</span>";
-			html+="<span>"+shelter_introduce+"</span>";
-			html+="</div>";
-			html+="</div>";
-			var shelterIcon = new Tmap.IconHtml(html, size,offset);//marker					
+				var shelterIcon = new Tmap.IconHtml("<img src='../../assets/shelter/shelter.PNG'/>",size,offset);//marker					
+			}
 			var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
 
-			
+			/*var html;			
+			html+="<div id='shelter_id_"+shelter_id+"'>";					
+			html+="<span>"+shelter_name+"</span>";
+			html+="<span>"+shelter_introduce+"</span>";
+			html+="<a href='/shelters/"+shelter_id+"'>쉘터가기</a>"
+			html+="</div>";*/
+
+			var popup;
+			popup = new Tmap.Popup("p1",new Tmap.LonLat(lon, lat),
+			                        new Tmap.Size(250, 250),
+			                        "<div id='shelter_id_"+shelter_id+"'>"
+			                        +"<span>"+shelter_name+"</span>"
+			                        +"<span>"+shelter_introduce+"</span>"
+			                        +"<a href='/shelters/"+shelter_id+"'>쉘터가기</a>"
+			                        +"</div>","close"
+			                        ); 
+			map.addPopup(popup);
+			popup.hide();
 			markers.addMarker(shelterMarker);
 
-			shelterMarker.events.register('mouseover', shelterMarker, onShelterOver);
+			if(main_location<=44){
+			shelterMarker.events.register('mouseover', popup, onShelterOver);
 
-			shelterMarker.events.register('mouseout', shelterMarker, onShelterOut);
+			shelterMarker.events.register('mouseout', popup, onShelterOut);
 
-			shelterMarker.events.register('click', shelterMarker, onShelterClick);
-
+			shelterMarker.events.register('click', popup, onShelterClick);
+			}
 			
 		});
 	}	
@@ -344,15 +353,14 @@ function shelterLoader(){
 
 
 function onShelterOver(e){
-
 }
 
 function onShelterOut(e){
-
 }
 
 function onShelterClick(e){
 	/*여기에 쉘터마커 클릭했을 때 쉘터로 이동하는거 만들기*/
+	this.show();
 }
 
 function SetLonlatEvents(){//쉘터 생성할때 좌표 지정하기 위한 메서드
