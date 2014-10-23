@@ -288,11 +288,7 @@ function shelterLoader(){
 	function response_json(json){
 		var main_location = location.toString().length;
 		alert(main_location);
-		if(main_location===22){
-			alert('test');
-		}else if(main_location==='http://localhost:3000/shelters/2/edit'){
-			
-		}
+		
 		var shelter_list = json.shelters;
 
 		var shelters_count=shelter_list.length;
@@ -317,7 +313,11 @@ function shelterLoader(){
 			//icon img넣는 곳
 			var shelterIcon = new Tmap.IconHtml("<div>"
 			+"<div id='shelter_id_"+shelter_id+"'>"
-			+"<img src='./assets/shelter/shelter.PNG'/>"
+			if(main_location<=44){
+			+"<img src='assets/shelter/shelter.PNG'/>"
+			}else if(main_location>=55){
+			+"<img src='../../assets/shelter/shelter.PNG'/>"	
+			}
 			+"<span>"+shelter_name+"</span>"
 			+"<span>"+shelter_introduce+"</span>"
 			+"</div>"
