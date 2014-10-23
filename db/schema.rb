@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141023062754) do
+ActiveRecord::Schema.define(version: 20141023175125) do
 
   create_table "bulletins", force: true do |t|
     t.string   "title"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20141023062754) do
 
   add_index "carts", ["user_id"], name: "index_carts_on_user_id"
 
+<<<<<<< HEAD
   create_table "comments", force: true do |t|
     t.integer  "post_id"
     t.text     "body"
@@ -53,6 +54,17 @@ ActiveRecord::Schema.define(version: 20141023062754) do
   end
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
+=======
+  create_table "likes", force: true do |t|
+    t.integer  "micropost_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "likes", ["micropost_id"], name: "index_likes_on_micropost_id"
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id"
+>>>>>>> making_votes
 
   create_table "micropost_comments", force: true do |t|
     t.string   "user_name"

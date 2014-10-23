@@ -3,6 +3,10 @@
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content">
   <%= micropost.content %>
+  <tr>
+  <td><%= pluralize(micropost.likes.count, "좋아요") %></td>
+  <td><%= button_to '좋아요', like_micropost_path(micropost), method: :post %></td>
+  </tr>
   <%= image_tag micropost.picture.url if micropost.picture? %>
   <h3>Comments</h3>
 <% micropost.comments.each do |comment| %>

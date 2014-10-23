@@ -29,6 +29,18 @@ class MicropostsController < ApplicationController
   end
 
   
+  def like
+   @micropost = Micropost.find(params[:id])
+   if current_user.already_liked?(@micropost) 
+   @micropost.likes.find_by(user_id: current_user.id).destroy
+   redirect_back_or root_path
+ else
+  @micropost.likes.create(user_id: current_user.id)
+  redirect_back_or root_path
+ end
+
+
+  end
 
   private
   def micropost_params
