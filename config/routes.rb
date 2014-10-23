@@ -32,7 +32,14 @@ get    'sell_lists'     => 'sell#index'
   resources :sessions,            only: [:new, :create, :destroy]
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :microposts,          only: [:create, :destroy, :new]
+  
+  resources :microposts do
+    member do
+    post 'like'
+  end
+end
+
+  
   resources :relationships,       only: [:create, :destroy]
 
   resource :cart

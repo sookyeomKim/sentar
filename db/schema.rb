@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141023062754) do
+ActiveRecord::Schema.define(version: 20141023162916) do
 
   create_table "bulletins", force: true do |t|
     t.string   "title"
@@ -44,6 +44,12 @@ ActiveRecord::Schema.define(version: 20141023062754) do
   end
 
   add_index "carts", ["user_id"], name: "index_carts_on_user_id"
+
+  create_table "likes", force: true do |t|
+    t.integer  "micropost_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "micropost_comments", force: true do |t|
     t.string   "user_name"

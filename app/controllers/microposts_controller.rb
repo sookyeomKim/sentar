@@ -29,6 +29,12 @@ class MicropostsController < ApplicationController
   end
 
   
+  def like
+   @micropost = Micropost.find(params[:id])
+   @micropost.likes.create
+   redirect_back_or root_path
+
+  end
 
   private
   def micropost_params
