@@ -58,6 +58,11 @@ class User < ActiveRecord::Base
       self.update_attribute(:activated , true) # 활성화 속성을 true로 업데이트
       self.update_attribute(:activated_at, Time.zone.now) # 활성화된 시간
   end
+  def already_liked?(micropost) 
+    user_ids = micropost.likes.map(&:user_id)
+    user_ids.include?(self.id)
+  end
+  
 
   # Sends activation email.
   def send_activation_email

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141023162916) do
+ActiveRecord::Schema.define(version: 20141023175125) do
 
   create_table "bulletins", force: true do |t|
     t.string   "title"
@@ -49,7 +49,11 @@ ActiveRecord::Schema.define(version: 20141023162916) do
     t.integer  "micropost_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "likes", ["micropost_id"], name: "index_likes_on_micropost_id"
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id"
 
   create_table "micropost_comments", force: true do |t|
     t.string   "user_name"
