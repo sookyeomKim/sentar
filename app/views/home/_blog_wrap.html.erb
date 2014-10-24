@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="blog_wrap">
+<div class="tab-pane fade active in" id="blog_wrap">
     <div class="row">
         <div class="col-md-12">
             <div class="navbar navbar-default list_bar" role="navigation">
@@ -57,24 +57,22 @@
                         </a>                    
                     </div>
                     <div class="col-lg-3">
-                        <div class="">
+                        <div>
                             <div>
-                                <span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span><%= micropost.likes.count %></span>
+                                <span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span id="like_<%= micropost.id%>"><%= micropost.likes.count %></span>
                                 &nbsp; <span><strong><i class="fa fa-comment"></i></strong></span>
                                 <span><%= micropost.comments.count %></span>
+                            </div>               
                                 
-                               
-                            </div>
-                            
-                                <span><%= button_to '좋아요', like_micropost_path(micropost), method: :post %></span>
-                            <div>
+                            <div >                            	
                                 <span class="blog_timestamp"><%=time_ago_in_words(micropost.created_at)%> ago</span>
                             </div>                  
                             <div>
+
                                 <span>
                                     <%if current_user?(micropost.user)%>
                                 <%=link_to "삭제", micropost, method: :delete,
-                                               data: { confirm: "You sure?" },
+                                               data: { confirm: "지우겄쏘??" },
                                                title: micropost.content,class:'btn btn-default btn-xs'%> 
                                     <%end%>
                                 </span>
@@ -84,53 +82,107 @@
                 </div>
             </div>
         </div>
-            
+        
+        <!-- like js -->    
+        <script>   
+        $(function(){
+        		$(".like_btn").click(function(){
+        			var current_id = $(this).closest('span').attr('id');
+        			var like_count = $('#like_'+current_id).html();
+        			like_count++
+        			/*$('#like_'+current_id).html(like_count);*/
+        			$(this).parents("div:eq(0)").prev().find("span:eq(1)").html(like_count);
+        		});
+
+        });
+        </script>
+        <!-- like js end -->    
         <div id="collapse<%=micropost.id%>" class="panel-collapse collapse">
           <div class="panel-body">
             <div>
                 <%=image_tag micropost.picture.url if micropost.picture?%>    
             </div>
             <div>
-                <%=micropost.content%>   
-                <% micropost.comments.each do |comment| %>
-            <div>
-                <strong><%= comment.user_name %></strong>
-                <br />
-                <p><%= comment.content %></p>
-                <p><%= link_to '삭제', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                <%=micropost.content%>
             </div>
-          <% end %>
-                <h1>댓글달기</h1>
-  <%= form_for(@comment) do |f| %>
-  <% if @comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-      <ul>
-      <% @comment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.hidden_field :user_name, value: current_user.id %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
-  </div>
-   <%= f.hidden_field :micropost_id, value: micropost.id  %>
+            <hr>
 
 
-  <div class="actions">
-    <% store_location %>
-    <%= f.submit %>
+<div class="row">
+			<div class="col-lg-12">
+				<div class="comment_wrap">
+					<div class="chat-panel panel panel-primary">
+						<!--댓글 wrap head 김수겸 14_09_15-->
+						<div class="panel-heading">
+							<i class="fa fa-comments"></i>
+							<div class="horizon_array_menu_h comment_menu">
+								<script type="text/javascript">
+									$(function() {
+										$(".tfs_tooltip").tooltip();
+									});
+								</script>
+								<ul class=" ">									
+									<li>
+										<span id="<%=micropost.id%>"><%= link_to '좋구만', like_micropost_path(micropost), method: :post, :remote=>true ,class:"btn btn-default btn-xs like_btn"%></span>
+									</li>
 
-  </div>
-<% end %>
+								</ul>
+							</div>
+						</div>
+						<!--댓글 wrap head end-->
 
+						<!--댓글 wrap body 김수겸 14_09_14-->
+						<div class="panel-body">
+							<ul class="chat">
+								<% micropost.comments.each do |comment| %>
+								<li class="left clearfix">
+									<span class="chat-img pull-left"> <%= gravatar_for @user , size: 50   ,class:'img-circle'%></span>
+									<div class="chat-body clearfix">
+										<div class="header">
+											<strong class="primary-font"> <%= comment.user_name %> </strong>
+											<small class="pull-right text-muted"><%= link_to '삭제', comment_path(comment), method: :delete, data: { confirm: '댓글 삭제?' } %> <i class="icon-time"></i> <%=time_ago_in_words(comment.created_at)%> ago </small>
+										</div>
+										<br>
+										<p>
+											<%= comment.content %>
+										</p>
+									</div>
+								</li>
+								<% end %>								
+							</ul>
+						</div>
+						<!--댓글 wrap body end-->
+
+						<!--댓글 wrap footer 김수겸 14_09_14-->
+						<div class="panel-footer">
+							<div class="input-group">
+								 <%= form_for(@comment) do |f| %>
+								  <% if @comment.errors.any? %>
+								    <div id="error_explanation">
+								      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+								      <ul>
+								      <% @comment.errors.full_messages.each do |message| %>
+								        <li><%= message %></li>
+								      <% end %>
+								      </ul>
+								    </div>
+								  <% end %> 
+								    <%= f.hidden_field :user_name, value: current_user.name %>
+								    <%= f.text_area :content,class:'form-control input-sm',placeholder:'말은 그 무엇보다 강려크하다' %>
+								   <%= f.hidden_field :micropost_id, value: micropost.id  %>
+								   <span class="input-group-btn">
+								    <% store_location %>
+								    <%= f.submit('댓글등록',class:'btn btn-default btn-sm',:remote=>true)%>
+								<% end %>
+								</span>
+							</div>
+						</div>
+						<!--댓글 wrap footer end-->
+					</div>
+				</div>
+			</div>
+		</div>
             </div>  
           </div>
         </div>

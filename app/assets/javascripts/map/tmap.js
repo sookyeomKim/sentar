@@ -325,12 +325,14 @@ function shelterLoader(){
 			html+="</div>";*/
 
 			var popup;
-			popup = new Tmap.Popup("p1",new Tmap.LonLat(lon, lat),
-			                        new Tmap.Size(250, 250),
+			var test = '<%= current_user.name %>';
+			popup = new Tmap.Popup("shelter",new Tmap.LonLat(lon, lat),
+			                        new Tmap.Size(200, 250),
 			                        "<div id='shelter_id_"+shelter_id+"'>"
 			                        +"<span>"+shelter_name+"</span>"
 			                        +"<span>"+shelter_introduce+"</span>"
 			                        +"<a href='/shelters/"+shelter_id+"'>쉘터가기</a>"
+			                        +"<span></span>"
 			                        +"</div>","close"
 			                        ); 
 			map.addPopup(popup);
