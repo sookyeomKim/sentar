@@ -152,7 +152,7 @@
 											<%= f.hidden_field :micropost_id, value: micropost.id  %>
 											<span class="input-group-btn">
 												<% store_location %>
-												<%= f.submit('댓글등록',class:'btn btn-default btn-sm',:remote=>true)%>
+												<%= f.submit('댓글등록',class:'btn btn-default btn-sm',remote: true)%>
 												<% end %>
 											</span>
 										</div>
