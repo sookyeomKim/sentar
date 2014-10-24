@@ -23,13 +23,9 @@
 		
 		<div class="profile_btn">
 			<p>
-				<!-- <a href="#" class="btn btn-default btn-line">친구추가</a><a href="#" class="btn btn-default btn-line">즐겨찾기</a> -->
-				<% @user ||= current_user %>
-				<div class="stats">
-					<a href="<%= following_user_path(@user) %>"> <strong id="following" class="stat"> <%= @user.following.count %> </strong> following </a>
-					<a href="<%= followers_user_path(@user) %>"> <strong id="followers" class="stat"> <%= @user.followers.count %> </strong> followers </a>
-				</div>
-			</p>			
+				<%= render 'shared/stats' %>
+				<%= render 'users/follow_form' if logged_in? %>
+			</p>	
 		</div>
 	</div>
 	<!--자기소개 end-->

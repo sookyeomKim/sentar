@@ -57,4 +57,13 @@
                                        title: micropost.content %>
     <% end %>
   </span>
+  <div>
+                  <span>
+                    <%if current_user?(micropost.user)%>
+                    <%=link_to "삭제", micropost, method: :delete,
+                    data: { confirm: "지우겄쏘??" },
+                    title: micropost.content,class:'btn btn-default btn-xs'%> 
+                    <%end%>
+                  </span>
+                </div>
 </li>

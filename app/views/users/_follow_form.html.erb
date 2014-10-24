@@ -1,6 +1,5 @@
 <% unless current_user?(@user) %>
   <div id="follow_form">
-  <h3>친구정보창</h3>
   <% if current_user.following?(@user) %>
     <%= render 'unfollow' %>
   <% else %>
