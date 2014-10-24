@@ -1,5 +1,7 @@
 <h2>Preview Bulletin</h2>
 
+
+
 <table class='table table-bordered'>
 <tr>
   <th>Title</th>
@@ -18,6 +20,8 @@
   <td><%= @bulletin.post_type %></td>
 </tr>
 </table>
+
+
 
 <%= link_to 'Edit', edit_shelter_bulletin_path(@bulletin.shelter, @bulletin), class: 'btn btn-default' %>
 <%= link_to 'Back', shelter_bulletins_path, class: 'btn btn-default' %>

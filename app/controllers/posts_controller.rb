@@ -97,7 +97,7 @@ class PostsController < ApplicationController
       #@post = @bulletin.posts.find(params[:id])#bulletin에 연결된 post를 찾음
       
       if params[:bulletin_id]#tag로 index 호출시 :tag파라미터만 넘겨오는 경우
-        @post = @bulletin.posts.find(params[:id])
+        @post = @bulletin.posts.find_by(shelter_id: params[:shelter_id])
       else
         @post = Post.find(params[:id])
       end

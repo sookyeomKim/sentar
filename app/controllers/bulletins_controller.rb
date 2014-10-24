@@ -78,7 +78,7 @@ class BulletinsController < ApplicationController
     end
     def set_bulletin
       #@bulletin = Bulletin.find(params[:id])
-      @bulletin = Bulletin.friendly.find(params[:id]) #friendly젬 추가(id값 대신에 다른 속성값을 받을거기 때문에)
+      @bulletin = Bulletin.friendly.find_by(post_type: params[:id]) #friendly젬 추가(id값 대신에 다른 속성값을 받을거기 때문에)
 
     end
 
