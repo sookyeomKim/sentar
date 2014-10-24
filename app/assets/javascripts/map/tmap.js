@@ -299,6 +299,7 @@ function shelterLoader(){
 	        	var shelter_name = shelter_info.name;
 	        	var shelter_introduce = shelter_info.introduce;
 	        	var shelter_lonlat = shelter_info.lonlat;
+	        	var shelter_kind = shelter_info.kind;
 			
 	        	var lonlat_split = shelter_lonlat.replace(/lon=/gi,'');
 			lonlat_split = lonlat_split.replace(/lat=/gi,'');
@@ -328,13 +329,15 @@ function shelterLoader(){
 			var test = '<%= current_user.name %>';
 			popup = new Tmap.Popup("shelter",new Tmap.LonLat(lon, lat),
 			                        new Tmap.Size(200, 250),
-			                        "<div id='shelter_id_"+shelter_id+"'>"
-			                        +"<span>"+shelter_name+"</span>"
+			                        "<div id='shelter_id_"+shelter_id+"'class='panel panel-info' style='width:100%;height:100%;'>"
+			                        +"<div class='panel-heading'>"
+			                        +"<span><a href='/shelters/"+shelter_id+"'><strong>"+shelter_name+"</strong>님의 미니쉘터</a></span>"
+			                        +"</div>"
+			                        +"<div class='panel-body'>"			                        
 			                        +"<span>"+shelter_introduce+"</span>"
-			                        +"<a href='/shelters/"+shelter_id+"'>쉘터가기</a>"
-			                        +"<span></span>"
+			                        +"</div>"	                        
 			                        +"</div>","close"
-			                        ); 
+			                        );
 			map.addPopup(popup);
 			popup.hide();
 			markers.addMarker(shelterMarker);

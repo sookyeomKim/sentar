@@ -11,7 +11,6 @@
 				onclick="view_commerce();return false;">커머스</a>
 				<a type="button" class="btn btn-default"
 				onclick="view_blog();return false;">블로그</a> -->
-				<a class="btn btn-default"href="#all_wrap" data-toggle="tab">전체</a>
 				<a class="btn btn-default"href="#commerce_wrap" data-toggle="tab">커머스</a>
 				<a class="btn btn-default"href="#blog_wrap" data-toggle="tab">블로그</a>
 			</div>
@@ -44,10 +43,6 @@
 	<!--list_wrap 김수겸 14.09.11-->
 	<div class="list_wrap content">
 		<div class="tab-content" style="padding:0 !important;">
-		<!--전체-->
-		<%= render 'all_wrap'%>
-		<!--전체 end-->
-
 		<!--커머스-->
 		<%= render 'commerce_wrap'%>
 		<!--커머스 end-->
