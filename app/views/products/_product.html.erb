@@ -7,7 +7,7 @@
 	<div class="thumbnail">
 		<!-- <span class="category"><%= product.category %></span> -->
 		<!--<%= link_to '+product.name+', controller: "products", action: "show", id: product.id %>-->
-		<a href="/home/item_info_view"style="cursor:pointer;"><%= image_tag product.picture.url , size: "224x224" if product.picture?%>
+		<a href="/products/<%= product.id %>"style="cursor:pointer;"><%= image_tag product.picture.url , size: "224x224" if product.picture?%>
 			</a>
 		<div class="caption">
 		<h3><%= link_to product.name, controller: "products", action: "show", id: product.id %></h3>
