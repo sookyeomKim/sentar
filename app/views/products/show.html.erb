@@ -40,90 +40,55 @@
 								<!--댓글 wrap head end-->
 
 								<!--댓글 wrap body 김수겸 14_09_14-->
-								<div class="panel-body">
-									<ul class="chat">
-										<li class="left clearfix">
-											<span class="chat-img pull-left"> <%= image_tag "sample.PNG", size: "50x50",class:"img-circle" %> </span>
-											<div class="chat-body clearfix">
-												<div class="header">
-													<strong class="primary-font"> 노찌롱 </strong>
-													<small class="pull-right text-muted"> <i class="icon-time"></i> 12 mins ago </small>
+								<!--댓글 wrap body 김수겸 14_09_14-->
+									<div class="panel-body",id="chat_comment">
+										<ul class="chat" >
+											<% @product.comments.each do |comment| %>
+											<li class="left clearfix">
+												<!--  -->
+												<span class="chat-img pull-left"> <%= gravatar_for current_user , size: 50   ,class:'img-circle'%></span>
+												<div class="chat-body clearfix">
+													<div class="header">
+														<strong class="primary-font"> <%= comment.user_name %> </strong>
+														
+													</div>
+													<br>
+													<p>
+														<%= comment.content %>
+													</p>
 												</div>
-												<br>
-												<p>
-													긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정
-												</p>
-											</div>
-										</li>
-										<li class="left clearfix">
-											<span class="chat-img pull-left"> <%= image_tag "sample.PNG", size: "50x50",class:"img-circle" %> </span>
-											<div class="chat-body clearfix">
-												<div class="header">
-													<strong class="primary-font"> 노찌롱 </strong>
-													<small class="pull-right text-muted"> <i class="icon-time"></i> 12 mins ago </small>
-												</div>
-												<br>
-												<p>
-													긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정
-												</p>
-											</div>
-										</li>
-										<li class="left clearfix">
-											<span class="chat-img pull-left"> <%= image_tag "sample.PNG", size: "50x50",class:"img-circle" %> </span>
-											<div class="chat-body clearfix">
-												<div class="header">
-													<strong class="primary-font"> 노찌롱 </strong>
-													<small class="pull-right text-muted"> <i class="icon-time"></i> 12 mins ago </small>
-												</div>
-												<br>
-												<p>
-													긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정
-												</p>
-											</div>
-										</li>
-										<li class="left clearfix">
-											<span class="chat-img pull-left"> <%= image_tag "sample.PNG", size: "50x50",class:"img-circle" %> </span>
-											<div class="chat-body clearfix">
-												<div class="header">
-													<strong class="primary-font"> 노찌롱 </strong>
-													<small class="pull-right text-muted"> <i class="icon-time"></i> 12 mins ago </small>
-												</div>
-												<br>
-												<p>
-													긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정
-												</p>
-											</div>
-										</li>
-										<li class="left clearfix">
-											<span class="chat-img pull-left"> <%= image_tag "sample.PNG", size: "50x50",class:"img-circle" %> </span>
-											<div class="chat-body clearfix">
-												<div class="header">
-													<strong class="primary-font"> 노찌롱 </strong>
-													<small class="pull-right text-muted"> <i class="icon-time"></i> 12 mins ago </small>
-												</div>
-												<br>
-												<p>
-													긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정긍정
-												</p>
-											</div>
-										</li>
+											</li>
+											<% end %>								
+										</ul>
+									</div>
+									<!--댓글 wrap body end-->
 
-									</ul>
-								</div>
-								<!--댓글 wrap body end-->
+									<!--댓글 wrap footer 김수겸 14_09_14-->
+									<div class="panel-footer">
+										<div class="input-group">
+											<%= form_for(@comment) do |f| %>
+											<% if @comment.errors.any? %>
+											<div id="error_explanation">
+												<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-								<!--댓글 wrap footer 김수겸 14_09_14-->
-								<div class="panel-footer">
-									<div class="input-group">
-										<input id="btn-input" type="text" class="form-control input-sm" placeholder="말은 그 무엇보다 강려크하다">
-										<span class="input-group-btn">
-											<button class="btn btn-warning btn-sm" id="btn-chat">
-												입력
-											</button> </span>
+												<ul>
+													<% @comment.errors.full_messages.each do |message| %>
+													<li><%= message %></li>
+													<% end %>
+												</ul>
+											</div>
+											<% end %> 
+											<%= f.hidden_field :user_name, value: current_user.name %>
+											<%= f.text_area :content,class:'form-control input-sm',placeholder:'말은 그 무엇보다 강려크하다',style:'width:500px;' %>
+											<%= f.hidden_field :product_id, value: @product.id  %>
+											<span class="input-group-btn">
+												<% store_location %>
+												<%= f.submit('댓글등록',class:'btn btn-default btn-sm',remote: true)%>
+												<% end %>
+											</span>
 										</div>
 									</div>
 									<!--댓글 wrap footer end-->
-								</div>
 							</div>
 						</div>
 					</div>

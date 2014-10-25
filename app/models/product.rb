@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
 	belongs_to :user
 	has_many :purchases
+	has_many :comments , dependent: :destroy
 	default_scope -> { order('created_at DESC') }
 	mount_uploader :picture, PictureUploader
 	mount_uploader :picture2, PictureUploader

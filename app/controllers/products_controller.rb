@@ -2,7 +2,8 @@ class ProductsController < ApplicationController
 	before_action :logged_in_user, only: [:create, :destroy]
 	
 	def show
-	@product = Product.find(params[:id])	 
+	@product = Product.find(params[:id])
+	@comment = @product.comments.build	 
 	end
 
 	def new
