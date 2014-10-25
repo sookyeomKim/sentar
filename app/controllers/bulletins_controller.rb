@@ -8,7 +8,7 @@ class BulletinsController < ApplicationController
   def index
     #@bulletins = Bulletin.all
     @bulletins = @shelter.bulletins.all
-    redirect_to root_path
+    
   end
 
   # GET /bulletins/1
