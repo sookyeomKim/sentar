@@ -2,7 +2,7 @@
 <div class="panel panel-default">
   <div class="alert alert-warning" >
     <a href="<%= following_user_path(@user) %>" class="alert-link">    
-      <%=@user.name %>님이 칭추한닝겐
+      <%=@user.name %>님이 칭추한 닝겐
       <span class="label label-warning">
         <strong id="following" class="stat">
           <%= @user.following.count%>
@@ -12,7 +12,7 @@
   </div>
   <div class="alert alert-warning">
     <a href="<%= followers_user_path(@user) %>" class="alert-link">    
-      <%=@user.name %>님을 칭추한닝겐
+      <%=@user.name %>님을 칭추한 닝겐
       <span class="label label-warning">
         <strong id="followers" class="stat" >
           <%= @user.followers.count%>
