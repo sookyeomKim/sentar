@@ -64,7 +64,7 @@
 						<div class="col-lg-2">
 							<div>
 								<div  style="float:right;">
-									<span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span id="like_<%= micropost.id%>"><%= micropost.likes.count %></span>
+									<span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span id="like_count"><%= micropost.likes.count %></span>
 									&nbsp; <span><strong><i class="fa fa-comment"></i></strong></span>
 									<span><%= micropost.comments.count %></span>
 								</div>               
@@ -115,7 +115,7 @@
 										<ul class="chat" >
 											<% micropost.comments.each do |comment| %>
 											<li class="left clearfix">
-												<span class="chat-img pull-left"> <%= gravatar_for @user , size: 50   ,class:'img-circle'%></span>
+												<span class="chat-img pull-left"> <%= gravatar_for User.find_by(name: comment.user_name) , size: 50   ,class:'img-circle'%></span>
 												<div class="chat-body clearfix">
 													<div class="header">
 														<strong class="primary-font"> <%= comment.user_name %> </strong>

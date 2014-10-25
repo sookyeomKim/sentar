@@ -43,14 +43,21 @@
 								<!--댓글 wrap body 김수겸 14_09_14-->
 									<div class="panel-body",id="chat_comment">
 										<ul class="chat" >
-											<% @product.comments.each do |comment| %>
+
+											<% @product.comments.each do |comment| unless comment.nil?  %>
 											<li class="left clearfix">
-												<!--  -->
-												<span class="chat-img pull-left"> <%= gravatar_for current_user , size: 50   ,class:'img-circle'%></span>
+												<% if  @user = User.find_by(name: comment.user_name)%>
+				
+												<span class="chat-img pull-left"> <%= gravatar_for @user , size: 50   ,class:'img-circle'%></span>
 												<div class="chat-body clearfix">
 													<div class="header">
-														<strong class="primary-font"> <%= comment.user_name %> </strong>
-														
+														<strong class="primary-font"> <%= comment.user_name %> 
+
+														<%=time_ago_in_words(comment.created_at)%> ago 
+														<small class="pull-right text-muted"><%= link_to '삭제', comment_path(comment), method: :delete, data: { confirm: '댓글 삭제?' } %> <i class="icon-time"></i> 
+														</small>
+														</strong>
+														<% end %>
 													</div>
 													<br>
 													<p>
@@ -61,6 +68,7 @@
 											<% end %>								
 										</ul>
 									</div>
+									<% end %>
 									<!--댓글 wrap body end-->
 
 									<!--댓글 wrap footer 김수겸 14_09_14-->
