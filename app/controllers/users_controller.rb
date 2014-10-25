@@ -25,10 +25,10 @@ def create
     if @user.save
       @user.send_activation_email  #계정 활성화 이메일 발송
       Shelter.create!(user_id: @user.id, introduce: "설정에서 변경해주세요", lonlat: 0000) #회원가입후 기본 쉘터 생성
-      Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'bulletin', title: 'init bulletin title', description: 'init description')
-      Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'post', title: 'init post title', description: 'init description')
-      Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'gallery', title: 'init gallery title', description: 'init description')
-      flash[:info] = "메일을 발송하였습니다 확인해 주세요."
+         Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'bulletin', title: '공지사항', description: 'init description')
+        Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'bulletin', title: '새소식', description: 'init description')
+        Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'blog', title: '가입인사', description: 'init description')
+        Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'gallery', title: '갤러리', description: 'init description')     flash[:info] = "메일을 발송하였습니다 확인해 주세요."
       redirect_to root_url
     else
       render 'new' #render는 컨트롤러에서도 사용가능
