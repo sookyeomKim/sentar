@@ -170,17 +170,4 @@
 	</div> 
 	<!-- blog list end-->    
 </div>
-<!-- like js -->    
-			<script>   
-			$(function(){
-				$(".like_btn").click(function(){
-					var current_id = $(this).closest('span').attr('id');
-					var like_count = $('#like_'+current_id).html();
-					like_count++
-					/*$('#like_'+current_id).html(like_count);*/
-					$(this).parents("div:eq(0)").prev().find("span:eq(1)").html(like_count);
-				});
 
-			});
-			</script>
-			<!-- like js end -->    
