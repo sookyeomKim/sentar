@@ -12,13 +12,14 @@ class SheltersController < ApplicationController
   def index
     @shelters = Shelter.all
     unless @shelters.nil?
-      render show
+      #render show
   end
 end
   # GET /shelters/1
   # GET /shelters/1.json
   def show
- 
+ @shelter = Shelter.find(params[:id])
+ @user = @shelter.user
   end
 
 

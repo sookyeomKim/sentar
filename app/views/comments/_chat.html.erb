@@ -1,0 +1,15 @@
+<% micropost.comments.each do |comment| %>
+											<li class="left clearfix">
+												<span class="chat-img pull-left"> <%= gravatar_for @user , size: 50   ,class:'img-circle'%></span>
+												<div class="chat-body clearfix">
+													<div class="header">
+														<strong class="primary-font"> <%= comment.user_name %> </strong>
+														<small class="pull-right text-muted"><%= link_to '삭제', comment_path(comment), method: :delete, data: { confirm: '댓글 삭제?' } %> <i class="icon-time"></i> <%=time_ago_in_words(comment.created_at)%> ago </small>
+													</div>
+													<br>
+													<p>
+														<%= comment.content %>
+													</p>
+												</div>
+											</li>
+											<% end %>								

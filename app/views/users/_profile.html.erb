@@ -1,9 +1,10 @@
 <div class="profile_wrap">
+	<% @user ||= current_user %>
 	<p>
-		<span><strong><%= current_user.name %></strong>님의 프로필</span>
+		<span><strong><%= @user.name %></strong>님의 프로필</span>
 	</p>
 	<!--이미지-->
-	<a href="" class="profile"> <%= gravatar_for current_user , size: 210  %></a>
+	<a href="" class="profile"> <%= gravatar_for @user , size: 210  %></a>
 	<!--이미지 end-->
 
 	<!--설정버튼-->
@@ -18,7 +19,7 @@
 	<!--자기소개-->
 	<div class="caption">
 		<p class="well">
-			<span><%= current_user.shelter.introduce %></span>
+			<span><%= @user.shelter.introduce %></span>
 		</p>
 		
 		<div class="profile_btn">

@@ -30,7 +30,8 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.html { redirect_back_or @comments}
-        format.json { render :show, status: :created, location: @comment }
+        # format.json { render :show, status: :created, location: @comment }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @comment.errors, status: :unprocessable_entity }

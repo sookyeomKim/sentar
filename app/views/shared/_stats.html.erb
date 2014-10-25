@@ -4,12 +4,12 @@
     <strong id="following" class="stat">
       <%= @user.following.count %>
     </strong>
-    내가칭추한닝겐
+    <%=@user.name %>님이 칭추한닝겐
   </a>
   <a href="<%= followers_user_path(@user) %>">
     <strong id="followers" class="stat">
       <%= @user.followers.count %>
     </strong>
-    나를칭추한닝겐
+  <%=@user.name %>님을 칭추한닝겐
   </a>
 </div>
