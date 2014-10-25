@@ -28,12 +28,15 @@ def create
          Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'bulletin', title: '공지사항', description: 'init description')
         Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'bulletin', title: '새소식', description: 'init description')
         Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'blog', title: '가입인사', description: 'init description')
-        Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'gallery', title: '갤러리', description: 'init description')     flash[:info] = "메일을 발송하였습니다 확인해 주세요."
+        Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'gallery', title: '갤러리', description: 'init description')     
+        flash[:info] = "메일을 발송하였습니다 확인해 주세요."
       
       redirect_to root_url
     else
       render 'new' #render는 컨트롤러에서도 사용가능
     end
+
+
   end
   
   def edit #업데이트 유저 (view : app/views/users/edit.html.erb)
