@@ -16,7 +16,8 @@
           </p>
           <p>
           	<%= link_to '카트에 담기', cart_path(:id => product.id  ,:amount => 1) , method: :post,class:'btn btn-primary'  %>
-          	<%= link_to '구매하기', new_purchase_path(:id => product.id),class:'btn btn-primary'  %>            
+          	<%= link_to '구매하기', new_purchase_path(:id => product.id),class:'btn btn-primary'  %>  
+          	<%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } ,class:'btn btn-primary' %>            
           </p>
           <p><span
 			class="timestamp"> updated <%= time_ago_in_words(product.created_at) %>
