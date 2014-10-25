@@ -13,9 +13,7 @@
         &nbsp; <span><strong><i class="fa fa-comment"></i></strong></span>
         <span><%= micropost.comments.count %></span>
         <div>
-          <span>
-            <%= link_to '좋아요', like_micropost_path(micropost), method: :post, class:'btn btn-default btn-round', remote: true %></span>
-
+         <span id="<%=micropost.id%>"><%= link_to '좋구만', like_micropost_path(micropost), method: :post, remote:true ,class:"btn btn-default btn-xs like_btn"%></span>
           </div>
         </div>
         <div style="float:right;">
@@ -42,11 +40,11 @@
           <% micropost.comments.each do |comment| %>
           <li class="left clearfix">
             <% @user = User.find_by(name: comment.user_name)||current_user  %>
-            <span class="chat-img pull-left"> <%=gravatar_for @user , size: 50   ,class:'img-circle'%></span>
+            <span class="chat-img pull-left"> <%=gravatar_for @user , size: 60%></span>
             <div class="chat-body clearfix">
               <div class="header">
                 <strong class="primary-font"> <%= comment.user_name %> </strong>
-                <small class="pull-right text-muted"><%= link_to '삭제', comment_path(comment), method: :delete, data: { confirm: '댓글 삭제?' } %> <i class="icon-time"></i> <%=time_ago_in_words(comment.created_at)%> ago </small>
+                <small class="pull-right text-muted"><%= link_to '삭제', comment_path(comment), method: :delete, data: { confirm: '댓글 삭제?' },class:'btn btn-default btn-xs' %> <i class="icon-time"></i> <%=time_ago_in_words(comment.created_at)%> ago </small>
               </div>
               <br>
               <p>

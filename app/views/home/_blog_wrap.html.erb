@@ -50,7 +50,7 @@
 		<%@microposts.each do |micropost| %>
 		<div class="panel panel-default">
 			<div class="media blog_list_item" id="micropost-<%=micropost.id%>">
-				<%=link_to gravatar_for(micropost.user), blog_path,class:'pull-left'%>   
+				<%=link_to gravatar_for(micropost.user,size:63), micropost.user,class:'pull-left'%>   
 				<div class="media-body">
 					<div class="row">
 						<div class="col-lg-10">
@@ -72,6 +72,9 @@
 								<div >                            	
 									<span class="blog_timestamp"><%=time_ago_in_words(micropost.created_at)%> ago</span>
 								</div> 
+								<div style="float:right;">
+									<span id="<%=micropost.id%>"><%= link_to '좋구만', like_micropost_path(micropost), method: :post, remote:true ,class:"btn btn-default btn-xs like_btn"%></span>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -96,16 +99,7 @@
 									<div class="panel-heading">
 										<i class="fa fa-comments"></i>
 										<div class="horizon_array_menu_h comment_menu">
-											<script type="text/javascript">
-											$(function() {
-												$(".tfs_tooltip").tooltip();
-											});
-											</script>
-												
-												<li>	
-												<span id="<%=micropost.id%>"><%= link_to '좋구만', like_micropost_path(micropost), method: :post, remote:true ,class:"btn btn-default btn-xs like_btn"%></span>
-												</li>
-											
+																						
 										</div>
 									</div>
 									<!--댓글 wrap head end-->
@@ -170,7 +164,7 @@
 					</div>  
 				</div>
 			</div>
-		<%end%>
+			<%end%>
 		</div> 
 		<!-- blog list end-->    
 	</div>
