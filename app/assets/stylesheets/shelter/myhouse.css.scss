@@ -48,9 +48,8 @@ position: relative;
     text-decoration: none;
 }
 .labels div {
-    background-color: rgba(203, 189, 58, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
     color: #FFFFFF;
-    //display: none;
     height: 50px;
     padding: 30px 0 0;
     position: absolute !important;
@@ -64,9 +63,15 @@ position: relative;
     -webkit-border-radius: 40px;
     border-radius: 40px;
 }
+.labels div>a{
+    color: #fff;
+}
 
 .labels div:hover {
     background-color: rgba(128, 128, 128, 0.8);
+}
+.labels div>a:hover {
+    color: #000;
 }
 .labels div span {
     border-left: 10px solid transparent;
