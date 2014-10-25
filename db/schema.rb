@@ -45,15 +45,6 @@ ActiveRecord::Schema.define(version: 20141025045121) do
 
   add_index "carts", ["user_id"], name: "index_carts_on_user_id"
 
-  create_table "comments", force: true do |t|
-    t.integer  "post_id"
-    t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comments", ["post_id"], name: "index_comments_on_post_id"
-
   create_table "likes", force: true do |t|
     t.integer  "micropost_id"
     t.datetime "created_at"
