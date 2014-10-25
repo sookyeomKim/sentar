@@ -1,24 +1,232 @@
-<h1>Listing purchases</h1>
+<%= render 'sell_and_buy/snb_category'%>
+<div id="content">
+  <div class="inner">
+    <h2 style="padding-top: 17px;padding-bottom:17px;">구매목록/배송조회</h2>
+    <!-- buy_status 김수겸 14.09.21 -->
+    <div class="buy_list_top well">
+      <p>
+        <span><strong>사용자</strong></span>님 방가방가
+      </p>
+      <hr>
+      <table class="table status_table ">
+        <thead>
+          <tr>
+            <th>배송중</th>
+            <th>포인트</th>
+            <th>할인쿠폰</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div>
+                <a href="#"><strong>0</strong></a><span>건</span>
+              </div></td>
+              <td>
+                <div>
+                  <a href="#"><strong>0</strong></a><span>점</span>
+                </div></td>
+                <td>
+                  <div>
+                    <a href="#"><strong>0</strong></a><span>장</span>
+                  </div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- buy_status end -->
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+          <!--date_sort 김수겸 14.09.21-->
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="date_sort">
+                <h4>기간별조회</h4>
+                <div class="horizon_array_menu_h date_sort_menu ">
+                  <ul>
+                    <li>
+                      <a class="btn btn-info btn-xs btn-line"><strong>1</strong>주일</a>
+                    </li>
+                    <li>
+                      <a class="btn btn-info btn-xs btn-line"><strong>15</strong>일</a>
+                    </li>
+                    <li>
+                      <a class="btn btn-info btn-xs btn-line"><strong>1</strong>개월</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="horizon_array_menu_h date_sort_menu">
+                  <ul>
+                    <li>
+                      <a id="month1ago" class="btn btn-info btn-xs btn-line"></a>
+                    </li>
+                    <li>
+                      <a id="month2ago" class="btn btn-info btn-xs btn-line"></a>
+                    </li>
+                    <li>
+                      <a id="month3ago" class="btn btn-info btn-xs btn-line"></a>
+                    </li>
+                    <li>
+                      <a id="month4ago" class="btn btn-info btn-xs btn-line"></a>
+                    </li>
+                    <li>
+                      <a id="month5ago" class="btn btn-info btn-xs btn-line"></a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="horizon_array_menu_h date_sort_menu">
+                  <ul>
+                    <li>
+                      <input type="text" id="from_date" name="from_date"
+                      class="from" value="" readonly="true">
+                    </li>
+                    <li>
+                      ~
+                    </li>
+                    <li>
+                      <input type="text" id="to_date" name="to_date" class="to"
+                      value="" readonly="true">
+                    </li>
+                  </ul>
+                </div>
+                <a id="btn_search" class="date_sort_menu btn btn-warning btn-sm btn-line"><span>조회하기</span></a>
+              </div>
+            </div>
+          </div>
+          <!--date_sort end-->
+          <hr>
+          <!--date_sort js 김수겸 14.09.21-->
+          <script type="text/javascript">
+          var month_num = function() {
+            var d = new Date();
+            var m = d.getMonth();
 
-  <tbody>
-    <% @purchases.each do |purchase| %>
-    
-      <tr>
-        <td><%= link_to 'Show', purchase %></td>
-        <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
-        <td><%= link_to 'Destroy', purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            for (var n = 1; n < 6; n++) {
+              var test = $("#month5ago strong").text();
 
-<br>
+              /*page change 로 인해 포문이 중첩실행 된다. 그를 방지하기 위한 코드*/
+              if (test) {
+                return;
+              }
+              var month = document.getElementById("month" + n + "ago");
+              var strong = document.createElement("strong");
+              var textnode = document.createTextNode("월");
 
-<%= link_to 'New Purchase', new_purchase_path %>
+              strong.innerHTML = m--;
+
+              month.appendChild(strong);
+              month.appendChild(textnode);
+            }
+            /* month.innerHTML = "월"; */
+
+          }
+          $(month_num);
+          $(document).on('page:change', month_num);
+
+          var datepicker = function() {
+            /*datepicker*/
+
+            $(".from").datepicker({
+              defaultDate : "+1w",
+              changeMonth : true,
+              numberOfMonths : 2,
+              onClose : function(selectedDate) {
+                $(".to").datepicker("option", "minDate", selectedDate);
+              }
+            });
+            $(".to").datepicker({
+              defaultDate : "+1w",
+              changeMonth : true,
+              numberOfMonths : 2,
+              onClose : function(selectedDate) {
+                $(".from").datepicker("option", "maxDate", selectedDate);
+              }
+            });
+          };
+          /*datepicker*/
+          $(datepicker);
+          $(document).on('page:change', datepicker);
+          </script>
+          <!--date_sort js end-->
+
+          <!--buy_list_main 김수겸 14.09.21-->
+          <div class="buy_list_main">
+
+      <!-- <li><a href="#on_shipping_merchandise" data-toggle="tab">배송중상품</a></li>
+      <li><a href="#shipping_complete_merchandise" data-toggle="tab">배송완료상품</a></li> -->
+
+      <!--전체-->
+      <div class="buy_list_table">
+        <table class="table table-hover basket_table">
+          <thead>
+            <tr>
+              <td>
+                <input type="checkbox" id="total_checkbox">
+              </td>
+              <td>상품/옵션정보</td>
+              <td>구매날짜</td>
+              <td>결제금액</td>
+              <td class="">배송상태</td>
+            </tr>
+          </thead>
+          <script>
+          $(function() {
+            $('#total_checkbox').click(function() {
+              $('.sub_checkbox').prop('checked', this.checked);
+              call_display_price();
+            });
+          });
+          </script>
+          <tbody>
+            <% @purchases.each do |purchase| %>
+            <tr>
+              <td>
+                <input type="checkbox" class="sub_checkbox" value="1000" name="opt[selected][]">
+              </td>
+
+              <td class="left_text_align">
+                <div class="media">
+                  <a class="pull-left" href="#"> <%= image_tag '11111.PNG',size:'60x60'%> </a>
+                  <div class="media-body">
+                    <div>
+                      상품제목을 여기에
+                    </div>                  
+                  </div>
+                </div></td>
+                <td>
+                  <div>
+                    <strong>등록날짜</strong>
+                  </div>
+                  <div>
+                    <a href="item_info_view" class="btn btn-default btn-sm">제품정보</a>
+                  </div></td>
+                  <td>
+                    <div>
+                      <span><strong class="item_total_price">123,000</strong>원</span>
+                    </div></td>
+
+                    <td >
+                      <div class="buy_order_btn">
+                        <input type="text" readonly="true" value="입금확인중" style="width:100px;">
+                      </div>
+                      <div class="buy_order_btn">
+                        <%= link_to '배송지변경', edit_purchase_path(purchase),class:'btn btn-default btn-xs' %>
+                      </div>
+                      <div class="buy_order_btn">
+                        <%= link_to '즉시취소', purchase, method: :delete, data: { confirm: '취소 하시겠습니까?' },class:'btn btn-default btn-xs' %>
+                      </div></td>
+                    </tr>
+
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+              <!--전체 end -->
+            </div>
+            <!--buy_list_main end-->
+          </div>
+        </div>
+
+
+
+
+      

@@ -13,10 +13,10 @@
             <strong><%= product.price %></strong>원
           </p>
           <p>
-          	<%= link_to '카트에 담기', cart_path(:id => product.id  ,:amount => 1) , method: :post,class:'btn btn-primary'  %>
-          	<%= link_to '구매하기', new_purchase_path(:id => product.id),class:'btn btn-primary'  %>
+          	<%= link_to '장바구니', cart_path(:id => product.id  ,:amount => 1) , method: :post,class:'btn btn-primary'  %>
+          	<%= link_to '구매하기', new_purchase_path(:id => product.id),class:'btn btn-default'  %>
           	<%if current_user?(product.user)%>  
-          	<%= link_to '삭제', product, method: :delete, data: { confirm: 'Are you sure?' } ,class:'btn btn-primary' %>
+          	<%= link_to '삭제', product, method: :delete, data: { confirm: 'Are you sure?' } ,class:'btn btn-warning' %>
           	<%end%>            
           </p>
           <p><span

@@ -1,37 +1,31 @@
 <%= form_for(@purchase) do |f| %>
-  <% if @purchase.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
+<% if @purchase.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
 
-      <ul>
-      <% @purchase.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+  <ul>
+    <% @purchase.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
 
-      </ul>
-    </div>
-      
-  <% end %>
+  </ul>
+</div>
 
-         <%= f.hidden_field :product_id, class: 'form-control' %>
-         <%= f.hidden_field :user_id, class: 'form-control' %>
-          <%= f.label :수취인 %>
-         <%= f.text_field :receive_name, class: 'form-control' %>
-          <%= f.label :주소 %>
-         <%= f.text_field :addr, class: 'form-control' %>
-          <%= f.label :phone %>
-         <%= f.text_field :phone, class: 'form-control' %>
-          <%= f.label :memo %>
-         <%= f.text_field :memo, class: 'form-control' %>
-          <%= f.label :total_cost %>
-         <%= f.text_field :total_cost, class: 'form-control' %>
-          <%= f.label :trade_type %>
-         <%= f.text_field :trade_type, class: 'form-control' %>
-          <%= f.label :payer %>
-         <%= f.text_field :payer, class: 'form-control' %>
-          <%= f.label :status %>
+<% end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= f.hidden_field :product_id, class: 'form-control' %>
+<%= f.hidden_field :user_id, class: 'form-control' %>
+<%= f.label :receive_name,'수취인' %>
+<%= f.text_field :receive_name, class: 'form-control' %>
+<%= f.label :addr,'주소' %>
+<%= f.text_field :addr, class: 'form-control' %>
+<%= f.label :phone,'전화번호' %>
+<%= f.text_field :phone, class: 'form-control' %>
+<%= f.label :memo,'메모' %>
+<%= f.text_field :memo, class: 'form-control' %>
+<%= f.label :trade_type,'배송방법'%>
+<%= f.text_field :trade_type, class: 'form-control' %>
+<div class="actions">
+  <span><%= f.submit('구매등록',class:'btn btn-warning')%></span><span><%= link_to '취소', root_path,class:'btn btn-default' %></span>
+</div>
 <% end %>
