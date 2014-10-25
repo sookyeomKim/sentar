@@ -27,9 +27,3 @@
 <br>
 
 <%= link_to 'New Bulletin', new_shelter_bulletin_path, class: 'btn btn-default' %>
-
-
-<!-- 네비게이션 및 기본 플래시 div -->
-
-<%= render "layouts/bulletinNav"  %>
-
