@@ -103,11 +103,7 @@
 											</script>
 											<ul id="like_cancel">	
 												<li>	
-													<% if current_user.already_liked?(micropost) %>
-													<span id="<%=micropost.id%>"><%= link_to '좋구만취소', like_micropost_path(micropost), method: :post, remote:true ,class:"btn btn-default btn-xs like_btn"%></span>
-													<% else %>
 													<span id="<%=micropost.id%>"><%= link_to '좋구만', like_micropost_path(micropost), method: :post, remote:true ,class:"btn btn-default btn-xs like_btn"%></span>
-													<% end %>
 												</li>
 											</ul>
 										</div>
