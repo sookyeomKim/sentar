@@ -2,21 +2,20 @@
 <% if logged_in? %>
 <% provide(:title, 'add new product') %>
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-6">
 
     <%= form_for :product , url: { action: "create" }, html: { multipart: true } do |f| %>
 
-    <%= f.label :name %>
+    <%= f.label :name ,'상품명' %>
     <%= f.text_field :name, class: 'form-control' %>
 
-    <%= f.label :price %>
+    <%= f.label :price,'상품가격' %>
     <%= f.text_field :price, class: 'form-control' %>
 
-    <%= f.label '내용' %>
+    <%= f.label :content , '내용' %>
     <%= f.text_area :content , class: 'form-control' %>
-    <%= f.label :category %>
-    <%= f.select :category, options_for_select([['음식', '음식'], ['옷', '옷'],['가구', '가구'],['가전', '가전']], 1), {}, { :class => 'form-control' } %>
-    
+    <%= f.label :category,'카테고리' %>
+    <%= f.select :category, options_for_select([['음식', '0'], ['옷', '1'],['가구', '2'],['가전', '3']], 1), {}, { :class => 'form-control' } %>
    <div class="fileupload fileupload-new" data-provides="fileupload">
               <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
               <div>

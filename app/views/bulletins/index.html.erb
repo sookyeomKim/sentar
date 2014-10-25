@@ -29,7 +29,9 @@
 
 
 <!-- 네비게이션 및 기본 플래시 div -->
+<<<<<<< HEAD
 
+=======
 
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -38,14 +40,39 @@
             <li><a href="#contact">Contact</a></li>
             
             <!--라우팅, 컨트롤러 연결, 뷰딴 연결 과정-->
-
-            <li class="<%= params[:bulletin_id] == '공지사항' ? 'active' : '' %>"><%= link_to '공지사항', shelter_bulletin_posts_path(bulletin_id: "공지사항") %></li>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+            <li class="<%= params[:bulletin_id] == '공지사항' ? 'active' : '' %>"><%= link_to '공지사항', shelter_bulletin_posts_path(bulletin_id: "bulletin") %></li>
             <!--파라미터에 지정된 속성과 일치된 값이 들어오면 삼항연산자에 의해 클래스를 active로 지정된다, 아니면 다른 클래스를 지정한다.(여기선 공백)-->
             <!--link_to 부분은 rake routes에서 확인가능-->
-            <li class="<%= params[:bulletin_id] == '새소식' ? 'active' : '' %>"><%= link_to '새소식', shelter_bulletin_posts_path(bulletin_id: "새소식") %></li>
-            <li class="<%= params[:bulletin_id] == '가입인사' ? 'active' : '' %>"><%= link_to '가입인사', shelter_bulletin_posts_path(bulletin_id: "가입인사") %></li>
-            <li class="<%= params[:bulletin_id] == '갤러리' ? 'active' : '' %>"><%= link_to '갤러리', shelter_bulletin_posts_path(bulletin_id: "갤러리") %></li>
-
+            <li class="<%= params[:bulletin_id] == '새소식' ? 'active' : '' %>"><%= link_to '새소식', shelter_bulletin_posts_path(bulletin_id: "blog") %></li>
+            <li class="<%= params[:bulletin_id] == '가입인사' ? 'active' : '' %>"><%= link_to '가입인사', shelter_bulletin_posts_path(bulletin_id: "bulletin") %></li>
+            <li class="<%= params[:bulletin_id] == '갤러리' ? 'active' : '' %>"><%= link_to '갤러리', shelter_bulletin_posts_path(bulletin_id: "gallary") %></li>
+=======
+            <li class="<%= params[:bulletin_id] == '공지사항' ? 'active' : '' %>"><%= link_to '공지사항', bulletin_posts_path("공지사항") %></li>
+            <!--파라미터에 지정된 속성과 일치된 값이 들어오면 삼항연산자에 의해 클래스를 active로 지정된다, 아니면 다른 클래스를 지정한다.(여기선 공백)-->
+            <!--link_to 부분은 rake routes에서 확인가능-->
+            <li class="<%= params[:bulletin_id] == '새소식' ? 'active' : '' %>"><%= link_to '새소식', bulletin_posts_path("새소식") %></li>
+            <li class="<%= params[:bulletin_id] == '가입인사' ? 'active' : '' %>"><%= link_to '가입인사', bulletin_posts_path("가입인사") %></li>
+            <li class="<%= params[:bulletin_id] == '갤러리' ? 'active' : '' %>"><%= link_to '갤러리', bulletin_posts_path("갤러리") %></li>
+>>>>>>> 723117671c17cebeafcfde21f42dff60f5adf399
+=======
+            <li class="<%= params[:bulletin_id] == '공지사항' ? 'active' : '' %>"><%= link_to '공지사항', shelter_bulletin_posts_path("공지사항") %></li>
+            <!--파라미터에 지정된 속성과 일치된 값이 들어오면 삼항연산자에 의해 클래스를 active로 지정된다, 아니면 다른 클래스를 지정한다.(여기선 공백)-->
+            <!--link_to 부분은 rake routes에서 확인가능-->
+            <li class="<%= params[:bulletin_id] == '새소식' ? 'active' : '' %>"><%= link_to '새소식', shelter_bulletin_posts_path("새소식") %></li>
+            <li class="<%= params[:bulletin_id] == '가입인사' ? 'active' : '' %>"><%= link_to '가입인사', shelter_bulletin_posts_path("가입인사") %></li>
+            <li class="<%= params[:bulletin_id] == '갤러리' ? 'active' : '' %>"><%= link_to '갤러리', shelter_bulletin_posts_path("갤러리") %></li>
+>>>>>>> 79738ddc52418f4849b26e63a38e5529ef11e4b8
+=======
+            <li class="<%= params[:bulletin_id] == '공지사항' ? 'active' : '' %>"><%= link_to '공지사항', shelter_bulletin_posts_path(post_type: "공지사항") %></li>
+            <!--파라미터에 지정된 속성과 일치된 값이 들어오면 삼항연산자에 의해 클래스를 active로 지정된다, 아니면 다른 클래스를 지정한다.(여기선 공백)-->
+            <!--link_to 부분은 rake routes에서 확인가능-->
+            <li class="<%= params[:bulletin_id] == '새소식' ? 'active' : '' %>"><%= link_to '새소식', shelter_bulletin_posts_path(post_type: "새소식") %></li>
+            <li class="<%= params[:bulletin_id] == '가입인사' ? 'active' : '' %>"><%= link_to '가입인사', shelter_bulletin_posts_path(post_type: "가입인사") %></li>
+            <li class="<%= params[:bulletin_id] == '갤러리' ? 'active' : '' %>"><%= link_to '갤러리', shelter_bulletin_posts_path(post_type: "갤러리") %></li>
+>>>>>>> 86838de8b3bdc89bdc74ecac43b1f2ac9f8c6a72
           </ul>
       </div>
 
@@ -60,3 +87,4 @@
       <!--<#%= yield %>-->
 
     </div> <!-- /container -->
+>>>>>>> 91be508fe30b597c467a4e79d1452c9e0a8c62bd

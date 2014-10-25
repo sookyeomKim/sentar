@@ -1,28 +1,122 @@
-<% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section>
-      <h1>
+<!-- 블로그 리스트 김수겸 14.09.19 -->
+<div class="content_re">
+  <div class="row">
+    <!-- blog side 김수겸 14.09.19 -->
+    <div class="col-lg-2">
+      <div class="left_wrap">
+        <!--profile 김수겸 14.09.18-->
+      <%= render 'users/profile'%>
+        <!--profile end-->
 
-        <%= gravatar_for @user , size: 100   %> 
-        <!-- 그라바타에 있는 이미지 이용, gravata_for 메서드는 users_helper에 구현  -->
-        <%= @user.name %>
-      </h1>
-    </section>
-    <section class="stats">
-      <%= render 'shared/stats' %>
-    </section>
-  </aside>
-  <div class="col-md-8">
-    <%= render 'follow_form' if logged_in? %>
-    <% if @user.microposts.any? %>
-      <h3>Microposts (<%= @user.microposts.count %>)</h3>
-      <ol class="microposts">
-        <%= render @microposts %>
-      </ol>
-      <%= will_paginate @microposts %>
-    <% end %>
+        <!--blog_map js 김수겸 14.09.16-->
+        <script>
+          $(function() {
+            var state = true;
+            $("#spread_btn").click(function() {
+              if (state) {
+                $("#map_div").animate({
+                  height : 300
+                }, 500);
+              } else {
+                $("#map_div").animate({
+                  height : 200
+                }, 500);
+              }
+              state = !state;
+            });
+          });
+        </script>
+        <!--blog_map js end-->
+
+        <!--blgo_map 김수겸 14.09.18-->
+        <div class="row">
+          <div class="col-lg-12">
+            <div id="map_div" class="blog_map">
+              <span class="spread_btn"><i id="spread_btn"class="fa fa-plus-square-o"></i></span>
+            </div>
+          </div>
+        </div>
+        <!--blog_map end-->
+
+        <!--blog_category 김수겸 14.09.18-->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="blog_category">
+              <ul class="list-group">
+                <li class="list-group-item btn btn-default">
+                  전체<i class="fa fa-chevron-left" style="float:right; margin-top:7px;"></i>
+                </li>
+                <li class="list-group-item btn btn-default">
+                  내일상<i class="fa fa-chevron-left" style="float:right; margin-top:7px;"></i>
+                </li>
+                <li class="list-group-item btn btn-default">
+                  요리<i class="fa fa-chevron-left" style="float:right; margin-top:7px;"></i>
+                </li>
+                <li class="list-group-item btn btn-default">
+                  맛집<i class="fa fa-chevron-left" style="float:right; margin-top:7px;"></i>
+                </li>
+                <li class="list-group-item btn btn-default">
+                  여행<i class="fa fa-chevron-left" style="float:right; margin-top:7px;"></i>
+                </li>
+                <li class="list-group-item btn btn-default">
+                  쇼핑<i class="fa fa-chevron-left" style="float:right; margin-top:7px;"></i>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--blog_category end-->
+      </div>
+    </div>
+    <!-- blog side end -->
+
+    <!--blog_list_wrap 김수겸 14.09.19-->
+    <div class="col-lg-10">
+      <div class="right_wrap">
+        <div class="row">
+          <div class="col-lg-12">
+            <!--blog_list_top 김수겸 14.09.19--> 
+            <div class="blog_list_top">
+              <span style="font-size:20px; font-weight:bold; margin:5px;">쇼핑</span>
+              <div class="blog_select_option">
+              <span class="common_select_btn_150px">
+                <%= select_tag"select_blog_query", options_for_select([["최신등록순",0],["댓글순",1],["추천순",2]]),class:'btn btn-sm btn-default'%>
+              </span>
+              <span>
+                  <%= link_to '새글쓰기',blog_new_path,class:"btn btn-default"%>
+              </span>
+                         </div>
+            </div>
+            <!--blog_list_top end-->  
+            <hr style="margin-top:0;">
+           
+            <!--blog_list_content-->
+            <div class="inner">
+                  <%= render @microposts %>
+            </div>
+            <!--blog_list_content end -->
+
+           
+            <hr>
+            <div class="blog_lsit_bottom">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--blog_list_wrap end-->
   </div>
 </div>
+<!-- 블로그 리스트 end -->
+  
+   
+      
+     
+
+
+<!-- <h3>Microposts (<%= @user.microposts.count %>)</h3>
+ -->
+
 
  

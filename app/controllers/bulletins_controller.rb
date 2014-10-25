@@ -8,7 +8,6 @@ class BulletinsController < ApplicationController
   def index
     #@bulletins = Bulletin.all
     @bulletins = @shelter.bulletins.all
-    
   end
 
   # GET /bulletins/1
