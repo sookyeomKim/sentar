@@ -52,11 +52,8 @@
 
 	<td>
 		<div class="buy_order_btn">
-			<a href="" class="btn btn-warning btn-xs">주문하기</a>
-		</div>
-		<div class="buy_order_btn">
-			<a href="" class="btn btn-default btn-xs">위시리스트</a>
-		</div>
+			<a href="purchases/new?id=<%= shopping_cart_item.item.id%>" class="btn btn-warning btn-xs">주문하기</a>
+		</div>		
 		<div class="buy_order_btn">
 			<%= link_to "제거", { action: "destroy", id: shopping_cart_item.item.id , amount: 1},
                                 method: :delete, data: { confirm: "Are you sure?" },class:'btn btn-default btn-xs' %>

@@ -11,7 +11,7 @@
 		<h3><%= link_to product.name, controller: "products", action: "show", id: product.id %></h3>
 		<p>
             <strong><%= product.price %></strong>원
-          </p>
+          </p>  
           <p>
           	<%= link_to '장바구니', cart_path(:id => product.id  ,:amount => 1) , method: :post,class:'btn btn-primary'  %>
           	<%= link_to '구매하기', new_purchase_path(:id => product.id),class:'btn btn-default'  %>
@@ -19,8 +19,7 @@
           	<%= link_to '삭제', product, method: :delete, data: { confirm: 'Are you sure?' } ,class:'btn btn-warning' %>
           	<%end%>            
           </p>
-          <p><span
-			class="timestamp"> updated <%= time_ago_in_words(product.created_at) %>
+          <p><span class="timestamp"> updated <%= time_ago_in_words(product.created_at) %>
 			ago.
 		</span></p>
 		</div>
