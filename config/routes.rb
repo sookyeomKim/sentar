@@ -18,7 +18,6 @@ get    'sell_lists'     => 'sell#index'
   get    'contact'  => 'static_pages#contact'
   get   'home'     => 'static_pages#home' 
   
-
   get    'signup'   => 'users#new'
   get    'login'    => 'sessions#new'
   delete 'logout'   => 'sessions#destroy'
