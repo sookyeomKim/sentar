@@ -29,13 +29,17 @@
 
 
 <!-- 네비게이션 및 기본 플래시 div -->
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> heroku/master
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
+<<<<<<< HEAD
             
             <!--라우팅, 컨트롤러 연결, 뷰딴 연결 과정-->
 
@@ -46,6 +50,14 @@
             <li class="<%= params[:bulletin_id] == '가입인사' ? 'active' : '' %>"><%= link_to '가입인사', shelter_bulletin_posts_path(bulletin_id: "bulletin") %></li>
             <li class="<%= params[:bulletin_id] == '갤러리' ? 'active' : '' %>"><%= link_to '갤러리', shelter_bulletin_posts_path(bulletin_id: "gallary") %></li>
 
+=======
+            <li class="<%= params[:bulletin_id] == '공지사항' ? 'active' : '' %>"><%= link_to '공지사항', shelter_bulletin_posts_path("공지사항") %></li>
+            <!--파라미터에 지정된 속성과 일치된 값이 들어오면 삼항연산자에 의해 클래스를 active로 지정된다, 아니면 다른 클래스를 지정한다.(여기선 공백)-->
+            <!--link_to 부분은 rake routes에서 확인가능-->
+            <li class="<%= params[:bulletin_id] == '새소식' ? 'active' : '' %>"><%= link_to '새소식', shelter_bulletin_posts_path("새소식") %></li>
+            <li class="<%= params[:bulletin_id] == '가입인사' ? 'active' : '' %>"><%= link_to '가입인사', shelter_bulletin_posts_path("가입인사") %></li>
+            <li class="<%= params[:bulletin_id] == '갤러리' ? 'active' : '' %>"><%= link_to '갤러리', shelter_bulletin_posts_path("갤러리") %></li>
+>>>>>>> heroku/master
           </ul>
       </div>
 
@@ -59,5 +71,9 @@
 
       <!--<#%= yield %>-->
 
+<<<<<<< HEAD
     </div> <!-- /container -->
 
+=======
+    </div> <!-- /container -->
+>>>>>>> heroku/master
