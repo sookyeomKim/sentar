@@ -1,15 +1,23 @@
 <% @user ||= current_user %>
-<div class="stats">
-  <a href="<%= following_user_path(@user) %>">
-    <strong id="following" class="stat">
-      <%= @user.following.count %>
-    </strong>
-    <%=@user.name %>님이 칭추한닝겐
-  </a>
-  <a href="<%= followers_user_path(@user) %>">
-    <strong id="followers" class="stat">
-      <%= @user.followers.count %>
-    </strong>
-  <%=@user.name %>님을 칭추한닝겐
-  </a>
+<div class="panel panel-default">
+  <div class="alert alert-warning">
+    <a href="<%= following_user_path(@user) %>">    
+      <%=@user.name %>님이 칭추한닝겐
+      <span class="label label-warning">
+        <strong id="following" class="stat">
+          <%= @user.following.count %>
+        </strong>
+      </span>
+    </a>
+  </div>
+  <div class="alert alert-warning">
+    <a href="<%= followers_user_path(@user) %>">    
+      <%=@user.name %>님을 칭추한닝겐
+      <span class="label label-warning">
+        <strong id="followers" class="stat">
+          <%= @user.followers.count %>
+        </strong>
+      </span>
+    </a>
+  </div>
 </div>
