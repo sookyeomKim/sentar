@@ -1,4 +1,4 @@
-<div id="micropost-<%= micropost.id %>">
+<div id="micropost-">
   <div class="panel panel-default">
     <div class="panel-heading">
       <span>
@@ -9,12 +9,12 @@
       </span>
 
       <div style="float:left;">
-        <span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span id="like_count"><%= micropost.likes.count %></span>
+        <span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span id="like-<%= micropost.id %>"><%= micropost.likes.count %></span>
         &nbsp; <span><strong><i class="fa fa-comment"></i></strong></span>
         <span><%= micropost.comments.count %></span>
         <div>
           <span>
-            <%= link_to '좋아요', like_micropost_path(micropost), method: :post,class:'btn btn-default btn-round' ,remote: true%></span>
+            <%= link_to '좋아요', like_micropost_path(micropost), method: :post, class:'btn btn-default btn-round', remote: true %></span>
 
           </div>
         </div>

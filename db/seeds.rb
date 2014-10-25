@@ -34,9 +34,9 @@
              
            
 #  #Microposts
-# User.order(:created_at).take(6).each do |user|
-#   50.times do
-#     user.microposts.create!(content: Faker::Lorem.sentence(5))
+# User.order(:created_at).take(5).each do |user|
+#   10.times do
+#     user.microposts.create!(title:Faker::Lorem.sentence(5), content: Faker::Lorem.sentence(5))
 #   end
 # end
 

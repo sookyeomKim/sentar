@@ -1,1 +1,4 @@
-$("#like_count").html('<%= @micropost.likes.count %>')
+
+
+$("#like-<%= @micropost.id %>").html('<%= @micropost.likes.count %>')
+

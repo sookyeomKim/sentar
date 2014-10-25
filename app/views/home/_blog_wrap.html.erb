@@ -64,7 +64,7 @@
 						<div class="col-lg-2">
 							<div>
 								<div  style="float:right;">
-									<span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span id="like_count"><%= micropost.likes.count %></span>
+									<span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span id="like-<%= micropost.id %>"><%= micropost.likes.count %></span>
 									&nbsp; <span><strong><i class="fa fa-comment"></i></strong></span>
 									<span><%= micropost.comments.count %></span>
 								</div>               
@@ -101,11 +101,11 @@
 												$(".tfs_tooltip").tooltip();
 											});
 											</script>
-											<ul id="like_cancel">	
+												
 												<li>	
-													<span id="<%=micropost.id%>"><%= link_to '좋구만', like_micropost_path(micropost), method: :post, remote:true ,class:"btn btn-default btn-xs like_btn"%></span>
+												<span id="<%=micropost.id%>"><%= link_to '좋구만', like_micropost_path(micropost), method: :post, remote:true ,class:"btn btn-default btn-xs like_btn"%></span>
 												</li>
-											</ul>
+											
 										</div>
 									</div>
 									<!--댓글 wrap head end-->
@@ -170,7 +170,7 @@
 					</div>  
 				</div>
 			</div>
-			<%end%>
+		<%end%>
 		</div> 
 		<!-- blog list end-->    
 	</div>
