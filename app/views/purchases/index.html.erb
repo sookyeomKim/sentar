@@ -9,6 +9,7 @@
 
   <tbody>
     <% @purchases.each do |purchase| %>
+    
       <tr>
         <td><%= link_to 'Show', purchase %></td>
         <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
