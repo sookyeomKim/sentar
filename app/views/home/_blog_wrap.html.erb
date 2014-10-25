@@ -115,7 +115,8 @@
 										<ul class="chat" >
 											<% micropost.comments.each do |comment| %>
 											<li class="left clearfix">
-												<span class="chat-img pull-left"> <%= gravatar_for User.find_by(name: comment.user_name) , size: 50   ,class:'img-circle'%></span>
+											 	<% @user = User.find_by(name: comment.user_name)||current_user  %>
+												<span class="chat-img pull-left"> <%= gravatar_for @user , size: 50   ,class:'img-circle'%></span>
 												<div class="chat-body clearfix">
 													<div class="header">
 														<strong class="primary-font"> <%= comment.user_name %> </strong>
