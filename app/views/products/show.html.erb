@@ -50,7 +50,11 @@
 											<div class="chat-body clearfix">
 												<div class="header">
 													<strong class="primary-font"> <%= comment.user_name %> </strong>
-													<small class="pull-right text-muted"><%= link_to '삭제', comment_path(comment), method: :delete, data: { confirm: '댓글 삭제?' } %> <i class="icon-time"></i> <%=time_ago_in_words(comment.created_at)%> ago </small>
+													<small class="pull-right text-muted">
+														<%if current_user?(@user)%>
+														<%= link_to '삭제', comment_path(comment), method: :delete, data: { confirm: '댓글 삭제?' } %>
+														<% end %>			
+														 <i class="icon-time"></i> <%=time_ago_in_words(comment.created_at)%> ago </small>
 												</div>
 												<br>
 												<p>
@@ -294,19 +298,19 @@
 											</div>
 										</div>
 										<div >
-											<!-- <%= image_tag "1.jpg",class:"item_img"%> -->
+											 <%= image_tag "1.jpg",class:"item_img"%>
 										</div>
 										<div >
-											<!-- <%= image_tag "2.jpg",class:"item_img" %> -->
+											 <%= image_tag "2.jpg",class:"item_img" %>
 										</div>
 										<div >
-											<!-- <%= image_tag "3.jpg",class:"item_img"%> -->
+											 <%= image_tag "3.jpg",class:"item_img"%>
 										</div>
 										<div >
-											<!-- <%= image_tag "4.jpg",class:"item_img"%> -->
+											 <%= image_tag "4.jpg",class:"item_img"%> 
 										</div>
 										<div >
-											<!-- <%= image_tag "5.jpg",class:"item_img"%> -->
+											 <%= image_tag "5.jpg",class:"item_img"%> 
 										</div>
 									</div>
 									<!--아이템 정보 하단 end-->

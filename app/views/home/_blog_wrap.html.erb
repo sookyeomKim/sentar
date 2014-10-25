@@ -102,8 +102,12 @@
 											});
 											</script>
 											<ul class=" ">									
-												<li>
+												<li>	
+													<% if current_user.already_liked?(@micropost) %>
+													<span id="<%=micropost.id%>"><%= link_to '좋구만취소', like_micropost_path(micropost), method: :post, remote:true ,class:"btn btn-default btn-xs like_btn"%></span>
+													<% else %>
 													<span id="<%=micropost.id%>"><%= link_to '좋구만', like_micropost_path(micropost), method: :post, remote:true ,class:"btn btn-default btn-xs like_btn"%></span>
+													<% end %>
 												</li>
 											</ul>
 										</div>
@@ -115,59 +119,63 @@
 										<ul class="chat" >
 											<% micropost.comments.each do |comment| %>
 											<li class="left clearfix">
-											 	<% @user = User.find_by(name: comment.user_name)||current_user  %>
+												<% @user = User.find_by(name: comment.user_name)||current_user  %>
 												<span class="chat-img pull-left"> <%= gravatar_for @user , size: 50   ,class:'img-circle'%></span>
 												<div class="chat-body clearfix">
 													<div class="header">
 														<strong class="primary-font"> <%= comment.user_name %> </strong>
-														<small class="pull-right text-muted"><%= link_to '삭제', comment_path(comment), method: :delete, data: { confirm: '댓글 삭제?' } %> <i class="icon-time"></i> <%=time_ago_in_words(comment.created_at)%> ago </small>
+														<small class="pull-right text-muted">
+															<%if current_user?(@user)%>					
+															<%= link_to '삭제', comment_path(comment), method: :delete, data: { confirm: '댓글 삭제?' } %>
+															<% end %>
+															<i class="icon-time"></i> <%=time_ago_in_words(comment.created_at)%> ago </small>
+														</div>
+														<br>
+														<p>
+															<%= comment.content %>
+														</p>
 													</div>
-													<br>
-													<p>
-														<%= comment.content %>
-													</p>
-												</div>
-											</li>
-											<% end %>								
-										</ul>
-									</div>
-									<!--댓글 wrap body end-->
-
-									<!--댓글 wrap footer 김수겸 14_09_14-->
-									<div class="panel-footer">
-										<div class="input-group">
-											<%= form_for(@comment) do |f| %>
-											<% if @comment.errors.any? %>
-											<div id="error_explanation">
-												<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-												<ul>
-													<% @comment.errors.full_messages.each do |message| %>
-													<li><%= message %></li>
-													<% end %>
-												</ul>
-											</div>
-											<% end %> 
-											<%= f.hidden_field :user_name, value: current_user.name %>
-											<%= f.text_area :content,class:'form-control input-sm',placeholder:'말은 그 무엇보다 강려크하다',style:'width:500px;' %>
-											<%= f.hidden_field :micropost_id, value: micropost.id  %>
-											<span class="input-group-btn">
-												<% store_location %>
-												<%= f.submit('댓글등록',class:'btn btn-default btn-sm',remote: true)%>
-												<% end %>
-											</span>
+												</li>
+												<% end %>								
+											</ul>
 										</div>
+										<!--댓글 wrap body end-->
+
+										<!--댓글 wrap footer 김수겸 14_09_14-->
+										<div class="panel-footer">
+											<div class="input-group">
+												<%= form_for(@comment) do |f| %>
+												<% if @comment.errors.any? %>
+												<div id="error_explanation">
+													<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+													<ul>
+														<% @comment.errors.full_messages.each do |message| %>
+														<li><%= message %></li>
+														<% end %>
+													</ul>
+												</div>
+												<% end %> 
+												<%= f.hidden_field :user_name, value: current_user.name %>
+												<%= f.text_area :content,class:'form-control input-sm',placeholder:'말은 그 무엇보다 강려크하다',style:'width:500px;' %>
+												<%= f.hidden_field :micropost_id, value: micropost.id  %>
+												<span class="input-group-btn">
+													<% store_location %>
+													<%= f.submit('댓글등록',class:'btn btn-default btn-sm',remote: true)%>
+													<% end %>
+												</span>
+											</div>
+										</div>
+										<!--댓글 wrap footer end-->
 									</div>
-									<!--댓글 wrap footer end-->
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>  
+					</div>  
+				</div>
 			</div>
-		</div>
-		<%end%>
-	</div> 
-	<!-- blog list end-->    
-</div>
+			<%end%>
+		</div> 
+		<!-- blog list end-->    
+	</div>
 

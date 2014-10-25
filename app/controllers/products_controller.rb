@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
 
 	def index
 		@user = User.find(current_user)
-		@products = @user.productFeed.paginate(page: params[:page])
+		@products = @user.products.paginate(page: params[:page])
 	end
 
 	def myindex

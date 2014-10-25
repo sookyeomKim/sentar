@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [ :destroy]
 
   # GET /comments
   # GET /comments.json
@@ -64,6 +65,11 @@ class CommentsController < ApplicationController
   end
 
   private
+    def correct_user
+    @comment = Comment.find(params[:id])
+     redirect_back_or root_path unless current_user?(User.find_by(name:@comment.user_name))
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
       @comment = Comment.find(params[:id])

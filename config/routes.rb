@@ -24,16 +24,17 @@ get    'sell_lists'     => 'sell#index'
   delete 'logout'   => 'sessions#destroy'
   get 'blog'    => 'static_pages#home'
    get 'blog_new'    => 'microposts#new'
-  resources :users do
-    member do
-      get :following, :followers
-    end
+resources :users do
+  member do
+    get :following, :followers
   end
+end
+#resources :users, only: [:show]
   resources :sessions,            only: [:new, :create, :destroy]
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   
-  resources :microposts do
+resources :microposts do
     member do
     post 'like'
   end
