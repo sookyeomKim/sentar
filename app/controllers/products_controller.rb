@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
 	before_action :logged_in_user, only: [:create, :destroy]
+	before_action :correct_user, only: [ :destroy]
 	
 	def show
 	@product = Product.find(params[:id])
@@ -40,10 +41,20 @@ class ProductsController < ApplicationController
     	end
   	end
 
+
+  	def destroy	
+  	
+  	@product.destroy	
+  	redirect_to products_path	
+  	end
+
  	private
 
 
-
+  def correct_user
+  @product = Product.find(params[:id])
+   redirect_to(products_path) unless current_user?(@product.user)
+  end
 
   def product_params
       params.require(:product).permit(:name, :price, :picture, :content, :picture2, :picture3)
