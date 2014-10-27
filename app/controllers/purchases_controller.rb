@@ -60,6 +60,7 @@ class PurchasesController < ApplicationController
       @purchase.ordertype = 'cart'
       @purchase.save
     end
+    current_user.cart.clear #cart clear
     redirect_to order_ok_path(type: 'cart')
   end
 

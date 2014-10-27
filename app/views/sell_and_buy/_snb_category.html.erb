@@ -101,7 +101,7 @@
 			<a  data-parent="#menu"
 			data-toggle="collapse" class="accordion-toggle collapsed"
 			data-target="#form-nav">판매<span class="pull-right"> <i
-				class="icon-angle-left"></i> </span> &nbsp; <span class="label label-success">5</span>&nbsp; </a>
+				class="icon-angle-left"></i> </span> &nbsp; <span class="label label-success"><%=current_user.admin_purchases.count %></span>&nbsp; </a>
 			<ul class="collapse" id="form-nav">				
 				<li class="">	
 				<%=link_to "상품관리",myproduct_url%>							
