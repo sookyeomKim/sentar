@@ -14,8 +14,17 @@ class PurchasesController < ApplicationController
 
   # GET /purchases/new
   def new
+    order = params[:order]
+    if order == 'goods'
     @product = Product.find(params[:id])
-    @purchase = @product.purchases.new(user_id: current_user.id)
+    @purchase = @product.purchases.new(user_id: current_user.id, total_cost: @product.price)
+
+    @ordertype = "goods"
+
+  else
+    @purchase = Purchase.new
+    end
+    
   end
 
   # GET /purchases/1/edit
@@ -25,6 +34,7 @@ class PurchasesController < ApplicationController
   # POST /purchases
   # POST /purchases.json
   def create
+    if params[:ordertype] == "goods"
     @purchase = Purchase.new(purchase_params)
 
     respond_to do |format|
@@ -37,6 +47,26 @@ class PurchasesController < ApplicationController
         format.json { render json: @purchase.errors, status: :unprocessable_entity }
       end
     end
+  else
+    @cart_items = current_user.cart_items
+    
+    order_info = Purchase.new(purchase_params)
+    
+    @cart_items.each do |cart_item|
+      @product = cart_item.product
+      @purchase = @product.purchases.new(user_id: current_user.id, total_cost: cart_item.quantity * cart_item.price)
+      @purchase.receive_name = order_info.receive_name
+      @purchase.addr = order_info.addr
+      @purchase.phone = order_info.phone
+      @purchase.memo = order_info.memo
+      @purchase.save
+    end
+
+
+    redirect_to new_purchase_path
+  end
+
+
   end
 
   # PATCH/PUT /purchases/1

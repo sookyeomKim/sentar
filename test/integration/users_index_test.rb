@@ -9,14 +9,6 @@ def setup
 
 
 
-test "index including pagination" do
-    log_in_as(@admin)
-    get users_path
-    assert_select 'div.pagination'
-    User.paginate(page: 1).each do |user|
-      assert_select 'a', user.name
-    end
-  end
 
 
 

@@ -12,19 +12,59 @@
 </div>
 
 <% end %>
+<table class="table_border">
+				<tr>
+					<td>주문 상세내역</td>
+				</tr>
+				<td>
+					<table class="table_border_sub_center">
+						<tr>
+							<th>사진</th>
+							<th>상품명</th>
+							<th>수량</th>
+							<th>가격</th>
+						</tr>
+						<%if(@ordertype == 'goods')  %>
+						<tr align=center height=20>
+							<td><%= image_tag @product.picture.url , size: "20*30" if @product.picture?%></td>
+							<td><%=@product.name %></td>
+							<td>1</td>
+							<td><%=@product.price  %></td>
+							
+						</tr>
+						<h1>total:cost <%= @product.price %></h1>
+						<% else %>
+
+						<% @cart_items = current_user.cart_items  %>
+						<% @cart_items.each  do |cart_item| %>
+						<tr align=center height=20>
+						<td><%= image_tag cart_item.product.picture.url , size: "20*30" if cart_item.product.picture?%></td>
+							<td><%=cart_item.product.name %></td>
+							<td><%=cart_item.quantity  %></td>
+							<td><%=cart_item.price * cart_item.quantity  %></td>
+						
+						<% end %>
+						<% end %>
+
+						
+
+</table>
+
 
 <%= f.hidden_field :product_id, class: 'form-control' %>
 <%= f.hidden_field :user_id, class: 'form-control' %>
+<%= f.hidden_field :total_cost, class: 'form-control' %>
 <%= f.label :receive_name,'수취인' %>
 <%= f.text_field :receive_name, class: 'form-control' %>
 <%= f.label :addr,'주소' %>
 <%= f.text_field :addr, class: 'form-control' %>
+<%= f.label :payer,'구매자' %>
+<%= f.text_field :payer, class: 'form-control' %>
 <%= f.label :phone,'전화번호' %>
 <%= f.text_field :phone, class: 'form-control' %>
 <%= f.label :memo,'메모' %>
 <%= f.text_field :memo, class: 'form-control' %>
-<%= f.label :trade_type,'배송방법'%>
-<%= f.text_field :trade_type, class: 'form-control' %>
+
 <div class="actions">
   <span><%= f.submit('구매등록',class:'btn btn-warning')%></span><span><%= link_to '취소', root_path,class:'btn btn-default' %></span>
 </div>

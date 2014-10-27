@@ -1,3 +1,4 @@
+<% unless shopping_cart_item.item.nil? %>
 <tr class='deal_length' data-deal_id="<%= shopping_cart_item.item.id%>"
 	data-deal_qty="<%= shopping_cart_item.quantity%>"
 	data-deal_price='<%=number_with_delimiter shopping_cart_item.item.price %>'>
@@ -28,7 +29,7 @@
 	<td>
 		<div>
 			<input type="text" readonly="true" name="opt[qty][]" id="modi_qty"
-				data-deal_id="<%= shopping_cart_item.item.id%>" value="1" title="수량">
+				data-deal_id="<%= shopping_cart_item.item.id%>" value="<%= shopping_cart_item.quantity%>" title="수량">
 		</div>
 		<div>
 			<a class="btn btn-default btn-sm qty_change"
@@ -55,8 +56,9 @@
 			<a href="purchases/new?id=<%= shopping_cart_item.item.id%>" class="btn btn-warning btn-xs">주문하기</a>
 		</div>		
 		<div class="buy_order_btn">
-			<%= link_to "제거", { action: "destroy", id: shopping_cart_item.item.id , amount: 1},
+			<%= link_to "제거", { action: "destroy", id: shopping_cart_item.item.id},
                                 method: :delete, data: { confirm: "Are you sure?" },class:'btn btn-default btn-xs' %>
 		</div>
 	</td>
 </tr>
+<% end %>

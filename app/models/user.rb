@@ -10,8 +10,10 @@ class User < ActiveRecord::Base
       has_many :following, through: :active_relationships, source: :followed
       has_many :followers, through: :passive_relationships, source: :follower
       has_many :products
+      has_one :cart , dependent: :destroy
       has_one :shelter, dependent: :destroy
       has_many :bulletins, dependent: :destroy
+      has_many :cart_items , class_name: "CartItem" , foreign_key: "owner_id" 
       
      attr_accessor :remember_token, :activation_token , :reset_token#getter, setter 지정
      before_save :downcase_email   # user가 디비에 저장되기 전에 email 주소를 소문자로 변경

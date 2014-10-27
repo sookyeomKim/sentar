@@ -2,6 +2,7 @@ class Product < ActiveRecord::Base
 	belongs_to :user
 	has_many :purchases
 	has_many :comments , dependent: :destroy
+	has_many :cartitems, dependent: :destroy, foreign_key: "item_id", class_name: "CartItem"
 	default_scope -> { order('created_at DESC') }
 	mount_uploader :picture, PictureUploader
 	mount_uploader :picture2, PictureUploader
@@ -18,6 +19,8 @@ def Product.from_users_followed_by(user)
           user_id: user.id)
 
   end
+
+ 
 
 	private
 	def picture_size
