@@ -48,6 +48,8 @@ end
   resources :products
   resources :purchases
 
+  get 'order_ok' => 'purchases#order_ok'
+
 
 #홈
 get 'home/popup'
@@ -68,6 +70,7 @@ get 'home/buy_list'
 
 get 'commerce' => 'sell_and_buy#main'
 get 'buy_list' => 'sell_and_buy#buy_list'
+get 'sell_list' => 'sell_and_buy#sell_list'
 
 
 get 'home/myhouse'

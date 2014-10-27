@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
       has_one :shelter, dependent: :destroy
       has_many :bulletins, dependent: :destroy
       has_many :cart_items , class_name: "CartItem" , foreign_key: "owner_id" 
-      
+      has_many :purchases
+      has_many :admin_purchases , class_name: "Purchase" , foreign_key: "owener_id"
      attr_accessor :remember_token, :activation_token , :reset_token#getter, setter 지정
      before_save :downcase_email   # user가 디비에 저장되기 전에 email 주소를 소문자로 변경
      before_create :create_activation_digest # user를 생성하기전 activation_digest를 생성

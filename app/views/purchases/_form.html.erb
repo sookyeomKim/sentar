@@ -24,7 +24,7 @@
 							<th>수량</th>
 							<th>가격</th>
 						</tr>
-						<%if(@ordertype == 'goods')  %>
+						<%if params[:order] == 'goods'  %>
 						<tr align=center height=20>
 							<td><%= image_tag @product.picture.url , size: "20*30" if @product.picture?%></td>
 							<td><%=@product.name %></td>
@@ -33,8 +33,9 @@
 							
 						</tr>
 						<h1>total:cost <%= @product.price %></h1>
-						<% else %>
-
+						
+						<% else %> <!-- 카트에서 주문할 경우 -->
+						<%= f.hidden_field :ordertype, class: 'form-control', value: 'cart'  %>
 						<% @cart_items = current_user.cart_items  %>
 						<% @cart_items.each  do |cart_item| %>
 						<tr align=center height=20>
@@ -52,7 +53,9 @@
 
 
 <%= f.hidden_field :product_id, class: 'form-control' %>
+
 <%= f.hidden_field :user_id, class: 'form-control' %>
+<%= f.hidden_field :quantity, class: 'form-control', value: 1 %> <!--  수량부분 값 받아줘야함 -->
 <%= f.hidden_field :total_cost, class: 'form-control' %>
 <%= f.label :receive_name,'수취인' %>
 <%= f.text_field :receive_name, class: 'form-control' %>
@@ -65,7 +68,8 @@
 <%= f.label :memo,'메모' %>
 <%= f.text_field :memo, class: 'form-control' %>
 
+
 <div class="actions">
-  <span><%= f.submit('구매등록',class:'btn btn-warning')%></span><span><%= link_to '취소', root_path,class:'btn btn-default' %></span>
+  <span><%= f.submit('구매등록',class:'btn btn-warning', ordertype: 'goods')%></span><span><%= link_to '취소', root_path,class:'btn btn-default' %></span>
 </div>
 <% end %>

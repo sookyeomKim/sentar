@@ -84,11 +84,11 @@
 		<li class="panel ">
 			<a  data-parent="#menu"
 			data-toggle="collapse" class="accordion-toggle"
-			data-target="#component-nav">구매<span class="pull-right"> <i class="icon-angle-left"></i> </span> &nbsp; <span class="label label-default">10</span>&nbsp; </a>
+			data-target="#component-nav">구매<span class="pull-right"> <i class="icon-angle-left"></i> </span> &nbsp; <span class="label label-default"><%=current_user.purchases.count %></span>&nbsp; </a>
 			<ul class="collapse" id="component-nav">
 
 				<li class="">
-					<%=link_to "구매목록/배송조회", purchases_path%>				
+					<%=link_to "구매목록/배송조회", buy_list_path%>				
 				</li>
 				<li class="">
 					<%=link_to "장바구니", cart_path%>					

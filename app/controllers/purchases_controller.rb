@@ -18,8 +18,7 @@ class PurchasesController < ApplicationController
     if order == 'goods'
     @product = Product.find(params[:id])
     @purchase = @product.purchases.new(user_id: current_user.id, total_cost: @product.price)
-
-    @ordertype = "goods"
+    
 
   else
     @purchase = Purchase.new
@@ -34,13 +33,14 @@ class PurchasesController < ApplicationController
   # POST /purchases
   # POST /purchases.json
   def create
-    if params[:ordertype] == "goods"
-    @purchase = Purchase.new(purchase_params)
-
+    @order_info = Purchase.new(purchase_params)
+    
+    unless @order_info.ordertype == 'cart'
+    @purchase = @order_info
     respond_to do |format|
       if @purchase.save
-       
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+        # format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+        format.html { redirect_to order_ok_path(type: 'goods', id:@purchase.id)}
         format.json { render :show, status: :created, location: @purchase }
       else
         format.html { render :new }
@@ -49,9 +49,7 @@ class PurchasesController < ApplicationController
     end
   else
     @cart_items = current_user.cart_items
-    
     order_info = Purchase.new(purchase_params)
-    
     @cart_items.each do |cart_item|
       @product = cart_item.product
       @purchase = @product.purchases.new(user_id: current_user.id, total_cost: cart_item.quantity * cart_item.price)
@@ -59,14 +57,24 @@ class PurchasesController < ApplicationController
       @purchase.addr = order_info.addr
       @purchase.phone = order_info.phone
       @purchase.memo = order_info.memo
+      @purchase.ordertype = 'cart'
       @purchase.save
     end
-
-
-    redirect_to new_purchase_path
+    redirect_to order_ok_path(type: 'cart')
   end
 
 
+  end
+
+  def order_ok
+    if params[:type] == 'goods'
+      purchase = Purchase.find(params[:id])
+      @total = purchase.total_cost
+      
+     else #for order from cart
+      @total = current_user.cart.total
+    end
+    
   end
 
   # PATCH/PUT /purchases/1
@@ -101,7 +109,7 @@ class PurchasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_params
-       params.require(:purchase).permit(:product_id, :user_id, :receive_name, :addr, :phone, :memo, :total_cost, :trade_type, :payer, :status, :ship_cost, :ship_company, :trans_num)
+       params.require(:purchase).permit(:product_id, :user_id, :receive_name, :addr, :phone, :memo, :total_cost, :trade_type, :payer, :status, :ship_cost, :ship_company, :trans_num, :quantity, :ordertype)
      
     end
     def set_statsu
