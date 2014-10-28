@@ -60,7 +60,7 @@ class PurchasesController < ApplicationController
       @purchase.ordertype = 'cart'
       @purchase.save
     end
-    current_user.cart.clear #cart clear
+   
     redirect_to order_ok_path(type: 'cart')
   end
 
@@ -74,6 +74,7 @@ class PurchasesController < ApplicationController
       
      else #for order from cart
       @total = current_user.cart.total
+       current_user.cart.clear #cart clear
     end
     
   end
