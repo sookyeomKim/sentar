@@ -15,7 +15,7 @@
     <%= f.label :content , '내용' %>
     <%= f.text_area :content , class: 'form-control' %>
     <%= f.label :category,'카테고리' %>
-    <%= f.select :category, options_for_select([['음식', '0'], ['옷', '1'],['가구', '2'],['가전', '3']], 1), {}, { :class => 'form-control' } %>
+    <%= f.select :category, options_for_select([['음식', '음식'], ['옷', '옷'],['가구', '가구'],['가전', '가전']], 1), {}, { :class => 'form-control' } %>
    <div class="fileupload fileupload-new" data-provides="fileupload">
               <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
               <div>
