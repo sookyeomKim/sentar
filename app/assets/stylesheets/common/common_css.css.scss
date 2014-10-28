@@ -139,3 +139,20 @@ margin-bottom:3px;
 .dropdown-friend a[data-method="delete"]{
 	display: none;
 }
+
+.logo h1 {
+  color: #000000;
+  font-size: 35px;
+}
+
+
+
+@media (max-width: 767px){
+  .logo h1 {
+    font-size: 25px;
+  }
+}
+
+.form-group{
+	padding: 25px !important;
+}
