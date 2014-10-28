@@ -34,7 +34,7 @@
 						</tr>
 						<h1>total:cost <%= @product.price %></h1>
 						
-						<% else %> <!-- 카트에서 주문할 경우 -->
+						<% elsif params[:order] == 'cart' %> <!-- 카트에서 주문할 경우 -->
 						<%= f.hidden_field :ordertype, class: 'form-control', value: 'cart'  %>
 						<% @cart_items = current_user.cart_items  %>
 						<% @cart_items.each  do |cart_item| %>
