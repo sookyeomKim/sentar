@@ -26,7 +26,22 @@ class User < ActiveRecord::Base
      has_secure_password
      validates :password, length: { minimum: 6 } , allow_blank: true
 
-    
+    acts_as_messageable #for mailing between users
+
+
+    def display_name
+      email
+    end
+
+    def notifications_email(object)
+  #Check if an email should be sent for that object
+  #if true
+  email
+  #if false
+  #return nil
+    end
+
+
      
     #테스트 용으로만 쓰임  
     def User.digest(string)

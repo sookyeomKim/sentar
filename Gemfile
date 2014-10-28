@@ -36,6 +36,11 @@ gem 'will_paginate',           '3.0.7' # 페이징
 gem 'bootstrap-will_paginate', '0.0.10' # 페이징 스타일 in 부트스트랩
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
+
+#-------------------------------- 메세징 기능
+gem 'mailboxer'
+#---------------------------------
+
 group :test do
   gem 'minitest-reporters', '1.0.5'
   gem 'mini_backtrace',     '0.1.3'
