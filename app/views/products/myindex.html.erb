@@ -1,10 +1,11 @@
 <%=render 'sell_and_buy/snb_category'%>
 
 <div id="content">
-  <div class="inner">
     <!-- sell_list 김수겸 14.09.24 -->
     <div class="sell_list">
-      <div class="sell_list_head"></div>
+      <div class="sell_list_head">
+        <div class="logo"><h1>상품관리</h1></div>
+      </div>
       <div class="sell_list_body">
         <div class="row">
           <div class="col-lg-12">
@@ -28,7 +29,16 @@
                   </thead>
                   
                   <tbody>
-
+                    <tr>
+                      <td>상품번호</td>
+                      <td>상품명</td>
+                      <td>상품내용</td>
+                      <td>가격</td>
+                      <td>카테고리</td>
+                      <td>등록일자</td>
+                      <td>수정일자</td>
+                      <td>이미지</td>
+                    </tr>
                   </tbody>
 
                   <tfoot>
@@ -57,7 +67,6 @@
     <!-- sell_list end -->
   </div>
 </div>
-</div>
 <!-- sell_list js 김수겸 14.09.24 -->
 <script type="text/Javascript">
 var sell_list = function() {
@@ -65,7 +74,7 @@ var sell_list = function() {
   .DataTable(
   {
     "lengthMenu" : [ [ 10, 25, 50, 75, -1 ],
-    [ 10, 25, 50, 75, "All" ] ],
+    [ 10, 25, 50, 75, "All" ] ],/*
     "ajax" : "/products.json",
     "columns" : [ {
       "title" : "상품번호",
@@ -91,7 +100,7 @@ var sell_list = function() {
     },{
       "title" : "이미지",
       "data" : "picture"
-    }],
+    }],*/
     "stateSave" : true,
     initComplete : function() {
       var api = this.api();
