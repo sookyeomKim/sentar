@@ -28,20 +28,20 @@
 	<tbody>
 		<%if params[:order] == 'goods'  %>
 		<tr>
-			<td><span><%= image_tag @product.picture.url , size: "20*30" if @product.picture?%></span></td>
+			<td><span><%= image_tag @product.picture.url , size: "50x50" if @product.picture?%></span></td>
 			<td><span><%=@product.name %></span></td>
 			<td><span>1</span></td>
-			<td><span><%=@product.price  %></span></td>
+			<td><span><strong><%=@product.price  %></strong>원</span></td>
 		</tr>
 		<% else %>
 		<%= f.hidden_field :ordertype, class: 'form-control', value: 'cart'  %>
 		<% @cart_items = current_user.cart_items  %>
 		<% @cart_items.each  do |cart_item| %>
 		<tr>
-			<td><span><%= image_tag cart_item.product.picture.url , size: 30 if cart_item.product.picture?%></span></td>
+			<td><span><%= image_tag cart_item.product.picture.url , size: "50x50" if cart_item.product.picture?%></span></td>
 			<td><span><%=cart_item.product.name %></span></td>
-			<td><span><%=cart_item.quantity  %></span></td>
-			<td><span><%=cart_item.price * cart_item.quantity  %></span></td>
+			<td><span><%=cart_item.quantity %></span></td>
+			<td><span><strong><%=cart_item.price * cart_item.quantity%></strong></span></td>
 		</tr>
 		<% end %>
 		<% end %>
