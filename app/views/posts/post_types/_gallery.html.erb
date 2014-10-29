@@ -1,43 +1,43 @@
 <span><%= link_to '사진올리기', new_bulletin_post_path, class: 'btn btn-default'%></span>
 <!--gallery-->
 <% @posts.each do | post | %>
-            <div class="blog_list_content_image">
-              <div class="row">
-                <div class="col-sm-6 col-md-2">
-                  <div class="image_info_toggle">
-                    <a href="#" class="thumbnail image_info" ><%= image_tag(post.picture_url) if post.picture? %></a>
-                    <div class="image_info_hover" style="display:none;">
-                      <div>
-                        <p>
-                          <strong><%= link_to post.title, [post.bulletin, post]%></strong>
-                          <strong><%= link_to '', edit_bulletin_post_path(post.bulletin, post), class:'fa fa-cog',style:'position: absolute;top:0;right:10px;margin:2px;color:#fff !important;' %></strong>
-                          <strong><%= link_to '', [post.bulletin, post], method: :delete, data: { confirm: 'Are you sure?' }, class:'fa fa-times',style:'position: absolute;top:0;right:0;margin:2px;color:#fff !important;' %></strong>
-                        </p>
-                      </div>
-                      <div class="info_text">
-                        <div >
-                          <span>2014/09/18 09:00</span>
-                        </div>
-                        <div >
-                          <span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
-                          <span>2331</span>
-                          &nbsp;
-                          <span><strong><i class="fa fa-comment"></i></strong></span>
-                          <span><%= post.commentboards.size %></span>
-                          &nbsp;
-                          <span class="comment_btn"><strong><i class="fa fa-tags"></i></strong></span>
-                        </div>
-                      </div>
-                    </div>                   
-                  </div>
-                </div>
-              </div>
+<div class="blog_list_content_image">
+  <div class="row">
+    <div class="col-sm-6 col-md-2">
+      <div class="image_info_toggle">
+        <a href="#" class="thumbnail image_info" ><%= image_tag(post.picture_url) if post.picture? %></a>
+        <div class="image_info_hover" style="display:none;">
+          <div>
+            <p>
+              <strong><%= link_to post.title, [post.bulletin, post],style:'color:#fff !important;'%></strong>
+              <strong><%= link_to '', edit_bulletin_post_path(post.bulletin, post), class:'fa fa-cog',style:'position: absolute;top:0;right:20px;margin:2px;color:#fff !important;' %></strong>
+              <strong><%= link_to '', [post.bulletin, post], method: :delete, data: { confirm: 'Are you sure?' }, class:'fa fa-times',style:'position: absolute;top:0;right:0;margin:2px;color:#fff !important;' %></strong>
+            </p>
+          </div>
+          <div class="info_text">
+            <div >
+              <span>2014/09/18 09:00</span>
             </div>
-            <div id="comments_popup_wrap"style="display:none;">
-               <% if post.tag_list.size > 0 %>
-                 <div class='tag_list'><%= icon('tags') + " " + tag_icons(post.tag_list) %></div>
-                <% end %>
+            <div >
+              <span ><strong><i class="fa fa-thumbs-up"></i></i></strong></span>
+              <span>2331</span>
+              &nbsp;
+              <span><strong><i class="fa fa-comment"></i></strong></span>
+              <span><%= post.commentboards.size %></span>
+              &nbsp;
+              <span class="comment_btn"><strong><i class="fa fa-tags"></i></strong></span>
             </div>
+          </div>
+        </div>                   
+      </div>
+    </div>
+  </div>
+</div>
+<div id="comments_popup_wrap"style="display:none;">
+   <% if post.tag_list.size > 0 %>
+     <div class='tag_list'><%= icon('tags') + " " + tag_icons(post.tag_list) %></div>
+    <% end %>
+</div>
 <% end %>
  <!--gallery end-->
             <!-- <div id="comments_popup_wrap" style="display:none;">
@@ -81,35 +81,35 @@
             </div> -->
            
 
-            <!--gallery js 김수겸 14.09.19-->
-            <%= javascript_tag do %>
+<!--gallery js 김수겸 14.09.19-->
+<%= javascript_tag do %>
 
-              var gallery_js = function() {
-                $(".image_info_toggle").mouseenter(function(evnet) {
-                  var a = $(event.currentTarget);
-                  a.find(".image_info_hover").fadeIn(100);
-                });
-                $(".image_info_toggle").mouseleave(function() {
-                  $(".image_info_hover").fadeOut(100);
-                });
-                //comments_popup
-                $(".comment_btn").click(function(e) {
-                  var divTop = e.clientY - 25;
-                  var divLeft = e.clientX - 10;
+  var gallery_js = function() {
+    $(".image_info_toggle").mouseenter(function(evnet) {
+      var a = $(event.currentTarget);
+      a.find(".image_info_hover").fadeIn(100);
+    });
+    $(".image_info_toggle").mouseleave(function() {
+      $(".image_info_hover").fadeOut(100);
+    });
+    //comments_popup
+    $(".comment_btn").click(function(e) {
+      var divTop = e.clientY - 25;
+      var divLeft = e.clientX - 10;
 
-                  $('#comments_popup_wrap').css({
-                    "top" : divTop,
-                    "left" : divLeft,
-                    "position" : "absoulte"
-                  }).show();
-                });
-                $('#comments_popup_wrap').mouseleave(function() {
-                  $("#comments_popup_wrap").hide();
-                });
-              }
-              $(gallery_js);
-              $(document).on("page:change",gallery_js);
-            <% end %>
-            <!--gallery end-->
+      $('#comments_popup_wrap').css({
+        "top" : divTop,
+        "left" : divLeft,
+        "position" : "absoulte"
+      }).show();
+    });
+    $('#comments_popup_wrap').mouseleave(function() {
+      $("#comments_popup_wrap").hide();
+    });
+  }
+  $(gallery_js);
+  $(document).on("page:change",gallery_js);
+<% end %>
+<!--gallery end-->
 
 
