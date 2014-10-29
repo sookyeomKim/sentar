@@ -10,8 +10,8 @@
                       <div>
                         <p>
                           <strong><%= link_to post.title, [post.bulletin, post]%></strong>
-                          <strong><%= link_to '', edit_bulletin_post_path(post.bulletin, post), class:'fa fa-cog',style:'position: absolute;top:0;right:10px;margin:2px;' %></strong>
-                          <strong><%= link_to '', [post.bulletin, post], method: :delete, data: { confirm: 'Are you sure?' }, class:'fa fa-times',style:'position: absolute;top:0;right:0;margin:2px;' %></strong>
+                          <strong><%= link_to '', edit_bulletin_post_path(post.bulletin, post), class:'fa fa-cog',style:'position: absolute;top:0;right:10px;margin:2px;color:#fff !important;' %></strong>
+                          <strong><%= link_to '', [post.bulletin, post], method: :delete, data: { confirm: 'Are you sure?' }, class:'fa fa-times',style:'position: absolute;top:0;right:0;margin:2px;color:#fff !important;' %></strong>
                         </p>
                       </div>
                       <div class="info_text">
@@ -111,23 +111,5 @@
               $(document).on("page:change",gallery_js);
             <% end %>
             <!--gallery end-->
-<% @posts.each do | post | %>
 
-
-    <div class='gallery'>
-      <div class='picture'><%= image_tag(post.picture_url) if post.picture? %></div>
-      <div class='title'><%= post.title %> <small>( <%= post.commentboards.size %> )</small></div>
-      <div class='content'><%= simple_format post.content %></div>
-      <% if post.tag_list.size > 0 %>
-       <div class='tag_list'><%= icon('tags') + " " + tag_icons(post.tag_list) %></div>
-      <% end %>
-      <div>
-          <%= link_to 'Show', [post.bulletin, post], class:'btn btn-default' %>
-          <%= link_to 'Edit', edit_bulletin_post_path(post.bulletin, post), class:'btn btn-default' %>
-          <%= link_to 'Destroy', [post.bulletin, post], method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-default' %>
-      </div>
-    </div>
-<% end %>
-
-<br>
 
