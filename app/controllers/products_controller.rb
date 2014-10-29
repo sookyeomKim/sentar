@@ -37,6 +37,8 @@ class ProductsController < ApplicationController
       	
     	else
       	@product = []
+      	@microposts= Micropost.from_users_followed_by(@user)
+      	flash.now[:danger] = "상품등록에 실패하였습니다. 다시시도해주세요"
       	render 'static_pages/home'
     	end
   	end
