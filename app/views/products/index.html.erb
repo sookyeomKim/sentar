@@ -101,7 +101,7 @@
     </div>
 </div>
 <!-- sell_list js 김수겸 14.09.24 -->
-<script>
+<%= javascript_tag do %>
 function format () {
     // `d` is the original data object for the row
     return '<table cellpadding="11" cellspacing="0" border="0" style="padding-left:50px;">'+
@@ -191,10 +191,8 @@ var sell_list = function () {
         }
     });
 };
-$(sell_list);
 $(document).on('page:change', sell_list);
-
-</script>
+<% end %>
 <!-- sell_list js end -->
 
 
