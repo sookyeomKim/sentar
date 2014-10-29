@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
 	end
 
 	def index
-		@user = User.find(current_user)
+		@user = current_user
 		@products = @user.products.paginate(page: params[:page])
 	end
 
@@ -43,8 +43,7 @@ class ProductsController < ApplicationController
 
 
   	def destroy	
-  	
-  	@product.destroy	
+  	@product.update_attribute(:user_id, nil)
   	redirect_to products_path	
   	end
 
