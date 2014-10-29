@@ -9,7 +9,9 @@
                     <div class="image_info_hover" style="display:none;">
                       <div>
                         <p>
-                          <strong><%= link_to post.title, [post.bulletin, post], class:'btn btn-default' %></strong>
+                          <strong><%= link_to post.title, [post.bulletin, post]%></strong>
+                          <strong><%= link_to '', edit_bulletin_post_path(post.bulletin, post), class:'fa fa-cog',style:'position: absolute;top:0;right:10px;margin:2px;' %></strong>
+                          <strong><%= link_to '', [post.bulletin, post], method: :delete, data: { confirm: 'Are you sure?' }, class:'fa fa-times',style:'position: absolute;top:0;right:0;margin:2px;' %></strong>
                         </p>
                       </div>
                       <div class="info_text">
@@ -31,13 +33,13 @@
                 </div>
               </div>
             </div>
-            <div class="comments_popup_wrap"style="display:none;">
+            <div id="comments_popup_wrap"style="display:none;">
                <% if post.tag_list.size > 0 %>
                  <div class='tag_list'><%= icon('tags') + " " + tag_icons(post.tag_list) %></div>
                 <% end %>
             </div>
 <% end %>
-
+ <!--gallery end-->
             <!-- <div id="comments_popup_wrap" style="display:none;">
               <div class="chat-panel panel panel-default">       
             
@@ -77,7 +79,7 @@
                 댓글 wrap footer end
               </div>
             </div> -->
-            <!--gallery end-->
+           
 
             <!--gallery js 김수겸 14.09.19-->
             <%= javascript_tag do %>
