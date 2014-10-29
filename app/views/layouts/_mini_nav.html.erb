@@ -15,6 +15,18 @@
 				<li class="list-group-item">
 					<%= link_to '메신저', conversations_path,class:"mini_nav_list btn btn-primary"%>
 				</li>
+				<li class="list-group-item">
+					<%= link_to '공지사항', bulletin_posts_path('공지사항'),class:"mini_nav_list btn btn-primary" %>
+				</li>
+				<li class="list-group-item">
+					<%= link_to '새소식', bulletin_posts_path('새소식'),class:"mini_nav_list btn btn-primary" %>
+				</li>
+				<li class="list-group-item">
+					<%= link_to '가입인사', bulletin_posts_path('가입인사'),class:"mini_nav_list btn btn-primary" %>
+				</li>
+				<li class="list-group-item">
+					<%= link_to '갤러리', bulletin_posts_path('갤러리'),class:"mini_nav_list btn btn-primary" %>
+				</li>
 			</ul>
 		</div>
 	<!-- 미니네비게이션 end -->
@@ -22,26 +34,27 @@
 	<!-- 미니 네비게이션 JS 김수겸 14.09.01 -->
 	<%= javascript_tag do %>
 	var eventClientX;
-	$(function() {
-		$("div").mousemove(function(event) {
-			eventClientX = event.clientX;
-			if (eventClientX < 3) {
-				/*eventInterval = setTimeout("$(function(){$('#mini_nav_toggle').show('slide',{direction:'left'},500)})", 500);*/
-				$(function() {
-					$('#mini_nav_toggle').show('slide', {
-						direction : 'left'
-					}, 200)
-				});
-				return;
-			}
-		});
+	var mini_nave = $(function() {
+						$("div").mousemove(function(event) {
+							eventClientX = event.clientX;
+							if (eventClientX < 3) {
+								/*eventInterval = setTimeout("$(function(){$('#mini_nav_toggle').show('slide',{direction:'left'},500)})", 500);*/
+								$(function() {
+									$('#mini_nav_toggle').show('slide', {
+										direction : 'left'
+									}, 200)
+								});
+								return;
+							}
+						});
 
-		$("#mini_nav_toggle").mouseleave(function() {
-			$(this).hide('slide', {
-				direction : 'left'
-			}, 200)
-		});
-	}); 
+						$("#mini_nav_toggle").mouseleave(function() {
+							$(this).hide('slide', {
+								direction : 'left'
+							}, 200)
+						});
+					});
+	$(mini_nave);
 	<% end %> 
 	<!-- 미니 네비게이션 JS end -->
 </div>

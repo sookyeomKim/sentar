@@ -8,6 +8,26 @@ var lonlat, pr_3857, pr_4326; //좌표변환 관련 상수
 var markers; //레이어 관련 변수
 
 var initialize = function () {
+    //mini_nav
+    /*$("div").mousemove(function(event) {
+        eventClientX = event.clientX;
+        if (eventClientX < 3) {
+            $(function() {
+                $('#mini_nav_toggle').show('slide', {
+                    direction : 'left'
+                }, 200)
+            });
+            return;
+        }
+    });
+
+    $("#mini_nav_toggle").mouseleave(function() {
+        $(this).hide('slide', {
+            direction : 'left'
+        }, 200)
+    });*/
+
+
     setVariables();
     map = new Tmap.Map({
         div: mapDiv
