@@ -1,0 +1,11 @@
+
+<h1>메세지</h1>
+<h2>받은 편지함</h2>
+<ul><%= render 'inbox' %></ul>
+<h2>보낸 편지함</h2>
+<ul><%= render 'sentbox' %></ul>
+<h2>휴지통</h2>	
+<ul><%= render 'trash' %></ul>
+
+
+<%=link_to "메세지보내기", new_conversation_path %>

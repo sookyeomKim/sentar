@@ -1,0 +1,43 @@
+<div class="container custom_container">
+  <div class="tab-content">
+    <div  class="tab-pane active">
+ 
+    <h1>답장하기</h1>
+
+     <%= simple_form_for(:message, url: {action: "reply"}, id: 2) do |f| %>
+
+
+      <%= f.label :subject %>
+      <%= f.text_field :subject,class:"form-control" %>
+      
+      <%= f.label :body, class: "checkbox inline"  %>
+      <%= f.text_field :body,class:"form-control" %>         
+     
+
+     <%= f.submit '보내기', class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
+  	<%= f.submit '취소'	, type: :reset, class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
+    
+    
+     <% end %>   
+    
+   </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- 
+
+= simple_form_for :message, url: reply_conversation_path(conversation) do |f|
+  = f.input :subject
+  = f.input :body
+  .form-actions
+    = f.button :submit, class: 'btn-primary'
+    = submit_tag 'Cancel', type: :reset, class: 'btn btn-danger'
+ -->

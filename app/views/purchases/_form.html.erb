@@ -31,6 +31,7 @@
 			<td><span><%=@product.name %></span></td>
 			<td><span>1</span></td>
 			<td><span><strong><%=@product.price  %></strong>원</span></td>
+			<legend>총 가격 <%= @product.price %></legend>
 		</tr>
 		<% else %>
 		<%= f.hidden_field :ordertype, class: 'form-control', value: 'cart'  %>
@@ -43,11 +44,12 @@
 			<td><span><strong><%=cart_item.price * cart_item.quantity%></strong></span></td>
 		</tr>
 		<% end %>
+		<legend>총 가격 <%= current_user.cart.total + 2500 %> 원</legend>
 		<% end %>
 	</tbody>
 </table>
 
-<legend>총 가격 <%= @product.price %></legend>
+
 
 <fieldset>
 	<%= f.hidden_field :product_id, class: 'form-control' %>

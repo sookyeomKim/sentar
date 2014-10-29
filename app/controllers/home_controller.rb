@@ -10,6 +10,8 @@ class HomeController < ApplicationController
   	@comments = @micropost.comments.all
    @comment = @micropost.comments.build
    @products = @user.productFeed
+
+   @conversations = current_user.mailbox.inbox
   end
 
 end

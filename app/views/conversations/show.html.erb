@@ -1,0 +1,14 @@
+<%= stylesheet_link_tag    "application", :media => "all" %>
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tags %>
+<h1><%= conversation.subject %></h1>
+<% conversation.receipts_for(current_user).each do |receipt| %>
+<ul>
+<% message = receipt.message %>
+<h3>제목:<%=message.subject %></h3>
+<p>내용:<%= message.body %></p>
+</ul>
+<% end %>
+<div>
+
+<%= render 'message/form' , conversation: conversation %>
