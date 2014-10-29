@@ -1,25 +1,22 @@
-<!--new와 edit 뷰 템플릿 파일에서 사용-->
-<!--<#%= simple_form_for(@post) do |f| %>--><!--gem으로 설치했던 simple_form메서드에 Post객체를 담은 @post인스턴스변수를 인자값으로 넣고 실행하면 |f|에 그 값이 들어온다.-->
-<%= simple_form_for(:post, url: {action: "create"}) do |f| %><!--라우팅 후 컨트롤러에서 연결, 뷰딴에 값들을 받고서 사용한다.-->
+<%= simple_form_for([@post.bulletin, @post]) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-group">
-    <%= f.input :title,input_html: { class: 'form-control' } %><!--텍스트입력창, :title을 받는다.-->
+    <%= f.input :title, input_html: { class: 'form-control' } %>
   </div>
   <div class="form-group">
-    <%= f.input :content,input_html: { class: 'form-control', rows: 10 } %><!--텍스트입력창, :content를 받는다.-->
+    <%= f.input :content, input_html: { class: 'form-control', rows: 10 } %>
   </div>
-  <% if @post.bulletin.post_type == "gallery" %> <!--만약 post_type이 gallery로 들어온다면 노출시킨다. gallery형 게시판에만 이미지를 업로드할 수 있도록 함이다.-->
-  <div class="form-group">
-    <%= f.input :picture, as: :file, input_html:{ class: 'form-control' } %>
-    <%= f.hidden_field :picture_cache %>
-  </div>
+  <% if @post.bulletin.post_type == "gallery" %>
+    <div class="form-group">
+      <%= f.input :picture, as: :file, input_html:{ class: 'form-control' } %>
+      <%= f.hidden_field :picture_cache %>
+    </div>
   <% end %>
-  <div class="form-group"><!--태그받는 입력창-->
-  <%= f.input :tag_list, placeholder: '하나 이상의 태그는 콤마(,)로 구분하여 입력하세요.', input_html: { class: 'form-control' } %>
+  <div class="form-group">
+    <%= f.input :tag_list, placeholder: '하나 이상의 태그는 콤마(,)로 구분하여 입력하세요.', input_html: { class: 'form-control' } %>
   </div>
 
-
-  <%= f.button :submit, class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
+  <%= f.button :submit, class: 'btn btn-default' %>
 
 <% end %>

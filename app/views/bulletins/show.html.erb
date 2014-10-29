@@ -1,7 +1,5 @@
 <h2>Preview Bulletin</h2>
 
-
-
 <table class='table table-bordered'>
 <tr>
   <th>Title</th>
@@ -12,16 +10,14 @@
   <td><%= @bulletin.description %></td>
 </tr>
 <tr>
-  <th>Created at</th>
-  <td><%= @bulletin.created_at %></td>
-</tr>
-<tr>
   <th>Post Type</th>
   <td><%= @bulletin.post_type %></td>
 </tr>
+<tr>
+  <th>Created at</th>
+  <td><%= @bulletin.created_at %></td>
+</tr>
 </table>
-
-
 
 <%= link_to 'Edit', edit_shelter_bulletin_path(@bulletin.shelter, @bulletin), class: 'btn btn-default' %>
 <%= link_to 'Back', shelter_bulletins_path, class: 'btn btn-default' %>

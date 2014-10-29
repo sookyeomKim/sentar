@@ -1,0 +1,9 @@
+<ul id="commentboards_list_<%=@post.id%>">
+<% if @post.commentboards.size > 0 %>
+  <%= render @post.commentboards %>
+<% else %>
+  <li>
+    No commentboards
+  </li>
+<% end %>
+</ul>

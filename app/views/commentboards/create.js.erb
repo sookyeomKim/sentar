@@ -1,0 +1,6 @@
+<% if @commentboard.errors.size == 0 %>
+  $('<%=j render @commentboard %>').appendTo($("#commentboards_list_<%=@post.id %>")).hide().fadeIn('fast');
+  $("#commentboards_form_<%=@post.id %> form")[0].reset();
+<% else %>
+  alert("Please submit after commenting...");
+<% end %>
