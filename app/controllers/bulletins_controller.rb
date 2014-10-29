@@ -69,7 +69,8 @@ class BulletinsController < ApplicationController
   private
 
     def set_shelter
-      @shelter = Shelter.find(params[:shelter_id])
+      #@shelter = Shelter.find(params[:shelter_id])
+      @shelter = Shelter.find(current_user.shelter)
     end
 
     # Use callbacks to share common setup or constraints between actions.
