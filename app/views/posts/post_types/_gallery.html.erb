@@ -1,8 +1,9 @@
 <span><%= link_to '사진올리기', new_bulletin_post_path, class: 'btn btn-default'%></span>
 <!--gallery-->
-<% @posts.each do | post | %>
+
 <div class="blog_list_content_image">
   <div class="row">
+    <% @posts.each do | post | %>
     <div class="col-sm-6 col-md-2">
       <div class="image_info_toggle">
         <a href="#" class="thumbnail image_info" ><%= image_tag(post.picture_url) if post.picture? %></a>
@@ -31,14 +32,15 @@
         </div>                   
       </div>
     </div>
+    <div id="comments_popup_wrap"style="display:none;">
+      <% if post.tag_list.size > 0 %>
+       <div class='tag_list'><%= icon('tags') + " " + tag_icons(post.tag_list) %></div>
+      <% end %>
+    </div>
+    <% end %>
   </div>
 </div>
-<div id="comments_popup_wrap"style="display:none;">
-   <% if post.tag_list.size > 0 %>
-     <div class='tag_list'><%= icon('tags') + " " + tag_icons(post.tag_list) %></div>
-    <% end %>
-</div>
-<% end %>
+
  <!--gallery end-->
             <!-- <div id="comments_popup_wrap" style="display:none;">
               <div class="chat-panel panel panel-default">       
