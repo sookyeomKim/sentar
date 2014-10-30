@@ -53,7 +53,8 @@
 
 	<td>
 		<div class="buy_order_btn">
-			<a href="purchases/new?id=<%= shopping_cart_item.item.id%>" class="btn btn-warning btn-xs">주문하기</a>
+
+			<%= link_to '구매하기', new_purchase_path(:id => shopping_cart_item.item.id, :order => 'goods'),class:'btn btn-default'  %>
 		</div>		
 		<div class="buy_order_btn">
 			<%= link_to "제거", { action: "destroy", id: shopping_cart_item.item.id},

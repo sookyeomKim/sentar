@@ -15,7 +15,7 @@ class CartsController < ApplicationController
   def destroy
   @product = Product.find(params[:id])
   @amount = params[:amount]
-   flash[:success] = "#{@product.id}????"
+   # flash[:success] = "#{@product.id}????"
   # @cart.remove(@product, @amount.to_i)
   @cart.remove(@product)
    redirect_to cart_path

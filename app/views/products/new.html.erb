@@ -1,10 +1,12 @@
 <%= render 'sell_and_buy/snb_category'%>
 <% if logged_in? %>
-<% provide(:title, 'add new product') %>
+<% provide(:title, '상품추가') %>
 <div class="row">
   <div class="col-md-6">
-
+  
     <%= form_for :product , url: { action: "create" }, html: { multipart: true } do |f| %>
+    <%= render 'shared/error_messages', object: @product %>
+
 
   <div class="form-group">
     <%= f.label :name ,'상품명',class:'col-lg-2  control-label'  %>

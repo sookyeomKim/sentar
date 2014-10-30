@@ -31,21 +31,26 @@ class ProductsController < ApplicationController
 	def create
 	@user = current_user
     	@product = @user.products.build(product_params)
-    	if @product.save
-      	
-      	redirect_to @product
-      	
-    	else
-      	@product = []
-      	@microposts= Micropost.from_users_followed_by(@user)
-      	flash.now[:danger] = "상품등록에 실패하였습니다. 다시시도해주세요"
-      	render 'static_pages/home'
-    	end
-  	end
 
+
+    	respond_to do |format|
+    	  if @product.save
+    	   flash[:success] = "상품이 등록 되었습니다."
+        format.html { redirect_to products_path }
+        format.json { render :show, status: :created, location: @product }
+      else
+        format.html { render :new }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+     end
+     end
 
   	def destroy	
   	@product.update_attribute(:user_id, nil)
+  	@cart_items = CartItem.where(item_id: @product.id)
+  	@cart_items.each  do |item|
+  		item.destroy
+  	end
   	redirect_to products_path	
   	end
 
