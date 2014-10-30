@@ -1,3 +1,4 @@
+<div class="content_re">
 <% if params["bulletin_id"] %>
   <%= render "posts/post_types/#{@bulletin.post_type}" %>
 <% else %>
@@ -10,3 +11,4 @@
     <%= render @posts %>
   </ul>
 <% end %>
+</div>
