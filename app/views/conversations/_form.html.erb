@@ -12,7 +12,8 @@
       <%= f.text_field :body,class:"form-control" %>         
 
       <%= f.button '보내기', class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
-      <%= f.button '취소'	, type: :reset, class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
+      <%= f.button '초기화', type: :reset, class: 'btn btn-danger' %><!--입력되어진대로 제출한다.-->
+      <%= link_to '뒤로', conversations_path,class:'btn btn-primary'%>
       <% end %>
     </div>
   </div>

@@ -6,6 +6,7 @@ class StaticPagesController < ApplicationController
      @microposts = current_user.microposts.paginate(page: params[:page])
      @comments = @micropost.comments.all
      @comment = @micropost.comments.build
+     @mailbox ||= current_user.mailbox
 
      end
   end

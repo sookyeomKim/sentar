@@ -4,39 +4,39 @@
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse"
             data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span><span
-                class="icon-bar"></span><span class="icon-bar"></span><span
-                class="icon-bar"></span>
-            </button>
-            <%= link_to 'SENTAR', root_path,class:'navbar-brand custom_brand' %>
+            <span class="sr-only">Toggle navigation</span><span
+            class="icon-bar"></span><span class="icon-bar"></span><span
+            class="icon-bar"></span>
+        </button>
+        <%= link_to 'SENTAR', root_path,class:'navbar-brand custom_brand' %>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <div class="search_bar">
+            <form class="navbar-form navbar-left" role="search" id="main_search"><!-- id 값줬다 -->
+                <select class="btn btn-info btn-line" id="poi_select">
+                    <option value="0">지역검색</option>
+                    <option value="1">커머스</option>
+                    <option value="2">블로그</option>
+                </select>
+                <div class="form-group" id="serch_horizon" style="padding: 0px !important;">
+                    <input type="text" class="form-control" placeholder="Search" id="searchText"><!-- 수정 : id 추가 -->
+                </div>
+                <a class="btn btn-info btn-line" onClick="sentar_search()"> <!-- 수정 : onClick추가 -->
+                    검색
+                </a>
+            </form>
         </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <div class="search_bar">
-                <form class="navbar-form navbar-left" role="search" id="main_search"><!-- id 값줬다 -->
-                    <select class="btn btn-info btn-line" id="poi_select">
-                        <option value="0">지역검색</option>
-                        <option value="1">커머스</option>
-                        <option value="2">블로그</option>
-                    </select>
-                    <div class="form-group" id="serch_horizon" style="padding: 0px !important;">
-                        <input type="text" class="form-control" placeholder="Search" id="searchText"><!-- 수정 : id 추가 -->
-                    </div>
-                    <a class="btn btn-info btn-line" onClick="sentar_search()"> <!-- 수정 : onClick추가 -->
-                        검색
-                    </a>
-                </form>
-            </div>
 
-            <% if logged_in? %>
-            <!-- 알람,딴집가기,내집가기  김수겸 14.09.01-->
-            <ul class="nav navbar-nav navbar-right">                
-                <!--알람-->
-                <li class="dropdown">
-                    <a class="dropdown-toggle"
-                    data-toggle="dropdown" href="#alarm"> <span class="label label-info">2</span> <i class="fa fa-bell"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="#">
+        <% if logged_in? %>
+        <!-- 알람,딴집가기,내집가기  김수겸 14.09.01-->
+        <ul class="nav navbar-nav navbar-right">                
+            <!--알람-->
+            <li class="dropdown">
+                <a class="dropdown-toggle"
+                data-toggle="dropdown" href="#alarm"> <span class="label label-info">2</span> <i class="fa fa-bell"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
+                <ul class="dropdown-menu dropdown-alerts">
+                    <li>
+                        <a href="#">
                             <div>
                                 <i class="icon-comment"></i> New Comment <span class="pull-right text-muted small"> 4 minutes ago</span>
                             </div> </a>
@@ -44,143 +44,121 @@
                         <li class="divider"></li>
                         <li>
                             <a href="#">
-                            <div>
-                                <i class="icon-twitter info"></i> 3 New Follower <span class="pull-right text-muted small"> 9 minutes ago</span>
-                            </div> </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                            <div>
-                                <i class="icon-envelope"></i> Message Sent <span class="pull-right text-muted small"> 20 minutes ago</span>
-                            </div> </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                            <div>
-                                <i class="icon-tasks"></i> New Task <span class="pull-right text-muted small"> 1 Hour ago</span>
-                            </div> </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                            <div>
-                                <i class="icon-upload"></i> Server Rebooted <span class="pull-right text-muted small"> 2 Hour ago</span>
-                            </div> </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#"> <strong>See All Alerts</strong> <i class="icon-angle-right"></i> </a>
-                        </li>
-                    </ul>
-                </li>
-                <!--알람end-->
+                                <div>
+                                    <i class="icon-twitter info"></i> 3 New Follower <span class="pull-right text-muted small"> 9 minutes ago</span>
+                                </div> </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="icon-envelope"></i> Message Sent <span class="pull-right text-muted small"> 20 minutes ago</span>
+                                    </div> </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <i class="icon-tasks"></i> New Task <span class="pull-right text-muted small"> 1 Hour ago</span>
+                                        </div> </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#">
+                                            <div>
+                                                <i class="icon-upload"></i> Server Rebooted <span class="pull-right text-muted small"> 2 Hour ago</span>
+                                            </div> </a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a class="text-center" href="#"> <strong>See All Alerts</strong> <i class="icon-angle-right"></i> </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!--알람end-->
 
-                <!--메세지-->
-                <li class="dropdown">
-                    <a class="dropdown-toggle"  data-toggle="dropdown" href="#"> <span class="label label-success">2</span> <i class="fa fa-envelope"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="#">
-                            <div>
-                                <strong>John Smith</strong>
-                                <span class="pull-right text-muted"> <em>Today</em> </span>
-                            </div>
-                            <div>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing.
-                                <br>
-                                <span class="label label-primary">Important</span>
+                                <!--메세지-->
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle"  data-toggle="dropdown" href="#"> <span class="label label-success">2</span> <i class="fa fa-envelope"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
+                                    <ul class="dropdown-menu dropdown-messages">
+                                    <%@mailbox.sentbox.each do |conversation| %>
+                                    <li style="margin-bottom: 20px;">
+                                        <div class="message_wrap">
+                                            <span class="message_wrap_left"><%= link_to conversation.subject , conversation_path(conversation)%></span>
+                                            <span class="message_wrap_right"><%= link_to "", trash_conversation_path(conversation), method: :post,class:'fa fa-trash' %></span>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <% end %>
+                                    <%@mailbox.inbox.each do |conversation| %>
+                                    <li style="margin-bottom: 20px;">
+                                        <div class="message_wrap">
+                                            <span class="message_wrap_left"><%= link_to conversation.subject , conversation_path(conversation)%></span>
+                                            <span class="message_wrap_right"><%= link_to "", trash_conversation_path(conversation), method: :post,class:'fa fa-trash' %></span>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <% end %>
+                                    <li>
+                                        <%= link_to '대화방 모두 보기', conversations_path,class:"text-center"%>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!--메세지 end-->
 
-                            </div> </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                            <div>
-                                <strong>Raphel Jonson</strong>
-                                <span class="pull-right text-muted"> <em>Yesterday</em> </span>
-                            </div>
-                            <div>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing.
-                                <br>
-                                <span class="label label-success"> Moderate </span>
-                            </div> </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                            <div>
-                                <strong>Chi Ley Suk</strong>
-                                <span class="pull-right text-muted"> <em>26 Jan 2014</em> </span>
-                            </div>
-                            <div>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing.
-                                <br>
-                                <span class="label label-danger"> Low </span>
-                            </div> </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#"> <strong>Read All Messages</strong> <i class="icon-angle-right"></i> </a>
-                        </li>
-                    </ul>
-                </li>
-                <!--메세지 end-->
+                            <!--친구-->
+                            <li class="dropdown">
+                                <a class="dropdown-toggle"
+                                data-toggle="dropdown" href="#"> <i class="fa fa-user"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
+                                <% if current_user.following.any? %>
+                                <ul class="dropdown-menu dropdown-friend">
+                                    <%= render current_user.following %>
+                                </ul>
+                                <% end %>
+                            </li>
+                            <!--친구 end-->
 
-                <!--친구-->
-                <li class="dropdown">
-                    <a class="dropdown-toggle"
-                    data-toggle="dropdown" href="#"> <i class="fa fa-user"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
-                    <% if current_user.following.any? %>
-                    <ul class="dropdown-menu dropdown-friend">
-                        <%= render current_user.following %>
-                    </ul>
-                    <% end %>
-                </li>
-                <!--친구 end-->
-
-                <!--profile-->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle profile" data-toggle="dropdown">
-                    <div class="avatar">
-                        <%= gravatar_for current_user%>
+                            <!--profile-->
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle profile" data-toggle="dropdown">
+                                    <div class="avatar">
+                                        <%= gravatar_for current_user%>
+                                    </div>
+                                    <div class="user-mini pull-left">
+                                        <span class="welcome">Welcome</span>
+                                        <span><%= current_user.name %></span>
+                                    </div> </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <%= link_to "내집가기",shelter_path(current_user)%>
+                                        </li>
+                                        <li>
+                                            <%=link_to "내블로그가기",blog_path(current_user)%>                             
+                                        </li>
+                                        <li>
+                                            <%=link_to "내커머스가기",commerce_path%> 
+                                        </li>
+                                        <li>
+                                            <%= link_to "계정설정", edit_user_path(current_user) %>
+                                        </li>
+                                        <li>
+                                            <%= link_to("모든유저보기", users_path ) %>
+                                        </li>
+                                        <li>
+                                            <%= link_to("모든쉘터보기", shelters_path ) %>
+                                        </li>
+                                        <li>
+                                            <%= link_to "로그아웃", logout_path, method: "delete" %>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!--profile end-->
+                            </ul>
+                            <!-- 알람,딴집가기,내집가기 end -->
+                            <% else %>
+                            <%= link_to "Log in", login_path,class:"login_btn btn btn-info btn-round btn-line" %>
+                            <% end %>
+                        </div>
                     </div>
-                    <div class="user-mini pull-left">
-                        <span class="welcome">Welcome</span>
-                        <span><%= current_user.name %></span>
-                    </div> </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <%= link_to "내집가기",shelter_path(current_user)%>
-                        </li>
-                        <li>
-                            <%=link_to "내블로그가기",blog_path(current_user)%>                             
-                        </li>
-                        <li>
-                            <%=link_to "내커머스가기",commerce_path%> 
-                        </li>
-                        <li>
-                            <%= link_to "계정설정", edit_user_path(current_user) %>
-                        </li>
-                        <li>
-                            <%= link_to("모든유저보기", users_path ) %>
-                        </li>
-                        <li>
-                            <%= link_to("모든쉘터보기", shelters_path ) %>
-                        </li>
-                        <li>
-                            <%= link_to "로그아웃", logout_path, method: "delete" %>
-                        </li>
-                    </ul>
-                </li>
-                <!--profile end-->
-            </ul>
-            <!-- 알람,딴집가기,내집가기 end -->
-            <% else %>
-            <%= link_to "Log in", login_path,class:"login_btn btn btn-info btn-round btn-line" %>
-            <% end %>
-        </div>
-    </div>
-</div>
+                </div>
 <!-- 상단네비게이션창 end -->

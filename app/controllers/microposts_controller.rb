@@ -1,7 +1,7 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
-
+  before_action :mailbox
 
   def create
   @micropost = current_user.microposts.build(micropost_params)
@@ -25,6 +25,7 @@ class MicropostsController < ApplicationController
   end
 
   def new
+    @mailbox ||= current_user.mailbox
     @micropost = Micropost.new
   end
 
@@ -51,6 +52,9 @@ class MicropostsController < ApplicationController
   end
 
   private
+    def mailbox
+    @mailbox ||= current_user.mailbox
+    end 
   def micropost_params
       params.require(:micropost).permit(:title, :content, :picture, :user_id)
     end

@@ -1,11 +1,52 @@
+<div class="row">
+	<div class="col-lg-6">
+		<h2>받은 편지함</h2>
+		<ul><%= render 'inbox' %></ul>
+		<h2>보낸 편지함</h2>
+		<ul><%= render 'sentbox' %></ul>
+		<h2>휴지통</h2>	
+		<ul><%= render 'trash' %></ul>
 
-<h1>메세지</h1>
-<h2>받은 편지함</h2>
-<ul><%= render 'inbox' %></ul>
-<h2>보낸 편지함</h2>
-<ul><%= render 'sentbox' %></ul>
-<h2>휴지통</h2>	
-<ul><%= render 'trash' %></ul>
+		<%=link_to "메세지보내기", new_conversation_path %>
+	</div>
+
+	<div class="col-lg-6">
+		<div class="panel">
+			<div class="panel-heading">
+				<h2>친구목록</h2>
+			</div>
+			<% if current_user.following.any? %>
+			<ul class="message_friends_wrap">
+				<%= render current_user.following %>
+			</ul>
+			<% end %>
+		</div>
+		<script>
+		$('.user_email').on('click',function(event){
+			var current_user_email = $(event.currentTarget).html();
+			alert(current_user_email);
+			$('#recipients_form').val(current_user_email);
+		});
+		</script>	
+		<div class="tab-content">
+			<div  class="tab-pane active">
+				<%= form_for(:conversation, url: :conversations, method: :post) do |f| %>
+				<%= f.label :recipients,'받는사람' %>
+				<%= f.text_field :recipients,class:"form-control",id:'recipients_form' %>
+
+				<%= f.label :subject,'제목' %>
+				<%= f.text_field :subject,class:"form-control" %>
+
+				<%= f.label :body, class: "checkbox inline"  %>
+				<%= f.text_field :body,class:"form-control" %>         
+
+				<%= f.button '보내기', class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
+				<%= f.button '초기화'	, type: :reset, class: 'btn btn-danger' %><!--입력되어진대로 제출한다.-->
+				<%= link_to '뒤로', conversations_path,class:'btn btn-primary'%>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
 
 
-<%=link_to "메세지보내기", new_conversation_path %>

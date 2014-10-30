@@ -1,5 +1,6 @@
  class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show,  :update, :edit ]
+  before_action :mailbox
 
   # GET /purchases
   # GET /purchases.json
@@ -114,6 +115,9 @@
   end
 
   private
+    def mailbox
+    @mailbox ||= current_user.mailbox
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_purchase
       @purchase = Purchase.find(params[:id])

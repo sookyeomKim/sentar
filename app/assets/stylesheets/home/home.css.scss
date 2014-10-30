@@ -142,3 +142,33 @@
 .stat{
 	color:#000;
 }
+
+.message_wrap{
+	position: absolute;
+	width: 100%;
+	background-color: #ccc;
+}
+
+
+.message_wrap_left>a{
+	float: left;
+	position: relative;
+	width: 90%;
+	background-color: #eee;
+}
+.message_wrap_left>a:hover{
+	float: left;
+	position: relative;
+	width: 90%;
+	background-color: #aaa;
+}
+.message_wrap_right>a{
+	text-align: center;
+	position: relative;
+	width: 10%;	
+	background-color: #ccc;
+}
+
+.message_friends_wrap{
+	list-style: none;
+}

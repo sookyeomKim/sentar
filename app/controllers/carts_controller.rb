@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
   before_filter :extract_shopping_cart
+  before_action :mailbox
 
   def create
      @product = Product.find(params[:id])
@@ -33,5 +34,7 @@ class CartsController < ApplicationController
      @cart = Cart.find_by(user_id: @user.id) || Cart.create(user_id: @user.id)
   end
 
- 
+  def mailbox
+    @mailbox ||= current_user.mailbox
+  end 
 end

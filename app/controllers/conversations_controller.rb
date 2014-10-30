@@ -9,6 +9,7 @@ helper_method :mailbox, :conversation
 
 
 def index
+  
 	@mailbox ||= current_user.mailbox
 end
 

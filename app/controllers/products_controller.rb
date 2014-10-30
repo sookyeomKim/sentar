@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
 	before_action :logged_in_user, only: [:create, :destroy]
 	before_action :correct_user, only: [ :destroy]
+  before_action :mailbox
 	
 	def show
 	@product = Product.find(params[:id])
@@ -16,10 +17,10 @@ class ProductsController < ApplicationController
 		@products = @user.products.paginate(page: params[:page])
 	end
 
-	def myindex
-		@user = User.find(current_user)
-		@products = @user.products.paginate(page: params[:page])
-	end
+	#def myindex
+	#	@user = User.find(current_user)
+	#	@products = @user.products.paginate(page: params[:page])
+	#end
 		
 	
 
@@ -55,7 +56,9 @@ class ProductsController < ApplicationController
   	end
 
  	private
-
+    def mailbox
+    @mailbox ||= current_user.mailbox
+    end 
 
   def correct_user
   @product = Product.find(params[:id])
