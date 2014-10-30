@@ -1,6 +1,6 @@
 <h2><%= params[:bulletin_id] %></h2>
 <div style='position: absolute;right:45%;top:0;'>
-  <span><%= link_to '뒤로',  [@bulletin.shelter], class: 'btn btn-default btn-lg' %></span>
+  <span><%= link_to '뒤로', shelter_bulletins_path(current_user.shelter), class: 'btn btn-default btn-lg' %></span>
   <span><%= link_to '새글쓰기', new_bulletin_post_path, class: 'btn btn-default btn-lg'%></span>
 </div>
 <div class="container">
