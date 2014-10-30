@@ -82,30 +82,45 @@
 						<%= form_for(@micropost, html: { multipart: true }) do |f| %>
 
 						<%= render 'shared/error_messages', object: f.object %>
-
-					 <%= f.label '제목' %>
-				   <%= f.text_field :title, class: 'form-control',placeholder: "제목을 입력하시오오오" %>
-						
-					 <%= f.text_area :content,class:"form-control wmd-input",rows:"10", placeholder: "글을 입력하시오오오" %>
-
-						<div class="fileupload fileupload-new" data-provides="fileupload">
-							<div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
-							<div>
-								<span class="btn btn-file btn-success"><span class="fileupload-new">이미지선택</span><span class="fileupload-exists">수정</span><%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %></span>
-								<a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">삭제</a>
-							</div>
-						</div>
-						<%= f.submit "Post", class: "btn btn-primary" %>
+						  <div class="form-group">
+						    <%= f.label :title ,'제목',class:'col-lg-2  control-label'  %>
+						    <div class="col-lg-10">
+						      <%= f.text_field :title, class: 'form-control',placeholder: "제목을 입력하시오오오" %>
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <%= f.label :content ,'내용',class:'col-lg-2  control-label'  %>
+						    <div class="col-lg-10">
+						      <%= f.text_area :content,class:"form-control wmd-input",rows:"10", placeholder: "글을 입력하시오오오" %>
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <%= f.label '이미지',class:'col-lg-2  control-label'  %>
+						    <div class="col-lg-10">
+						      <div class="fileupload fileupload-new" data-provides="fileupload">
+								<div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
+								<div>
+									<span class="btn btn-file btn-success"><span class="fileupload-new">이미지선택</span><span class="fileupload-exists">수정</span><%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %></span>
+									<a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">삭제</a>
+								</div>
+							 </div>
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <div class="col-lg-10 col-lg-offset-2">
+						      <%= f.submit "등록", class: "btn btn-primary" %>
+						    </div>
+						  </div>
 						<% end %>
 
-						<script type="text/javascript">
+						<%= javascript_tag do %>
 							$('#micropost_picture').bind('change', function() {
 								size_in_megabytes = this.files[0].size / 1024 / 1024;
 								if (size_in_megabytes > 5) {
 									alert('Maximum file size is 5MB. Please choose a smaller file.');
 								}
 							});
-						</script>
+						<% end %>
 
 					</div>
 				</div>
