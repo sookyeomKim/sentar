@@ -7,25 +7,32 @@
 		<h2>휴지통</h2>	
 		<ul><%= render 'trash' %></ul>
 
-		<%=link_to "메세지보내기", new_conversation_path %>
+<!-- <%=link_to "메세지보내기", new_conversation_path %> -->
 	</div>
 
 	<div class="col-lg-6">
-		<div class="panel">
+		<div class="panel" id="arcodian">
 			<div class="panel-heading">
-				<h2>친구목록</h2>
+				<h2 class="accordion-toggle"data-toggle="collapse" data-parent="#accordion" href="#friend_list" style="cursor:pointer;"><strong>친구목록</strong></h2>
 			</div>
+			<div>
 			<% if current_user.following.any? %>
-			<ul class="message_friends_wrap">
+			<ul id="friend_list" class="message_friends_wrap panel-collapse collapse">
 				<%= render current_user.following %>
 			</ul>
 			<% end %>
 		</div>
 		<script>
+		var form_val = $('#recipients_form').val();
 		$('.user_email').on('click',function(event){
 			var current_user_email = $(event.currentTarget).html();
-			alert(current_user_email);
-			$('#recipients_form').val(current_user_email);
+			var form_val = $('#recipients_form').val();
+			if(form_val===''){
+			$('#recipients_form').val($('#recipients_form').val()+current_user_email);
+			}else{
+				$('#recipients_form').val($('#recipients_form').val()+','+current_user_email);
+			}
+
 		});
 		</script>	
 		<div class="tab-content">
