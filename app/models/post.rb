@@ -3,5 +3,5 @@ class Post < ActiveRecord::Base
     
     belongs_to :bulletin #Bulletin과 일대다 관계 형성(belongs_to시 단수형 선언)
     mount_uploader :picture, PictureUploader #이미지 업로드관련 db를 마운트 시켜줬다.
-    has_many :comments, dependent: :destroy #comments와 일대다 관계 형성
+    has_many :commentboards, dependent: :destroy #comments와 일대다 관계 형성
 end

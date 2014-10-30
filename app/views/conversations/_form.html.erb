@@ -1,24 +1,21 @@
 <div class="container custom_container">
   <div class="tab-content">
     <div  class="tab-pane active">
-    <%= form_for(:conversation, url: :conversations, method: :post) do |f| %>
-
-      <%= f.label :recipients %>
+      <%= form_for(:conversation, url: :conversations, method: :post) do |f| %>
+      <%= f.label :recipients,'받는사람' %>
       <%= f.text_field :recipients,class:"form-control" %>
-  
-      <%= f.label :subject %>
+
+      <%= f.label :subject,'제목' %>
       <%= f.text_field :subject,class:"form-control" %>
       
       <%= f.label :body, class: "checkbox inline"  %>
       <%= f.text_field :body,class:"form-control" %>         
-        
-     <%= f.button '보내기', class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
-  	<%= f.button '취소'	, type: :reset, class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
-    <% end %>
-    
-    
-   </div>
-</div>
+
+      <%= f.button '보내기', class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
+      <%= f.button '취소'	, type: :reset, class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
+      <% end %>
+    </div>
+  </div>
 </div>
 
 

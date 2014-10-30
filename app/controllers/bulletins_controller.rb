@@ -1,13 +1,15 @@
-#게시판의 개념을 도입하면 원하는 만큼의 게시판을 작성하여 글을 게시판별로 묶을 수 있다.
 class BulletinsController < ApplicationController
-  before_action :set_bulletin, only: [:show, :edit, :update, :destroy] #before_action에 지정된 메서드는 지정된 액션이 실행되기 전에만 수행됨.
   before_action :set_shelter
-  #before_action :correct_user, only: [:destroy, :edit]
+  before_action :set_bulletin, only: [:show, :edit, :update, :destroy]
+  
   # GET /bulletins
   # GET /bulletins.json
   def index
-    #@bulletins = Bulletin.all
-    @bulletins = @shelter.bulletins.all
+    if params[:shelter_id]
+      @bulletins = @shelter.bulletins.all
+    else
+      @bulletins = Bulletin.all
+    end
   end
 
   # GET /bulletins/1
@@ -17,7 +19,6 @@ class BulletinsController < ApplicationController
 
   # GET /bulletins/new
   def new
-    #@bulletin = Bulletin.new
     @bulletin = @shelter.bulletins.new
   end
 
@@ -28,11 +29,11 @@ class BulletinsController < ApplicationController
   # POST /bulletins
   # POST /bulletins.json
   def create
-    #@bulletin = Bulletin.new(bulletin_params)
     @bulletin = @shelter.bulletins.new(bulletin_params)
+
     respond_to do |format|
       if @bulletin.save
-        format.html { redirect_to [@bulletin.shelter, @bulletin], notice: 'Bulletin was successfully created.' }
+        format.html { redirect_to [@shelter.bulletin, @bulletin], notice: 'Bulletin was successfully created.' }
         format.json { render :show, status: :created, location: @bulletin }
       else
         format.html { render :new }
@@ -46,7 +47,7 @@ class BulletinsController < ApplicationController
   def update
     respond_to do |format|
       if @bulletin.update(bulletin_params)
-        format.html { redirect_to [@bulletin.shelter, @bulletin], notice: 'Bulletin was successfully updated.' }
+        format.html { redirect_to [@shelter.bulletin, @bulletin], notice: 'Bulletin was successfully updated.' }
         format.json { render :show, status: :ok, location: @bulletin }
       else
         format.html { render :edit }
@@ -65,25 +66,24 @@ class BulletinsController < ApplicationController
     end
   end
 
-  private 
-
-  # correct 유저 확인
-    #def correct_user
-    #  @user = User.find(params[:id])
-    #  redirect_to(bulletin_path) unless current_user?(@user)
-    #end
+  private
 
     def set_shelter
+      #@shelter = Shelter.find(params[:shelter_id])
       @shelter = Shelter.find(current_user.shelter)
     end
-    def set_bulletin
-      #@bulletin = Bulletin.find(params[:id])
-      @bulletin = Bulletin.friendly.find(params[:id]) #friendly젬 추가(id값 대신에 다른 속성값을 받을거기 때문에)
 
+    # Use callbacks to share common setup or constraints between actions.
+    def set_bulletin
+      if params[:shelter_id]
+        @bulletin = @shelter.bulletins.friendly.find(params[:id])
+      else
+        @bulletin = Bulletin.friendly.find(params[:id])
+      end
     end
 
+    # Never trust parameters from the scary internet, only allow the white list through.
     def bulletin_params
-      #params.require(:bulletin).permit(:title, :description)
-      params.require(:bulletin).permit(:title, :description, :post_type)#게시판 타입을 지정해줄 모델을 마이그레이션 한다음에 속성 추가
+      params.require(:bulletin).permit(:title, :description, :post_type)
     end
 end

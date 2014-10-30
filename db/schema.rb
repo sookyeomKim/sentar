@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141028123943) do
+ActiveRecord::Schema.define(version: 20141029102446) do
 
   create_table "bulletins", force: true do |t|
     t.string   "title"
@@ -44,6 +44,15 @@ ActiveRecord::Schema.define(version: 20141028123943) do
   end
 
   add_index "carts", ["user_id"], name: "index_carts_on_user_id"
+
+  create_table "commentboards", force: true do |t|
+    t.integer  "post_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "commentboards", ["post_id"], name: "index_commentboards_on_post_id"
 
   create_table "likes", force: true do |t|
     t.integer  "micropost_id"

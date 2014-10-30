@@ -1,4 +1,4 @@
-<%= simple_form_for(:bulletin, url: {action: "create"}) do |f| %>
+<%= simple_form_for([@bulletin.shelter, @bulletin]) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-group">
@@ -8,7 +8,7 @@
     <%= f.input :description, input_html: { class: 'form-control', rows: 5 } %>
   </div>
   <div class="form-group">
-  <%= f.input :post_type, collection: [ ['게시판', 'bulletin'], ['블로그', 'blog'], ['갤러리', 'gallery']], input_html:{ class:'form-control'} %>
+    <%= f.input :post_type, collection: [ ['게시판', 'bulletin'], ['블로그', 'blog'], ['갤러리', 'gallery']], input_html:{ class:'form-control'} %>
   </div>
 
   <%= f.button :submit, class: 'btn btn-default' %>

@@ -116,3 +116,14 @@ position: relative;
     left: 275px;
     top: 30px;
 }
+
+
+#comments_popup_wrap{
+    position: fixed;
+    width:500px;
+    height:300px;
+    border-radius:5px;
+    z-index: 3000;
+    opacity: 0.95;
+    background-color: #fff;
+}

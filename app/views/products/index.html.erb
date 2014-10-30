@@ -101,7 +101,7 @@
     </div>
 </div>
 <!-- sell_list js 김수겸 14.09.24 -->
-<script>
+<%= javascript_tag do %>
 function format () {
     // `d` is the original data object for the row
     return '<table cellpadding="11" cellspacing="0" border="0" style="padding-left:50px;">'+
@@ -114,8 +114,7 @@ function format () {
 }
 
 var sell_list = function () {
-    var table = $('#dataTables')
-        .DataTable({
+    var table = $('#dataTables').DataTable({
         "lengthMenu": [
             [10, 25, 50, 75, -1],
             [10, 25, 50, 75, "All"]
@@ -160,7 +159,7 @@ var sell_list = function () {
 
     //tfoot에 셀렉트 넣기
     $("#dataTables tfoot th").each(function (i) {
-        if ($(this).index() >= '2') {
+        if ($(this).index() >= '3') {
             var title = $('#dataTables thead th').eq($(this).index()).text();
             var select = $('<select><option value="">-' + title + '-</option></select>').appendTo($(this).empty()).on('change', function () {
                 var val = $(this).val();
@@ -192,10 +191,9 @@ var sell_list = function () {
         }
     });
 };
-$(document).ready(sell_list);
+$(sell_list);
 $(document).on('page:change', sell_list);
-
-</script>
+<% end %>
 <!-- sell_list js end -->
 
 

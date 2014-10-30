@@ -1,4 +1,4 @@
-<h2>Bulletins</h2>
+<!-- <h2>Bulletins</h2>
 
 <table class="table">
   <thead>
@@ -23,43 +23,77 @@
     <% end %>
   </tbody>
 </table>
+
 <br>
 
 <%= link_to 'New Bulletin', new_shelter_bulletin_path, class: 'btn btn-default' %>
+ -->
 
+<div class="content_ab">
+    <div id="carousel-example-captions" class="carousel slide bs-docs-carousel-example">
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-captions" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-captions" data-slide-to="1" class=""></li>
+            <li data-target="#carousel-example-captions" data-slide-to="2" class=""></li>
+            <li data-target="#carousel-example-captions" data-slide-to="3" class=""></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <%=image_tag( "../../../assets/shelter/shelter_background.jpg", height: '70%', width: '70%')%>
+                    <div class="carousel-caption">
+                        <div>
+                            <h1><%= link_to '공지사항', bulletin_posts_path('공지사항') %></h1>
+                        </div>
+                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </div>
+            </div>           
+            <div class="item">
+                <%=image_tag( "../../../assets/shelter/shelter_background.jpg", height: '70%', width: '70%')%>
+                    <div class="carousel-caption">
+                        <div>
+                            <h1><%= link_to '가입인사', bulletin_posts_path('가입인사') %></h1>
+                        </div>
+                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    </div>
+            </div>
+             <div class="item">
+                <%=image_tag( "../../../assets/shelter/shelter_background.jpg", height: '70%', width: '70%')%>
+                    <div class="carousel-caption">
+                        <div>
+                            <h1><%= link_to '새소식', bulletin_posts_path('새소식') %></li></h1>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+            </div>
+            <div class="item">
+                <%=image_tag( "../../../assets/shelter/shelter_background.jpg", height: '70%', width: '70%')%>
+                    <div class="carousel-caption">
+                        <div>
+                            <h1><%= link_to '갤러리', bulletin_posts_path('갤러리') %></h1>
+                        </div>
+                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    </div>
+            </div>
+        </div> <a class="left carousel-control" href="#carousel-example-captions" data-slide="prev">
+          <span class="icon-prev"></span>
+        </a>
+ <a class="right carousel-control" href="#carousel-example-captions" data-slide="next">
+          <span class="icon-next"></span>
+        </a>
 
-<!-- 네비게이션 및 기본 플래시 div -->
+    </div>
+</div>
+<!-- 여기 뷰딴 꾸며도 -->
+       <!--  <div class="navbar-collapse collapse">
+         <ul class="nav navbar-nav">
+           라우팅, 컨트롤러 연결, 뷰딴 연결 과정
+           <li class="<%= params[:bulletin_id] == '공지사항' ? 'active' : '' %>"><%= link_to '공지사항', bulletin_posts_path('공지사항') %></li>
+           파라미터에 지정된 속성과 일치된 값이 들어오면 삼항연산자에 의해 클래스를 active로 지정된다, 아니면 다른 클래스를 지정한다.(여기선 공백)
+           link_to 부분은 rake routes에서 확인가능
+           <li class="<%= params[:bulletin_id] == '새소식' ? 'active' : '' %>"><%= link_to '새소식', bulletin_posts_path('새소식') %></li>
+           <li class="<%= params[:bulletin_id] == '가입인사' ? 'active' : '' %>"><%= link_to '가입인사', bulletin_posts_path('가입인사') %></li>
+           <li class="<%= params[:bulletin_id] == '갤러리' ? 'active' : '' %>"><%= link_to '갤러리', bulletin_posts_path('갤러리') %></li>
+         </ul>
+       </div> --><!--/.nav-collapse -->
 
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-
-            
-            <!--라우팅, 컨트롤러 연결, 뷰딴 연결 과정-->
-
-            <li class="<%= params[:bulletin_id] == '공지사항' ? 'active' : '' %>"><%= link_to '공지사항', shelter_bulletin_posts_path(bulletin_id: "공지사항") %></li>
-            <!--파라미터에 지정된 속성과 일치된 값이 들어오면 삼항연산자에 의해 클래스를 active로 지정된다, 아니면 다른 클래스를 지정한다.(여기선 공백)-->
-            <!--link_to 부분은 rake routes에서 확인가능-->
-            <li class="<%= params[:bulletin_id] == '새소식' ? 'active' : '' %>"><%= link_to '새소식', shelter_bulletin_posts_path(bulletin_id: "새소식") %></li>
-            <li class="<%= params[:bulletin_id] == '가입인사' ? 'active' : '' %>"><%= link_to '가입인사', shelter_bulletin_posts_path(bulletin_id: "가입인사") %></li>
-            <li class="<%= params[:bulletin_id] == '갤러리' ? 'active' : '' %>"><%= link_to '갤러리', shelter_bulletin_posts_path(bulletin_id: "갤러리") %></li>
-
-
-          </ul>
-      </div>
-
-    <div class="container">
-
-      <%= render partial: "shared/flash_messages", flash: flash %><!--render 메소드는 partial 템플릿을 받을 때, 옵션으로 로컬 변수들을 넘겨 받을 수 있는데, 
-                                                                      여기서는 flash 변수에 flash 해시를 넘겨 준다. 
-                                                                      이 변수 flash는 _flash_messages.html.erb 파일에서 바로 사용할 수 있게 된다.-->
-
-      <%= content_for?(:post_layout) ? content_for(:post_layout) : yield %><!--flash_messages를 띄우기 위함-->
-
-      <!--<#%= yield %>-->
-
-
-    </div> <!-- /container -->
-
+        

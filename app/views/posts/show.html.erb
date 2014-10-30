@@ -10,12 +10,12 @@
   <td><%= @post.content %></td>
 </tr>
 <tr>
-  <th>Created at</th>
-  <td><%= @post.created_at %></td>
+  <th>Tag list</th>
+  <td><%= tag_icons @post.tag_list %></td>
 </tr>
 <tr>
-  <th>Tag list</th>
-  <td><%= tag_icons @post.tag_list %></td><!--tag_icons 헬퍼메서드 app/helpers/application_helper.rb-->
+  <th>Created at</th>
+  <td><%= @post.created_at %></td>
 </tr>
 <% if @post.bulletin.post_type == "gallery" %>
   <tr>
@@ -24,12 +24,8 @@
   </tr>
 <% end %>
 </table>
-</table>
 
-<!--<#%= link_to 'Edit', edit_post_path(@post) %> |--> <!--rake routes를 보면 prefix참조할 수 있다-->
-<!--<#%= link_to 'Back', posts_path %>--> <!--rake routes를 보면 prefix참조할 수 있다-->
-<%= link_to 'Edit', edit_bulletin_post_path(@post.bulletin, @post), class: 'btn btn-default'  %> |<!--post의 bulletin 외래키와 post의 값을 파라미터로 넘겨줌-->
-<%= link_to 'Back', bulletin_posts_path, class: 'btn btn-default'  %><!--rake routes를 보면 prefix참조할 수 있다-->
+<%= link_to 'Edit', edit_bulletin_post_path(@post.bulletin, @post), class: 'btn btn-default' %>
+<%= link_to 'Back', bulletin_posts_path, class: 'btn btn-default' %>
 
-
-<%= render "comments/comments" %><!--댓글창-->
+<%= render "commentboards/commentboards" %>

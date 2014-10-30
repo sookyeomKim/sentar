@@ -1,0 +1,5 @@
+<li id="commentboard_<%=commentboard.id %>">
+  <%= commentboard.body %>,
+  <%= time_ago_in_words(commentboard.created_at) %> ago
+  <%= link_to icon('remove-circle'), [commentboard.post, commentboard], method: :delete, remote: true, data: { confirm: "Are you sure?" } %>
+</li>
