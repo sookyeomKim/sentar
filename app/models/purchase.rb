@@ -28,5 +28,10 @@ class Purchase < ActiveRecord::Base
  	status = "주문취소"
   end
 end
-	
+
+def cancel_order
+update_attribute(:status, 5)
+end
+
+
 end

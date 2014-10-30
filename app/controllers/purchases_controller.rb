@@ -1,4 +1,4 @@
-class PurchasesController < ApplicationController
+ class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show,  :update, :edit ]
 
   # GET /purchases
@@ -78,6 +78,16 @@ class PurchasesController < ApplicationController
     end
     
   end
+
+  def cancel
+
+
+    @purchase = Purchase.find(params[:id])
+      @purchase.update_attribute(:status, 5)
+   redirect_to buy_list_path
+
+  end
+
 
   # PATCH/PUT /purchases/1
   # PATCH/PUT /purchases/1.json

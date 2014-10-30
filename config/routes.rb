@@ -60,10 +60,11 @@ end
 
   get    'myproduct'    => 'products#myindex'
   resources :products
+  
   resources :purchases
 
   get 'order_ok' => 'purchases#order_ok'
-
+  post 'cancel' => 'purchases#cancel'
 
 #홈
 get 'home/popup'
