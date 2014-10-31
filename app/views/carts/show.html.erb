@@ -9,25 +9,26 @@
 					<thead>
 						<tr>
 							<!-- <td><input type="checkbox" id="total_checkbox"
-								checked="checked"></td> -->
-								<td>상품/옵션정보</td>
-								<td>수량</td>
-								<td>상품금액</td>
-								<td>배송비</td>
-								<td class="">주문</td>
-							</tr>
-						</thead>
-						<tbody>
-							<%=render :partial => 'shopping_cart_item', :collection => @cart.shopping_cart_items%>
-						</tbody>
-					</table>
-				</div>
-				<!--상품리스트 js 김수겸 14.09.26-->
-				<%= javascript_tag do %>
+							checked="checked"></td> -->
+							<td>상품/옵션정보</td>
+							<td>수량</td>
+							<td>상품금액</td>
+							<td>배송비</td>
+							<td class="">주문</td>
+						</tr>
+					</thead>
+					<tbody>
+						<%=render :partial => 'shopping_cart_item', :collection => @cart.shopping_cart_items%>
+					</tbody>
+				</table>
+			</div>
+				<!-- 상품리스트 js 김수겸 14.09.26
+				<script type="text/javascript">
 				var popup_modal = function() {
 					$(".qty_change").click(function(e) {
 						var divTop = e.clientY - 25;
 						var divLeft = e.clientX - 10;
+				
 						$('#popup_modal_wrap').css({
 							"top" : divTop,
 							"left" : divLeft,
@@ -40,30 +41,19 @@
 				}
 				$(popup_modal);
 				$(document).on('page:change', popup_modal);
-				<% end %> 
-				<!--상품리스트 js end-->
-				<%=render 'popup_modal'%>
+				</script>
+				상품리스트 js end -->
 				<hr>
-				<div class = "price_wrap" , id="price_wrap">
-					<h1>주문금액 : <%=@cart.total %> 원  + 배송비 : 2500원 total : <%=@cart.total + 2500 %> 원 </h1>
+				<div class="price_wrap">
+					<span>주문금액</span><span id="total_price_org"></span><span>+</span><span>배송비</span><span
+					class="total_ship_price"></span><span>=</span><span>결제예정금액</span><span
+					id="total_price"></span><span>원</span>
 				</div>
 				<!--basket end-->
 
 				<!--basket js 김수겸 14.09.22-->
 				<%= javascript_tag do %>
 				var basket = function() {
-
-					//전체체크박스
-					$('#total_checkbox').click(function() {
-						$('.sub_checkbox').prop('checked', this.checked);
-						call_display_price();
-					});
-
-					// 상품체크박스
-					$(".sub_checkbox:checkbox").click(function() {
-						call_display_price();
-					});
-
 					call_display_price();
 				}
 				$(basket);
@@ -79,7 +69,7 @@
 					tot['total_price'] = 0;
 					tot['total_ship_price'] = 0;
 
-					$('input[name="opt[selected][]"]:checked')
+					$('.deal_length')
 					.each(
 						function() {
 							var deal_id = $(this).attr(
@@ -87,7 +77,6 @@
 							var qty = parseInt($(
 								'input[name="opt[qty][]"][data-deal_id="'
 								+ deal_id + '"]').val());
-
 							if (tot.deal[deal_id] == undefined) {
 								tot.deal[deal_id] = {};
 								tot.deal[deal_id]['qty'] = 0;
@@ -130,46 +119,46 @@
 							tot['deal'][deal_id]['ship_price'] = 0;
 							tot['total_ship_price'] += 0;
 
-						} else {
-							tot['deal'][deal_id]['ship_price'] = ship_price;
+							} else {
+								tot['deal'][deal_id]['ship_price'] = ship_price;
 
-							tot['total_ship_price'] += ship_price;
+								tot['total_ship_price'] += ship_price;
 
-						}
+							}
 
-						if (ship_price_type == 0) {
-							$('.deal_ship_price_' + deal_id).text('무료');
-						} else {
-							var shipPriceHtml = number_format(tot['deal'][deal_id]['ship_price'])
-							+ "원";
-							$('.deal_ship_price_' + deal_id)
-							.html(shipPriceHtml);
-						}
+							if (ship_price_type == 0) {
+								$('.deal_ship_price_' + deal_id).text('무료');
+								} else {
+									var shipPriceHtml = number_format(tot['deal'][deal_id]['ship_price'])
+									+ "원";
+									$('.deal_ship_price_' + deal_id)
+									.html(shipPriceHtml);
+								}
 
-						$(".num_" + deal_id).text(
-							number_format($(".num_" + deal_id).text()));
+								$(".num_" + deal_id).text(
+								number_format($(".num_" + deal_id).text()));
 
-					}
+							}
 
-					var cart_sum_amount = tot['total_price'];
+							var cart_sum_amount = tot['total_price'];
 
-					var cart_sum_ship = tot['total_ship_price'];
+							var cart_sum_ship = tot['total_ship_price'];
 
-					var cart_sum_payment = cart_sum_amount + cart_sum_ship;
-					
+							var cart_sum_payment = cart_sum_amount + cart_sum_ship;
 
-					$("#total_price_org").text(number_format(cart_sum_amount));
-					$(".total_ship_price").text(number_format(cart_sum_ship));
-					$("#total_price").text(number_format(cart_sum_payment));
 
-					//ex)1000>1,000만들기
+							$("#total_price_org").text(number_format(cart_sum_amount));
+							$(".total_ship_price").text(number_format(cart_sum_ship));
+							$("#total_price").text(number_format(cart_sum_payment));
+
+							//ex)1000>1,000만들기
 function number_format(str1) {
 	return str1.toString().replace(
-		/(\-?\d+)(\d{3})($|\.\d+)/,
-		function(str, p1, p2, p3) {
-			return number_format(p1) + "," + p2 + ""
-			+ p3;
-		});
+	/(\-?\d+)(\d{3})($|\.\d+)/,
+	function(str, p1, p2, p3) {
+		return number_format(p1) + "," + p2 + ""
+		+ p3;
+	});
 }
 
 }
@@ -187,25 +176,24 @@ $('.deal_length')
 		var deal_price_split = deal_price.replace(
 			/,/g, '');
 
-		deal_info[deal_id] = {};
-		deal_info[deal_id]['deal'] = {};
-		deal_info[deal_id]['deal']['deal_id'] = deal_id;
-		deal_info[deal_id]['deal']['qty'] = deal_qty;
-		deal_info[deal_id]['deal']['option_price_sale'] = deal_price_split;
-		deal_info[deal_id]['deal']['price_ship'] = '2500';
-		deal_info[deal_id]['deal']['ship_price_type'] = '1';
-	});
-<% end %> 
-<!--basket js end-->
-<hr>
-<div>
-	<div class="row">
-		<div class="col-lg-4 col-lg-offset-4">
-			<span><a href="/" class="btn btn-default btn-lg">쇼핑계속하기</a></span>
-			<span><%= link_to '전체구매하기', new_purchase_path(:cart_id => current_user.cart.id) ,class:'btn btn-warning btn-lg'  %></span>
+			deal_info[deal_id] = {};
+			deal_info[deal_id]['deal'] = {};
+			deal_info[deal_id]['deal']['deal_id'] = deal_id;
+			deal_info[deal_id]['deal']['qty'] = deal_qty;
+			deal_info[deal_id]['deal']['option_price_sale'] = deal_price_split;
+			deal_info[deal_id]['deal']['price_ship'] = '2500';
+			deal_info[deal_id]['deal']['ship_price_type'] = '1';
+		});
+		<% end %>
+		<!--basket js end-->
+		<hr>
+		<div>
+			<div class="row">
+				<div class="col-lg-4 col-lg-offset-4">
+					<span><a href="/" class="btn btn-default btn-lg">쇼핑계속하기</a></span>
+					<span><%= link_to '전체구매하기', new_purchase_path(:cart_id => current_user.cart.id) ,class:'btn btn-warning btn-lg'  %></span>
+				</div>
 			</div>
 		</div>
-		
 	</div>
-</div>
 </div>

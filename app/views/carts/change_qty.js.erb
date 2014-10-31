@@ -1,6 +1,4 @@
-
-
-
-$("#quantity-<%= @cart_item.id %>").html("<%=@cart_item.quantity%>")
-$("#price_wrap").html("<h1>주문금액 : <%=@cart.total %> 원  + 배송비 : 2500원 total : <%=@cart.total + 2500 %> 원 </h1>")
-$("#price-<%=@cart_item.id %>").html("<%= @cart_item.quantity * @product.price  %>")
+$("#quantity-<%= @cart_item.id %>").val("<%=@cart_item.quantity%>")
+call_display_price();
+/*$("#price_wrap").html("<h1>주문금액 : <%=@cart.total %> 원  + 배송비 : 2500원 total : <%=@cart.total + 2500 %> 원 </h1>")*/
+/*$("#price-<%=@cart_item.id %>").html("<%= @cart_item.quantity * @product.price  %>")*/

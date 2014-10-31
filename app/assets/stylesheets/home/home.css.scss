@@ -188,8 +188,52 @@
 	background-color:#428bca;
 	position: absolute;
 	width: 100%;
+	height: 54px;
 }
 .btn_mail>ul>li{
 	width: 50%;
+	text-align: center;
 	position: relative;
+	vertical-align: middle;
+}
+.btn_mail>ul>li>h2>a>strong{
+	color: #fff;
+}
+
+
+.conversation_list { position: relative;
+  .conversation_list_ul {
+    position: relative;
+    .conversation_list_item:nth-child(even){
+    	background-color: rgba(60,120,190,0.5);
+    }
+    .conversation_list_item { 
+    	clear: both;
+    	height: 50px;
+    	  div {
+        float: left;
+        width: calc(100% - 50px); height: 50px;
+        padding: 0; margin: 0;
+        outline: 0; border: 0;
+        background: transparent;
+        text-indent: 5px;
+        margin-top: 3px;
+        position: absolute;
+      }
+      ol { float: right;
+        li {
+          cursor: pointer;
+          float: left;
+          width: 50px; height: 50px;
+          font-size: 20pt;
+          line-height: 50px;
+          text-align: center;
+          a{
+          	color: #000;
+          	margin-top: 10px;
+          }
+        }
+      }
+    }
+  }
 }

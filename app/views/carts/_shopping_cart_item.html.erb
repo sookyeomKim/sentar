@@ -2,9 +2,10 @@
 <tr class='deal_length' data-deal_id="<%= shopping_cart_item.item.id%>"
 	data-deal_qty="<%= shopping_cart_item.quantity%>"
 	data-deal_price='<%=number_with_delimiter shopping_cart_item.item.price %>'>
-	<input type="checkbox" name="opt[selected][]"
+	<!-- <td><input type="checkbox" name="opt[selected][]"
 		data-deal_id="<%= shopping_cart_item.item.id%>" class="sub_checkbox"
-		value="" point_benefit="0" checked="checked" hidden='true'>
+		value="" point_benefit="0" checked="checked"></td> -->
+
 	<td class="left_text_align">
 		<div class="media">
 			<a class="pull-left" href="#"> <%= image_tag shopping_cart_item.item.picture,size:'60x60'%>
@@ -15,8 +16,7 @@
 				</div>
 				<div class="vertical_array_menu">
 					<ul>
-						<li><a href="" class="btn btn-default btn-xs">옵션변경/추가</a></li>
-						<li><span><strong>[옵션1]</strong></span> <span>개당 : <%=shopping_cart_item.item.price  %> <strong
+						<li><span><strong>[옵션1]</strong></span> <span>개당 : <strong
 								class="apop_price"
 								data-deal_id="<%= shopping_cart_item.item.id%>"></strong>원
 						</span></li>
@@ -26,25 +26,31 @@
 		</div>
 	</td>
 	<td>
-		<div>
-
-			<div id = 'quantity-<%=shopping_cart_item.id %>'>
-			<%= shopping_cart_item.quantity %>	
-			</div>
-			
-			<%= link_to("▲", change_qty_path(id: shopping_cart_item.item.id, :type => "up") , method: :post , remote: :true) %>
-								<%= link_to("▼", change_qty_path(id: shopping_cart_item.item.id, :type => "down") , method: :post , remote: :true) %>
-				
-				
+		<div class="horizon_array_menu_h change_qty_btn">
+			<ul>
+				<li >
+					<input type="text" readonly="true" name="opt[qty][]" id = 'quantity-<%=shopping_cart_item.id %>'
+						data-deal_id="<%= shopping_cart_item.item.id%>" value="<%= shopping_cart_item.quantity%>" title="수량">
+				</li>
+				<li >
+					<div class="vertical_array_menu">
+						<ul>
+							<li>
+						<%= link_to("▲", change_qty_path(id: shopping_cart_item.item.id, :type => "up") , method: :post , remote: :true) %>
+							</li>
+							<li>
+						<%= link_to("▼", change_qty_path(id: shopping_cart_item.item.id, :type => "down") , method: :post , remote: :true) %>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
 		</div>
-		<!-- <div>
-			<a class="btn btn-default btn-sm qty_change"
-				data-deal_id="<%= shopping_cart_item.item.id%>">변경</a>
-		</div> -->
 	</td>
 	<td>
 		<div>
-			<span id = 'price-<%=shopping_cart_item.id %>'><%= shopping_cart_item.quantity * shopping_cart_item.price  %></span>원
+			<span><strong class="total_price"
+				data-deal_id="<%= shopping_cart_item.item.id%>"></strong>원</span>
 		</div>
 	</td>
 	<td>
@@ -58,12 +64,11 @@
 
 	<td>
 		<div class="buy_order_btn">
-
-			<%= link_to '구매하기', new_purchase_path(:id => shopping_cart_item.item.id, :order => 'goods', quantity: shopping_cart_item.quantity  ),class:'btn btn-default'  %>
+			<a href="purchases/new?id=<%= shopping_cart_item.item.id%>" class="btn btn-warning btn-xs">주문하기</a>
 		</div>		
 		<div class="buy_order_btn">
 			<%= link_to "제거", { action: "destroy", id: shopping_cart_item.item.id},
-                                method: :delete, data: { confirm: "Are you sure?" },class:'btn btn-default btn-xs' %>
+                                method: :delete, data: { confirm: "장바구니에서 제거하시겠습니까??" },class:'btn btn-default btn-xs' %>
 		</div>
 	</td>
 </tr>
