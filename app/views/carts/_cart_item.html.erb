@@ -1,0 +1,8 @@
+
+<%= link_to("▲", change_qty_path(id: @cart_item.item.id, :type => "up") , method: :post , remote: :true) %>
+<%= link_to("▼", change_qty_path(id: @cart_item.item.id, :type => "down") , method: :post , remote: :true) %>
+
+
+
+
+

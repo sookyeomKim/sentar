@@ -27,11 +27,16 @@
 	<tbody>
 		<%if params[:order] == 'goods'  %>
 		<tr>
+			<% unless params[:quantity] %>
+			<% @purchase.total_cost = @product.price %>
+			<% @purchase.quantity = 1 %>
+			<% end %>
+			
 			<td><span><%= image_tag @product.picture.url , size: "50x50" if @product.picture?%></span></td>
 			<td><span><%=@product.name %></span></td>
-			<td><span>1</span></td>
-			<td><span><strong><%=@product.price  %></strong>원</span></td>
-			<legend>총 가격 <%= @product.price %></legend>
+			<td><span><%= @purchase.quantity %></span></td>
+			<td><span><strong><%=@purchase.total_cost  %></strong>원</span></td>
+			<legend>총 가격 <%= @purchase.total_cost %></legend>
 		</tr>
 		<% else %>
 		<%= f.hidden_field :ordertype, class: 'form-control', value: 'cart'  %>
