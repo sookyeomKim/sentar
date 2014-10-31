@@ -12,10 +12,7 @@
 					$(".qty_change").click(function(event) {
 						deal_id = $(event.currentTarget).attr('data-deal_id');
 					});
-	
-	
 					$("#modi_submit_btn").click(function(t){
-						
 						var input_qty = $("#input_qty").val();
 						$('input[name="opt[qty][]"][data-deal_id="'+deal_id+'"]').val(input_qty);
 						call_display_price();
