@@ -1,5 +1,25 @@
 <div class="row">
 	<div class="col-lg-6">
+		<div class="panel">
+			<div class="panel-heading" >
+				<div  class="horizon_array_menu_h btn_mail">
+					<ul>
+						<li>	<h2><a href="#btn_inbox" data-toggle="tab"><strong>받은 편지함</strong></a></h2></li>
+						<li>	<h2><a href="#btn_sentbox" data-toggle="tab"><strong>보낸 편지함</strong></a></h2></li>
+					</ul>
+				</div>		
+			</div>
+			<div class="panel-body">
+				<div class="tab-content" style="padding:0 !important;">
+					<div class="tab-pane fade active in" id="btn_inbox">
+						<ul><%= render 'inbox' %></ul>
+					</div>
+					<div class="tab-pane fade" id="btn_sentbox">
+						<ul><%= render 'sentbox' %></ul>						
+					</div>
+				</div>
+			</div>
+		</div>
 		<h2>받은 편지함</h2>
 		<ul><%= render 'inbox' %></ul>
 		<h2>보낸 편지함</h2>
@@ -12,12 +32,15 @@
 
 	<div class="col-lg-6">
 		<div class="panel" id="arcodian">
-			<div class="panel-heading">
-				<h2 class="accordion-toggle"data-toggle="collapse" data-parent="#accordion" href="#friend_list" style="cursor:pointer;"><strong>친구목록</strong></h2>
+			<div class="panel-heading" style="background-color:#777;">
+						<h2 class="accordion-toggle"data-toggle="collapse" data-parent="#accordion" href="#friend_list" style="cursor:pointer; text-align:center;"><strong>친구목록</strong></h2>
 			</div>
 			<div>
 			<% if current_user.following.any? %>
 			<ul id="friend_list" class="message_friends_wrap panel-collapse collapse">
+				<li>
+					<p class="text-danger">이메일을 클릭하세요.</p>
+				</li>
 				<%= render current_user.following %>
 			</ul>
 			<% end %>
@@ -58,7 +81,7 @@
 
 				<%= f.button '보내기', class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
 				<%= f.button '초기화'	, type: :reset, class: 'btn btn-danger' %><!--입력되어진대로 제출한다.-->
-				<%= link_to '뒤로', conversations_path,class:'btn btn-primary'%>
+				<!--<%= link_to '뒤로', conversations_path,class:'btn btn-primary'%>-->
 				<% end %>
 			</div>
 		</div>

@@ -58,6 +58,8 @@ end
 
   resource :cart
 
+  post 'cart/change_qty', to: 'carts#change_qty'
+
   get    'myproduct'    => 'products#myindex'
   resources :products
   

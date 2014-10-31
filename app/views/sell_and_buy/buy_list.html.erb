@@ -182,7 +182,7 @@
 					
 					<!-- 교택님이 수정한 부분 -->
 					<% @purchases.each do |purchase| %> 
-					 <% unless purchase.product.nil? %>
+					 <% unless (purchase.product.nil? ||  purchase.status == 5) %>
 					 <tr>
 						
 							<td>
@@ -219,8 +219,8 @@
 							
 							</div>
 							<div class="buy_order_btn">
-								<% if purchase.status = 0 %>
-								<%= link_to "즉시취소", cancel_path(id:purchase.id)  , class:'btn btn-warning' ,method: :post%>
+								<% if purchase.status == 0 %>
+								<%= link_to "즉시취소", cancel_path(id:purchase.id)  ,data: { confirm: '주문을 취소하실건가요?' }, class:'btn btn-warning' ,method: :post%>
 								<% end %>
 							</div></td>
 						</tr>

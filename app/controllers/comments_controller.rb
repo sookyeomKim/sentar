@@ -25,12 +25,14 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+
     @comment = Comment.new(comment_params)
+    @micropost = @comment.micropost
     store_location
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_back_or @comments}
+        format.html { redirect_back_or root_path}
         # format.json { render :show, status: :created, location: @comment }
         format.js
       else

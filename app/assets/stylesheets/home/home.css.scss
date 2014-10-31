@@ -172,3 +172,24 @@
 .message_friends_wrap{
 	list-style: none;
 }
+/* 
+.btn_mail:hover{
+	
+}
+.btn_mail>h2>a{
+	color: #fff;
+	text-align: center !important;
+}
+.btn_mail>h2>a:hover{
+	color: #bbb;
+} */
+
+.btn_mail>ul{
+	background-color:#428bca;
+	position: absolute;
+	width: 100%;
+}
+.btn_mail>ul>li{
+	width: 50%;
+	position: relative;
+}

@@ -38,8 +38,10 @@
     
     unless @order_info.ordertype == 'cart'
     @purchase = @order_info
+    set_rest
     respond_to do |format|
       if @purchase.save
+        
         # format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
         format.html { redirect_to order_ok_path(type: 'goods', id:@purchase.id)}
         format.json { render :show, status: :created, location: @purchase }
@@ -59,6 +61,7 @@
       @purchase.phone = order_info.phone
       @purchase.memo = order_info.memo
       @purchase.ordertype = 'cart'
+      set_rest
       @purchase.save
     end
    
@@ -84,7 +87,7 @@
 
 
     @purchase = Purchase.find(params[:id])
-      @purchase.update_attribute(:status, 5)
+    @purchase.update_attribute(:status, 5)
    redirect_to buy_list_path
 
   end
@@ -128,7 +131,8 @@
        params.require(:purchase).permit(:product_id, :user_id, :receive_name, :addr, :phone, :memo, :total_cost, :trade_type, :payer, :status, :ship_cost, :ship_company, :trans_num, :quantity, :ordertype)
      
     end
-    def set_statsu
+    def set_rest
       @purchase.status = 0
+      @purchase.owener_id = @purchase.product.user_id
     end
 end
