@@ -47,10 +47,9 @@ class ProductsController < ApplicationController
 
   	def destroy	
   	@product.update_attribute(:user_id, nil)
-  	@cart_items = CartItem.where(item_id: @product.id)
-  	@cart_items.each  do |item|
-  		item.destroy
-  	end
+  CartItem.rm_product_incart(@product)
+
+  
   	redirect_to products_path	
   	end
 

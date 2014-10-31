@@ -1,0 +1,21 @@
+
+											
+											<li class="left clearfix">
+												<% @user = User.find_by(name: comment.user_name)||current_user  %>
+												<span class="chat-img pull-left"> <%= gravatar_for @user , size: 50   ,class:'img-circle'%></span>
+												<div class="chat-body clearfix">
+													<div class="header">
+														<strong class="primary-font"> <%= comment.user_name %> </strong>
+														<small class="pull-right text-muted">
+															<%if current_user?(@user)%>					
+															<%= link_to '삭제', comment_path(comment), method: :delete, data: { confirm: '댓글 삭제?' },class:'btn btn-default btn-xs' %>
+															<% end %>
+															<i class="icon-time"></i> <%=time_ago_in_words(comment.created_at)%> ago </small>
+														</div>
+														<br>
+														<p>
+															<%= comment.content %>
+														</p>
+													</div>
+												</li>
+										

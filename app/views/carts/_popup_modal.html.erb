@@ -2,26 +2,43 @@
 <!-- <iframe src="popup" frameborder="0"></iframe> -->
 <div>	
 	<input type="text" id="input_qty"class="form-control" placeholder="수량입력" value="">
-	<a id="modi_submit_btn"class="btn btn-primary btn-sm btn-line">수량수정</a>	
+	<a id="modi_submit_btn"class="btn btn-primary btn-sm btn-line">수량수정 </a>	
 </div>
 </div>
 <script type="text/javascript">
 	var modi_submit_btn = function() {
 		var deal_id;
 
+
 					$(".qty_change").click(function(event) {
 						deal_id = $(event.currentTarget).attr('data-deal_id');
+
+
+
 					});
 	
 	
 					$("#modi_submit_btn").click(function(t){
+
+						
 						
 						var input_qty = $("#input_qty").val();
+						
+						$.ajax({
+  						 url:'/cart/change_qty', 
+   						data:(
+     					'id=' + deal_id + '&' +
+     					'qty=' + input_qty
+  								)
+						})
 						$('input[name="opt[qty][]"][data-deal_id="'+deal_id+'"]').val(input_qty);
 						call_display_price();
 						$("#popup_modal_wrap").hide();
 					});				
+			
+
+
 			}
 	$(modi_submit_btn);
-	$(document).on('page:change', modi_submit_btn);
+	$(document).on('page:change', modi_submit_btn 	);
 </script>

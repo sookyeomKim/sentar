@@ -1,3 +1,18 @@
-$("#chat_comment").html('<%= render('comments/chat') %>')
 
 
+
+$("#comment-2").html("asdfasdfasdfasdf")
+
+$<%= render @comment  %>
+
+
+
+<% if @comment.errors.size == 0 %>
+ $({'<%= render 'comments/comment' %>'}).appendTo($("#comment-<%= @micropost.id%>")).hide().fadeIn('fast')
+<% else %>
+
+alert("Please submit after commenting...")
+
+<%end%>
+
+$("#followers").html('<%= @user.followers.count %>')

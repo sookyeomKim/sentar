@@ -1,14 +1,10 @@
 class Purchase < ActiveRecord::Base
 	belongs_to :user
 	belongs_to  :product
-  before_save :set_purchase
+  
+  
 
-
-  def set_purchase
-  	self.status = 0
-  	self.owener_id = self.product.user_id
-  	
-  end
+  
 
 
 
@@ -30,7 +26,7 @@ class Purchase < ActiveRecord::Base
 end
 
 def cancel_order
-update_attribute(:status, 5)
+self.update_attributes!(:status, 5)
 end
 
 

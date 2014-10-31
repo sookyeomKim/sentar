@@ -12,12 +12,31 @@ class CartsController < ApplicationController
   def show
   end
 
+
+
+  def change_qty
+   id = params[:id]
+   qty = params[:qty]
+   
+   @cart = current_user.cart
+   @product = Product.find(id)
+   @cart.add(@product, 99)
+
+
+   respond_to do |format|
+      format.js #make_a_change.js.erb
+   end
+end
+
+
   def destroy
   @product = Product.find(params[:id])
-  @amount = params[:amount]
-   # flash[:success] = "#{@product.id}????"
-  # @cart.remove(@product, @amount.to_i)
-  @cart.remove(@product)
+  # @amount = params[:amount]
+  #  # flash[:success] = "#{@product.id}????"
+  # # @cart.remove(@product, @amount.to_i)
+  # @cart.remove(@product)
+
+  CartItem.rm_product_incart(@product)
    redirect_to cart_path
  
 
@@ -33,5 +52,7 @@ class CartsController < ApplicationController
      @cart = Cart.find_by(user_id: @user.id) || Cart.create(user_id: @user.id)
   end
 
- 
+ def update
+   
+ end
 end
