@@ -1,18 +1,7 @@
 /*
 *common
 */
-@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800');
 
-$dark: #222; $light: #FFF;
-
-*, *:before, *:after { box-sizing: border-box; }
-body { background: $dark; }
-body, input {
-  font-family: 'Open Sans', sans-serif;
-  text-align: justify;
-  line-height: normal;
-  font-smoothing: antialiased;
-}
 li{
 	list-style:none;
 }
