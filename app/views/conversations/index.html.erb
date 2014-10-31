@@ -9,29 +9,31 @@
 			</div>	
 			<div class="" style="padding:0 !important;margin-top:54px;">
 				<div class="fade active in" id="btn_inbox">
-					<ul>
-						<%@mailbox.inbox.each do |conversation| %>
-						<li class="conversation_list_item">
-							<div class="vertical_array_menu c_l_item_subject">
-								<ul>
+					<div class="conversation_list">
+						<ul class="conversation_list_ul">
+							<%@mailbox.inbox.each do |conversation| %>
+							<li class="conversation_list_item">
+								<div class="vertical_array_menu c_l_item_subject">
+									<ul>
+										<li>
+											<strong>
+												<%= link_to conversation.subject+'님과의 대화', conversation_path(conversation),style:'width:100%;height:25px;position:absolute;color:#000;'%>
+											</strong>
+										</li>
+										<li>
+											<%= link_to conversation.subject, conversation_path(conversation),style:'width:100%;position:absolute;top:25px;height:25px;color:#666'%>
+										</li>
+									</ul>
+								</div>
+								<ol>
 									<li>
-										<strong>
-											<%= link_to conversation.subject+'님과의 대화', conversation_path(conversation),style:'width:100%;height:25px;position:absolute;color:#000;'%>
-										</strong>
+										<%= link_to "", trash_conversation_path(conversation),data: { confirm: "휴지통으로 버리시겠습니까?" } ,method: :post,class:'fa fa-trash' %>
 									</li>
-									<li>
-										<%= link_to conversation.subject, conversation_path(conversation),style:'width:100%;position:absolute;top:25px;height:25px;color:#666'%>
-									</li>
-								</ul>
-							</div>
-							<ol>
-								<li>
-									<%= link_to "", trash_conversation_path(conversation),data: { confirm: "휴지통으로 버리시겠습니까?" } ,method: :post,class:'fa fa-trash' %>
-								</li>
-							</ol>
-						</li>
-						<% end %>
-					</ul>
+								</ol>
+							</li>
+							<% end %>
+						</ul>
+					</div>
 				</div>
 				<div class="fade" id="btn_sentbox">
 					<div class="conversation_list">
