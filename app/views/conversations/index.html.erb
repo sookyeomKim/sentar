@@ -1,11 +1,68 @@
+<div class="row">
+	<div class="col-lg-6">
+		<h2>받은 편지함</h2>
+		<ul><%= render 'inbox' %></ul>
+		<h2>보낸 편지함</h2>
+		<ul><%= render 'sentbox' %></ul>
+		<h2>휴지통</h2>	
+		<ul><%= render 'trash' %></ul>
 
-<h1>메세지</h1>
-<h2>받은 편지함</h2>
-<ul><%= render 'inbox' %></ul>
-<h2>보낸 편지함</h2>
-<ul><%= render 'sentbox' %></ul>
-<h2>휴지통</h2>	
-<ul><%= render 'trash' %></ul>
+<!-- <%=link_to "메세지보내기", new_conversation_path %> -->
+	</div>
+
+	<div class="col-lg-6">
+		<div class="panel" id="arcodian">
+			<div class="panel-heading">
+				<h2 class="accordion-toggle"data-toggle="collapse" data-parent="#accordion" href="#friend_list" style="cursor:pointer;"><strong>친구목록</strong></h2>
+			</div>
+			<div>
+			<% if current_user.following.any? %>
+			<ul id="friend_list" class="message_friends_wrap panel-collapse collapse">
+				<%= render current_user.following %>
+			</ul>
+			<% end %>
+		</div>
+		<%= javascript_tag do %>
+		$('.user_email').on('click',function(event){
+			var form_val = $('#recipients_form').val();
+			var form_val_split =form_val.split(',');
+			var form_val_split_length = form_val_split.length;
+			var current_user_email = $(event.currentTarget).html();
+			for(var i=0; i<form_val_split_length;i++){
+				if(form_val===''){
+				$('#recipients_form').val($('#recipients_form').val()+current_user_email);
+				}else{
+					if(form_val_split[i]===current_user_email){
+						alert("이미 추가하셨습니다.")
+						return;
+					}else{
+						if(form_val_split_length==i+1){
+							$('#recipients_form').val($('#recipients_form').val()+','+current_user_email);
+						}					
+					}
+				}
+			}
+		});
+		<% end %>
+		<div class="tab-content">
+			<div  class="tab-pane active">
+				<%= form_for(:conversation, url: :conversations, method: :post) do |f| %>
+				<%= f.label :recipients,'받는사람' %>
+				<%= f.text_field :recipients,class:"form-control",id:'recipients_form' %>
+
+				<%= f.label :subject,'제목' %>
+				<%= f.text_field :subject,class:"form-control" %>
+
+				<%= f.label :body, class: "checkbox inline"  %>
+				<%= f.text_field :body,class:"form-control" %>         
+
+				<%= f.button '보내기', class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
+				<%= f.button '초기화'	, type: :reset, class: 'btn btn-danger' %><!--입력되어진대로 제출한다.-->
+				<%= link_to '뒤로', conversations_path,class:'btn btn-primary'%>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
 
 
-<%=link_to "메세지보내기", new_conversation_path %>

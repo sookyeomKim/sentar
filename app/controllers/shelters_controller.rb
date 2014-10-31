@@ -1,6 +1,7 @@
 class SheltersController < ApplicationController
   before_action :set_shelter, only: [:show, :edit, :update, :destroy, :create]
   before_action :set_user
+  before_action :mailbox
   #before_action :set_tmap, only: [:index, :show, :edit, :update, :destroy]
   
 
@@ -20,6 +21,7 @@ end
   def show
  @shelter = Shelter.find(params[:id])
  @user = @shelter.user
+ @mailbox ||= current_user.mailbox
   end
 
 
@@ -87,7 +89,9 @@ end
 
 
   private
-
+   def mailbox
+    @mailbox ||= current_user.mailbox
+    end
 
     def set_user
       #@user = current_user

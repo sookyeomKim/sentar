@@ -5,7 +5,7 @@
 	<a id="modi_submit_btn"class="btn btn-primary btn-sm btn-line">수량수정 </a>	
 </div>
 </div>
-<script type="text/javascript">
+<%= javascript_tag do %>
 	var modi_submit_btn = function() {
 		var deal_id;
 
@@ -40,5 +40,9 @@
 
 			}
 	$(modi_submit_btn);
+
 	$(document).on('page:change', modi_submit_btn 	);
 </script>
+
+<% end %>
+

@@ -11,10 +11,12 @@ class UsersController < ApplicationController
   
   
   def index
+    @mailbox ||= current_user.mailbox
     @users = User.paginate(page: params[:page])
   end
   
   def show
+    @mailbox ||= current_user.mailbox
     @user =  User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
     @comment = Comment.new
@@ -74,7 +76,6 @@ def create
   end
 
   private
-
     def user_params #strong parameters rails4.0 부터 필요함
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
