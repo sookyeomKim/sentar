@@ -16,12 +16,17 @@
   # GET /purchases/new
   def new
     order = params[:order]
-    if order == 'goods'
+    if order == 'goods' 
     @product = Product.find(params[:id])
     @purchase = @product.purchases.new(user_id: current_user.id, total_cost: @product.price)
-    
+    if (quantity = params[:quantity].to_i)
+      @purchase.quantity = quantity
+      @purchase.total_cost *= quantity
+    end
+  
 
-  else
+    else
+
     @purchase = Purchase.new
     end
     

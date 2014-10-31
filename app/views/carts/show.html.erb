@@ -8,8 +8,8 @@
 				<table class="table table-hover basket_table">
 					<thead>
 						<tr>
-							<td><input type="checkbox" id="total_checkbox"
-								checked="checked"></td>
+							<!-- <td><input type="checkbox" id="total_checkbox"
+								checked="checked"></td> -->
 								<td>상품/옵션정보</td>
 								<td>수량</td>
 								<td>상품금액</td>
@@ -44,10 +44,8 @@
 				<!--상품리스트 js end-->
 				<%=render 'popup_modal'%>
 				<hr>
-				<div class="price_wrap">
-					<span>주문금액</span><span id="total_price_org"></span><span>+</span><span>배송비</span><span
-					class="total_ship_price"></span><span>=</span><span>결제예정금액</span><span
-					id="total_price"></span>
+				<div class = "price_wrap" , id="price_wrap">
+					<h1>주문금액 : <%=@cart.total %> 원  + 배송비 : 2500원 total : <%=@cart.total + 2500 %> 원 </h1>
 				</div>
 				<!--basket end-->
 

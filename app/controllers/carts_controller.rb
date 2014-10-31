@@ -17,16 +17,25 @@ class CartsController < ApplicationController
 
   def change_qty
    id = params[:id]
-   qty = params[:qty]
-   
    @cart = current_user.cart
-   @product = Product.find(id)
-   @cart.add(@product, 99)
+   @product = Product.find(params[:id])
+   @cart_item = current_user.cart_items.find_by(item_id: params[:id])
+   if(params[:type] == 'up')
+   @cart.add(@product, @product.price)
+   @cart_item = current_user.cart_items.find_by(item_id: params[:id])
+   else
+    if(@cart_item.quantity > 1 )
+    @cart.remove(@product)
+    @cart_item = current_user.cart_items.find_by(item_id: params[:id])
+    end
+  end
 
+   # @total = cart.cart_items.find(item_id: @product.id).quantity
 
    respond_to do |format|
-      format.js #make_a_change.js.erb
-   end
+      format.html { redirect_to cart_path}
+      format.js
+    end
 end
 
 
