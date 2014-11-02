@@ -2,6 +2,10 @@ class CartsController < ApplicationController
   before_filter :extract_shopping_cart
   before_action :mailbox
 
+
+
+  attr_accessor :quantity
+
   def create
      @product = Product.find(params[:id])
     #@product = Product.first
