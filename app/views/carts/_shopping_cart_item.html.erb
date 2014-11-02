@@ -36,10 +36,10 @@
 					<div class="vertical_array_menu">
 						<ul>
 							<li>
-						<%= link_to("▲", change_qty_path(id: shopping_cart_item.item.id, :type => "up") , method: :post ) %>
+						<%= link_to("▲", change_qty_path(id: shopping_cart_item.item.id, :type => "up") , method: :post ,remote: :true) %>
 							</li>
 							<li>
-						<%= link_to("▼", change_qty_path(id: shopping_cart_item.item.id, :type => "down") , method: :post) %>
+						<%= link_to("▼", change_qty_path(id: shopping_cart_item.item.id, :type => "down") , method: :post, remote: :true) %>
 							</li>
 						</ul>
 					</div>
