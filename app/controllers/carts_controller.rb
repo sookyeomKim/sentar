@@ -32,7 +32,8 @@ class CartsController < ApplicationController
     
    end
 
-   @cart_item = current_user.cart_items.find_by(item_id: id)
+   @cart_item = CartItem.where(owner_id = current_user.id , item_id = @product.id)
+   #current_user.cart_items.find_by(item_id: id)
 
    respond_to do |format|
       format.html { redirect_to cart_path}
