@@ -1,81 +1,26 @@
-<h2><%= params[:bulletin_id] %></h2>
-<div style='position: absolute;right:45%;top:0;'>
-  <%= link_to '뒤로', shelter_bulletins_path(current_user.shelter), class: 'btn btn-default btn-lg' %>
-  <%= link_to '새글쓰기', new_bulletin_post_path, class: 'btn btn-default btn-lg'%>
-</div>
-<div class="container">
-  <div class="col-lg-8 col-lg-offset-2 well"style="margin-top:50px;">
-    <div class="panel-group" id="arcodian">
+<div class="container"style="margin-top:5px;">
+  <h1><%= params[:bulletin_id] %></h1>
+  <div style='position: absolute;right:0;top:0;'>
+    <%= link_to '뒤로', shelter_bulletins_path(current_user.shelter), class: 'btn btn-default btn-lg' %>
+    <%= link_to '새글쓰기', new_bulletin_post_path, class: 'btn btn-default btn-lg'%>
+  </div>
+  <div class="col-lg-12"style="margin-top:10px;">
+    <div class=" dadan_2">
       <% @posts.each do |post| %>
-      <div class="panel panel-default">
-      <div class="media blog_list_item" id="">
+      <div class="media post_list_item">
         <a class="pull-left" href=""> <!--img-->  </a>   
         <div class="media-body">
           <h4 class="media-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse2" target="">
-              <%= post.title %>
-            </a>
+            <strong><%= link_to post.title, [post.bulletin, post]%></strong>
             <span class="blog_timestamp">
-              <%= link_to 'Show', [post.bulletin, post], class:'btn btn-default' %>
-              <strong><%= link_to '', edit_bulletin_post_path(post.bulletin, post), class:'fa fa-cog',style:'color:#fff;'%></strong>
-              <strong><%= link_to '', [post.bulletin, post], method: :delete, data: { confirm: '사진을 삭제하시겠습니까?' }, class:'fa fa-times',style:'color:#fff;'%></strong> 
+              <span><i class="fa fa-comment"></i></span>
+              <span><%= post.commentboards.size %></span>
+              <%= link_to '', edit_bulletin_post_path(post.bulletin, post), class:'fa fa-cog'%>
+              <%= link_to '', [post.bulletin, post], method: :delete, data: { confirm: '사진을 삭제하시겠습니까?' }, class:'fa fa-times'%>
             </span>            
           </h4>
-          <a href="" target="">수교미</a>
-          <div>                             
-            <span class="blog_timestamp" style="font-size:10px;">less than a minute ago</span>
-          </div>
-          <div>
-            <span><strong><i class="fa fa-comment"></i></strong></span>
-            <span><%= post.commentboards.size %></span>            
-          </div>               
-        </div>
-      </div>
-
-      
-      <div id="collapse2" class="panel-collapse collapse">
-        <div class="panel-body">
-          <div>
-                
-          </div>
-          <div>
-            허ㅡㅓㅡ
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="comment_wrap">
-                <div class="chat-panel panel panel-default">
-                  <!--댓글 wrap head 김수겸 14_09_15-->
-                  <div class="panel-heading">
-                    <i class="fa fa-comments"></i>
-                    <div class="horizon_array_menu_h comment_menu">
-
-                    </div>
-                  </div>
-                  <!--댓글 wrap head end-->
-
-                  <!--댓글 wrap body 김수겸 14_09_14-->
-                  <div class="panel-body" ,id="chat_comment">
-                    <ul class="chat">
-                      </ul>
-                    </div>
-                    <!--댓글 wrap body end-->
-
-                    <!--댓글 wrap footer 김수겸 14_09_14-->
-                    <div class="panel-footer">
-                      <div class="input-group">
-                        <span class="input-group-btn">
-
-                        </span>
-                      </div>
-                    </div>
-                    <!--댓글 wrap footer end-->
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          여기 이름 넣어야 해
+          <span class="blog_timestamp" style="font-size:10px;"><%=time_ago_in_words(post.created_at)%> ago</span>
         </div>
       </div>
       <% end %>

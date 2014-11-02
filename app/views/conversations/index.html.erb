@@ -12,19 +12,11 @@
 					<div class="conversation_list">
 						<ul class="conversation_list_ul">
 							<%@mailbox.conversations.each do |conversation| %>
-
-
 							<li class="conversation_list_item">
-
-
 								<div class="vertical_array_menu c_l_item_subject">
 									<ul>
-										
 										<li>
 											<strong>
-
-												<%=link_to gravatar_for(conversation.last_sender,size:45), conversation.last_sender %>  
-
 												<%= link_to participants_name(conversation), conversation_path(conversation),style:'width:100%;height:25px;position:absolute;color:#000;'%>
 											</strong>
 										</li>
@@ -34,6 +26,9 @@
 									</ul>
 								</div>
 								<ol>
+									<li>
+										<%=link_to gravatar_for(conversation.last_sender,size:50), conversation.last_sender%>
+									</li>
 									<li>
 										<%= link_to "", trash_conversation_path(conversation),data: { confirm: "휴지통으로 버리시겠습니까?" } ,method: :post,class:'fa fa-trash' %>
 									</li>
