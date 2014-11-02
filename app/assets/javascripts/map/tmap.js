@@ -38,74 +38,12 @@ var initialize = function () {
     shelterLoader();
     /*tmap poi method*/
     $("#sentar_search").on("click", function () { //Poi매서드, 쉘터를 Poi를 이용해 띄워주자
-        var selected_option = $("#poi_select option:selected").val();
-        if (selected_option == 0) {
-
-            tData = new Tmap.TData(); //response parameter를 *respnse parameter:sk서버내에 저장되어있는 map정보를 핸들링해줌
-            /*가져온 데이터를 어떻게 처리할지 결정*/
-            /*마크업에서의 검색값 */
-            var searchText = $('#searchText').val();
-            /*한글깨짐방지*/
-            var encodingSearchText = encodeURIComponent(searchText);
-
-            tData.events.register("onComplete", tData, onCompleteLoadGetPOIDataFromSearch); /*tData를 이용하여 oncompleete(100%)됐을 때 onCompleteLoadGetPOIDataFromSearch이용하여 처리*/
-            tData.events.register("onProgress", tData, onProgressLoadPoiData); /**/
-            tData.events.register("onError", tData, onErrorLoadPoiData);
-
-
-
-            if (searchText != '') { //검색값이 공백이 아닐 때
-                var options = {
-                    version: 1
-                };
-                /*poi관련된 값들을 처리해주는 method*/
-
-                tData.getPOIDataFromSearch(encodingSearchText, options);
-                $('#searchResult').css("display", "block");
-            } else {
-                alert('검색어 입력해라');
-            }
-        } else if (selected_option == 1) {
-            commerce_shelter_search();
-        } else if (selected_option == 2) {
-            blog_shelter_search();
-        }
+        sentar_search();
     });
     $( "#searchText" ).keypress(function( event ) {
       if ( event.which == 13 ) {
         event.preventDefault();
-         var selected_option = $("#poi_select option:selected").val();
-        if (selected_option == 0) {
-
-            tData = new Tmap.TData(); //response parameter를 *respnse parameter:sk서버내에 저장되어있는 map정보를 핸들링해줌
-            /*가져온 데이터를 어떻게 처리할지 결정*/
-            /*마크업에서의 검색값 */
-            var searchText = $('#searchText').val();
-            /*한글깨짐방지*/
-            var encodingSearchText = encodeURIComponent(searchText);
-
-            tData.events.register("onComplete", tData, onCompleteLoadGetPOIDataFromSearch); /*tData를 이용하여 oncompleete(100%)됐을 때 onCompleteLoadGetPOIDataFromSearch이용하여 처리*/
-            tData.events.register("onProgress", tData, onProgressLoadPoiData); /**/
-            tData.events.register("onError", tData, onErrorLoadPoiData);
-
-
-
-            if (searchText != '') { //검색값이 공백이 아닐 때
-                var options = {
-                    version: 1
-                };
-                /*poi관련된 값들을 처리해주는 method*/
-
-                tData.getPOIDataFromSearch(encodingSearchText, options);
-                $('#searchResult').css("display", "block");
-            } else {
-                alert('검색어 입력해라');
-            }
-        } else if (selected_option == 1) {
-            commerce_shelter_search();
-        } else if (selected_option == 2) {
-            blog_shelter_search();
-        }
+        sentar_search();
       }
     });
 };
@@ -278,7 +216,40 @@ function onErrorLoadPoiData() {
 
 }
 
+function sentar_search(){
+    var selected_option = $("#poi_select option:selected").val();
+        if (selected_option == 0) {
 
+            tData = new Tmap.TData(); //response parameter를 *respnse parameter:sk서버내에 저장되어있는 map정보를 핸들링해줌
+            /*가져온 데이터를 어떻게 처리할지 결정*/
+            /*마크업에서의 검색값 */
+            var searchText = $('#searchText').val();
+            /*한글깨짐방지*/
+            var encodingSearchText = encodeURIComponent(searchText);
+
+            tData.events.register("onComplete", tData, onCompleteLoadGetPOIDataFromSearch); /*tData를 이용하여 oncompleete(100%)됐을 때 onCompleteLoadGetPOIDataFromSearch이용하여 처리*/
+            tData.events.register("onProgress", tData, onProgressLoadPoiData); /**/
+            tData.events.register("onError", tData, onErrorLoadPoiData);
+
+
+
+            if (searchText != '') { //검색값이 공백이 아닐 때
+                var options = {
+                    version: 1
+                };
+                /*poi관련된 값들을 처리해주는 method*/
+
+                tData.getPOIDataFromSearch(encodingSearchText, options);
+                $('#searchResult').css("display", "block");
+            } else {
+                alert('검색어 입력해라');
+            }
+        } else if (selected_option == 1) {
+            commerce_shelter_search();
+        } else if (selected_option == 2) {
+            blog_shelter_search();
+        }
+}
 /**/
 function onCompleteLoadGetPOIDataFromSearch() {
     /*html공간선언*/
