@@ -2,15 +2,10 @@ class ConversationsController < ApplicationController
 
   before_action :correct_user , only: [:show]
   helper_method :mailbox, :conversation
-
-
-
-
-
-
   def index
     
    @mailbox ||= current_user.mailbox
+
  end
 
 
@@ -67,6 +62,14 @@ end
 def message_params(*keys)
   fetch_params(:message, *keys)
 end
+
+
+
+
+
+
+  
+
 
 def fetch_params(key, *subkeys)
   params[key].instance_eval do

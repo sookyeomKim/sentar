@@ -79,26 +79,18 @@
 
                                 <!--메세지-->
                                 <li class="dropdown">
-                                    <a class="dropdown-toggle"  data-toggle="dropdown" href="#"> <span class="label label-success">2</span> <i class="fa fa-envelope"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
+                                    <a class="dropdown-toggle"  data-toggle="dropdown" href="#"> <span class="label label-success"><%=current_user.mailbox.inbox.count %></span> <i class="fa fa-envelope"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
                                     <ul class="dropdown-menu dropdown-messages">
-                                    <%@mailbox.sentbox.each do |conversation| %>
+                                    <%current_user.mailbox.inbox.each do |conversation| %>
                                     <li style="margin-bottom: 20px;">
                                         <div class="message_wrap">
-                                            <span class="message_wrap_left"><%= link_to conversation.subject , conversation_path(conversation)%></span>
+                                            <span class="message_wrap_center"><%= link_to conversation.subject , conversation_path(conversation)%></span>
                                             <span class="message_wrap_right"><%= link_to "", trash_conversation_path(conversation), method: :post,class:'fa fa-trash' %></span>
                                         </div>
                                     </li>
                                     <li class="divider"></li>
                                     <% end %>
-                                    <%@mailbox.inbox.each do |conversation| %>
-                                    <li style="margin-bottom: 20px;">
-                                        <div class="message_wrap">
-                                            <span class="message_wrap_left"><%= link_to conversation.subject , conversation_path(conversation)%></span>
-                                            <span class="message_wrap_right"><%= link_to "", trash_conversation_path(conversation), method: :post,class:'fa fa-trash' %></span>
-                                        </div>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <% end %>
+                                    
                                     <li>
                                         <%= link_to '대화방 모두 보기', conversations_path,class:"text-center"%>
                                     </li>
