@@ -23,7 +23,7 @@ class CartsController < ApplicationController
    id = params[:id]
    @cart = current_user.cart
    @product = Product.find(id)
-   @cart_item = current_user.cart_items.find_by(item_id: id)
+    @cart_item = CartItem.where(owner_id = current_user.id , item_id = @product.id)
    if(params[:type] == 'up')
    @cart.add(@product, @product.price)
    else
@@ -32,8 +32,7 @@ class CartsController < ApplicationController
     
    end
 
-   @cart_item = CartItem.where(owner_id = current_user.id , item_id = @product.id)
-   #current_user.cart_items.find_by(item_id: id)
+    @cart_item = CartItem.where(owner_id = current_user.id , item_id = @product.id)
 
    respond_to do |format|
       format.html { redirect_to cart_path}
