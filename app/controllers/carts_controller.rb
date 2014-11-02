@@ -4,7 +4,7 @@ class CartsController < ApplicationController
 
 
 
-  attr_accessor :quantity
+
 
   def create
      @product = Product.find(params[:id])
@@ -27,7 +27,7 @@ class CartsController < ApplicationController
    if(params[:type] == 'up')
    @cart.add(@product, @product.price)
    elsif(params[:type] == 'down')
-    if(@cart_item.quantity > 1 )
+    if(@cart_item.quantity.to_i > 1 )
     @cart.remove(@product)
     end
    end
