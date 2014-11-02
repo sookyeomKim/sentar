@@ -8,12 +8,7 @@ class CartItem < ActiveRecord::Base
 
 
 	 
-	 def removable?
-	 	
-	 	self.quantity > 1
-
-	 end
-
+	
 end
 
 

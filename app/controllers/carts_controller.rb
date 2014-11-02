@@ -23,12 +23,12 @@ class CartsController < ApplicationController
    id = params[:id]
    @cart = current_user.cart
    @product = Product.find(id)
-    @cart_item = CartItem.where(owner_id = current_user.id , item_id = @product.id)
+    @cart_item = @cart.cart_items.find_by(item_id: id)
    if(params[:type] == 'up')
    @cart.add(@product, @product.price)
    else
     
-    @cart.remove(@product) if @cart_item.removable?
+    @cart.remove(@product) if @cart_item.quantity > 1
     
    end
 
