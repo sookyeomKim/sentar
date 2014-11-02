@@ -25,7 +25,7 @@ var initialize = function () {
         $(this).hide('slide', {
             direction : 'left'
         }, 200)
-    });*/
+});*/
 
 
     setVariables();
@@ -36,6 +36,78 @@ var initialize = function () {
 
     setLayers();
     shelterLoader();
+    /*tmap poi method*/
+    $("#sentar_search").on("click", function () { //Poi매서드, 쉘터를 Poi를 이용해 띄워주자
+        var selected_option = $("#poi_select option:selected").val();
+        if (selected_option == 0) {
+
+            tData = new Tmap.TData(); //response parameter를 *respnse parameter:sk서버내에 저장되어있는 map정보를 핸들링해줌
+            /*가져온 데이터를 어떻게 처리할지 결정*/
+            /*마크업에서의 검색값 */
+            var searchText = $('#searchText').val();
+            /*한글깨짐방지*/
+            var encodingSearchText = encodeURIComponent(searchText);
+
+            tData.events.register("onComplete", tData, onCompleteLoadGetPOIDataFromSearch); /*tData를 이용하여 oncompleete(100%)됐을 때 onCompleteLoadGetPOIDataFromSearch이용하여 처리*/
+            tData.events.register("onProgress", tData, onProgressLoadPoiData); /**/
+            tData.events.register("onError", tData, onErrorLoadPoiData);
+
+
+
+            if (searchText != '') { //검색값이 공백이 아닐 때
+                var options = {
+                    version: 1
+                };
+                /*poi관련된 값들을 처리해주는 method*/
+
+                tData.getPOIDataFromSearch(encodingSearchText, options);
+                $('#searchResult').css("display", "block");
+            } else {
+                alert('검색어 입력해라');
+            }
+        } else if (selected_option == 1) {
+            commerce_shelter_search();
+        } else if (selected_option == 2) {
+            blog_shelter_search();
+        }
+    });
+    $( "#searchText" ).keypress(function( event ) {
+      if ( event.which == 13 ) {
+        event.preventDefault();
+         var selected_option = $("#poi_select option:selected").val();
+        if (selected_option == 0) {
+
+            tData = new Tmap.TData(); //response parameter를 *respnse parameter:sk서버내에 저장되어있는 map정보를 핸들링해줌
+            /*가져온 데이터를 어떻게 처리할지 결정*/
+            /*마크업에서의 검색값 */
+            var searchText = $('#searchText').val();
+            /*한글깨짐방지*/
+            var encodingSearchText = encodeURIComponent(searchText);
+
+            tData.events.register("onComplete", tData, onCompleteLoadGetPOIDataFromSearch); /*tData를 이용하여 oncompleete(100%)됐을 때 onCompleteLoadGetPOIDataFromSearch이용하여 처리*/
+            tData.events.register("onProgress", tData, onProgressLoadPoiData); /**/
+            tData.events.register("onError", tData, onErrorLoadPoiData);
+
+
+
+            if (searchText != '') { //검색값이 공백이 아닐 때
+                var options = {
+                    version: 1
+                };
+                /*poi관련된 값들을 처리해주는 method*/
+
+                tData.getPOIDataFromSearch(encodingSearchText, options);
+                $('#searchResult').css("display", "block");
+            } else {
+                alert('검색어 입력해라');
+            }
+        } else if (selected_option == 1) {
+            commerce_shelter_search();
+        } else if (selected_option == 2) {
+            blog_shelter_search();
+        }
+      }
+    });
 };
 $(initialize);
 $(document).on('page:load', initialize);
@@ -89,14 +161,14 @@ function shelterLoader() {
 
         var shelter_list = json.shelters;
 
-         
-           /* var state = true;
+
+        /* var state = true;
             $("#view_commerce").click(function () {
-            		state=false;
+                    state=false;
             });
             $("#view_blog").click(function () {
-            		state=true;
-            });*/
+                    state=true;
+                });*/
 
         //var shelters_count=shelter_list.length;
 
@@ -109,16 +181,16 @@ function shelterLoader() {
             var shelter_lonlat = shelter_info.lonlat;
             var shelter_kind = shelter_info.kind;
             /*if(state){
-            	if(shelter_kind=='commerce'){
-            		return;
-            	}
+                if(shelter_kind=='commerce'){
+                    return;
+                }
             }
             else if(!state){
-            	if(shelter_kind=='blog'){
-            		return;
-            	}
+                if(shelter_kind=='blog'){
+                    return;
+                }
             }*/
-           
+
             lonlat_split(shelter_lonlat);
 
             var lon = lonlat_split_arr[0];
@@ -126,13 +198,13 @@ function shelterLoader() {
 
             //icon img넣는 곳
             if (main_location <= 44) {
-                var shelterIcon = new Tmap.IconHtml("<img src='assets/shelter/shelter.PNG'/>", size, offset); //marker					
+                var shelterIcon = new Tmap.IconHtml("<img src='assets/shelter/shelter.PNG'/>", size, offset); //marker                  
             } else if (main_location >= 55) {
-                var shelterIcon = new Tmap.IconHtml("<img src='../../assets/shelter/shelter.PNG'/>", size, offset); //marker					
+                var shelterIcon = new Tmap.IconHtml("<img src='../../assets/shelter/shelter.PNG'/>", size, offset); //marker                    
             }
             var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
 
-            var popup;            
+            var popup;
             popup = new Tmap.Popup("shelter", new Tmap.LonLat(lon, lat),
             new Tmap.Size(200, 250),
                 "<div id='shelter_id_" + shelter_id + "'class='panel panel-info' style='width:100%;height:100%;'>" + "<div class='panel-heading'>" + "<span><a href='/shelters/" + shelter_id + "'><strong>" + shelter_name + "</strong>님의 미니쉘터</a></span>" + "</div>" + "<div class='panel-body'>" + "<span>" + shelter_introduce + "</span>" + "<span>" + shelter_kind + "</span>" + "</div>" + "</div>", "close");
@@ -177,7 +249,7 @@ function onClickMap(e) {
 
 
     /*$("#lon").val(lonlat.)
-	$("#lat").val(lonlat.)*/
+    $("#lat").val(lonlat.)*/
     $("#lonlat").val(lonlat);
     /*addMarker(lonlat);*/
 
@@ -187,7 +259,7 @@ function onClickMap(e) {
     var size = new Tmap.Size(21, 25);
     var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
     var icon = new Tmap.IconHtml('<img src="../../assets/shelter/shelter.PNG" style="z-index:9999px"/>', size, offset);
-    /*var icon = new Tmap.IconHtml('<div class="shelter" style="border:10px solid black;"><div onClick="test1()" style="text-decoration: none;	color: RED;	font-size: 9pt;">AAAAAAAAA</div><div onClick="test2()"><img src="img/d.png" /></div><div onClick="test3()" style="text-decoration: none;	color: BLUE;	font-size: 9pt;">QQQQQQQQQQQQQQQQQQQqQ</div></div>',size,offset);*/
+    /*var icon = new Tmap.IconHtml('<div class="shelter" style="border:10px solid black;"><div onClick="test1()" style="text-decoration: none;  color: RED; font-size: 9pt;">AAAAAAAAA</div><div onClick="test2()"><img src="img/d.png" /></div><div onClick="test3()" style="text-decoration: none;    color: BLUE;    font-size: 9pt;">QQQQQQQQQQQQQQQQQQQqQ</div></div>',size,offset);*/
     var marker = new Tmap.Marker(lonlat, icon);
     markers.addMarker(marker);
 }
@@ -195,41 +267,7 @@ function onClickMap(e) {
 
 
 
-/*tmap poi method*/
-function sentar_search() { //Poi매서드, 쉘터를 Poi를 이용해 띄워주자
-var selected_option = $("#poi_select option:selected").val();
 
-    if (selected_option == 0) {
-        tData = new Tmap.TData(); //response parameter를 *respnse parameter:sk서버내에 저장되어있는 map정보를 핸들링해줌
-        /*가져온 데이터를 어떻게 처리할지 결정*/
-        /*마크업에서의 검색값 */
-        var searchText = $('#searchText').val();
-        /*한글깨짐방지*/
-        var encodingSearchText = encodeURIComponent(searchText);
-
-        tData.events.register("onComplete", tData, onCompleteLoadGetPOIDataFromSearch); /*tData를 이용하여 oncompleete(100%)됐을 때 onCompleteLoadGetPOIDataFromSearch이용하여 처리*/
-        tData.events.register("onProgress", tData, onProgressLoadPoiData); /**/
-        tData.events.register("onError", tData, onErrorLoadPoiData);
-
-
-
-        if (searchText != '') { //검색값이 공백이 아닐 때
-            var options = {
-                version: 1
-            };
-            /*poi관련된 값들을 처리해주는 method*/
-
-            tData.getPOIDataFromSearch(encodingSearchText, options);
-            $('#searchResult').css("display", "block");
-        } else {
-            alert('search POI Input.');
-        }
-    }else if(selected_option == 1){
-        commerce_shelter_search();
-    }else if(selected_option == 2){
-        blog_shelter_search();
-    }
-}
 
 
 function onProgressLoadPoiData() {
@@ -247,121 +285,122 @@ function onCompleteLoadGetPOIDataFromSearch() {
     $("#searchResult").html(""); //수정 : 이부분 커머스 검색라인으로 옴기자
     var size = new Tmap.Size(50, 50);
     var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
-    
+
     /*일반지역검색*/
-        if ($(this.responseXML).find("searchPoiInfo pois poi").text() != '') {
+    if ($(this.responseXML).find("searchPoiInfo pois poi").text() != '') {
 
-            $(this.responseXML).find("searchPoiInfo pois poi").each(
-            /*통합검색이랑 지역검색만 넣어놨는데 필요한데로 추가 및 제거해야함*/
-            function () {
+        $(this.responseXML).find("searchPoiInfo pois poi").each(
+        /*통합검색이랑 지역검색만 넣어놨는데 필요한데로 추가 및 제거해야함*/
+        function () {
 
-                var name = $(this).find("name").text();
+            var name = $(this).find("name").text();
 
-                var upperAddrName = $(this).find(
-                    "upperAddrName").text();
+            var upperAddrName = $(this).find(
+                "upperAddrName").text();
 
-                var middleAddrName = $(this).find(
-                    "middleAddrName").text();
+            var middleAddrName = $(this).find(
+                "middleAddrName").text();
 
-                var lowerAddrName = $(this).find(
-                    "lowerAddrName").text();
+            var lowerAddrName = $(this).find(
+                "lowerAddrName").text();
 
-                var upperBizName = $(this).find(
-                    "upperBizName").text();
+            var upperBizName = $(this).find(
+                "upperBizName").text();
 
-                var middleBizName = $(this).find(
-                    "middleBizName").text();
+            var middleBizName = $(this).find(
+                "middleBizName").text();
 
-                var lowerBizName = $(this).find(
-                    "lowerBizName").text();
+            var lowerBizName = $(this).find(
+                "lowerBizName").text();
 
-                var detailBizName = $(this).find(
-                    "detailBizName").text();
+            var detailBizName = $(this).find(
+                "detailBizName").text();
 
-                /*shelter에 대한 정보값도 받아와야 함 딱히 할 필요 엄슬 듯*/
-                var coordX = $(this).find("frontLon")
-                    .text();
+            /*shelter에 대한 정보값도 받아와야 함 딱히 할 필요 엄슬 듯*/
+            var coordX = $(this).find("frontLon")
+                .text();
 
-                var coordY = $(this).find("frontLat")
-                    .text();
+            var coordY = $(this).find("frontLat")
+                .text();
 
-                /*var trLonLat = get3857LonLat(coordX, coordY);//위도,경도좌표변환
-					alert(trLonLat);*/
-                var nameArray = [];
+            /*var trLonLat = get3857LonLat(coordX, coordY);//위도,경도좌표변환
+                alert(trLonLat);*/
+            var nameArray = [];
 
-                nameArray = name.split("(");
+            nameArray = name.split("(");
 
-                if (name.length > 20) {
-                    name = nameArray[0] + '<br/>(' + nameArray[1];
-                }
+            if (name.length > 20) {
+                name = nameArray[0] + '<br/>(' + nameArray[1];
+            }
 
-                if ($(this).index() >= 10) { //인덱스값 초과
+            if ($(this).index() >= 10) { //인덱스값 초과
 
-                    $("#searchResult").append(
-                        '<div><span class="num">' + ($(this).index() + 1) + '</span>&nbsp;<span class="imgSpan"><img src="img/sampleIcon.png"></span><span class="poiResultList"><a href="javascript:selectPoi(' + coordX + ',' + coordY + ')"style="text-decoration:none; *margin-top:-10px;">' + name + '</a></span></div><br/><br/>');
+                $("#searchResult").append(
+                    '<div><span class="num">' + ($(this).index() + 1) + '</span>&nbsp;<span class="imgSpan"><img src="img/sampleIcon.png"></span><span class="poiResultList"><a href="javascript:selectPoi(' + coordX + ',' + coordY + ')"style="text-decoration:none; *margin-top:-10px;">' + name + '</a></span></div><br/><br/>');
 
-                    var icon = new Tmap.IconHtml("<img src='img/sampleIcon.png'/>", size, offset); //marker
+                var icon = new Tmap.IconHtml("<img src='img/sampleIcon.png'/>", size, offset); //marker
 
-                } else {
+            } else {
 
-                    $("#searchResult").append(
-                        '<div><span class="num">' + ($(this).index() + 1) + '</span>&nbsp;<span class="imgSpan"><img src="img/sampleIcon' + ($(this).index() + 1) + '.png"></span><span class="poiResultList"><a href="javascript:selectPoi(' + coordX + ',' + coordY + ')"style="text-decoration:none;*margin-top:-10px;">' + name + '</a></span></div><br/><br/>');
+                $("#searchResult").append(
+                    '<div><span class="num">' + ($(this).index() + 1) + '</span>&nbsp;<span class="imgSpan"><img src="img/sampleIcon' + ($(this).index() + 1) + '.png"></span><span class="poiResultList"><a href="javascript:selectPoi(' + coordX + ',' + coordY + ')"style="text-decoration:none;*margin-top:-10px;">' + name + '</a></span></div><br/><br/>');
 
-                    var icon = new Tmap.IconHtml( //marker
-                    "<img src='img/sampleIcon" + ($(this).index() + 1) + ".png'/>", size, offset);
+                var icon = new Tmap.IconHtml( //marker
+                "<img src='img/sampleIcon" + ($(this).index() + 1) + ".png'/>", size, offset);
 
-                }
+            }
 
-                var label = new Tmap.Label(
-                    "&nbsp;상호명 : " + name + "<br/><br/>&nbsp;주소 : " + upperAddrName + " " + middleAddrName + "" + lowerAddrName + "<br/><br/>&nbsp;구분 : " + upperBizName + "&nbsp;&gt;&nbsp;" + middleBizName + "&nbsp;&gt;&nbsp;" + lowerBizName + "&nbsp;&gt;&nbsp;" + detailBizName);
+            var label = new Tmap.Label(
+                "&nbsp;상호명 : " + name + "<br/><br/>&nbsp;주소 : " + upperAddrName + " " + middleAddrName + "" + lowerAddrName + "<br/><br/>&nbsp;구분 : " + upperBizName + "&nbsp;&gt;&nbsp;" + middleBizName + "&nbsp;&gt;&nbsp;" + lowerBizName + "&nbsp;&gt;&nbsp;" + detailBizName);
 
 
-                var marker = new Tmap.Markers(new Tmap.LonLat(coordX, coordY), icon, label);
+            var marker = new Tmap.Markers(new Tmap.LonLat(coordX, coordY), icon, label);
 
-                /*재검색했을 때 마커 클리어*/
-                if (markers != null) {
-                    markers.clearMarkers();
-                }
+            /*재검색했을 때 마커 클리어*/
+            if (markers != null) {
+                markers.clearMarkers();
+            }
 
-                markers.addMarker(marker);
+            markers.addMarker(marker);
 
-                marker.events.register('mouseover', marker,
-                onMarkerOver);
+            marker.events.register('mouseover', marker,
+            onMarkerOver);
 
-                marker.events.register('mouseout', marker,
-                onMarkerOut);
+            marker.events.register('mouseout', marker,
+            onMarkerOut);
 
-                main_search.submit; /*결과제출*/
+            main_search.submit; /*결과제출*/
 
-            });
+        });
 
-        } else if ($(this.responseXML).find("error").text() != '') {
+    } else if ($(this.responseXML).find("error").text() != '') {
 
-            var errorMessage = $(this.responseXML).find("error message").text();
+        var errorMessage = $(this.responseXML).find("error message").text();
 
-            alert(errorMessage);
+        alert(errorMessage);
 
-        } else {
+    } else {
 
-            alert('search Poi none');
+        alert('search Poi none');
 
-        }
-        /*검색시 줌 설정*/
-        if ($(this.responseXML).find("searchPoiInfo pois poi").text() != '') {
+    }
+    /*검색시 줌 설정*/
+    if ($(this.responseXML).find("searchPoiInfo pois poi").text() != '') {
 
-            map.zoomToExtent(markers.getDataExtent());
+        map.zoomToExtent(markers.getDataExtent());
 
-        } else {
+    } else {
 
-            map.setCenter(new Tmap.LonLat(14134074.680985, 4517814.0870894), 15);
+        map.setCenter(new Tmap.LonLat(14134074.680985, 4517814.0870894), 15);
 
-            markers.clearMarkers();
+        markers.clearMarkers();
 
-        }
-    
+    }
+
     /*일반지역검색 end*/
 
-    /*쉘터검색*//*
+    /*쉘터검색*/
+    /*
     else if (selected_option == 1) {
 
 
@@ -410,11 +449,11 @@ function commerce_shelter_search() {
                 var lat = lonlat_split_arr[1];
 
                 //icon img넣는 곳
-                var shelterIcon = new Tmap.IconHtml("<img src='assets/shelter/shelter.PNG'/>", size, offset); //marker					
+                var shelterIcon = new Tmap.IconHtml("<img src='assets/shelter/shelter.PNG'/>", size, offset); //marker                  
                 if (shelter_searchText == shelter_name) {
-                    if(shelter_kind=='commerce'){
-                    var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
-                    }else{
+                    if (shelter_kind == 'commerce') {
+                        var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
+                    } else {
                         return;
                     }
 
@@ -426,7 +465,7 @@ function commerce_shelter_search() {
                     markers.clearMarkers();
                 }
 
-                var popup;            
+                var popup;
                 popup = new Tmap.Popup("shelter", new Tmap.LonLat(lon, lat),
                 new Tmap.Size(200, 250),
                     "<div id='shelter_id_" + shelter_id + "'class='panel panel-info' style='width:100%;height:100%;'>" + "<div class='panel-heading'>" + "<span><a href='/shelters/" + shelter_id + "'><strong>" + shelter_name + "</strong>님의 미니쉘터</a></span>" + "</div>" + "<div class='panel-body'>" + "<span>" + shelter_introduce + "</span>" + "<span>" + shelter_kind + "</span>" + "</div>" + "</div>", "close");
@@ -447,13 +486,13 @@ function commerce_shelter_search() {
 
                 }
 
-               
+
                 shelterMarker.events.register('mouseover', popup, onShelterOver);
 
                 shelterMarker.events.register('mouseout', popup, onShelterOut);
 
                 shelterMarker.events.register('click', popup, onShelterClick);
-               
+
 
             });
         } else {
@@ -461,8 +500,9 @@ function commerce_shelter_search() {
         }
     }
 }
-function blog_shelter_search(){
-     var size = new Tmap.Size(35, 35);
+
+function blog_shelter_search() {
+    var size = new Tmap.Size(35, 35);
     var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
     $.ajax({
         type: "GET",
@@ -498,9 +538,9 @@ function blog_shelter_search(){
                 //icon img넣는 곳
                 var shelterIcon = new Tmap.IconHtml("<img src='assets/shelter/shelter.PNG'/>", size, offset); //marker                  
                 if (shelter_searchText == shelter_name) {
-                    if(shelter_kind=='blog'){
-                    var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
-                    }else{
+                    if (shelter_kind == 'blog') {
+                        var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
+                    } else {
                         return;
                     }
 
@@ -512,7 +552,7 @@ function blog_shelter_search(){
                     markers.clearMarkers();
                 }
 
-                var popup;            
+                var popup;
                 popup = new Tmap.Popup("shelter", new Tmap.LonLat(lon, lat),
                 new Tmap.Size(200, 250),
                     "<div id='shelter_id_" + shelter_id + "'class='panel panel-info' style='width:100%;height:100%;'>" + "<div class='panel-heading'>" + "<span><a href='/shelters/" + shelter_id + "'><strong>" + shelter_name + "</strong>님의 미니쉘터</a></span>" + "</div>" + "<div class='panel-body'>" + "<span>" + shelter_introduce + "</span>" + "<span>" + shelter_kind + "</span>" + "</div>" + "</div>", "close");
@@ -533,13 +573,13 @@ function blog_shelter_search(){
 
                 }
 
-               
+
                 shelterMarker.events.register('mouseover', popup, onShelterOver);
 
                 shelterMarker.events.register('mouseout', popup, onShelterOut);
 
                 shelterMarker.events.register('click', popup, onShelterClick);
-               
+
 
             });
         } else {
@@ -548,8 +588,8 @@ function blog_shelter_search(){
     }
 }
 
-function lonlat_split(shelter_lonlat){
-	var lonlat_split = shelter_lonlat.replace(/lon=/gi, '');
+function lonlat_split(shelter_lonlat) {
+    var lonlat_split = shelter_lonlat.replace(/lon=/gi, '');
     lonlat_split = lonlat_split.replace(/lat=/gi, '');
     lonlat_split = lonlat_split.replace(/\n/gi, '');
     lonlat_split = lonlat_split.replace(/^\s+|\s+$/gi, '');
