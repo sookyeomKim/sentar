@@ -4,7 +4,6 @@
 			<div  class="horizon_array_menu_h btn_mail">
 				<ul>
 					<li class="active">	<h2><a href="#btn_inbox" data-toggle="tab"><strong>대화목록</strong></a></h2></li>
-					<!-- <li>	<h2><a href="#btn_sentbox" data-toggle="tab"><strong>보낸 편지함</strong></a></h2></li> -->
 				</ul>
 			</div>	
 			<div class="tab-content" style="padding:0 !important;margin-top:54px;">
@@ -21,7 +20,7 @@
 											</strong>
 										</li>
 										<li>
-											<%= link_to conversation.last_message.body, conversation_path(conversation),style:'width:100%;position:absolute;top:25px;height:25px;color:#666'%>
+											<%= link_to conversation.last_message.body, conversation_path(conversation),style:'width:100%;position:absolute;top:25px;height:25px;color:#666',class:"text_split"%>
 										</li>
 									</ul>
 								</div>
@@ -38,38 +37,22 @@
 						</ul>
 					</div>
 				</div>
-				<!-- <div class="tab-pane fade" id="btn_sentbox">
-					<div class="conversation_list">
-						<ul class="conversation_list_ul">
-							<%@mailbox.sentbox.each do |conversation| %>
-							<li class="conversation_list_item">
-								<div class="vertical_array_menu c_l_item_subject">
-									<ul>
-										<li>
-											<strong>
-												<%=link_to gravatar_for(conversation.last_sender,size:45), conversation.last_sender %>  
-
-												<%= link_to participants_name(conversation), conversation_path(conversation),style:'width:100%;height:25px;position:absolute;color:#000;'%>
-											</strong>
-										</li>
-										<li>
-											<%= link_to conversation.subject, conversation_path(conversation),style:'width:100%;position:absolute;top:25px;height:25px;color:#666'%>
-										</li>
-									</ul>
-								</div>
-								<ol>
-									<li>
-										<%= link_to "", trash_conversation_path(conversation),data: { confirm: "휴지통으로 버리시겠습니까?" } ,method: :post,class:'fa fa-trash' %>
-									</li>
-								</ol>
-							</li>
-							<% end %>
-						</ul>
-					</div>						
-				</div> -->
 			</div>
 		</div>
 	</div>
+
+	<%= javascript_tag do %>
+	var text_split = function(){
+			var text_split = $(".text_split").text(); 
+			var text_length = text_split.length;
+			if(text_length>=40){
+			var text_substr = text_split.substr(0,40)+'...';
+			$(".text_split").text(text_substr);
+		}
+	};
+	$(text_split);
+	$(document).on("page:change",text_split);
+	<% end %>
 
 	<div class="col-lg-6">
 		<div class="panel" id="arcodian">
