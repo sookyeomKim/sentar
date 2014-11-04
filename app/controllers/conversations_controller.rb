@@ -27,6 +27,7 @@ end
 
 def show
   @conversation.mark_as_read(current_user)
+  
 
 end
 

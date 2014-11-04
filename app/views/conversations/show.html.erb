@@ -1,42 +1,41 @@
 <div class="row">
-	<div class="col-lg-6">
+	<div class="col-lg-8">
 		<div class="panel">
 			<div class="panel-heading" style="background-color:#d9534f;">
 				<h2 class="accordion-toggle"data-toggle="collapse" data-parent="#accordion" href="#friend_list" style="text-align:center;"><%= csrf_meta_tags %><strong><%= conversation.subject %></strong></h2>
 			</div>
 			<div class="panel-body" style="padding:0 !important;">
-					<div class="conversation_list">
-						<ul class="conversation_list_ul">
-							<% conversation.receipts_for(current_user).each do |receipt| %>
-							<li class="conversation_list_item">
-								<div class="vertical_array_menu c_l_item_subject">
-									<ul>
-										<li>
-											<% message = receipt.message %>
-											<strong>
-												<%=message.subject %>
-											</strong>
-										</li>
-										<li>
-											<%= message.body %>
-										</li>
-									</ul>
-								</div>
-								<ol>
+				<div class="message_list">
+					<ul class="message_list_ul">
+						<% conversation.receipts_for(current_user).each do |receipt| %>
+						<li class="message_list_item">
+							<div class="vertical_array_menu c_l_item_subject">
+								<ul>
 									<li>
-										사진과 시간
+										<% message = receipt.message %>
+										<!-- strong>
+											<%=message.subject %>
+										</strong> -->
 									</li>
-								</ol>
-							</li>
-							<% end %>
-						</ul>
-					</div>	
+									<li>
+										<%= message.body %>
+									</li>
+								</ul>
+							</div>
+							<ol>
+								<li>
+									<%= link_to(gravatar_for(message.sender, size: 40) , message.sender) %>
+								</li>
+							</ol>
+						</li>
+						<% end %>
+					</ul>
+				</div>	
 			</div>
 		</div>
-
 		<%= render 'message/form' , conversation: conversation %>
 	</div>
-	<div class="col-lg-6">
+	<!-- <div class="col-lg-6">
 		<div class="panel">
 			<div  class="horizon_array_menu_h btn_mail">
 				<ul>
@@ -101,4 +100,4 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
