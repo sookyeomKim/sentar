@@ -130,6 +130,9 @@ class User < ActiveRecord::Base
     Product.from_users_followed_by(self)
   end
 
+
+  
+
   private
 
     # Converts email to all lower-case.

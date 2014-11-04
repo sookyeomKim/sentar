@@ -12,6 +12,7 @@
 					<div class="conversation_list">
 						<ul class="conversation_list_ul">
 							<%@mailbox.conversations.each do |conversation| %>
+							<% unless conversation.is_trashed?(current_user) %>
 							<li class="conversation_list_item">
 								<div class="vertical_array_menu c_l_item_subject">
 									<ul>
@@ -34,6 +35,7 @@
 									</li>
 								</ol>
 							</li>
+							<% end %>
 							<% end %>
 						</ul>
 					</div>
