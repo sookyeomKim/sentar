@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-lg-6">
+	<div class="col-lg-8">
 		<div class="panel">
 			<div class="panel-heading" style="background-color:#d9534f;">
 				<h2 class="accordion-toggle"data-toggle="collapse" data-parent="#accordion" href="#friend_list" style="text-align:center;"><%= csrf_meta_tags %><strong><%= conversation.subject %></strong></h2>
@@ -13,9 +13,9 @@
 								<ul>
 									<li>
 										<% message = receipt.message %>
-										<strong>
+										<!-- strong>
 											<%=message.subject %>
-										</strong>
+										</strong> -->
 									</li>
 									<li>
 										<%= message.body %>
@@ -24,7 +24,7 @@
 							</div>
 							<ol>
 								<li>
-									in
+									<%= link_to(gravatar_for(message.sender, size: 40) , message.sender) %>
 								</li>
 							</ol>
 						</li>
@@ -35,7 +35,7 @@
 		</div>
 		<%= render 'message/form' , conversation: conversation %>
 	</div>
-	<div class="col-lg-6">
+	<!-- <div class="col-lg-6">
 		<div class="panel">
 			<div  class="horizon_array_menu_h btn_mail">
 				<ul>
@@ -100,4 +100,4 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->

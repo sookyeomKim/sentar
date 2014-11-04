@@ -30,7 +30,7 @@
         <% if logged_in? %>
         <!-- 알람,딴집가기,내집가기  김수겸 14.09.01-->
         <ul class="nav navbar-nav navbar-right">                
-            <!--알람-->
+            <!-- 알람
             <li class="dropdown">
                 <a class="dropdown-toggle"
                 data-toggle="dropdown" href="#alarm"> <span class="label label-info">2</span> <i class="fa fa-bell"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
@@ -75,13 +75,16 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <!--알람end-->
-
+                                알람end
+             -->
                                 <!--메세지-->
                                 <li class="dropdown">
-                                    <a class="dropdown-toggle"  data-toggle="dropdown" href="#"> <span class="label label-success"><%=current_user.mailbox.inbox.count %></span> <i class="fa fa-envelope"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
+                                    <a class="dropdown-toggle"  data-toggle="dropdown" href="#"> <span class="label label-success"><%=current_user.unread_inbox_count   %></span> <i class="fa fa-envelope"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
                                     <ul class="dropdown-menu dropdown-messages">
-                                    <%current_user.mailbox.conversations.each do |conversation| %>
+
+                                    <%current_user.mailbox.inbox.each do |conversation| %>
+                                    <% if conversation.is_unread?(current_user) %>
+
                                     <li style="margin-bottom: 20px;">
                                         <div class="message_wrap">
                                             <span class="message_wrap_center"><%= link_to conversation.subject , conversation_path(conversation)%></span>
@@ -90,9 +93,10 @@
                                     </li>
                                     <li class="divider"></li>
                                     <% end %>
+                                    <% end %>
                                     
                                     <li>
-                                        <%= link_to '대화방 모두 보기', conversations_path,class:"text-center"%>
+                                        <%= link_to '모든 메세지 보기', conversations_path,class:"text-center"%>
                                     </li>
                                 </ul>
                             </li>

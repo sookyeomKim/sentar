@@ -1,11 +1,11 @@
 <div  class="form-group">
- <%= simple_form_for(:message, url: {action: "reply"},id: 2) do |f| %>
+ <%= simple_form_for(:message, url: {action: "reply"}) do |f| %>
 
 
- <%= f.label :subject,'제목' %>
- <%= f.text_field :subject,class:"form-control" %>
+<!--  <%= f.label :subject,'제목' %> -->
+ <%= f.hidden_field :subject, value: "blanked" %>
 
- <%= f.label :body,'내용'%>
+ <%= f.label :body,'답장하기'%>
  <%= f.text_area :body,class:"form-control"%>         
 
 <a class="btn btn-default" id="message_submit_btn">보내기</a>

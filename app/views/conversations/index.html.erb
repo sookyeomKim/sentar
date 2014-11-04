@@ -3,36 +3,77 @@
 		<div class="panel">
 			<div  class="horizon_array_menu_h btn_mail">
 				<ul>
-					<li class="active">	<h2><a href="#btn_inbox" data-toggle="tab"><strong>대화목록</strong></a></h2></li>
+					<li class="active">	<h2><a href="#btn_inbox" data-toggle="tab"><strong>메세지 목록</strong></a></h2></li>
 				</ul>
 			</div>	
 			<div class="tab-content" style="padding:0 !important;margin-top:54px;">
 				<div class="tab-pane fade active in" id="btn_inbox">
 					<div class="conversation_list">
-						<ul class="conversation_list_ul">
+						
+							
+							<ul class="conversation_list_ul">
 							<%@mailbox.conversations.each do |conversation| %>
+
+							<% unless conversation.is_trashed?(current_user) %>
+
+							<% participants = conversation.participants %> <!-- 대화 참여자 -->
+							<%p_size = 50 %>
+							<% if participants.size  > 2 %>
+							<%p_size = 40   %>
+							<% is_group = true %>
+							<% end %>
 							<li class="conversation_list_item">
 								<div class="vertical_array_menu c_l_item_subject">
 									<ul>
 										<li>
 											<strong>
-												<%= link_to participants_name(conversation), conversation_path(conversation),style:'width:100%;height:25px;position:absolute;color:#000;'%>
+												<!-- <%= link_to conversation.last_message.subject, conversation_path(conversation),style:'width:100%;height:25px;position:absolute;color:#000;'%> -->
+												<%=time_ago_in_words(conversation.last_message.created_at)%> ago
+												
+												<% read_users = who_read_this conversation.last_message %>
+												 
+												 <% unless read_users.size == 0%>
+												 
+
+												 읽음
+
+												 <% end %>
+												 	
+												
+												 
+		
 											</strong>
-										</li>
+											안 읽은 메세지 : <%=count_unread_message_in conversation %>
+										</li> 
 										<li>
-											<%= link_to conversation.last_message.body, conversation_path(conversation),style:'width:100%;position:absolute;top:25px;height:25px;color:#666',class:"text_split"%>
+											<% if current_user?(conversation.last_message.sender) %>
+											<%=gravatar_for(current_user, size: 20) %>
+											<% elsif is_group  %>
+											<%=gravatar_for(conversation.last_sender, size: 20) %>
+											<%end%>
+											<%= link_to conversation.last_message.body, conversation_path(conversation),style:'width:100%;position:absolute;top:25px;height:25px;color:#666'%>
+											<!-- 위에다가,class:"text_split" 넣으면 이상해진다 -->
 										</li>
+										
 									</ul>
 								</div>
-								<ol>
+								<ol><% participants.each do |participant| %>
 									<li>
-										<%=link_to gravatar_for(conversation.last_sender,size:50), conversation.last_sender%>
-									</li>
+										
+										<%unless current_user?(participant) %> <!-- 나를 제외한 참여자들  얼굴 띄우기 -->
+
+											
+										<%=link_to gravatar_for(participant,size: p_size), participant%>
+										<% end %>
+										<!-- <%=link_to gravatar_for(conversation.last_sender,size:50), conversation.last_sender%>  -->
+
+									</li><% end %>
 									<li>
 										<%= link_to "", trash_conversation_path(conversation),data: { confirm: "휴지통으로 버리시겠습니까?" } ,method: :post,class:'fa fa-trash' %>
 									</li>
 								</ol>
 							</li>
+							<% end %>
 							<% end %>
 						</ul>
 					</div>
@@ -94,14 +135,14 @@
 					<div class="tab-content">
 						<div  class="tab-pane active">
 							<%= form_for(:conversation, url: :conversations, method: :post) do |f| %>
-							<%= f.label :recipients,'받는사람' %>
+							<%= f.label :recipients,'받는사람(친구 목록을 눌러보아요 :)' %>
 							<%= f.text_field :recipients,class:"form-control",id:'recipients_form' %>
 
-							<%= f.label :subject,'제목' %>
-							<%= f.text_field :subject,class:"form-control" %>
+							<!-- <%= f.label :subject,'제목' %> -->
+							<%= f.hidden_field :subject , value: "blanked"  %>
 
-							<%= f.label :body, class: "checkbox inline"  %>
-							<%= f.text_field :body,class:"form-control" %>         
+							<%= f.label :body, '전하고 싶은 말', class: "checkbox inline"  %>
+							<%= f.text_area :body,class:"form-control" %>         
 
 							<%= f.button '보내기', class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
 							<%= f.button '초기화'	, type: :reset, class: 'btn btn-danger' %><!--입력되어진대로 제출한다.-->
