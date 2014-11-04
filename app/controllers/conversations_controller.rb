@@ -6,6 +6,7 @@ class ConversationsController < ApplicationController
     
    @mailbox ||= current_user.mailbox
 
+
  end
 
 
@@ -26,6 +27,8 @@ def reply
 end
 
 def show
+  
+  
   @conversation.mark_as_read(current_user)
   
 
@@ -43,7 +46,11 @@ def untrash
 end
 
 
+def readable_off
 
+      current_user.redable_off
+      
+    end
 
 
 private
@@ -55,6 +62,8 @@ end
 def conversation
 
   @conversation ||= mailbox.conversations.find(params[:id]) 
+
+
 end
 
 def conversation_params(*keys)

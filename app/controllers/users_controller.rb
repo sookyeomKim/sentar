@@ -100,4 +100,7 @@ def create
     def admin_user
       redirect_to(root_url) unless current_user.admin? #현재 유저가 관리자가 아닐경우 root 유알엘로 redirect
     end
+
+
+    
 end

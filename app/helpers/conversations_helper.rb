@@ -58,6 +58,15 @@ def count_unread_message_in(conversation)
 end
 
 
+def is_read?(message)
+
+ read_member = []
+ read_member = who_read_this(message)
+
+ return true unless read_member.size == 0
+end
+
+
 
 
 end

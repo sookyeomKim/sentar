@@ -1,5 +1,5 @@
 <div  class="form-group">
- <%= simple_form_for(:message, url: {action: "reply"}) do |f| %>
+ <%= simple_form_for(:message, url: {action: "reply"} ) do |f| %>
 
 
 <!--  <%= f.label :subject,'제목' %> -->
@@ -8,6 +8,7 @@
  <%= f.label :body,'답장하기'%>
  <%= f.text_area :body,class:"form-control"%>         
 
+<%= f.hidden_field :type , value: "only_sender" %>
 
  <%= f.submit '보내기', class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
  <%= f.submit '초기화'	, type: :reset, class: 'btn btn-danger' %><!--입력되어진대로 제출한다.-->

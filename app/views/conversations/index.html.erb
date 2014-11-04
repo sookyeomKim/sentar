@@ -12,7 +12,10 @@
 						
 							
 							<ul class="conversation_list_ul">
+
 							<%@mailbox.conversations.each do |conversation| %>
+							<% receipts = conversation.receipts_for current_user %>
+							<% last_message = receipts.last.message %>
 
 							<% unless conversation.is_trashed?(current_user) %>
 
@@ -27,13 +30,14 @@
 									<ul>
 										<li>
 											<strong>
-												<!-- <%= link_to conversation.last_message.subject, conversation_path(conversation),style:'width:100%;height:25px;position:absolute;color:#000;'%> -->
-												<%=time_ago_in_words(conversation.last_message.created_at)%> ago
+												<!-- <%= link_to last_message.subject, conversation_path(conversation),style:'width:100%;height:25px;position:absolute;color:#000;'%> -->
+												<%=time_ago_in_words(last_message.created_at)%> ago
 												
-												<% read_users = who_read_this conversation.last_message %>
+												<!-- <% read_users = who_read_this last_message %> -->
 												 
-												 <% unless read_users.size == 0%>
 												 
+												 
+												 <% if is_read?(last_message) %>
 
 												 읽음
 
@@ -46,12 +50,12 @@
 											안 읽은 메세지 : <%=count_unread_message_in conversation %>
 										</li> 
 										<li>
-											<% if current_user?(conversation.last_message.sender) %>
+											<% if current_user?(last_message.sender) %>
 											<%=gravatar_for(current_user, size: 20) %>
 											<% elsif is_group  %>
 											<%=gravatar_for(conversation.last_sender, size: 20) %>
 											<%end%>
-											<%= link_to conversation.last_message.body, conversation_path(conversation),style:'width:100%;position:absolute;top:25px;height:25px;color:#666'%>
+											<%= link_to last_message.body, conversation_path(conversation),style:'width:100%;position:absolute;top:25px;height:25px;color:#666'%>
 											<!-- 위에다가,class:"text_split" 넣으면 이상해진다 -->
 										</li>
 										
@@ -73,8 +77,12 @@
 									</li>
 								</ol>
 							</li>
+
 							<% end %>
+
 							<% end %>
+
+
 						</ul>
 					</div>
 				</div>

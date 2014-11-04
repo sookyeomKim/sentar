@@ -32,6 +32,7 @@ resources :users do
     get :following, :followers
   end
 end
+
 #resources :users, only: [:show]
   resources :sessions,            only: [:new, :create, :destroy]
   resources :account_activations, only: [:edit]
@@ -40,12 +41,14 @@ end
   #resources :messages
  resources :conversations, only: [:index, :show, :new, :create] do
     
+
     member do
       post :reply
       post :trash
       post :untrash
     end
   end
+  post 'readable_off' => 'conversations#readable_off'
   
 resources :microposts do
     member do
