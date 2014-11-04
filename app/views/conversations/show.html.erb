@@ -2,11 +2,19 @@
 	<div class="col-lg-8">
 		<div class="panel">
 			<div class="panel-heading" style="background-color:#d9534f;">
-				<h2 class="accordion-toggle"data-toggle="collapse" data-parent="#accordion" href="#friend_list" style="text-align:center;"><%= csrf_meta_tags %><strong><%= conversation.subject %></strong></h2>
-			</div>
+			 	<% conversation.participants.each do |member| %>
+
+			 	 <% unless member == current_user %>
+				<%=gravatar_for member %>
+				<%= member.name %>
+				<% end %> <!-- unless end -->
+				<% end %> <!-- do end -->
+
+			</div> 
 			<div class="panel-body" style="padding:0 !important;">
 				<div class="message_list">
 					<ul class="message_list_ul">
+
 						<% conversation.receipts_for(current_user).each do |receipt| %>
 						<li class="message_list_item">
 							<div class="vertical_array_menu c_l_item_subject">
@@ -16,9 +24,38 @@
 										<!-- strong>
 											<%=message.subject %>
 										</strong> -->
+										<%= message.sender.name %>
 									</li>
 									<li>
 										<%= message.body %>
+										<%= message.created_at %>
+
+									<% if conversation.participants.size == 2 %> <!-- 일대일 대화일 경우 -->
+										<% if is_read?(message)  %>
+										읽음
+										<% else %>
+										안 읽음
+										<% end %>
+									<%else %> <!-- 그룹 대화일 경우 -->
+									<% read_grooup =  who_read_this message  %>									
+									<% if read_grooup.count > 0 %>
+									<h5>읽은 유저:</h5>
+									<% read_grooup.each do |member| %>
+									
+									<%=gravatar_for(member, size: 30) %>
+									
+
+									<%end%>
+
+									
+
+
+									<% end %>
+									<% end %>
+
+									</li>
+									<li>
+										
 									</li>
 								</ul>
 							</div>
@@ -33,6 +70,8 @@
 				</div>	
 			</div>
 		</div>
+		
+		
 		<%= render 'message/form' , conversation: conversation %>
 	</div>
 	<!-- <div class="col-lg-6">
