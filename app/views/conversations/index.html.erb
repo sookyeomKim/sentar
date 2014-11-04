@@ -6,27 +6,13 @@
 					<li class="active">	<h2><a href="#btn_inbox" data-toggle="tab"><strong>메세지 목록</strong></a></h2></li>
 				</ul>
 			</div>	
-<<<<<<< HEAD
-			
 			<div class="conversation_list" style="padding:0 !important;margin-top:54px;">
 				<ul class="conversation_list_ul">
 					<%@mailbox.conversations.each do |conversation| %>
-=======
-			<div class="tab-content" style="padding:0 !important;margin-top:54px;">
-				<div class="tab-pane fade active in" id="btn_inbox">
-					<div class="conversation_list">
-						
-							
-							<ul class="conversation_list_ul">
 
-							<%@mailbox.conversations.each do |conversation| %>
-							<% receipts = conversation.receipts_for current_user %>
-							<% last_message = receipts.last.message %>
->>>>>>> 6f377510a599462ddca26a37fac8127360ed3450
-
+					<% receipts = conversation.receipts_for current_user %>
+					<% last_message = receipts.last.message %>
 					<% unless conversation.is_trashed?(current_user) %>
-
-<<<<<<< HEAD
 					<% participants = conversation.participants %> <!-- 대화 참여자 -->
 					<%p_size = 50 %>
 					<% if participants.size  > 2 %>
@@ -40,60 +26,9 @@
 									<strong>
 										<!-- <%= link_to conversation.last_message.subject, conversation_path(conversation),style:'width:100%;height:25px;position:absolute;color:#000;'%> -->
 										<%=time_ago_in_words(conversation.last_message.created_at)%> ago
-										<% read_users = who_read_this conversation.last_message %>
-										<% unless read_users.size == 0%>
+										
+										<% if is_read?(last_message) %>
 										읽음
-=======
-							<% participants = conversation.participants %> <!-- 대화 참여자 -->
-							<%p_size = 50 %>
-							<% if participants.size  > 2 %>
-							<%p_size = 40   %>
-							<% is_group = true %>
-							<% end %>
-							<li class="conversation_list_item">
-								<div class="vertical_array_menu c_l_item_subject">
-									<ul>
-										<li>
-											<strong>
-												<!-- <%= link_to last_message.subject, conversation_path(conversation),style:'width:100%;height:25px;position:absolute;color:#000;'%> -->
-												<%=time_ago_in_words(last_message.created_at)%> ago
-												
-												<!-- <% read_users = who_read_this last_message %> -->
-												 
-												 
-												 
-												 <% if is_read?(last_message) %>
-
-												 읽음
-
-												 <% end %>
-												 	
-												
-												 
-		
-											</strong>
-											안 읽은 메세지 : <%=count_unread_message_in conversation %>
-										</li> 
-										<li>
-											<% if current_user?(last_message.sender) %>
-											<%=gravatar_for(current_user, size: 20) %>
-											<% elsif is_group  %>
-											<%=gravatar_for(conversation.last_sender, size: 20) %>
-											<%end%>
-											<%= link_to last_message.body, conversation_path(conversation),style:'width:100%;position:absolute;top:25px;height:25px;color:#666'%>
-											<!-- 위에다가,class:"text_split" 넣으면 이상해진다 -->
-										</li>
-										
-									</ul>
-								</div>
-								<ol><% participants.each do |participant| %>
-									<li>
-										
-										<%unless current_user?(participant) %> <!-- 나를 제외한 참여자들  얼굴 띄우기 -->
-
-											
-										<%=link_to gravatar_for(participant,size: p_size), participant%>
->>>>>>> 6f377510a599462ddca26a37fac8127360ed3450
 										<% end %>
 									</strong>
 									안 읽은 메세지 : <%=count_unread_message_in conversation %>
@@ -123,24 +58,14 @@
 							</li>
 
 							<% end %>
-<<<<<<< HEAD
 							<li>
 								<%= link_to "", trash_conversation_path(conversation),data: { confirm: "휴지통으로 버리시겠습니까?" } ,method: :post,class:'fa fa-trash' %>
 							</li>
 						</ol>
 					</li>
-					<% end %>
+					<% end %>					
 					<% end %>
 				</ul>
-=======
-
-							<% end %>
-
-
-						</ul>
-					</div>
-				</div>
->>>>>>> 6f377510a599462ddca26a37fac8127360ed3450
 			</div>
 		</div>
 	</div>

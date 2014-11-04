@@ -4,45 +4,35 @@ module ConversationsHelper
 
 
 def participants_name(conversation)
-
  name = []
  participants = conversation.participants
  participants.delete(current_user)
  if participants.count > 3 
  name = (1..3).map {|i| (participants[i]).name }
  name.join(",") + ", ..." #"외 #{participants.count - 3} 명"
-else
+ else
  # participants.each do |user|
  # 	unless current_user?(user)
  # 	name.push(user.name)
  # 	end
-
- 
  name = participants.map {|user| user.name}
-
-name.join(",")
-end
-
+ name.join(",")
+ end
 end
 
 def who_read_this(message)
-   
    receipts = message.receipts.where(mailbox_type: "inbox")
    read_member = []
    receipts.each do |receipt|
-   if receipt.is_read?
-   	read_member.push(receipt.receiver)
-
-   end
-   
+     if receipt.is_read?
+     	read_member.push(receipt.receiver)
+     end
    end
    return read_member
-
 end
 
 
 def count_unread_message_in(conversation)
-
 	receipts = conversation.receipts_for current_user
 
      count = 0
@@ -64,9 +54,5 @@ def is_read?(message)
  read_member = who_read_this(message)
 
  return true unless read_member.size == 0
-end
-
-
-
-
+ end
 end
