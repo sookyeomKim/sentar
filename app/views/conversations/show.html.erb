@@ -24,7 +24,9 @@
 										<!-- strong>
 											<%=message.subject %>
 										</strong> -->
+										<%if message.sender %> 
 										<%= message.sender.name %>
+										<%end %>
 									</li>
 									<li>
 										<%= message.body %>
@@ -50,9 +52,15 @@
 								</ul>
 							</div>
 							<ol>
+								
 								<li>
+									<%if message.sender %> 
 									<%= link_to(gravatar_for(message.sender, size: 40) , message.sender) %>
+									<else>
+									<!-- 탈퇴한 멤버 -->
+									<%end %>
 								</li>
+								
 							</ol>
 						</li>
 						<% end %>

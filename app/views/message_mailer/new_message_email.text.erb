@@ -3,8 +3,9 @@
 
 새로운 메일이 도착했습니다
 
+<%= gravatar_for @message.sender  %>
 -----------------------------------------------
-<%=gravatar_for(@message.sender) @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
+<%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
 -----------------------------------------------
 
 <%= link_to("확인하러가기", conversations_path ) %> 
