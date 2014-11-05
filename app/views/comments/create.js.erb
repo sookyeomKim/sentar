@@ -1,18 +1,9 @@
 
 
 
-$("#comment-2").html("asdfasdfasdfasdf")
+$('#micropost-<%=@micropost.id %>').html("<%=j render @micropost.comments %>")
 
-$<%= render @comment  %>
+<!-- $("#comment_form-<%=@micropost.id %>").html("<%= escape_javascript(j render 'comments/form' , micropost: @micropost) %>")
+ -->
 
 
-
-<% if @comment.errors.size == 0 %>
- $({'<%= render 'comments/comment' %>'}).appendTo($("#comment-<%= @micropost.id%>")).hide().fadeIn('fast')
-<% else %>
-
-alert("Please submit after commenting...")
-
-<%end%>
-
-$("#followers").html('<%= @user.followers.count %>')

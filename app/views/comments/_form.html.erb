@@ -1,30 +1,21 @@
-<%= form_for(@comment = @micropost.comments.build) do |f| %>
-  <% if @comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+<%= form_for(@comment, remote: :true) do |f| %>
+												<% if @comment.errors.any? %>
+												<div id="error_explanation">
+													<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-      <ul>
-      <% @comment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :user_name %><br>
-    <%= f.text_field :user_name %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
-  </div>
-   <%= f.hidden_field :micropost_id, value: @comment.micropost_id  %>
-
-
-  <div class="actions">
-    <% store_location %>
-    <%= f.submit %>
-
-  </div>
+													<ul>
+														<% @comment.errors.full_messages.each do |message| %>
+														<li><%= message %></li>
+														<% end %>
+													</ul>
+												</div>
+												<% end %> 
+												<%= f.hidden_field :user_name, value: current_user.name %>
+												
+												<%= f.text_area :content,class:'form-control input-sm',placeholder:'말은 그 무엇보다 강려크하다'%>
+											    
+												<%= f.hidden_field :micropost_id, value: micropost.id  %>
+												<span class="input-group-btn">
+													<% store_location %>
+													<%= f.submit('댓글등록', class:'btn btn-default btn-sm')%>
 <% end %>

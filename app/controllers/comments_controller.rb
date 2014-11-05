@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
 
     @comment = Comment.new(comment_params)
     @micropost = @comment.micropost
-    store_location
+    
 
     respond_to do |format|
       if @comment.save
@@ -62,14 +62,15 @@ class CommentsController < ApplicationController
     @comment.destroy
     respond_to do |format|
       format.html { redirect_back_or root_path  }
-      format.json { head :no_content }
+      #format.json { head :no_content }
+      format.js
     end
   end
 
   private
     def correct_user
     @comment = Comment.find(params[:id])
-     redirect_back_or root_path unless current_user?(User.find_by(name:@comment.user_name))
+     redirect_back_or root_path unless current_user?(User.find_by(name:@comment.user_name)) or current_user?(@comment.micropost.user)
     end
 
     # Use callbacks to share common setup or constraints between actions.

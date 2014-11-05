@@ -1,3 +1,5 @@
+
+
 <div class="tab-pane fade active in" id="blog_wrap">
 	<div class="row">
 		<div class="col-md-12">
@@ -49,7 +51,7 @@
 	<div class="panel-group" id="arcodian">
 		<%@microposts.each do |micropost| %>
 		<div class="panel panel-default">
-			<div class="media blog_list_item" id="micropost-<%=micropost.id%>">
+			<div class="media blog_list_item" >
 				<%=link_to gravatar_for(micropost.user,size:66), micropost.user,class:'pull-left'%>   
 				<div class="media-body">
 					<h4 class="media-heading">
@@ -57,7 +59,7 @@
 							<%=micropost.title%>
 						</a> 						
 					</h4>
-					<%=link_to micropost.user.name, micropost.user,target:''%>               
+					<p , style = 'bold'><%= micropost.user.name %> <p>               
 
 					<div >                            	
 						<span class="blog_timestamp"style="font-size:10px;"><%=time_ago_in_words(micropost.created_at)%> ago</span>
@@ -95,19 +97,19 @@
 									<!--댓글 wrap head end-->
 
 									<!--댓글 wrap body 김수겸 14_09_14-->
-									<div class="panel-body",id="comment-<%=micropost.id %>">
-										<ul class="chat" >
-											<% micropost.comments.each do |comment| %>
-											<%= render comment %>
-												<% end %>								
+									<div class="panel-body" >
+										<ul class="chat" id="micropost-<%=micropost.id %>" >
+											
+											<%= render micropost.comments %>
+																
 											</ul>
 										</div>
 										<!--댓글 wrap body end-->
 
 										<!--댓글 wrap footer 김수겸 14_09_14-->
-										<div class="panel-footer">
-											<div class="input-group">
-												<%= form_for(@comment) do |f| %>
+										<!-- <div class="panel-footer" >
+											<div class="input-group" >
+												<%= form_for(@comment, remote: :true) do |f| %>
 												<% if @comment.errors.any? %>
 												<div id="error_explanation">
 													<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -120,14 +122,19 @@
 												</div>
 												<% end %> 
 												<%= f.hidden_field :user_name, value: current_user.name %>
+												
 												<%= f.text_area :content,class:'form-control input-sm',placeholder:'말은 그 무엇보다 강려크하다'%>
+											    </div>
 												<%= f.hidden_field :micropost_id, value: micropost.id  %>
 												<span class="input-group-btn">
 													<% store_location %>
-													<%= f.submit('댓글등록',class:'btn btn-default btn-sm')%>
+													<%= f.submit('댓글등록', class:'btn btn-default btn-sm')%>
 													<% end %>
 												</span>
 											</div>
+										</div> -->
+										<div id="comment_form-<%=@micropost.id %>">
+										<%= render 'comments/form' , micropost: micropost %>
 										</div>
 										<!--댓글 wrap footer end-->
 									</div>

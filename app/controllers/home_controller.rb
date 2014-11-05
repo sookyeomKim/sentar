@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 	before_action :logged_in_user
-  before_action :mailbox
+  
 
   def index
   	@shelters = Shelter.all
@@ -16,8 +16,4 @@ class HomeController < ApplicationController
   end
 
 
-private
-  def mailbox
-    @mailbox ||= current_user.mailbox
-  end
 end
