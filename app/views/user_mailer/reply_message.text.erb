@@ -1,11 +1,9 @@
-새로운 메세지
+새로운 답장
 ===============================================
 
-새로운 메일이 도착했습니다
-
-
+ <%=@message.sender.name %> 님으로 부터 답장이 왔습니다
 -----------------------------------------------
 <%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
 -----------------------------------------------
 
-<%= link_to("확인하러가기", conversations_path ) %> 
+<%= link_to("확인하러 가기", conversations_path ) %>

@@ -1,10 +1,9 @@
-You have a new reply: <%= @subject %>
+새로운 답장
 ===============================================
 
-You have received a new reply:
-
+ <%=@message.sender %> 님으로 부터 답장이 왔습니다
 -----------------------------------------------
 <%= @message.body.html_safe? ? @message.body : strip_tags(@message.body) %>
 -----------------------------------------------
 
-Visit <%= root_url %> and go to your inbox for more info.
+<%= link_to("확인하러 가기", conversations_path ) %>

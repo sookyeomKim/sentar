@@ -87,6 +87,11 @@ class User < ActiveRecord::Base
     UserMailer.account_activation(self).deliver
   end
 
+  def send_new_message_emali(message)
+    UserMailer.new_message(message, self).deliver
+    
+  end
+
 
   def create_reset_digest # 패스워드 변경을 위한 토큰 다이제스트 생성
     self .reset_token = User.new_token
