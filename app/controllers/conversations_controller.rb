@@ -11,10 +11,17 @@ class ConversationsController < ApplicationController
   recipient_emails = conversation_params(:recipients).split(',')
   recipients = User.where(email: recipient_emails).all
 
-  conversation = current_user.
-  send_message(recipients, *conversation_params(:body, :subject)).conversation
+  if @conversation = already_have_conversation?(recipients)
+  body = conversation_params(:body)
+  current_user.reply_to_conversation( @conversation, body )
 
-  redirect_to conversation_path(conversation)
+  else
+  
+ @conversation = current_user.send_message(recipients, *conversation_params(:body, :subject)).conversation
+  end
+
+  redirect_to conversation_path(@conversation)
+   
 end
 
 
@@ -72,7 +79,22 @@ def message_params(*keys)
 end
 
 
+def already_have_conversation?(recipients)
 
+  conversations = mailbox.conversations
+  conversations.each do |conversation|
+    participants = conversation.participants
+    participants.delete(current_user)
+    if recipients == participants
+      @conversation = conversation
+      return @conversation
+    end
+
+  end
+  
+  return false
+  
+end
 
 
 
@@ -96,4 +118,9 @@ def correct_user
 
     end
   end
+
+
+
+
+
 end
