@@ -16,49 +16,50 @@
 					<% participants = conversation.participants %> <!-- 대화 참여자 -->
 					<%p_size = 50 %>
 					<% if participants.size  > 2 %>
-					<%p_size = 40   %>
+					<%p_size = 25   %>
 					<% is_group = true %>
 					<% end %>
 					<li class="conversation_list_item">
-						<div class="vertical_array_menu c_l_item_subject">
-							<ul>
-								<li>
-									<strong>
-										<!-- <%= link_to conversation.last_message.subject, conversation_path(conversation),style:'width:100%;height:25px;position:absolute;color:#000;'%> -->
-										<%=time_ago_in_words(conversation.last_message.created_at)%> ago
-										
-										<% if is_read?(last_message) %>
-										읽음
-										<% end %>
-									</strong>
-									안 읽은 메세지 : <%=count_unread_message_in conversation %>
-								</li> 
-								<li>
-									<span>
-										<% if current_user?(conversation.last_message.sender) %>
-										<%=gravatar_for(current_user, size: 20) %>
-										<% elsif is_group  %>
-										<%=gravatar_for(conversation.last_sender, size: 20) %>
-										<%end%>
+						<div>
+							<span>
+								<% if current_user?(conversation.last_message.sender) %>
+								<%=gravatar_for(current_user, size: 50) %>
+								<% elsif is_group  %>
+								<%=gravatar_for(conversation.last_sender, size: 50) %>
+								<%end%>
+								<!-- <a href="conversations/<%=conversation.id  %>">
+									<span class="text_split">
+										<%= conversation.last_message.body  %>
 									</span>
-									<span>
-										<%= link_to conversation.last_message.body, conversation_path(conversation),class:"text_split",style:'width:100%;position:absolute;top:25px;height:25px;color:#666'%>
-									</span>
-									<!-- 위에다가,class:"text_split" 넣으면 이상해진다 -->
-								</li>
-							</ul>
-						</div>
-						<ol>
-							<% participants.each do |participant| %>
-							<li>										
-								<%unless current_user?(participant) %> <!-- 나를 제외한 참여자들  얼굴 띄우기 -->
-								<%=link_to gravatar_for(participant,size: p_size), participant%>
-								<% end %>
-								<!-- <%=link_to gravatar_for(conversation.last_sender,size:50), conversation.last_sender%>  -->
-							</li>
+								</a> -->
+								<%= link_to conversation.last_message.body, conversation_path(conversation),class:"text_split"%>
+							</span>
+							<span class="index_message_info vertical_array_menu">
+								<ul>
+									<li>
+										<strong>
+											<%=time_ago_in_words(conversation.last_message.created_at)%> ago
 
+											<% if is_read?(last_message) %>
+											읽음
+											<% end %>
+										</strong>
+									</li>
+									<li>
+										<i class="label label-warning" style="float:right;margin:5px;"><%=count_unread_message_in conversation %></i>
+									</li>
+								</ul>
+							</span>
+						</div>
+						<ol>							
+							<% participants.each do |participant| %>
+							<%unless current_user?(participant) %>
+							<li class="index_message_right_info">									
+								<%=link_to gravatar_for(participant,size: p_size), participant%>
+							</li>
 							<% end %>
-							<li>
+							<% end %>
+							<li clas="index_message_right_info">
 								<%= link_to "", trash_conversation_path(conversation),data: { confirm: "휴지통으로 버리시겠습니까?" } ,method: :post,class:'fa fa-trash' %>
 							</li>
 						</ol>
@@ -76,8 +77,8 @@
 		for(var i = 0 ; i<=text_count;i++){
 			var each_text = $(".text_split:eq("+i+")").text();
 			var each_text_length = each_text.length;
-			if(each_text_length>=20){
-				var text_substr = each_text.substr(0,19)+'...';
+			if(each_text_length>=25){
+				var text_substr = each_text.substr(0,24)+'...';
 				$(".text_split:eq("+i+")").text(text_substr);
 			}
 		}
@@ -88,10 +89,10 @@
 
 	<div class="col-lg-6">
 		<div class="panel" id="arcodian">
-			<div class="panel-heading" style="background-color:#777;">
+			<div class="panel-heading">
 				<h2 class="accordion-toggle"data-toggle="collapse" data-parent="#accordion" href="#friend_list" style="cursor:pointer; text-align:center;"><strong>친구목록</strong></h2>
 			</div>
-			<div>
+			<div style="background-color:#f0f0f0;">
 				<% if current_user.following.any? %>
 				<ul id="friend_list" class="message_friends_wrap panel-collapse collapse">
 					<li>
@@ -123,8 +124,8 @@
 						}
 					});
 					<% end %>
-					<div class="tab-content">
-						<div  class="tab-pane active">
+					<div class="">
+						<div  class="">
 							<%= form_for(:conversation, url: :conversations, method: :post) do |f| %>
 							<%= f.label :recipients,'받는사람(친구 목록을 눌러보아요 :)' %>
 							<%= f.text_field :recipients,class:"form-control",id:'recipients_form' %>
