@@ -14,10 +14,15 @@ class ConversationsController < ApplicationController
   if @conversation = already_have_conversation?(recipients)
   body = conversation_params(:body)
   current_user.reply_to_conversation( @conversation, body )
-
+  
   else
   
  @conversation = current_user.send_message(recipients, *conversation_params(:body, :subject)).conversation
+
+
+
+
+  
   end
 
   redirect_to conversation_path(@conversation)
