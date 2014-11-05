@@ -3,7 +3,7 @@
 		<div class="panel">
 			<div  class="horizon_array_menu_h btn_mail">
 				<ul>
-					<li class="active">	<h2><a href="#btn_inbox" data-toggle="tab"><strong>메세지 목록</strong></a></h2></li>
+					<li class="active">	<h2><strong>메세지 목록</strong></h2></li>
 				</ul>
 			</div>	
 			<div class="conversation_list" style="padding:0 !important;margin-top:54px;">
@@ -14,18 +14,14 @@
 					<% last_message = receipts.last.message %>
 					<% unless conversation.is_trashed?(current_user) %>
 					<% participants = conversation.participants %> <!-- 대화 참여자 -->
-					<%p_size = 50 %>
-					<% if participants.size  > 2 %>
-					<%p_size = 25   %>
-					<% is_group = true %>
-					<% end %>
+					<% is_group = true %>					
 					<li class="conversation_list_item">
 						<div>
 							<span>
 								<% if current_user?(conversation.last_message.sender) %>
-								<%=gravatar_for(current_user, size: 50) %>
+								<%=gravatar_for_circle2(current_user, size: 50) %>
 								<% elsif is_group  %>
-								<%=gravatar_for(conversation.last_sender, size: 50) %>
+								<%=gravatar_for_circle(conversation.last_sender, size: 50) %>
 								<%end%>
 								<!-- <a href="conversations/<%=conversation.id  %>">
 									<span class="text_split">
@@ -38,32 +34,52 @@
 								<ul>
 									<li>
 										<strong>
-											<%=time_ago_in_words(conversation.last_message.created_at)%> ago
-
-											<% if read_counts(last_message) > 1 %>
-											읽음
-											<% end %>
+											<%=time_ago_in_words(conversation.last_message.created_at)%> ago	
 										</strong>
 									</li>
 									<li>
-										<i class="label label-warning" style="float:right;margin:5px;"><%=count_unread_message_in conversation %></i>
+										<span style="float:right;margin:5px;">
+											<% if read_counts(last_message) > 1 %>
+											읽음
+											<% end %>
+										<i class="label label-warning"><%=count_unread_message_in conversation %></i>
+										</span>
 									</li>
 								</ul>
 							</span>
 						</div>
-						<ol>							
-							
+						<!-- position:absolute; width:100px;height;100px;top:0;left:0; -->
+						<ol>		
 							<li>	
 							<% participants.each do |participant| %>
-							<%unless current_user?(participant) %>								
-								<%=link_to gravatar_for(participant,size: p_size), participant%>
-							<% end %>
+								<%unless current_user?(participant) %>
+									<% if participants.size  <= 2 %>
+									<%=link_to gravatar_for_circle2(participant,size: 50), participant%>
+									<% elsif participants.size  <=6 %>
+										<%=link_to gravatar_for_circle2(participant,size: 25), participant,style:"height:25px !important;"%>
+									<% elsif participants.size  > 6 %>
+										<% unless participant.id  >= 6 %>
+										<%=link_to gravatar_for_circle2(participant,size: 25), participant,style:"height:25px !important;",class:"accordion-toggle","data-toggle"=>"collapse", "data-parent"=>"#accordion", href:"#user_view"%>
+										<% end %>
+									<% end %>
+								<% end %>
 							<% end %>
 							</li>
 							<li>
 								<%= link_to "", trash_conversation_path(conversation),data: { confirm: "휴지통으로 버리시겠습니까?" } ,method: :post,class:'fa fa-trash trash_btn' %>
 							</li>
 						</ol>
+					</li>
+					<li>
+						<% if participants.size  > 6 %>
+							<div class="panel-collapse collapse" id="user_view">
+								<% participants.each do |participant| %>
+									<%unless current_user?(participant) %>
+										<%=link_to gravatar_for_circle2(participant,size: 50), participant%>
+									<% end %>
+								<% end %>
+							</div>
+						<% end %>
 					</li>
 					<% end %>					
 					<% end %>

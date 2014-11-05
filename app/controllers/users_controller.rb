@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-    before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
-                                        :following, :followers]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
+    :following, :followers]
    # 모든 유저보기 , 유저 설정 , 업데이트 , 삭제 는 로그인상태일때만 가능  
   before_action :correct_user,   only: [:edit, :update] # 해당 아이디로 로그인 상태일때만 설정 및 업데이트 가능
   before_action :admin_user,     only: :destroy # destroy action은 관리자만 가능
@@ -23,16 +23,16 @@ class UsersController < ApplicationController
   end
 
   
- 
-def create
+
+  def create
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email  #계정 활성화 이메일 발송
       Shelter.create!(user_id: @user.id, introduce: "설정에서 변경해주세요", lonlat: 0000) #회원가입후 기본 쉘터 생성
       Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'bulletin', title: '공지사항', description: 'init description')
-        Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'blog', title: '새소식', description: 'init description')
-        Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'bulletin', title: '가입인사', description: 'init description')
-        Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'gallery', title: '갤러리', description: 'init description')
+      Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'blog', title: '새소식', description: 'init description')
+      Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'bulletin', title: '가입인사', description: 'init description')
+      Bulletin.create!(user_id: @user.id, shelter_id: @user.id, post_type: 'gallery', title: '갤러리', description: 'init description')
       flash[:info] = "메일을 발송하였습니다 확인해 주세요."
       redirect_to root_url
     else
@@ -78,12 +78,12 @@ def create
   private
     def user_params #strong parameters rails4.0 부터 필요함
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+       :password_confirmation)
     end
-  
+
   # 로그인 상태 확인
-    def logged_in_user
-      unless logged_in?
+  def logged_in_user
+    unless logged_in?
         store_location # 로그인 후 유저 프로필 페이지가 아닌 edit_form으로 이동
         flash[:danger] = "Please log in."
         redirect_to login_url
@@ -97,10 +97,7 @@ def create
     end
 
      # 관리자 확인
-    def admin_user
+     def admin_user
       redirect_to(root_url) unless current_user.admin? #현재 유저가 관리자가 아닐경우 root 유알엘로 redirect
     end
-
-
-    
-end
+  end
