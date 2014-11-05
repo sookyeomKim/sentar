@@ -20,15 +20,29 @@ def participants_name(conversation)
  end
 end
 
-def who_read_this(message)
-   receipts = message.receipts.where(mailbox_type: "inbox")
-   read_member = []
-   receipts.each do |receipt|
+# def who_read_this(message)
+#    receipts = message.receipts
+#    read_member = []
+#    receipts.each do |receipt|
+#      if receipt.is_read?
+#      	read_member.push(receipt.receiver)
+#      end
+#    end
+#    return read_member
+# end
+
+
+def read_counts(message)
+    count = 0  
+   receipts = message.receipts
+  
+  receipts.each do |receipt|
      if receipt.is_read?
-     	read_member.push(receipt.receiver)
+      count += 1
      end
    end
-   return read_member
+   return count
+
 end
 
 
@@ -50,9 +64,14 @@ end
 
 def is_read?(message)
 
- read_member = []
- read_member = who_read_this(message)
+ # read_member = []
+ # read_member = who_read_this(message)
 
+ 
+ read_counts(message)
  return true unless read_member.size == 0
  end
+
+
+
 end

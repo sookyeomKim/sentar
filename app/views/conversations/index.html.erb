@@ -40,7 +40,7 @@
 										<strong>
 											<%=time_ago_in_words(conversation.last_message.created_at)%> ago
 
-											<% if is_read?(last_message) %>
+											<% if read_counts(last_message) > 1 %>
 											읽음
 											<% end %>
 										</strong>
