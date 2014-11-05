@@ -52,15 +52,16 @@
 							</span>
 						</div>
 						<ol>							
+							
+							<li>	
 							<% participants.each do |participant| %>
-							<%unless current_user?(participant) %>
-							<li class="index_message_right_info">									
+							<%unless current_user?(participant) %>								
 								<%=link_to gravatar_for(participant,size: p_size), participant%>
+							<% end %>
+							<% end %>
 							</li>
-							<% end %>
-							<% end %>
-							<li clas="index_message_right_info">
-								<%= link_to "", trash_conversation_path(conversation),data: { confirm: "휴지통으로 버리시겠습니까?" } ,method: :post,class:'fa fa-trash' %>
+							<li>
+								<%= link_to "", trash_conversation_path(conversation),data: { confirm: "휴지통으로 버리시겠습니까?" } ,method: :post,class:'fa fa-trash trash_btn' %>
 							</li>
 						</ol>
 					</li>
@@ -77,8 +78,8 @@
 		for(var i = 0 ; i<=text_count;i++){
 			var each_text = $(".text_split:eq("+i+")").text();
 			var each_text_length = each_text.length;
-			if(each_text_length>=25){
-				var text_substr = each_text.substr(0,24)+'...';
+			if(each_text_length>=20){
+				var text_substr = each_text.substr(0,19)+'...';
 				$(".text_split:eq("+i+")").text(text_substr);
 			}
 		}
