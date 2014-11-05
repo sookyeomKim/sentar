@@ -196,7 +196,7 @@
 		position: relative;
 		vertical-align: middle;
 	}
-	.btn_mail>ul>li>h2>a>strong{
+	.btn_mail>ul>li>h2>strong{
 		color: #fff;
 	}
 
@@ -239,20 +239,25 @@
 						float: right;
 					}
 				}
-				ol { float: right;
+				ol { 
+					float: right;
 					li {
-						a{float: right;
+						a{
+							float: right;
+							font-size: 0 !important;
+							line-height: 0 !important;
 							img{
-								margin-top: -4.2px;
+								/* margin-top: -4.2px; */
+
 							}
 						}
 						cursor: pointer;
 						float: left;
-						width: 50px; height: 50px;
-						font-size: 20pt;
-						line-height: 50px;
+						width: 50px; height: 50px;						
 						text-align: center;
 						.trash_btn{
+							font-size: 20pt !important;
+							line-height: 25px !important;
 							color: #000;
 							margin-top: 11.5px;
 							margin-right: 12.5px;
