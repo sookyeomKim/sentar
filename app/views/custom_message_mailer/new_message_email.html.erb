@@ -10,13 +10,13 @@
     </p>
     <blockquote>
 
-      
+      <%=gravatar_for(@message.sender) %>
       <p>
         <%= raw @message.body %>
       </p>
     </blockquote>
     <p>
-      <%= link_to("확인하러가기", conversations_path ) %> 
+      <%= link_to("확인하러가기", conversations_url ) %> 
 
     </p>
   </body>

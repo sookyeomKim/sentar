@@ -7,6 +7,8 @@
     <h1>새로운 답장</h1>
 
     <p>
+
+      <%=gravatar_for(@message.sender) %>
       <%=@message.sender.name %> 님으로 부터 답장이 왔습니다
     </p>
     <blockquote>
@@ -15,7 +17,7 @@
       </p>
     </blockquote>
     <p>
-     <%= link_to("확인하러가기", conversations_path ) %> 
+     <%= link_to("확인하러가기", conversations_url ) %> 
     </p>
   </body>
 </html>
