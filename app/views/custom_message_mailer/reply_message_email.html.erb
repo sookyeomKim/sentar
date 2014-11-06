@@ -4,20 +4,18 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>새로운 메세지</h1>
+    <h1>새로운 답장</h1>
+    <%= gravatar_for(@message.sender) %>
     <p>
-      새로운 메일이 도착했습니다
+      <%=@message.sender.name %> 님으로 부터 답장이 왔습니다
     </p>
     <blockquote>
-
-      <%= gravatar(@message.sender) %>
       <p>
         <%= raw @message.body %>
       </p>
     </blockquote>
     <p>
-      <%= link_to("확인하러가기", conversations_path ) %> 
-
+     <%= link_to("확인하러가기", conversations_path ) %> 
     </p>
   </body>
 </html>

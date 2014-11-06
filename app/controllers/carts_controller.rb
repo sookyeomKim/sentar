@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   before_filter :extract_shopping_cart
-  before_action :mailbox
+  
 
 
 
@@ -46,9 +46,9 @@ end
   # @amount = params[:amount]
   #  # flash[:success] = "#{@product.id}????"
   # # @cart.remove(@product, @amount.to_i)
-  # @cart.remove(@product)
+  quantity = @cart.cart_items.find_by(item_id: @product).quantity
+  @cart.remove(@product, quantity)
 
-  CartItem.rm_product_incart(@product)
    redirect_to cart_path
  
 
@@ -69,8 +69,6 @@ end
    
  end
 
-  def mailbox
-    @mailbox ||= current_user.mailbox
-  end 
+  
 
 end
