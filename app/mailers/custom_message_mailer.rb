@@ -1,5 +1,5 @@
 class CustomMessageMailer < Mailboxer::BaseMailer
-default from: "sentar@noreply.com"
+default from: "sentar@sentar.com"
 def send_email(message, receiver)
 if message.conversation.messages.size > 1
 reply_message_email(message,receiver)
