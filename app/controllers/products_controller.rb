@@ -1,11 +1,11 @@
 class ProductsController < ApplicationController
 	before_action :logged_in_user, only: [:create, :destroy]
 	before_action :correct_user, only: [ :destroy]
-  before_action :mailbox
+
 	
 	def show
 	@product = Product.find(params[:id])
-	@comment = @product.comments.build	 
+	# @comment = @product.comments.build	 
 	end
 
 	def new
@@ -55,9 +55,7 @@ class ProductsController < ApplicationController
   	end
 
  	private
-    def mailbox
-    @mailbox ||= current_user.mailbox
-    end 
+   
 
   def correct_user
   @product = Product.find(params[:id])

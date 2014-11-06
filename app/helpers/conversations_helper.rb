@@ -32,6 +32,13 @@ end
 # end
 
 
+def yourwelcome(body)
+  body.split
+
+
+  
+end
+
 def read_counts(message)
     count = 0  
    receipts = message.receipts

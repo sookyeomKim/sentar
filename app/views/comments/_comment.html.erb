@@ -1,7 +1,7 @@
 
 											
 <li class="left clearfix", id="comment-<%=comment.id %>">
-<% @user = User.find_by(name: comment.user_name) %>
+<% @user = comment.user || product.user %>
 <span class="chat-img pull-left"> <%= gravatar_for @user , size: 50   ,class:'img-circle'%></span>
 <div class="chat-body clearfix">
 <div class="header">

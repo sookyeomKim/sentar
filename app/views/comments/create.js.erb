@@ -1,9 +1,16 @@
 
 
-
+<% if @micropost %>
 $('#micropost-<%=@micropost.id %>').html("<%=j render @micropost.comments %>")
 
+<% end %>
 
 
+
+<% if @product  %>
+
+$('#product-<%=@product.id %>').html("<%=j render @product.comments,partial: "comments/product_comment" , product: @product %>")
+
+<% end %>
 
 

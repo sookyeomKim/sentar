@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @comment = Comment.new
+    @comment = current_user.comments.new
   end
 
   # GET /comments/1/edit
@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
 
     @comment = Comment.new(comment_params)
     @micropost = @comment.micropost
-    
+    @product = @comment.product
 
     respond_to do |format|
       if @comment.save
@@ -70,7 +70,7 @@ class CommentsController < ApplicationController
   private
     def correct_user
     @comment = Comment.find(params[:id])
-     redirect_back_or root_path unless current_user?(User.find_by(name:@comment.user_name)) or current_user?(@comment.micropost.user)
+     redirect_back_or root_path unless current_user?(@comment.user) or current_user?(@comment.micropost.user)
     end
 
     # Use callbacks to share common setup or constraints between actions.
@@ -80,6 +80,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:user_name, :content, :micropost_id, :product_id)
+      params.require(:comment).permit(:user_id, :user_name, :content, :micropost_id, :product_id)
     end
 end

@@ -41,38 +41,47 @@
 
 								<!--댓글 wrap body 김수겸 14_09_14-->
 								<div class="panel-body">
-									<ul class="chat">
-										<% @product.comments.each do |comment| unless comment.nil?  %>
-										<li class="left clearfix">
-											<% if  @user = User.find_by(name: comment.user_name)%>
-											
+									<ul class="chat"  id="product-<%=@product.id %>">
+										
+										<% @product.comments.each do |comment|     %>
+										
+										<li class="left clearfix" id="comment-<%=comment.id %>">
+											<% @user = comment.user %>
+											 
 											<span class="chat-img pull-left"> <%= gravatar_for @user , size: 50   ,class:'img-circle'%></span>
 											<div class="chat-body clearfix">
 												<div class="header">
 													<strong class="primary-font"> <%= comment.user_name %> </strong>
 													<small class="pull-right text-muted">
-														<%if current_user?(@user)%>
-														<%= link_to '삭제', comment_path(comment), method: :delete, data: { confirm: '댓글 삭제?' } %>
-														<% end %>			
-														 <i class="icon-time"></i> <%=time_ago_in_words(comment.created_at)%> ago </small>
+														<%if current_user?(@user)  %>		
+														<%= link_to '삭제', comment_path(comment), method: :delete, remote: :true,  data: { confirm: '댓글 삭제?' } %>
+														<%= time_ago_in_words(comment.created_at) %> ago
+
+														<% end %>	
+
+													</small>
 												</div>
-												<br>
+
+												
 												<p>
 													<%= comment.content %>
 												</p>
 											</div>
+											
 										</li>
-										<% end %>
-										<% end %>
+										
+										
 										<% end %>
 									</ul>
 								</div>
+								
 								<!--댓글 wrap body end-->
 
 								<!--댓글 wrap footer 김수겸 14_09_14-->
 								<div class="panel-footer">
 									<div class="input-group">
-										<%= form_for(@comment) do |f| %>
+										<% @comment = @product.comments.build %>
+										<%= form_for(@comment, remote: :true) do |f| %>
 										<% if @comment.errors.any? %>
 										<div id="error_explanation">
 											<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -84,7 +93,7 @@
 											</ul>
 										</div>
 										<% end %> 
-										<%= f.hidden_field :user_name, value: current_user.name %>
+										<%= f.hidden_field :user_id, value: current_user.id %>
 										<%= f.text_area :content,class:'form-control input-sm',placeholder:'말은 그 무엇보다 강려크하다',style:'width:400px;' %>
 										<%= f.hidden_field :product_id, value: @product.id  %>
 										<span class="input-group-btn">
@@ -322,4 +331,8 @@
 					<!--우측 wrap end-->
 				</div>
 			</div>
+
+		</div>
+	</div>
+</div>
 

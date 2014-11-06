@@ -29,7 +29,7 @@
 										<%end %>
 									</li>
 									<li>
-										<%= message.body %>
+										<%= simple_format(message.body) %> 
 										<%= message.created_at %>
 
 									<% if conversation.participants.size == 2 %> <!-- 일대일 대화일 경우 -->

@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
                                    foreign_key: "followed_id",
                                    dependent:   :destroy
 
+
+
       has_many :following, through: :active_relationships, source: :followed
       has_many :followers, through: :passive_relationships, source: :follower
       has_many :products
@@ -16,7 +18,7 @@ class User < ActiveRecord::Base
       has_many :cart_items , class_name: "CartItem" , foreign_key: "owner_id" 
       has_many :purchases
       has_many :admin_purchases , class_name: "Purchase" , foreign_key: "owener_id"
-      has_many :comments , dependent: :destroy , foreign_key: "user_name", primary_key: "name"
+      has_many :comments , dependent: :destroy 
      attr_accessor :remember_token, :activation_token , :reset_token, :readable #getter, setter 지정
      before_save :downcase_email # user가 디비에 저장되기 전에 email 주소를 소문자로 변경
      before_create :create_activation_digest  # user를 생성하기전 activation_digest를 생성
