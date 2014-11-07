@@ -5,12 +5,12 @@ class HomeController < ApplicationController
   def index
   	@shelters = Shelter.all
   	
-  	@user ||= current_user
-  	@microposts= Micropost.from_users_followed_by(@user)
-  	@micropost = @user.microposts.build 
-  	@comments = @micropost.comments.all
-   @comment = @micropost.comments.build
-   @products ||= @user.productFeed
+  @user ||= current_user
+  @microposts= Micropost.from_users_followed_by(@user)
+  @micropost = @user.microposts.build 
+  @comments = @micropost.comments.all
+  @comment = @micropost.comments.build
+  @products ||= @user.productFeed
 
    #@conversations = current_user.mailbox.inbox
   end
