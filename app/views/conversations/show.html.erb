@@ -5,8 +5,8 @@
 				<div class="message_list">
 					<ul class="message_list_ul">
 						<% conversation.receipts_for(current_user).each do |receipt| %>
-						<li class="message_list_item">
-							<% message = receipt.message %>
+						<% message = receipt.message %>
+						<li class="message_list_item" id="<%=message.id%>">							
 							<ol>
 								<li>
 									<%if message.sender %> 
