@@ -43,10 +43,11 @@
 								<div class="panel-body">
 									<ul class="chat"  id="product-<%=@product.id %>">
 										
-										<%=render "comments/product_comment" , comments: @product.comments %>
+										<%= render "comments/product_comment" , comments: @product.comments %>
 
 									</ul>
 								</div>
+							
 								
 								<!--댓글 wrap body end-->
 

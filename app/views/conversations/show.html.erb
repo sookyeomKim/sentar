@@ -4,7 +4,7 @@
 			<div class="panel-body" id="message_chat" style="padding:0 !important;">
 				<div class="message_list">
 					<ul class="message_list_ul">
-						<% conversation.receipts_for(current_user).each do |receipt| %>
+						<% conversation.receipts_for(current_user).order('created_at ASC').each do |receipt| %>
 						<% message = receipt.message %>
 						<li class="message_list_item" id="<%=message.id%>">							
 							<ol>

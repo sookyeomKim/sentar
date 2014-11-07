@@ -77,7 +77,8 @@ def conversation
   # id = params[:id].to_i
   # if ids.include?id
 
-  @conversation ||= mailbox.conversations.find(params[:id]) 
+  @conversation ||= mailbox.conversations.find(params[:id])
+
 # else
 #   flash[:danger] = "다른 유저들의 방은 안되여 :("
 #   redirect_to conversations_path
