@@ -1,6 +1,6 @@
 class ConversationsController < ApplicationController
 
-  # before_action :correct_user , only: [:show]
+
   helper_method :mailbox, :conversation
   def index
    @mailbox ||= current_user.mailbox
@@ -40,7 +40,7 @@ end
 
 def show
   
-  
+  @conversation ||= mailbox.conversations.find(params[:id]) 
   @conversation.mark_as_read(current_user)
   
 
@@ -72,15 +72,15 @@ def mailbox
 end
 
 def conversation
-  ids = mailbox.conversations.ids
-  id = params[:id].to_i
-  if ids.include?id
+  # ids = mailbox.conversations.ids
+  # id = params[:id].to_i
+  # if ids.include?id
 
   @conversation ||= mailbox.conversations.find(params[:id]) 
-else
-  flash[:danger] = "다른 유저들의 방은 안되여 :("
-  redirect_to conversations_path
-end
+# else
+#   flash[:danger] = "다른 유저들의 방은 안되여 :("
+#   redirect_to conversations_path
+# end
 
 end
 
