@@ -2,7 +2,9 @@ class ConversationsController < ApplicationController
 
 
   helper_method :mailbox, :conversation
-  def index
+
+
+def index
    @mailbox ||= current_user.mailbox
    @conversations = @mailbox.conversations.paginate(page: params[:page], per_page: 7  )
 
