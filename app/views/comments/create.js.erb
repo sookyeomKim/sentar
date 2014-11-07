@@ -5,20 +5,25 @@
 $('<%=j render @comment %>').appendTo($("#micropost-<%=@micropost.id %>")).hide().fadeIn('fast');
 $('#comment_form-<%= @micropost.id %>')[0].reset()
 
-<% end %>
-
-
-
-<% if @product  %>
-$('<%=j render @comment %>').appendTo($("#product-<%=@product.id %>")).hide().fadeIn('fast');
-
-$('#comment_form')[0].reset()
-<% end %>
-
-
 $(function(){
 var target_id='#micropost-<%=@micropost.id %>';
 $('#micropost-scroll-div').css('scrollTop', $(target_id).offset().top);
 $('#micropost-scroll-div').animate({ scrollTop: <%=@micropost.comments.size%>*100 }, 2000); 
 /*window.scrollTo(0, $(target_id).offset().top);*/
 });
+
+
+<% end %>
+
+
+
+<% if @product  %>
+
+$('<%= j render @comment %>').appendTo($("#product-<%=@product.id %>")).hide().fadeIn('fast');
+$('#comment_form')[0].reset()
+
+
+
+<% end %>
+
+
