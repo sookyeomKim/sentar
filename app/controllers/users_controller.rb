@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   def index
     @mailbox ||= current_user.mailbox
     @users = User.paginate(page: params[:page])
+
   end
   
   def show

@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   def index
   	@shelters = Shelter.all
   	
-  	@user = User.find(current_user.id)
+  	@user = current_user
   	@microposts= Micropost.from_users_followed_by(@user)
   	@micropost = current_user.microposts.build 
   	@comments = @micropost.comments.all

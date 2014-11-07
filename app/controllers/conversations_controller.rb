@@ -4,6 +4,9 @@ class ConversationsController < ApplicationController
   helper_method :mailbox, :conversation
   def index
    @mailbox ||= current_user.mailbox
+   @conversations = @mailbox.conversations.paginate(page: params[:page], per_page: 7  )
+
+   
  end
 
 
@@ -69,9 +72,15 @@ def mailbox
 end
 
 def conversation
+  ids = mailbox.conversations.ids
+  id = params[:id].to_i
+  if ids.include?id
 
   @conversation ||= mailbox.conversations.find(params[:id]) 
-
+else
+  flash[:danger] = "다른 유저들의 방은 안되여 :("
+  redirect_to conversations_path
+end
 
 end
 

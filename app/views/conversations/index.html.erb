@@ -8,7 +8,7 @@
 			</div>	
 			<div class="conversation_list" style="padding:0 !important;margin-top:54px;">
 				<ul class="conversation_list_ul">
-					<%@mailbox.conversations.each do |conversation| %>
+					<%@conversations.each do |conversation| %>
 
 					<% receipts = conversation.receipts_for current_user %>
 					<% last_message = receipts.last.message %>
@@ -80,13 +80,16 @@
 								<% end %>
 							</div>
 						<% end %>
+
 					</li>
 					<% end %>					
 					<% end %>
 				</ul>
+				<%= will_paginate %>
 			</div>
 		</div>
 	</div>
+
 
 	<script>
 	var text_split = function(){		

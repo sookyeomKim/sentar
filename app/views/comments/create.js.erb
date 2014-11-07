@@ -2,6 +2,8 @@
 
 <% if @micropost %>
 $('#micropost-<%=@micropost.id %>').html("<%=j render @micropost.comments %>")
+$('#comment_form-<%= @micropost.id %>')[0].reset()
+
 
 <% end %>
 
