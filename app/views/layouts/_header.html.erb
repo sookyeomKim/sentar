@@ -107,7 +107,7 @@
                                 <a class="dropdown-toggle"
                                 data-toggle="dropdown" href="#"> <i class="fa fa-user"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
                                 <% if current_user.following.any? %>
-                                <ul class="dropdown-menu dropdown-friend" id="friend_list">
+                                <ul class="dropdown-menu dropdown-friend">
                                     <%= render current_user.following %>
                                 </ul>
                                 <% end %>

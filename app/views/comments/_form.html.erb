@@ -1,23 +1,25 @@
 
 <%= form_for(@comment, remote: :true, :html => { :id => "comment_form-#{micropost.id}"  } ) do |f| %>
+<% if @comment.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-												<% if @comment.errors.any? %>
-												<div id="error_explanation">
-													<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+	<ul>
+		<% @comment.errors.full_messages.each do |message| %>
+		<li><%= message %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %> 
+<%= f.hidden_field :user_id, value: current_user.id %>
 
-													<ul>
-														<% @comment.errors.full_messages.each do |message| %>
-														<li><%= message %></li>
-														<% end %>
-													</ul>
-												</div>
-												<% end %> 
-												<%= f.hidden_field :user_id, value: current_user.id %>
-										
-												<%= f.text_area :content,class:'form-control input-sm',placeholder:'말은 그 무엇보다 강려크하다'%>
-											   
-												<%= f.hidden_field :micropost_id, value: micropost.id  %>
-												<span class="input-group-btn">
-													<% store_location %>
-													<%= f.submit('댓글등록', class:'btn btn-default btn-sm')%>
+<%= f.text_area :content,class:'form-control input-sm',id:"comment_textarea-#{micropost.id}",placeholder:'말은 그 무엇보다 강려크하다'%>
+
+<%= f.hidden_field :micropost_id, value: micropost.id  %>
+<span><a class="btn btn-default blog_comment_submit_btn" id="<%= micropost.id  %>">댓글등록</a></span>
+<span id="blog_comment_warning<%= micropost.id  %>" class="text-danger" style="display:none;">빈칸은 앙대영!!!</span>
+
+<!-- <%= f.submit('댓글등록', class:'btn btn-default btn-sm')%> -->
 <% end %>
+
+
