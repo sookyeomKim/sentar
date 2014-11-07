@@ -1,6 +1,6 @@
 class ConversationsController < ApplicationController
 
-  before_action :correct_user , only: [:show]
+  # before_action :correct_user , only: [:show]
   helper_method :mailbox, :conversation
   def index
    @mailbox ||= current_user.mailbox
