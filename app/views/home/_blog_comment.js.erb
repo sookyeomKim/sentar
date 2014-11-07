@@ -1,0 +1,17 @@
+<%= javascript_tag do %>
+$(".blog_comment_submit_btn").on("click",function(event){
+  var comment_currentTarget = $(event.currentTarget);
+  var comment_currentTarget_id = comment_currentTarget.attr("id");
+  /*alert(comment_currentTarget.parent().parent().parent().find("form"));*/
+  /*var comment_id=$(this).attr("id");*/
+  var blog_comment_form = comment_currentTarget.parent().parent().parent().find("form");
+  var text_area = comment_currentTarget.parent().parent().parent().find("textarea");
+  var text_area_val = text_area.val();
+  if(text_area_val===""){
+    $("#blog_comment_warning"+comment_currentTarget_id).css( "display", "inline" ).fadeOut( 1250 );
+    return;
+  }    
+  blog_comment_form.submit();
+  var text_area = text_area.val("");
+});
+<% end %>
