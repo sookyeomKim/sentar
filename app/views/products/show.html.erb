@@ -282,7 +282,7 @@
 										
 										<div >
 										
-										<%= image_tag  @product.picture2.url , class:"item_img"%>
+										<%= image_tag  @product.picture2.url , class:"item_img" if @product.picture?%>
 										</div>
 										
 									</div>
