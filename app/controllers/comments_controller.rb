@@ -33,6 +33,8 @@ class CommentsController < ApplicationController
     @micropost = @comment.micropost
     @product = @comment.product
 
+    @comment.user_name = current_user.name
+
     respond_to do |format|
       if @comment.save
         format.html { redirect_back_or root_path}
