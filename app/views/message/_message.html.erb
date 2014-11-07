@@ -1,0 +1,29 @@
+<li class="message_list_item" id="<%=message.id%>">							
+							<ol>
+								<li>
+									<%if message.sender %> 
+									<%= link_to(gravatar_for_circle2(message.sender, size: 50) , message.sender) %>
+									<%end %>
+								</li>
+							</ol>
+							<div class="message_body">
+								<div class="message_name">
+									<%if message.sender %> 
+									<strong><%= message.sender.name %></strong>
+									<%end %>
+								</div>
+								<div class="message_content">
+									<div class="message_content_main well"><%= simple_format(message.body) %></div>
+									<div class="message_content_info"><%= message.created_at %>
+										<% if conversation.participants.size == 2 %> <!-- 일대일 대화일 경우 -->
+										<% if read_counts(message) > 1  %>
+										읽음
+										<% else %>
+										안 읽음
+										<% end %>
+										<%else %> <!-- 그룹 대화일 경우 -->
+										<%=read_counts(message) %>명 읽음
+										<% end %></div>
+									</div>
+								</div>
+							</li>

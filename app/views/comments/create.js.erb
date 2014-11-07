@@ -1,7 +1,7 @@
 
 
 <% if @micropost %>
-<!-- $('#micropost-<%=@micropost.id %>').html("<%=j render @micropost.comments %>") -->
+
 $('<%=j render @comment %>').appendTo($("#micropost-<%=@micropost.id %>")).hide().fadeIn('fast');
 $('#comment_form-<%= @micropost.id %>')[0].reset()
 

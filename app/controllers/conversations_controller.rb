@@ -36,8 +36,16 @@ end
 
 
 def reply
-  @user.reply_to_conversation(conversation, *message_params(:body, :subject))
-  redirect_to conversation_path(conversation)
+  
+  @receipt= @user.reply_to_conversation(conversation, *message_params(:body, :subject))
+  
+
+  respond_to do |format|
+      format.html { redirect_to conversation_path(conversation) }
+      format.js
+    end
+  
+  
 end
 
 def show

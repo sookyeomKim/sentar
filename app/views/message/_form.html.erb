@@ -1,5 +1,5 @@
 <div  class="form-group">
- <%= simple_form_for(:message, url: {action: "reply"} ) do |f| %>
+ <%= simple_form_for(:message, url: {action: "reply"}, remote: true ) do |f| %>
 
 
  <!--  <%= f.label :subject,'제목' %> -->

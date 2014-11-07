@@ -1,0 +1,26 @@
+
+$('<%= j render "message/message", message: @receipt.message %>').appendTo($("#message_list")).hide().fadeIn('fast')
+
+
+
+/*
+$(function(){
+var target_id='#message_list';
+$('#message-scroll-div').css('scrollTop', $(target_id).offset().top);
+$('#message-scroll-div').animate({
+				scrollTop:$(".message_content_info:last").offset().top
+			}, 500);
+window.scrollTo(0, $(target_id).offset().top);
+});
+
+
+
+
+		var message_croll = function(){
+			$('#message-scroll-div').animate({
+				scrollTop:$(".message_content_info:last").offset().top
+			}, 500);
+		};
+		$(message_croll);
+		$(document).on("page:change",message_croll);
+*/
