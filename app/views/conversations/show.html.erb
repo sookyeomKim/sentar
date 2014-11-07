@@ -168,12 +168,12 @@
 				</div>
 			</div>
 		</div>
-		<%= javascript_tag do %>
+		<!-- <%= javascript_tag do %>
 		var text_split = function(){
 			$('#message_chat').animate({
 				scrollTop:$(".message_content_info:last").offset().top
 			}, 500);
-
+		
 			var text_count = $(".text_split").length;
 			for(var i = 0 ; i<=text_count;i++){
 				var each_text = $(".text_split:eq("+i+")").text();
@@ -186,4 +186,4 @@
 		};
 		$(text_split);
 		$(document).on("page:change",text_split);
-		<% end %>
+		<% end %> -->
