@@ -143,176 +143,143 @@
 	color:#000;
 }
 
-.message_wrap{
+
+
+.btn_mail>ul{
+	background-color:rgba(100,150,200,0.5);
 	position: absolute;
 	width: 100%;
-	background-color: #ccc;
+	height: 54px;
 }
-
-
-.message_wrap_left>a{
-	float: left;
-	position: relative;
-	width: 90%;
-	background-color: #eee;
-}
-.message_wrap_left>a:hover{
-	float: left;
-	position: relative;
-	width: 90%;
-	background-color: #aaa;
-}
-.message_wrap_right>a{
+.btn_mail>ul>li{
+	width: 50%;
 	text-align: center;
 	position: relative;
-	width: 10%;	
-	background-color: #ccc;
+	vertical-align: middle;
 }
-
-.message_friends_wrap{
-	list-style: none;
-}
-/* 
-.btn_mail:hover{
-	
-}
-.btn_mail>h2>a{
+.btn_mail>ul>li>h2>strong{
 	color: #fff;
-	text-align: center !important;
 }
-.btn_mail>h2>a:hover{
-	color: #bbb;
-	} */
 
-	.btn_mail>ul{
-		background-color:rgba(100,150,200,0.5);
-		position: absolute;
-		width: 100%;
-		height: 54px;
-	}
-	.btn_mail>ul>li{
-		width: 50%;
-		text-align: center;
+
+.conversation_list { 
+	position: relative;
+	.conversation_list_ul {
 		position: relative;
-		vertical-align: middle;
-	}
-	.btn_mail>ul>li>h2>strong{
-		color: #fff;
-	}
+		.conversation_list_item:nth-child(odd){
 
-
-	.conversation_list { position: relative;
-		.conversation_list_ul {
-			position: relative;
-			.conversation_list_item:nth-child(even){
-				background: rgb(238,238,238); /* Old browsers */
-				background: -moz-radial-gradient(center, ellipse cover,  rgba(238,238,238,1) 0%, rgba(204,204,204,1) 100%); /* FF3.6+ */
-				background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(238,238,238,1)), color-stop(100%,rgba(204,204,204,1))); /* Chrome,Safari4+ */
-				background: -webkit-radial-gradient(center, ellipse cover,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* Chrome10+,Safari5.1+ */
-				background: -o-radial-gradient(center, ellipse cover,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* Opera 12+ */
-				background: -ms-radial-gradient(center, ellipse cover,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* IE10+ */
-				background: radial-gradient(ellipse at center,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* W3C */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
-
-			}
-			.conversation_list_item { 
-				clear: both;
-				height: 50px;
-				div {
-					float: left;
-					width: calc(100% - 100px); 
-					height: 50px;
-					padding: 0; margin: 0;
-					outline: 0; border: 0;
-					background: transparent;
-					position: absolute;
+		}
+		.conversation_list_item { 
+			clear: both;
+			height: 50px;
+			.conversation_list_item_left{
+				display: inline-block;
+				li {
 					a{
-						width:calc(100% - 60px);
-						position:absolute;
-						top:0px;
-						height:50px;
-						color:#666;
-						margin: 12.5px;
+						float: right;
+						font-size: 0 !important;
+						line-height: 0 !important;
+						img{
+							/* margin-top: -4.2px; */
+
+						}
 					}
-					.index_message_info{
+					cursor: pointer;
+					float: left;
+					width: 50px; height: 50px;						
+					text-align: center;
+				}
+			}
+			div {
+				display: inline-block;
+				/* float: left; */
+				width: calc(100% - 100px); 
+				height: 50px;
+				padding: 0; margin: 0;
+				outline: 0; border: 0;
+				background: transparent;
+				position: absolute;
+				a{
+					width:calc(100% - 0px);
+					position:absolute;
+					top:0px;
+					height:50px;
+					color:#666;
+					padding: 12.5px;
+				}
+				.index_message_info{
+					float: right;
+				}
+			}
+			ol { 
+				float: right;
+				li {
+					a{
+						float: right;
+						font-size: 0 !important;
+						line-height: 0 !important;
+						img{
+							/* margin-top: -4.2px; */
+
+						}
+					}
+					cursor: pointer;
+					float: left;
+					width: 50px; height: 50px;						
+					text-align: center;
+					.trash_btn{
+						font-size: 20pt !important;
+						line-height: 25px !important;
+						color: #000;
+						margin-top: 11.5px;
+						margin-right: 12.5px;
+					}
+				}
+			}
+		}
+	}
+}
+
+.message_list { 
+	position: relative;
+	.message_list_ul {
+		position: relative;
+		.message_list_item:nth-child(even){
+			div{
+			}
+		}
+		.message_list_item { 
+			clear: both;
+			ol { 
+				float: left;
+				li {
+					a{
+						cursor: pointer;
+						img{
+						}
+					}					
+				}
+			}
+			.message_body {
+				position: relative;
+				/* background: transparent; */
+				.message_name{
+					font-size: 10pt;
+					padding-left: 5px;
+					display: inline-block;
+					position: relative;
+					width: 10%;
+				}
+				.message_content{
+					padding-left: 5px;
+					display: inline-block;
+					position: relative;
+					width: 90%;
+					.message_content_info{
 						float: right;
 					}
 				}
-				ol { 
-					float: right;
-					li {
-						a{
-							float: right;
-							font-size: 0 !important;
-							line-height: 0 !important;
-							img{
-								/* margin-top: -4.2px; */
-
-							}
-						}
-						cursor: pointer;
-						float: left;
-						width: 50px; height: 50px;						
-						text-align: center;
-						.trash_btn{
-							font-size: 20pt !important;
-							line-height: 25px !important;
-							color: #000;
-							margin-top: 11.5px;
-							margin-right: 12.5px;
-						}
-					}
-				}
 			}
 		}
 	}
-
-	.message_list { position: relative;
-		.message_list_ul {
-			position: relative;
-			.message_list_item:nth-child(even){
-				div{
-				background: rgb(250,198,149); /* Old browsers */
-				background: -moz-radial-gradient(center, ellipse cover,  rgba(250,198,149,1) 0%, rgba(245,171,102,1) 47%, rgba(239,141,49,1) 100%); /* FF3.6+ */
-				background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(250,198,149,1)), color-stop(47%,rgba(245,171,102,1)), color-stop(100%,rgba(239,141,49,1))); /* Chrome,Safari4+ */
-				background: -webkit-radial-gradient(center, ellipse cover,  rgba(250,198,149,1) 0%,rgba(245,171,102,1) 47%,rgba(239,141,49,1) 100%); /* Chrome10+,Safari5.1+ */
-				background: -o-radial-gradient(center, ellipse cover,  rgba(250,198,149,1) 0%,rgba(245,171,102,1) 47%,rgba(239,141,49,1) 100%); /* Opera 12+ */
-				background: -ms-radial-gradient(center, ellipse cover,  rgba(250,198,149,1) 0%,rgba(245,171,102,1) 47%,rgba(239,141,49,1) 100%); /* IE10+ */
-				background: radial-gradient(ellipse at center,  rgba(250,198,149,1) 0%,rgba(245,171,102,1) 47%,rgba(239,141,49,1) 100%); /* W3C */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fac695', endColorstr='#ef8d31',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-				}
-			}
-			.message_list_item { 
-				clear: both;
-				div {
-					float: right;
-					width: calc(100% - 50px);
-					padding: 0; margin: 0;
-					outline: 0; border: 0;
-					background: transparent;
-					text-indent: 5px;
-					margin-top: 3px;
-				}
-				ol { float: left;
-					li {
-						a{
-							img{
-								margin-top: -5px;
-							}
-						}
-						cursor: pointer;
-						float: left;
-						width: 50px; height: 50px;
-						font-size: 20pt;
-						line-height: 50px;
-						text-align: center;
-						a{
-							color: #000;
-							margin-top: 10px;
-						}
-					}
-				}
-			}
-		}
-	}
+}

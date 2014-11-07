@@ -177,3 +177,10 @@ a:hover, a:focus {
 	-moz-column-count: 2;
 	-moz-column-gap: 10px;
 }
+
+.divider{
+	height: 1px;
+	margin: 5px 0;
+	overflow: hidden;
+	background-color: #e5e5e5;
+}

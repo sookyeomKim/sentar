@@ -1,6 +1,6 @@
 <li>
-  <span><%= gravatar_for user %></span><!--  프로필 사진 -->
-  <span><%= link_to user.name, user %></span><!--  유저 이름   -->
+  <span><%=link_to gravatar_for user %></span><!--  프로필 사진 -->
+  <span><%=link_to user.name, user %></span><!--  유저 이름   -->
   <span class="user_email" id="user_email_id_<%= user.id%>"><%= user.email %></span>
   
 
