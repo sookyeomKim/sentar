@@ -70,7 +70,6 @@
 										<%= f.text_area :content,class:'form-control input-sm',placeholder:'말은 그 무엇보다 강려크하다',style:'width:400px;' %>
 										<%= f.hidden_field :product_id, value: @product.id  %>
 										<span class="input-group-btn">
-											<% store_location %>
 											<%= f.submit('댓글등록',class:'btn btn-default btn-sm',remote: true)%>
 											<% end %>
 										</span>
