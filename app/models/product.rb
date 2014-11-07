@@ -11,6 +11,7 @@ class Product < ActiveRecord::Base
 	validates :name, presence: true
 	validates :price, numericality: true
 	validate :picture_size
+	validates :quantity, presence: :true
 	
 def Product.from_users_followed_by(user)
     	following_ids = "SELECT followed_id FROM relationships
