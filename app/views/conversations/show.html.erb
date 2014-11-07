@@ -17,7 +17,7 @@
 							<div class="message_body">
 								<div class="message_name">
 									<%if message.sender %> 
-										<strong><%= message.sender.name %></strong>
+									<strong><%= message.sender.name %></strong>
 									<%end %>
 								</div>
 								<div class="message_content">
@@ -162,24 +162,28 @@
 									<% end %>
 								</ul>
 							</div>
-							<!-- 대화 목록 end-->
-							<%= javascript_tag do %>
-							var text_split = function(){		
-								var text_count = $(".text_split").length;
-								for(var i = 0 ; i<=text_count;i++){
-									var each_text = $(".text_split:eq("+i+")").text();
-									var each_text_length = each_text.length;
-									if(each_text_length>=20){
-										var text_substr = each_text.substr(0,19)+'...';
-										$(".text_split:eq("+i+")").text(text_substr);
-									}
-								}
-							};
-							$(text_split);
-							$(document).on("page:change",text_split);
-							<% end %>
+							<!-- 대화 목록 end-->							
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<%= javascript_tag do %>
+		var text_split = function(){
+			$('#message_chat').animate({
+				scrollTop:$(".message_content_info:last").offset().top
+			}, 500);
+
+			var text_count = $(".text_split").length;
+			for(var i = 0 ; i<=text_count;i++){
+				var each_text = $(".text_split:eq("+i+")").text();
+				var each_text_length = each_text.length;
+				if(each_text_length>=20){
+					var text_substr = each_text.substr(0,19)+'...';
+					$(".text_split:eq("+i+")").text(text_substr);
+				}
+			}
+		};
+		$(text_split);
+		$(document).on("page:change",text_split);
+		<% end %>

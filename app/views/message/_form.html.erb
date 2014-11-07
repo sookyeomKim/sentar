@@ -21,15 +21,6 @@
 </div>
 
 <%= javascript_tag do %>
-var message_focus= function(){
-  $('#message_chat').animate({
-    scrollTop:$(".message_content_info:last").offset().top
-  }, 500);
-  
-}
-$(message_focus);
-$(document).on("page:change",message_focus);
-
 $("#message_submit_btn").on("click",function(){
   var message_form = $(".message");
   var text_area = $("#message_body").val();
