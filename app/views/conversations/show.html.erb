@@ -3,10 +3,12 @@
 		<div class="chat-panel">
 			<div class="panel-body" id="message-scroll-div" style="padding:0 !important;">
 				<div class="message_list">
+
 					<ul class="message_list_ul" id ="message_list">
 						<% conversation.receipts_for(current_user).order('created_at ASC').each do |receipt| %>
 						<% message = receipt.message %>
 						<%= render "message/message" , message: message %>
+
 							<div class="divider">
 
 							</div>

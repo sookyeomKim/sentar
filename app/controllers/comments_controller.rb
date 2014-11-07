@@ -37,6 +37,13 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+
+
+
+
+
+
+        
         format.html { redirect_back_or root_path}
         #format.json { render :show, status: :created, location: @comment }
         format.js

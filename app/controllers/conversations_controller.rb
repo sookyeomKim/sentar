@@ -28,12 +28,9 @@ def index
 
 
   
-  end
-
-  redirect_to conversation_path(@conversation)
-   
 end
-
+  redirect_to conversation_path(@conversation)
+end
 
 def reply
   

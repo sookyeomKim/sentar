@@ -1,4 +1,3 @@
-
 <%= form_for(@comment, remote: :true, :html => { :id => "comment_form-#{micropost.id}"  } ) do |f| %>
 <% if @comment.errors.any? %>
 <div id="error_explanation">
@@ -18,7 +17,6 @@
 <%= f.hidden_field :micropost_id, value: micropost.id  %>
 <span><a class="btn btn-default blog_comment_submit_btn" id="<%= micropost.id  %>">댓글등록</a></span>
 <span id="blog_comment_warning<%= micropost.id  %>" class="text-danger" style="display:none;">빈칸은 앙대영!!!</span>
-
 <!-- <%= f.submit('댓글등록', class:'btn btn-default btn-sm')%> -->
 <% end %>
 
