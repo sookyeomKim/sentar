@@ -11,6 +11,8 @@ $('#comment_form-<%= @micropost.id %>')[0].reset()
 
 <% if @product  %>
 
+
+$('#comment_form')[0].reset()
 $('#product-<%=@product.id %>').html("<%=j render @product.comments,partial: "comments/product_comment" , product: @product %>")
 
 <% end %>
