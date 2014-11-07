@@ -1,10 +1,5 @@
 class CartsController < ApplicationController
   before_filter :extract_shopping_cart
-  
-
-
-
-
 
   def create
      @product = Product.find(params[:id])
@@ -21,9 +16,9 @@ class CartsController < ApplicationController
 
   def change_qty
    id = params[:id]
-   @cart = current_user.cart
+   @cart = @user.cart
    @product = Product.find(id)
-    @cart_item = @cart.cart_items.find_by(item_id: id)
+   @cart_item = @cart.cart_items.find_by(item_id: id)
    if(params[:type] == 'up')
    @cart.add(@product, @product.price)
    else
@@ -60,8 +55,8 @@ end
   end
   private
   def extract_shopping_cart
-     @user = User.find(current_user.id)
-     @cart = Cart.find_by(user_id: @user.id) || Cart.create(user_id: @user.id)
+     @user ||= current_user
+     @cart = @cart || @user.cart || Cart.create(user_id: @user.id)
   end
 
 

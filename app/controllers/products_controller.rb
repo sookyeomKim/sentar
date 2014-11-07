@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
 	end
 
 	def index
-		@user = current_user
+		@user ||= current_user
 		@products = @user.products.paginate(page: params[:page])
 	end
 
@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
 
 	
 	def create
-	@user = current_user
+	@user ||= current_user
     	@product = @user.products.build(product_params)
 
 

@@ -1,7 +1,7 @@
 class SheltersController < ApplicationController
   before_action :set_shelter, only: [:show, :edit, :update, :destroy, :create]
   before_action :set_user
-  before_action :mailbox
+  
   #before_action :set_tmap, only: [:index, :show, :edit, :update, :destroy]
   
 
@@ -89,14 +89,12 @@ end
 
 
   private
-   def mailbox
-    @mailbox ||= current_user.mailbox
-    end
+  
 
     def set_user
       #@user = current_user
       #@shelter = Shelter.create(user)
-      @user = User.find(current_user.id)
+      @user ||= current_user
     end
 
 
@@ -105,7 +103,7 @@ end
     # Use callbacks to share common setup or constraints between actions.
     def set_shelter
       #@shelter = Shelter.find(params[:id])
-      @shelter = current_user.shelter || Shelter.create!(user_id: current_user.id, introduce: "empty", lonlat: 0000)
+      @shelter = @shelter ||current_user.shelter || Shelter.create!(user_id: current_user.id, introduce: "empty", lonlat: 0000)
       #@tmap = Tmap.find_by(id: 1)
       #@shelter.tmap_id = @tmap
       

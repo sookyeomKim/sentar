@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   #before_action :set_shelter
   before_action :set_bulletin
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :mailbox
+  
 
   # GET /posts
   # GET /posts.json
@@ -73,9 +73,7 @@ class PostsController < ApplicationController
   end
 
   private
-    def mailbox
-    @mailbox ||= current_user.mailbox
-    end 
+    
 
     def set_bulletin
       @bulletin = Bulletin.friendly.find(params[:bulletin_id]) if params[:bulletin_id]

@@ -76,14 +76,18 @@
                                     </ul>
                                 </li>
                                 알람end
+
              -->
                                 <!--메세지-->
+                                <% @user ||= current_user %>
+                                <% @mailbox ||= @user.mailbox %>
+                                <% @header_conversations = @mailbox.inbox %>
                                 <li class="dropdown">
-                                    <a class="dropdown-toggle"  data-toggle="dropdown" href="#"> <span class="label label-success"><%=current_user.unread_inbox_count   %></span> <i class="fa fa-envelope"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
+                                    <a class="dropdown-toggle"  data-toggle="dropdown" href="#"> <span class="label label-success"><%=@user.unread_inbox_count   %></span> <i class="fa fa-envelope"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
                                     <ul class="dropdown-menu dropdown-messages">
 
-                                    <%current_user.mailbox.inbox.each do |conversation| %>
-                                    <% if conversation.is_unread?(current_user) %>
+                                    <% @header_conversations.each do |conversation| %>
+                                    <% if conversation.is_unread?(@user) %>
 
                                     <li style="margin-bottom: 20px;">
                                         <div class="message_wrap">
@@ -106,9 +110,9 @@
                             <li class="dropdown">
                                 <a class="dropdown-toggle"
                                 data-toggle="dropdown" href="#"> <i class="fa fa-user"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
-                                <% if current_user.following.any? %>
+                                <% if @user.following.any? %>
                                 <ul class="dropdown-menu dropdown-friend" id="friend_list">
-                                    <%= render current_user.following %>
+                                    <%= render @user.following %>
                                 </ul>
                                 <% end %>
                             </li>
@@ -118,24 +122,24 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle profile" data-toggle="dropdown">
                                     <div class="avatar">
-                                        <%= gravatar_for current_user%>
+                                        <%= gravatar_for @user%>
                                     </div>
                                     <div class="user-mini pull-left">
                                         <span class="welcome">Welcome</span>
-                                        <span><%= current_user.name %></span>
+                                        <span><%= @user.name %></span>
                                     </div> </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <%= link_to "내집가기",shelter_path(current_user)%>
+                                            <%= link_to "내집가기",shelter_path(@user)%>
                                         </li>
                                         <li>
-                                            <%=link_to "내블로그가기",blog_path(current_user)%>                             
+                                            <%=link_to "내블로그가기",blog_path(@user)%>                             
                                         </li>
                                         <li>
                                             <%=link_to "내커머스가기",commerce_path%> 
                                         </li>
                                         <li>
-                                            <%= link_to "계정설정", edit_user_path(current_user) %>
+                                            <%= link_to "계정설정", edit_user_path(@user) %>
                                         </li>
                                         <li>
                                             <%= link_to("모든유저보기", users_path ) %>

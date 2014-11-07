@@ -2,11 +2,9 @@ class StaticPagesController < ApplicationController
   def home
      if logged_in?
       @user ||= current_user
-  	   @micropost = @user.microposts.build 
-     
+  	   @micropost ||= @user.microposts.build 
      @microposts = @user.microposts.paginate(page: params[:page])
-     @comments = @micropost.comments.all
-     @comment = @micropost.comments.build
+     @comment  ||= @micropost.comments.build
      
 
      end

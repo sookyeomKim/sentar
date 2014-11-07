@@ -1,6 +1,5 @@
 class SellAndBuyController < ApplicationController
-  before_action :mailbox
-
+  
   def main
   end
 
@@ -14,7 +13,5 @@ class SellAndBuyController < ApplicationController
   end
 
 private
-    def mailbox
-    @mailbox ||= current_user.mailbox
-    end
+    
 end

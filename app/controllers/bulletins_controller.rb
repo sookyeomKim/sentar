@@ -1,8 +1,7 @@
 class BulletinsController < ApplicationController
   before_action :set_shelter
   before_action :set_bulletin, only: [:show, :edit, :update, :destroy]
-  before_action :mailbox
-  
+
   # GET /bulletins
   # GET /bulletins.json
   def index
@@ -68,9 +67,7 @@ class BulletinsController < ApplicationController
   end
 
   private
-      def mailbox
-        @mailbox ||= current_user.mailbox
-      end 
+      
 
     def set_shelter
       #@shelter = Shelter.find(params[:shelter_id])

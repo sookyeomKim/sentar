@@ -1,11 +1,11 @@
 class ConversationsController < ApplicationController
 
-
+  before_action :set_user
   helper_method :mailbox, :conversation
 
 
 def index
-   @mailbox ||= current_user.mailbox
+   @mailbox ||= mailbox
    @conversations = @mailbox.conversations.paginate(page: params[:page], per_page: 7  )
 
    
@@ -18,11 +18,11 @@ def index
 
   if @conversation = already_have_conversation?(recipients)
   body = conversation_params(:body)
-  current_user.reply_to_conversation( @conversation, body )
+  @user.reply_to_conversation( @conversation, body )
   
   else
   
- @conversation = current_user.send_message(recipients, *conversation_params(:body, :subject)).conversation
+ @conversation = @user.send_message(recipients, *conversation_params(:body, :subject)).conversation
 
 
 
@@ -36,33 +36,32 @@ end
 
 
 def reply
-  current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
+  @user.reply_to_conversation(conversation, *message_params(:body, :subject))
   redirect_to conversation_path(conversation)
 end
 
 def show
   
-  @conversation ||= mailbox.conversations.find(params[:id]) 
-  @conversation.mark_as_read(current_user)
+  conversation.mark_as_read(@user)
   
 
 end
 
 
 def trash
-  conversation.move_to_trash(current_user)
+  conversation.move_to_trash(@user)
   redirect_to :conversations
 end
 
 def untrash
-  conversation.untrash(current_user)
+  conversation.untrash(@user)
   redirect_to :conversations
 end
 
 
 def readable_off
 
-      current_user.redable_off
+      @user.redable_off
       
     end
 
@@ -70,7 +69,7 @@ def readable_off
 private
 
 def mailbox
-  @mailbox ||= current_user.mailbox
+  @mailbox ||= @user.mailbox
 end
 
 def conversation
@@ -100,7 +99,7 @@ def already_have_conversation?(recipients)
   conversations = mailbox.conversations
   conversations.each do |conversation|
     participants = conversation.participants
-    participants.delete(current_user)
+    participants.delete(@user)
     if recipients == participants
       @conversation = conversation
       return @conversation
@@ -136,7 +135,9 @@ def correct_user
   end
 
 
-
+def set_user
+@user ||= current_user
+end
 
 
 end

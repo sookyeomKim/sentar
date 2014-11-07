@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'commentboards/destroy'
 
-  resources :comments
+  resources :comments,   only: [ :create, :destroy]
 
   get 'sell_and_buy/main'
 
