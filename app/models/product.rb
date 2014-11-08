@@ -5,7 +5,7 @@ class Product < ActiveRecord::Base
 	has_many :cartitems, dependent: :destroy, foreign_key: "item_id", class_name: "CartItem"
 	default_scope -> { order('created_at DESC') }
 	mount_uploader :picture, PictureUploader
-	mount_uploader :picture2, PictureUploader
+	mount_uploader :picture2, PictureDetailUploader
 	mount_uploader :picture3, PictureUploader
 	validates :user_id, presence: true
 	validates :name, presence: true
