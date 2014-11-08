@@ -5,9 +5,9 @@ class Shelter < ActiveRecord::Base
 	validates :lonlat, presence: true
 	has_many :bulletins, dependent: :destroy
 
-	searchable do  # text: 전체 텍스트 범위내에서 검색
-	text :name, :introduce  
-  	end
+	# searchable do  # text: 전체 텍스트 범위내에서 검색
+	# text :name, :introduce  
+ #  	end
   #TYPES = %w( All )
 #  TYPES = %w( All Commerce Blog )
 #  before_save :set_type
