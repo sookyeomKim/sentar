@@ -48,7 +48,7 @@ class ProductsController < ApplicationController
 
   	def destroy	
   	@product.update_attribute(:user_id, nil)
-  CartItem.rm_product_incart(@product)
+     CartItem.rm_product_incart(@product)
 
   
   	redirect_to products_path	
@@ -63,7 +63,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-      params.require(:product).permit(:name, :price, :picture, :category, :content, :picture2, :picture3)
+      params.require(:product).permit(:name, :price, :picture, :category, :content, :picture2, :picture3, :quantity)
     end
 
 end

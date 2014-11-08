@@ -4,9 +4,12 @@ class CartItem < ActiveRecord::Base
 
 
 
+	  def CartItem.rm_product_incart(product)
 
+	  	cart_items = where("item_id = #{product.id}")
+	  	cart_items.destroy_all
 
-
+	  end
 	 
 	
 end

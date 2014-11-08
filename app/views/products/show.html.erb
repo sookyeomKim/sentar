@@ -198,7 +198,7 @@
 
 														<div class="count">
 															<div class="buy_count" id="buy_count">
-																<span class="bc_num">2122</span>
+																<span class="bc_num"><%=@product.quantity  %></span>
 																<span class="bc_text">개</span>
 															</div>
 															<div class="time_count" id="time_count">
@@ -259,7 +259,9 @@
 												</div>
 											</div>
 										</div>
+										
 										<div >
+<<<<<<< HEAD
 											<%= image_tag "1.jpg",class:"item_img"%>
 										</div>
 										<div >
@@ -273,7 +275,12 @@
 										</div>
 										<div >
 											<%= image_tag "5.jpg",class:"item_img"%> 
+=======
+										
+										<%= image_tag  @product.picture2.url , class:"item_img" if @product.picture?%>
+>>>>>>> a5697630bda6918b3fee68facb31b8247ebbe813
 										</div>
+										
 									</div>
 									<!--아이템 정보 하단 end-->
 								</div>
