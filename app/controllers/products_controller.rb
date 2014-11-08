@@ -48,7 +48,7 @@ class ProductsController < ApplicationController
 
   	def destroy	
   	@product.update_attribute(:user_id, nil)
-  CartItem.rm_product_incart(@product)
+     CartItem.rm_product_incart(@product)
 
   
   	redirect_to products_path	

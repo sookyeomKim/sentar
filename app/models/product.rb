@@ -26,7 +26,13 @@ def Product.from_users_followed_by(user)
 	private
 	def picture_size
       if picture.size > 5.megabytes
-        errors.add(:picture, "should be less than 5MB")
+        errors.add(:picture, "5MB를 초과 할수 없습니다.")
+      end
+      if picture2.size > 5.megabytes
+        errors.add(:picture, "5MB를 초과 할수 없습니다.")
+      end
+      if picture3.size > 5.megabytes
+        errors.add(:picture, "5MB를 초과 할수 없습니다.")
       end
 
     end
