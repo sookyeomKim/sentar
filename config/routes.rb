@@ -141,4 +141,6 @@ resources :posts do
 end
 
 
+ post 'search' => 'conversations#search'
+
 end

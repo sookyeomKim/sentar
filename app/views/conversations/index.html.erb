@@ -7,7 +7,22 @@
 				<ul>
 					<li class="active">	<h2><strong>메세지 목록</strong></h2></li>
 				</ul>
-			</div>	
+			
+
+		
+
+			<ul>
+				
+			<%= form_for(:search, url: :search, method: :post ) do |f| %>
+
+			<input type="search", placeholder: 'Search', name: 'search'>
+			
+
+			
+			<% end %>
+			</ul>
+			</div>
+		
 			<div class="conversation_list" style="padding:0 !important;margin-top:54px;">
 				<ul class="conversation_list_ul">
 					<%@conversations.each do |conversation| %>

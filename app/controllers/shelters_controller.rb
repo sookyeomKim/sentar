@@ -11,10 +11,10 @@ class SheltersController < ApplicationController
   # GET /shelters
   # GET /shelters.json
   def index
-    @shelters = Shelter.all
-    unless @shelters.nil?
-      #render show
-  end
+   @search = Shelter.search do
+    fulltext params[:search]
+    end
+   @shelters = @search.results
 end
   # GET /shelters/1
   # GET /shelters/1.json

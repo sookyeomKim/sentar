@@ -1,7 +1,15 @@
 class ConversationsController < ApplicationController
 
-  before_action :set_user
+  before_action :set_user, :logged_in_user
   helper_method :mailbox, :conversation
+
+
+
+def search
+@search = params[:search]
+@messages = current_user.search_messages(@search)
+
+end
 
 
 def index

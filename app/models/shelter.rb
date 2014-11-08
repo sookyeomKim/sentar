@@ -4,6 +4,11 @@ class Shelter < ActiveRecord::Base
 	validates :user_id , presence: true
 	validates :lonlat, presence: true
 	has_many :bulletins, dependent: :destroy
+
+	searchable do  # text: 전체 텍스트 범위내에서 검색
+	text :name , :boost => 5 #name , introduce 검색 가중도를  name에 5배로 설정
+	text :introduce 
+  	end
   #TYPES = %w( All )
 #  TYPES = %w( All Commerce Blog )
 #  before_save :set_type

@@ -1,8 +1,14 @@
 <!-- all_user list 김수겸 14.09.19 -->
+
+
 <div class="content_re">
+
   <div class="row">
+   
     <!-- all_user side 김수겸 14.09.19 -->
     <div class="col-lg-2">
+
+
       <div class="left_wrap">
         <!--profile 김수겸 14.09.18-->
       <%= render 'users/profile'%>
@@ -17,6 +23,12 @@
         <div class="row">
           <div class="col-lg-12">
          <div class="shelters_wrap">
+           <!-- 검색기능 -->
+    <%= form_tag shelters_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
            <ul>
               <% @shelters.each do |shelter| %>
               <li>
