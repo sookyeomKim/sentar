@@ -5,6 +5,10 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %> 
   <%= csrf_meta_tags %>  
+  <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      </script>
+    <![endif]-->
   <script  language='javascript' src='https://apis.skplanetx.com/tmap/js?version=1&format=javascript&appKey=30c68bc1-8813-3f13-9c99-d3660cf91545'></script>
   <%= render 'layouts/shim' %>
 </head>
