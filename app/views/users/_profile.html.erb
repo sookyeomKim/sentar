@@ -18,9 +18,9 @@
 
 	<!--자기소개-->
 	<div class="caption">
-		<p class="well">
-			<span><%= @user.shelter.introduce %></span>
-		</p>
+		<div class="well">
+			<%= simple_format(@user.shelter.introduce) %>
+		</div>
 		
 		<div class="profile_btn">
 			<p>

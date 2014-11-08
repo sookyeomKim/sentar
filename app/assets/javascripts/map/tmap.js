@@ -8,26 +8,6 @@ var lonlat, pr_3857, pr_4326; //좌표변환 관련 상수
 var markers; //레이어 관련 변수
 
 var initialize = function () {
-    //mini_nav
-    /*$("div").mousemove(function(event) {
-        eventClientX = event.clientX;
-        if (eventClientX < 3) {
-            $(function() {
-                $('#mini_nav_toggle').show('slide', {
-                    direction : 'left'
-                }, 200)
-            });
-            return;
-        }
-    });
-
-    $("#mini_nav_toggle").mouseleave(function() {
-        $(this).hide('slide', {
-            direction : 'left'
-        }, 200)
-});*/
-
-
     setVariables();
     map = new Tmap.Map({
         div: mapDiv
@@ -40,11 +20,11 @@ var initialize = function () {
     $("#sentar_search").on("click", function () { //Poi매서드, 쉘터를 Poi를 이용해 띄워주자
         sentar_search();
     });
-    $( "#searchText" ).keypress(function( event ) {
-      if ( event.which == 13 ) {
-        event.preventDefault();
-        sentar_search();
-      }
+    $("#searchText").keypress(function (event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            sentar_search();
+        }
     });
 };
 $(initialize);
@@ -78,7 +58,7 @@ function get3857LonLat(coordX, coordY) { //좌표변환메서드
 
 /*좌표값말고 다른것도 받아도된다*/
 function shelterLoader() {
-
+    var current_id = $("#current_user_id").attr("data-user_id");
     var size = new Tmap.Size(35, 35);
     var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
 
@@ -136,7 +116,11 @@ function shelterLoader() {
 
             //icon img넣는 곳
             if (main_location <= 44) {
+                if(current_id==shelter_id){
+            var shelterIcon = new Tmap.IconHtml("<img src='../../assets/shelter/myhome.png'/>", size, offset); //marker                        
+            }else{
                 var shelterIcon = new Tmap.IconHtml("<img src='assets/shelter/shelter.PNG'/>", size, offset); //marker                  
+            }
             } else if (main_location >= 55) {
                 var shelterIcon = new Tmap.IconHtml("<img src='../../assets/shelter/shelter.PNG'/>", size, offset); //marker                    
             }
@@ -145,7 +129,7 @@ function shelterLoader() {
             var popup;
             popup = new Tmap.Popup("shelter", new Tmap.LonLat(lon, lat),
             new Tmap.Size(200, 250),
-                "<div id='shelter_id_" + shelter_id + "'class='panel panel-info' style='width:100%;height:100%;'>" + "<div class='panel-heading'>" + "<span><a href='/shelters/" + shelter_id + "'><strong>" + shelter_name + "</strong>님의 미니쉘터</a></span>" + "</div>" + "<div class='panel-body'>" + "<span>" + shelter_introduce + "</span>" + "<span>" + shelter_kind + "</span>" + "</div>" + "</div>", "close");
+                "<div id='shelter_id_" + shelter_id + "'class='panel panel-info' style='width:100%;height:100%;'>" + "<div class='panel-heading'>" + "<span><a href='/shelters/" + shelter_id + "'><strong>" + shelter_name + "</strong>님의 미니쉘터</a></span>" + "</div>" + "<div class='panel-body'>" + "<span>" + shelter_introduce + "</span>" + "<span>" + shelter_kind + "</span>" + "</div>" + "</div>", true);
             map.addPopup(popup);
             popup.hide();
             markers.addMarker(shelterMarker);
@@ -157,11 +141,15 @@ function shelterLoader() {
 
                 shelterMarker.events.register('click', popup, onShelterClick);
             }
+            if(current_id!=shelter_id){
+            return;
+        }else{
+            map.setCenter(new Tmap.LonLat(lon,lat), 15);
+        }
 
-        });
+        });        
     }
     /*ajax쉘터 정보들 받아오기 end*/
-
 }
 
 
@@ -200,6 +188,7 @@ function onClickMap(e) {
     /*var icon = new Tmap.IconHtml('<div class="shelter" style="border:10px solid black;"><div onClick="test1()" style="text-decoration: none;  color: RED; font-size: 9pt;">AAAAAAAAA</div><div onClick="test2()"><img src="img/d.png" /></div><div onClick="test3()" style="text-decoration: none;    color: BLUE;    font-size: 9pt;">QQQQQQQQQQQQQQQQQQQqQ</div></div>',size,offset);*/
     var marker = new Tmap.Marker(lonlat, icon);
     markers.addMarker(marker);
+    shelterLoader();
 }
 
 
@@ -216,39 +205,39 @@ function onErrorLoadPoiData() {
 
 }
 
-function sentar_search(){
+function sentar_search() {
     var selected_option = $("#poi_select option:selected").val();
-        if (selected_option == 0) {
+    if (selected_option == 0) {
 
-            tData = new Tmap.TData(); //response parameter를 *respnse parameter:sk서버내에 저장되어있는 map정보를 핸들링해줌
-            /*가져온 데이터를 어떻게 처리할지 결정*/
-            /*마크업에서의 검색값 */
-            var searchText = $('#searchText').val();
-            /*한글깨짐방지*/
-            var encodingSearchText = encodeURIComponent(searchText);
+        tData = new Tmap.TData(); //response parameter를 *respnse parameter:sk서버내에 저장되어있는 map정보를 핸들링해줌
+        /*가져온 데이터를 어떻게 처리할지 결정*/
+        /*마크업에서의 검색값 */
+        var searchText = $('#searchText').val();
+        /*한글깨짐방지*/
+        var encodingSearchText = encodeURIComponent(searchText);
 
-            tData.events.register("onComplete", tData, onCompleteLoadGetPOIDataFromSearch); /*tData를 이용하여 oncompleete(100%)됐을 때 onCompleteLoadGetPOIDataFromSearch이용하여 처리*/
-            tData.events.register("onProgress", tData, onProgressLoadPoiData); /**/
-            tData.events.register("onError", tData, onErrorLoadPoiData);
+        tData.events.register("onComplete", tData, onCompleteLoadGetPOIDataFromSearch); /*tData를 이용하여 oncompleete(100%)됐을 때 onCompleteLoadGetPOIDataFromSearch이용하여 처리*/
+        tData.events.register("onProgress", tData, onProgressLoadPoiData); /**/
+        tData.events.register("onError", tData, onErrorLoadPoiData);
 
 
 
-            if (searchText != '') { //검색값이 공백이 아닐 때
-                var options = {
-                    version: 1
-                };
-                /*poi관련된 값들을 처리해주는 method*/
+        if (searchText != '') { //검색값이 공백이 아닐 때
+            var options = {
+                version: 1
+            };
+            /*poi관련된 값들을 처리해주는 method*/
 
-                tData.getPOIDataFromSearch(encodingSearchText, options);
-                $('#searchResult').css("display", "block");
-            } else {
-                alert('검색어 입력해라');
-            }
-        } else if (selected_option == 1) {
-            commerce_shelter_search();
-        } else if (selected_option == 2) {
-            blog_shelter_search();
+            tData.getPOIDataFromSearch(encodingSearchText, options);
+            $('#searchResult').css("display", "block");
+        } else {
+            alert('검색어 입력해라');
         }
+    } else if (selected_option == 1) {
+        commerce_shelter_search();
+    } else if (selected_option == 2) {
+        blog_shelter_search();
+    }
 }
 /**/
 function onCompleteLoadGetPOIDataFromSearch() {
@@ -295,7 +284,7 @@ function onCompleteLoadGetPOIDataFromSearch() {
                 .text();
 
             /*var trLonLat = get3857LonLat(coordX, coordY);//위도,경도좌표변환
-                alert(trLonLat);*/
+            alert(trLonLat);*/
             var nameArray = [];
 
             nameArray = name.split("(");
@@ -439,7 +428,7 @@ function commerce_shelter_search() {
                 var popup;
                 popup = new Tmap.Popup("shelter", new Tmap.LonLat(lon, lat),
                 new Tmap.Size(200, 250),
-                    "<div id='shelter_id_" + shelter_id + "'class='panel panel-info' style='width:100%;height:100%;'>" + "<div class='panel-heading'>" + "<span><a href='/shelters/" + shelter_id + "'><strong>" + shelter_name + "</strong>님의 미니쉘터</a></span>" + "</div>" + "<div class='panel-body'>" + "<span>" + shelter_introduce + "</span>" + "<span>" + shelter_kind + "</span>" + "</div>" + "</div>", "close");
+                    "<div id='shelter_id_" + shelter_id + "'class='panel panel-info' style='width:100%;height:100%;'>" + "<div class='panel-heading'>" + "<span><a href='/shelters/" + shelter_id + "'><strong>" + shelter_name + "</strong>님의 미니쉘터</a></span>" + "</div>" + "<div class='panel-body'>" + "<span>" + shelter_introduce + "</span>" + "<span>" + shelter_kind + "</span>" + "</div>" + "</div>", true);
                 map.addPopup(popup);
                 popup.hide();
                 markers.addMarker(shelterMarker);
@@ -526,7 +515,7 @@ function blog_shelter_search() {
                 var popup;
                 popup = new Tmap.Popup("shelter", new Tmap.LonLat(lon, lat),
                 new Tmap.Size(200, 250),
-                    "<div id='shelter_id_" + shelter_id + "'class='panel panel-info' style='width:100%;height:100%;'>" + "<div class='panel-heading'>" + "<span><a href='/shelters/" + shelter_id + "'><strong>" + shelter_name + "</strong>님의 미니쉘터</a></span>" + "</div>" + "<div class='panel-body'>" + "<span>" + shelter_introduce + "</span>" + "<span>" + shelter_kind + "</span>" + "</div>" + "</div>", "close");
+                    "<div id='shelter_id_" + shelter_id + "'class='panel panel-info' style='width:100%;height:100%;'>" + "<div class='panel-heading'>" + "<span><a href='/shelters/" + shelter_id + "'><strong>" + shelter_name + "</strong>님의 미니쉘터</a></span>" + "</div>" + "<div class='panel-body'>" + "<span>" + shelter_introduce + "</span>" + "<span>" + shelter_kind + "</span>" + "</div>" + "</div>", true);
                 map.addPopup(popup);
                 popup.hide();
                 markers.addMarker(shelterMarker);
@@ -568,3 +557,155 @@ function lonlat_split(shelter_lonlat) {
 
     return lonlat_split_arr;
 }
+
+/*blog해당 유저 쉘터 띄우기*/
+function blog_map() {
+    markers.clearMarkers();
+    var blog_id = $("#current_user_id").attr("data-user_id");
+    var size = new Tmap.Size(35, 35);
+    var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
+
+    /*ajax쉘터 정보들 받아오기*/
+    $.ajax({
+        type: "GET",
+        url: "/shelters.json",
+        async: false,
+        dataType: "json",
+        success: response_json,
+        error: function (e) {
+            alert("error");
+        }
+    });
+
+    function response_json(json) {
+        var shelter_list = json.shelters;
+
+        $.each(shelter_list, function (index) {
+            var shelter_info = shelter_list[index].Shelter;
+
+            var shelter_id = shelter_info.id;
+            var shelter_name = shelter_info.name;
+            var shelter_introduce = shelter_info.introduce;
+            var shelter_lonlat = shelter_info.lonlat;
+            var shelter_kind = shelter_info.kind;
+
+            lonlat_split(shelter_lonlat);
+
+            var lon = lonlat_split_arr[0];
+            var lat = lonlat_split_arr[1];
+
+            //icon img넣는 곳
+            if(blog_id==shelter_id){
+            var shelterIcon = new Tmap.IconHtml("<img src='../../assets/shelter/home.png'/>", size, offset); //marker                        
+            }else{
+            var shelterIcon = new Tmap.IconHtml("<img src='../../assets/shelter/shelter.PNG'/>", size, offset); //marker                    
+            }
+            var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
+
+            var popup;
+            popup = new Tmap.Popup("shelter", new Tmap.LonLat(lon, lat),
+            new Tmap.Size(200, 250),
+                "<div id='shelter_id_" + shelter_id + "'class='panel panel-info' style='width:100%;height:100%;'>" + "<div class='panel-heading'>" + "<span><a href='/shelters/" + shelter_id + "'><strong>" + shelter_name + "</strong>님의 미니쉘터</a></span>" + "</div>" + "<div class='panel-body'>" + "<span>" + shelter_introduce + "</span>" + "<span>" + shelter_kind + "</span>" + "</div>" + "</div>", "close");
+            map.addPopup(popup);
+            popup.hide();
+            markers.addMarker(shelterMarker);
+
+            shelterMarker.events.register('mouseover', popup, onShelterOver);
+
+            shelterMarker.events.register('mouseout', popup, onShelterOut);
+
+            shelterMarker.events.register('click', popup, onShelterClick);
+
+            /*var my_lon;
+            var my_lat;
+            if(blog_id==shelter_id){
+                my_lon=lon;
+                my_lat=lat;
+            }else{
+                return;
+            }
+            map.setCenter(new Tmap.LonLat(my_lon,my_lat), 15);*/
+            if(blog_id!=shelter_id){
+                return;
+            }else{
+                map.setCenter(new Tmap.LonLat(lon,lat), 15);
+            }
+        });
+    }
+}
+
+function product_info_map() {
+    markers.clearMarkers();
+    var product_info_id = $("#current_user_id").attr("data-user_id");
+    var size = new Tmap.Size(35, 35);
+    var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
+
+    /*ajax쉘터 정보들 받아오기*/
+    $.ajax({
+        type: "GET",
+        url: "/shelters.json",
+        async: false,
+        dataType: "json",
+        success: response_json,
+        error: function (e) {
+            alert("error");
+        }
+    });
+
+    function response_json(json) {
+        var shelter_list = json.shelters;
+
+        $.each(shelter_list, function (index) {
+            var shelter_info = shelter_list[index].Shelter;
+
+            var shelter_id = shelter_info.id;
+            var shelter_name = shelter_info.name;
+            var shelter_introduce = shelter_info.introduce;
+            var shelter_lonlat = shelter_info.lonlat;
+            var shelter_kind = shelter_info.kind;
+
+            lonlat_split(shelter_lonlat);
+
+            var lon = lonlat_split_arr[0];
+            var lat = lonlat_split_arr[1];
+
+            //icon img넣는 곳
+            if(product_info_id==shelter_id){
+            var shelterIcon = new Tmap.IconHtml("<img src='../../assets/shelter/home.png'/>", size, offset); //marker                        
+            }else{
+            var shelterIcon = new Tmap.IconHtml("<img src='../../assets/shelter/shelter.PNG'/>", size, offset); //marker                    
+            }
+            var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
+
+            var popup;
+            popup = new Tmap.Popup("shelter", new Tmap.LonLat(lon, lat),
+            new Tmap.Size(200, 250),
+                "<div id='shelter_id_" + shelter_id + "'class='panel panel-info' style='width:100%;height:100%;'>" + "<div class='panel-heading'>" + "<span><a href='/shelters/" + shelter_id + "'><strong>" + shelter_name + "</strong>님의 미니쉘터</a></span>" + "</div>" + "<div class='panel-body'>" + "<span>" + shelter_introduce + "</span>" + "<span>" + shelter_kind + "</span>" + "</div>" + "</div>", "close");
+            map.addPopup(popup);
+            popup.hide();
+            markers.addMarker(shelterMarker);
+
+            shelterMarker.events.register('mouseover', popup, onShelterOver);
+
+            shelterMarker.events.register('mouseout', popup, onShelterOut);
+
+            shelterMarker.events.register('click', popup, onShelterClick);
+
+            /*var my_lon;
+            var my_lat;
+            if(blog_id==shelter_id){
+                my_lon=lon;
+                my_lat=lat;
+            }else{
+                return;
+            }
+            map.setCenter(new Tmap.LonLat(my_lon,my_lat), 15);*/
+            if(product_info_id!=shelter_id){
+                return;
+            }else{
+                map.setCenter(new Tmap.LonLat(lon,lat), 15);
+            }
+        });
+    }
+}
+

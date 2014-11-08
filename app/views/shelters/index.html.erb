@@ -33,7 +33,7 @@
               <% @shelters.each do |shelter| %>
               <li>
                   <span><%= shelter.name %></span>
-                  <span><%= shelter.introduce %></span>
+                  <span><%= simple_format(shelter.introduce) %></span>
                   <span><%= shelter.kind %></span>
                   <span><%= link_to '쉘터보기', shelter %></span>
                   <!-- <td><%= link_to 'Edit', edit_shelter_path(shelter) %></td>
