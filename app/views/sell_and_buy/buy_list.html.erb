@@ -201,7 +201,7 @@
 							</div></td>
 							<td>
 							<div>
-								<strong><%=purchase.created_at %></strong>
+								<strong><%=purchase.created_at.strftime("%Y년 %m월 %d일") %></strong>
 							</div>
 							<div>
 							<% @product = purchase.product %>
@@ -221,6 +221,9 @@
 							<div class="buy_order_btn">
 								<% if purchase.status == 0 %>
 								<%= link_to "즉시취소", cancel_path(id:purchase.id)  ,data: { confirm: '주문을 취소하실건가요?' }, class:'btn btn-warning' ,method: :post%>
+								<%= link_to("주문변경", edit_purchase_path(purchase), class:'btn btn-warning',
+								data: {confirm: "주문을 변경하시겠습니까?"} , :type => "buyer") %>
+
 								<% end %>
 							</div></td>
 						</tr>

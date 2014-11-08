@@ -14,7 +14,18 @@
     </div>
       
   <% end %>
-
+        <% if params[:type] = "buyer" %>
+        
+         <%= f.label :수취인 %>
+         <%= f.text_field :receive_name , value: @purchase.receive_name, class: 'form-control' %>
+         <%= f.label :주소 %>
+         <%= f.text_field :addr, value:@purchase.addr, class: 'form-control' %>
+         <%= f.label :전화번호 %>
+         <%= f.text_field:phone, value: @purchase.phone, class: 'form-control' %>
+         <%= f.label :메모 %>
+         <%= f.text_field :memo, value: @purchase.memo , class: 'form-control'%>
+         
+         <%elsif params[:type] = "admin"%>
          <%= f.hidden_field :product_id, class: 'form-control' %>
          <%= f.hidden_field :user_id, class: 'form-control' %>
           <%= f.label :수취인 %>
@@ -35,6 +46,11 @@
          <%= f.label :payer, class: 'form-control' %>
           <%= f.label :status %>
           <%= f.text_field :status %>
+
+
+         <% end %>
+
+         
 
 
   <div class="actions">

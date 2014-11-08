@@ -5,11 +5,6 @@ class ConversationsController < ApplicationController
 
 
 
-def search
-@search = params[:search]
-@messages = current_user.search_messages(@search)
-
-end
 
 
 def index
