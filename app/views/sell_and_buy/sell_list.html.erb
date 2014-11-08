@@ -10,6 +10,7 @@
 			<hr>
 			<table class="table status_table ">
 				<thead>
+
 					<tr>
 						<th>배송중</th>
 						<th>포인트</th>
@@ -19,316 +20,161 @@
 				<tbody>
 					<tr>
 						<td>
-						<div>
-							<a href="#"><strong>0</strong></a><span>건</span>
-						</div></td>
-						<td>
-						<div>
-							<a href="#"><strong>0</strong></a><span>점</span>
-						</div></td>
-						<td>
-						<div>
-							<a href="#"><strong>0</strong></a><span>장</span>
-						</div></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<!-- buy_status end -->
-
-		<!--date_sort 김수겸 14.09.21-->
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="date_sort">
-					<h4>기간별조회</h4>
-					<div class="horizon_array_menu_h date_sort_menu ">
-						<ul>
-							<li>
-								<a class="btn btn-info btn-xs btn-line"><strong>1</strong>주일</a>
-							</li>
-							<li>
-								<a class="btn btn-info btn-xs btn-line"><strong>15</strong>일</a>
-							</li>
-							<li>
-								<a class="btn btn-info btn-xs btn-line"><strong>1</strong>개월</a>
-							</li>
-						</ul>
+							<div>
+								<a href="#"><strong>0</strong></a><span>건</span>
+							</div></td>
+							<td>
+								<div>
+									<a href="#"><strong>0</strong></a><span>점</span>
+								</div></td>
+								<td>
+									<div>
+										<a href="#"><strong>0</strong></a><span>장</span>
+									</div></td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
-					<div class="horizon_array_menu_h date_sort_menu">
-						<ul>
-							<li>
-								<a id="month1ago" class="btn btn-info btn-xs btn-line"></a>
-							</li>
-							<li>
-								<a id="month2ago" class="btn btn-info btn-xs btn-line"></a>
-							</li>
-							<li>
-								<a id="month3ago" class="btn btn-info btn-xs btn-line"></a>
-							</li>
-							<li>
-								<a id="month4ago" class="btn btn-info btn-xs btn-line"></a>
-							</li>
-							<li>
-								<a id="month5ago" class="btn btn-info btn-xs btn-line"></a>
-							</li>
-						</ul>
+					<!-- buy_status end -->
+
+					<!--date_sort 김수겸 14.09.21-->
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="date_sort">
+								<h4>기간별조회</h4>
+								<div class="horizon_array_menu_h date_sort_menu ">
+									<ul>
+										<li>
+											<a class="btn btn-info btn-xs btn-line"><strong>1</strong>주일</a>
+										</li>
+										<li>
+											<a class="btn btn-info btn-xs btn-line"><strong>15</strong>일</a>
+										</li>
+										<li>
+											<a class="btn btn-info btn-xs btn-line"><strong>1</strong>개월</a>
+										</li>
+									</ul>
+								</div>
+								<div class="horizon_array_menu_h date_sort_menu">
+									<ul>
+										<li>
+											<a id="month1ago" class="btn btn-info btn-xs btn-line"></a>
+										</li>
+										<li>
+											<a id="month2ago" class="btn btn-info btn-xs btn-line"></a>
+										</li>
+										<li>
+											<a id="month3ago" class="btn btn-info btn-xs btn-line"></a>
+										</li>
+										<li>
+											<a id="month4ago" class="btn btn-info btn-xs btn-line"></a>
+										</li>
+										<li>
+											<a id="month5ago" class="btn btn-info btn-xs btn-line"></a>
+										</li>
+									</ul>
+								</div>
+								<div class="horizon_array_menu_h date_sort_menu">
+									<ul>
+										<li>
+											<input type="text" id="from_date" name="from_date"
+											class="from" value="" readonly="true">
+										</li>
+										<li>
+											~
+										</li>
+										<li>
+											<input type="text" id="to_date" name="to_date" class="to"
+											value="" readonly="true">
+										</li>
+									</ul>
+								</div>
+								<a id="btn_search" class="date_sort_menu btn btn-warning btn-sm btn-line"><span>조회하기</span></a>
+							</div>
+						</div>
 					</div>
-					<div class="horizon_array_menu_h date_sort_menu">
-						<ul>
-							<li>
-								<input type="text" id="from_date" name="from_date"
-								class="from" value="" readonly="true">
-							</li>
-							<li>
-								~
-							</li>
-							<li>
-								<input type="text" id="to_date" name="to_date" class="to"
-								value="" readonly="true">
-							</li>
-						</ul>
-					</div>
-					<a id="btn_search" class="date_sort_menu btn btn-warning btn-sm btn-line"><span>조회하기</span></a>
-				</div>
-			</div>
-		</div>
-		<!--date_sort end-->
-		<hr>
-		<!--date_sort js 김수겸 14.09.21-->
-		<script type="text/javascript">
-			var month_num = function() {
-				var d = new Date();
-				var m = d.getMonth();
+					<!--date_sort end-->
+					<hr>
+					<!--date_sort js 김수겸 14.09.21-->
+					<script type="text/javascript">
+					var month_num = function() {
+						var d = new Date();
+						var m = d.getMonth();
 
-				for (var n = 1; n < 6; n++) {
-					var test = $("#month5ago strong").text();
+						for (var n = 1; n < 6; n++) {
+							var test = $("#month5ago strong").text();
 
-					/*page change 로 인해 포문이 중첩실행 된다. 그를 방지하기 위한 코드*/
-					if (test) {
-						return;
+							/*page change 로 인해 포문이 중첩실행 된다. 그를 방지하기 위한 코드*/
+							if (test) {
+								return;
+							}
+							var month = document.getElementById("month" + n + "ago");
+							var strong = document.createElement("strong");
+							var textnode = document.createTextNode("월");
+
+							strong.innerHTML = m--;
+
+							month.appendChild(strong);
+							month.appendChild(textnode);
+						}
+						/* month.innerHTML = "월"; */
+
 					}
-					var month = document.getElementById("month" + n + "ago");
-					var strong = document.createElement("strong");
-					var textnode = document.createTextNode("월");
+					$(month_num);
+					$(document).on('page:change', month_num);
 
-					strong.innerHTML = m--;
+					var datepicker = function() {
+						/*datepicker*/
 
-					month.appendChild(strong);
-					month.appendChild(textnode);
-				}
-				/* month.innerHTML = "월"; */
-				
-			}
-			$(month_num);
-			$(document).on('page:change', month_num);
+						$(".from").datepicker({
+							defaultDate : "+1w",
+							changeMonth : true,
+							numberOfMonths : 2,
+							onClose : function(selectedDate) {
+								$(".to").datepicker("option", "minDate", selectedDate);
+							}
+						});
+						$(".to").datepicker({
+							defaultDate : "+1w",
+							changeMonth : true,
+							numberOfMonths : 2,
+							onClose : function(selectedDate) {
+								$(".from").datepicker("option", "maxDate", selectedDate);
+							}
+						});
+					};
+					/*datepicker*/
+					$(datepicker);
+					$(document).on('page:change', datepicker);
+					</script>
+					<!--date_sort js end-->
 
-			var datepicker = function() {
-				/*datepicker*/
-
-				$(".from").datepicker({
-					defaultDate : "+1w",
-					changeMonth : true,
-					numberOfMonths : 2,
-					onClose : function(selectedDate) {
-						$(".to").datepicker("option", "minDate", selectedDate);
-					}
-				});
-				$(".to").datepicker({
-					defaultDate : "+1w",
-					changeMonth : true,
-					numberOfMonths : 2,
-					onClose : function(selectedDate) {
-						$(".from").datepicker("option", "maxDate", selectedDate);
-					}
-				});
-			};
-			/*datepicker*/
-			$(datepicker);
-			$(document).on('page:change', datepicker);
-		</script>
-		<!--date_sort js end-->
-
-		<!--buy_list_main 김수겸 14.09.21-->
-		<div class="buy_list_main">
+					<!--buy_list_main 김수겸 14.09.21-->
+					<div class="sell_list_main">
 
 			<!-- <li><a href="#on_shipping_merchandise" data-toggle="tab">배송중상품</a></li>
 			<li><a href="#shipping_complete_merchandise" data-toggle="tab">배송완료상품</a></li> -->
 
 			<!--전체-->
 
-			<div class="buy_list_table">
-				<table class="table table-hover basket_table">
-					<thead>
-						<tr>
-							<td>
-							<input type="checkbox" id="total_checkbox">
-							</td>
-							<td>상품/옵션정보</td>
-							<td>구매날짜</td>
-							<td>결제금액</td>
-							<td class="">배송상태</td>
-						</tr>
-					</thead>
-					<script>
-						$(function() {
-							$('#total_checkbox').click(function() {
-								$('.sub_checkbox').prop('checked', this.checked);
-								call_display_price();
-							});
-						});
-					</script>
-					<tbody>
-						<!-- <c:forEach begin="1" end="3" step="1"> -->
-					
-					<!-- 교택님이 수정한 부분 -->
-					<% @purchases.each do |purchase| %> 
-						<% unless purchase.product.nil? %>
-						<tr>
-							<td>
-							<input type="checkbox" class="sub_checkbox" value="1000" name="opt[selected][]">
-							</td>
+			<!-- 
+주문번호</td>
+	  <td style=font-family:Tahoma;font-size:8pt;font-weight:bold;>주문자</td>
+	  <td style=font-family:Tahoma;font-size:8pt;font-weight:bold;>결제방법</td>
+	  <td style=font-family:Tahoma;font-size:8pt;font-weight:bold;>주문금액</td>
+	  <td style=font-family:Tahoma;font-size:8pt;font-weight:bold;>주문상태</td>
+	  <td style=font-family:Tahoma;font-size:8pt;font-weight:bold;>주문일시</td>
+	  <td style=font-family:Tahoma;font-size:8pt;font-weight:bold;>수정/삭제</
 
-							<td class="left_text_align">
-							<div class="media">
-								<a class="pull-left" href="#"> <%= image_tag purchase.product.picture, size:'60x60'%> </a>
-								
-								<div class="media-body">
-									<div>
-										<%=purchase.product.name %>
-									</div>									
-								</div>
-							</div></td>
-							<td>
-							<div>
-								<strong><%=purchase.created_at %></strong>
-							</div>
-							<div>
-							<% @product = purchase.product %>
-							<%= link_to "제품정보", @product  %>
-							</div></td>
-							<td>
-							<div>
-								<span><strong class="item_total_price"><%=purchase.total_cost%></strong>원</span>
-							</div></td>
+	  -->
+	
+				<!-- <c:forEach begin="1" end="3" step="1"> -->
 
-							<td >
-							<div class="buy_order_btn">
-								<input type="text" readonly="true" value= '<%=purchase.status_kr %>' style="width:100px;">
-								
-							
-							</div>
-							<div class="buy_order_btn">
-								<% if purchase.status == 0 || 1 %>
-								
-								<% end %>
-							</div></td>
-						</tr>
-						<% end %>
-						<% end %>
-						<!-- </c:forEach> -->
-					</tbody>
-				</table>
-			</div>
-			<!--전체 end -->
+				<%= render @purchases %>
+				<span class="buy_order_btn">
+
+             
+
+				<!-- 교택님이 수정한 부분 -->
+				
 			
-
-			<!--배송중상품-->
-			<!-- <div class="tab-pane" id="on_shipping_merchandise">
-			<div class="buy_list_table">
-			<table class="table table-hover">
-			<thead>
-			<tr>
-			<th>구매내역</th>
-			<th>상품명/옵션</th>
-			<th>주문금액</th>
-			<th colspan="2">진행상태</th>
-			</tr>
-			</thead>
-			<c:forEach begin="1" end="5" step="1">
-			<tbody>
-			<tr>
-			<td>
-			<div class="date">
-			<div>구입날짜</div>
-			<div><a href="">제품번호</a></div>
-			</div>
-			</td>
-			<td><a href="#">상품제목</a>
-			<div>
-			<span>옵션제목<b>2</b>개
-			</span>
-			</div></td>
-			<td><b>13,000</b>원 <span>
-			</span>
-			<div>
-			<a href="">상세정보</a>
-			</div></td>
-			<td class="status"><div>배송중</div></td>
-			<td>
-			<div>
-			<a >즉시취소</a>
-			</div>
-			<div>
-			<a >배송조회</a>
-			</div>
-			</td>
-			</tr>
-			</tbody>
-			</c:forEach>
-			</table>
-			</div>
-			</div> -->
-			<!--배송중상품 end-->
-
-			<!--배송완료상품-->
-			<!-- <div class="tab-pane" id="shipping_complete_merchandise">
-			<div class="buy_list_table">
-			<table class="table table-hover">
-			<thead>
-			<tr>
-			<th>구매내역</th>
-			<th>상품명/옵션</th>
-			<th>주문금액</th>
-			<th colspan="2">진행상태</th>
-			</tr>
-			</thead>
-			<c:forEach begin="1" end="5" step="1">
-			<tbody>
-			<tr>
-			<td>
-			<div class="date">
-			<div>구입날짜</div>
-			<div><a href="">제품번호</a></div>
-			</div>
-			</td>
-			<td><a href="#">상품제목</a>
-			<div>
-			<span>옵션제목<b>2</b>개
-			</span>
-			</div></td>
-			<td><b>13,000</b>원 <span>
-			</span>
-			<div>
-			<a href="">상세정보</a>
-			</div></td>
-			<td class="status"><div>배송완료</div></td>
-			<td>
-			<div>
-			<a >반품/교환</a>
-			</div>
-			<div>
-			<a >배송조회</a>
-			</div>
-			</td>
-			</tr>
-			</tbody>
-			</c:forEach>
-			</table>
-			</div>
-			</div> -->
-			<!--배송완료상품 end-->
-
-		</div>
-		<!--buy_list_main end-->
-	</div>
-</div>

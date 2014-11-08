@@ -11,7 +11,7 @@ class Purchase < ActiveRecord::Base
  def status_kr
 
  if self.status == 0  
- 	status = "대기중"
+ 	status = "입금확인중"
  elsif self.status == 1 
  	status = "발송준비"
  elsif self.status == 2 

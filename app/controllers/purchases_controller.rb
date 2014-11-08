@@ -1,11 +1,11 @@
  class PurchasesController < ApplicationController
-  before_action :set_purchase, only: [:show,  :update, :edit ]
+  before_action :set_purchase, only: [:show,  :update, :edit, :destroy ]
   
 
   # GET /purchases
   # GET /purchases.json
   def index
-    @purchases ||= Purchase.all
+    @purchases = Purchase.all
   end
 
   # GET /purchases/1
@@ -34,6 +34,7 @@
 
   # GET /purchases/1/edit
   def edit
+    
   end
 
   # POST /purchases
@@ -66,6 +67,7 @@
       @purchase.phone = order_info.phone
       @purchase.memo = order_info.memo
       @purchase.ordertype = 'cart'
+      @purchase.quantity = cart_item.quantity
       set_rest
       @purchase.save
     end
@@ -117,7 +119,8 @@
   def destroy
     @purchase.destroy
     respond_to do |format|
-      format.html { redirect_to purchases_url, notice: 'Purchase was successfully destroyed.' }
+
+      format.html { redirect_to sell_list_path, notice: '주문이 삭제되었습니다.' }
       format.json { head :no_content }
     end
   end
