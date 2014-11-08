@@ -12,7 +12,7 @@
 <% end %> 
 <%= f.hidden_field :user_id, value: current_user.id %>
 
-<%= f.text_area :content,class:'form-control input-sm',id:"comment_textarea-#{micropost.id}",placeholder:'말은 그 무엇보다 강려크하다'%>
+<%= f.text_area :content,class:'form-control input-sm',id:"comment_textarea-#{micropost.id}"%>
 
 <%= f.hidden_field :micropost_id, value: micropost.id  %>
 <span><a class="btn btn-default blog_comment_submit_btn" id="<%= micropost.id  %>">댓글등록</a></span>
