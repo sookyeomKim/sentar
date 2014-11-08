@@ -40,7 +40,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 #-------------------------------- 메세징 기능
 gem 'mailboxer'
 #---------------------------------
-gem 'sunspot_rails'
+# gem 'sunspot_rails'
 
 group :test do
   gem 'minitest-reporters', '1.0.5'

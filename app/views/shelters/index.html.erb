@@ -24,11 +24,11 @@
           <div class="col-lg-12">
          <div class="shelters_wrap">
            <!-- 검색기능 -->
-    <%= form_tag shelters_path, :method => :get do %>
+   <!--  <%= form_tag shelters_path, :method => :get do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search", :name => nil %>
-<% end %>
+<% end %> -->
            <ul>
               <% @shelters.each do |shelter| %>
               <li>
