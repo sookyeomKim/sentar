@@ -3,18 +3,14 @@
 	<span class="chat-img pull-left"> <%= gravatar_for @user , size: 50   ,class:'img-circle'%></span>
 	<div class="chat-body clearfix">
 		<div class="header">
-			<strong class="primary-font"> <%= comment.user_name %> </strong>
+			<strong class="primary-font"><%= comment.user_name %></strong>
 			<small class="pull-right text-muted">
 				<%if current_user?(@user) || current_user?(comment.micropost.user) %>					
-				<%= link_to '삭제', comment_path(comment), method: :delete,  data: { confirm: '댓글 삭제?' }, 
-				remote: :true, class:'btn btn-default btn-xs' %>
+				<%= link_to '삭제', comment_path(comment), method: :delete,  data: { confirm: '댓글 삭제?' },remote: :true, class:'btn btn-default btn-xs' %>
 				<% end %>
 				<i class="icon-time"></i> <%=time_ago_in_words(comment.created_at)%> ago </small>
 			</div>
-			<br>
-			<p>
-				<%= simple_format(comment.content) %>
-			</p>
+			<p><%= simple_format(comment.content) %></p>
 		</div>
 	</li>
 

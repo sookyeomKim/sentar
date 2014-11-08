@@ -40,15 +40,11 @@
 								<!--댓글 wrap head end-->
 
 								<!--댓글 wrap body 김수겸 14_09_14-->
-								<div class="panel-body">
+								<div class="panel-body" id="message-scroll-div">
 									<ul class="chat"  id="product-<%=@product.id %>">
-										
 										<%= render "comments/product_comment" , comments: @product.comments %>
-
 									</ul>
 								</div>
-							
-								
 								<!--댓글 wrap body end-->
 
 								<!--댓글 wrap footer 김수겸 14_09_14-->
@@ -68,15 +64,31 @@
 										</div>
 										<% end %> 
 										<%= f.hidden_field :user_id, value: current_user.id %>
-										<%= f.text_area :content,class:'form-control input-sm',placeholder:'말은 그 무엇보다 강려크하다',style:'width:400px;' %>
+										
+										<%= f.text_area :content,class:'form-control input-sm',id:"product_comment_text",placeholder:'말은 그 무엇보다 강려크하다',style:'width:100%px;' %>
 										<%= f.hidden_field :product_id, value: @product.id  %>
-										<span class="input-group-btn">
-											<%= f.submit('댓글등록',class:'btn btn-default btn-sm',remote: true)%>
-											<% end %>
-										</span>
+										
+										<!-- <%= f.submit('댓글등록',class:'btn btn-default btn-sm',remote: true)%> -->
+										<span><a class="btn btn-default" id="product_comment_submit_btn">댓글등록</a></span>
+										<span id="product_comment_warning" class="text-danger" style="display:none;">빈칸은 앙대영!!!</span>
+										
+										<% end %>
 									</div>
 								</div>
 								<!--댓글 wrap footer end-->
+								<%= javascript_tag do %>
+								$("#product_comment_submit_btn").on("click",function(){
+									var comment_form = $("#comment_form");
+									var text_area = $("#product_comment_text").val();
+									if(text_area===""){
+										$("#product_comment_warning").css( "display", "inline" ).fadeOut( 1250 );
+										return;
+									}    
+									comment_form.submit();
+									$("#product_comment_text").val("");
+								});
+								<% end %>
+
 							</div>
 						</div>
 					</div>
@@ -107,39 +119,7 @@
 							</div>
 						</div>
 					</div>
-					<!--지도 wrap end-->
-
-					<!--커머스 네비게이션 JS 김수겸 14_09_14-->
-					<script>
-					$(document).ready(function() {
-						var comment_height = $(".info_view_comment").height();
-						var map_height = $(".info_view_map").height();
-						var sum_height = comment_height + map_height + 30;
-						var a = $(window).height();
-						var b = $(document).height();
-						$(window).scroll(function() {
-							var document_scroll = $(window).scrollTop();
-							console.log(a);
-							console.log(b);
-							if (sum_height < document_scroll) {
-								$(".commerce_nav").css({
-									"position" : "fixed",
-									"top" : "50px",
-									"width" : "41%",
-									"margin-top" :"2px"
-
-								});
-							} else {
-								$(".commerce_nav").css({
-									"position" : "relative",
-									"width" : "100%",
-									"top" : "0"
-								});
-							}
-						});
-					});
-					</script>
-					<!--커머스 네비게이션 JS end-->
+					<!--지도 wrap end-->					
 
 					<!--커머스 네비게이션-->
 					<div class="commerce_nav">
@@ -280,19 +260,19 @@
 											</div>
 										</div>
 										<div >
-											 <%= image_tag "1.jpg",class:"item_img"%>
+											<%= image_tag "1.jpg",class:"item_img"%>
 										</div>
 										<div >
-											 <%= image_tag "2.jpg",class:"item_img" %>
+											<%= image_tag "2.jpg",class:"item_img" %>
 										</div>
 										<div >
-											 <%= image_tag "3.jpg",class:"item_img"%>
+											<%= image_tag "3.jpg",class:"item_img"%>
 										</div>
 										<div >
-											 <%= image_tag "4.jpg",class:"item_img"%> 
+											<%= image_tag "4.jpg",class:"item_img"%> 
 										</div>
 										<div >
-											 <%= image_tag "5.jpg",class:"item_img"%> 
+											<%= image_tag "5.jpg",class:"item_img"%> 
 										</div>
 									</div>
 									<!--아이템 정보 하단 end-->
@@ -309,3 +289,32 @@
 	</div>
 </div>
 
+<script>
+var product_info = function() {
+	var comment_height = $(".info_view_comment").height();
+	var map_height = $(".info_view_map").height();
+	var sum_height = comment_height + map_height + 30;
+	var a = $(window).height();
+	var b = $(document).height();
+	$(window).scroll(function() {
+		var document_scroll = $(window).scrollTop();
+		if (sum_height < document_scroll) {
+			$(".commerce_nav").css({
+				"position" : "fixed",
+				"top" : "50px",
+				"width" : "41%",
+				"margin-top" :"2px"
+
+			});
+		} else {
+			$(".commerce_nav").css({
+				"position" : "relative",
+				"width" : "100%",
+				"top" : "0"
+			});
+		}
+	});
+}
+$(product_info);
+$(document).on("page:change",product_info);
+</script>

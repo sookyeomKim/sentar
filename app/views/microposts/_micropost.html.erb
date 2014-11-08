@@ -1,90 +1,6 @@
-<!-- <div id="micropost-">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <span>
-        <%= link_to gravatar_for(micropost.user), micropost.user %>
-      </span>
-      <span>
-        <%= link_to micropost.user.name, micropost.user %>
-      </span>
-
-      <div style="float:left;">
-        <span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span id="like-<%= micropost.id %>"><%= micropost.likes.count %></span>
-        &nbsp; <span><strong><i class="fa fa-comment"></i></strong></span>
-        <span><%= micropost.comments.count %></span>
-        <div>
-         <span id="<%=micropost.id%>"><%= link_to '좋구만', like_micropost_path(micropost), method: :post, remote:true ,class:"btn btn-default btn-xs like_btn"%></span>
-          </div>
-        </div>
-        <div style="float:right;">
-          <span class="timestamp">
-            Posted <%= time_ago_in_words(micropost.created_at) %> ago.        
-          </span>
-          <span>
-            <%if current_user?(micropost.user)%>
-            <%=link_to "포스트삭제", micropost, method: :delete,
-            data: { confirm: "지우겄쏘??" },
-            title: micropost.content,class:'btn btn-default btn-xs'%> 
-            <%end%>
-          </span>
-        </div>   
-      </div>
-      <div class="panel-body">
-        <span>
-          <%= image_tag micropost.picture.url if micropost.picture? %>
-          <%= micropost.content %>
-        </span>
-      </div>
-      <div class="panel-footer">
-        <ul class="chat">
-          <% micropost.comments.each do |comment| %>
-          <li class="left clearfix">
-            <% @user = User.find_by(name: comment.user_name)||current_user  %>
-            <span class="chat-img pull-left"> <%=gravatar_for @user , size: 60%></span>
-            <div class="chat-body clearfix">
-              <div class="header">
-                <strong class="primary-font"> <%= comment.user_name %> </strong>
-                <small class="pull-right text-muted"><%= link_to '삭제', comment_path(comment), method: :delete, data: { confirm: '댓글 삭제?' },class:'btn btn-default btn-xs' %> <i class="icon-time"></i> <%=time_ago_in_words(comment.created_at)%> ago </small>
-              </div>
-              <br>
-              <p>
-                <%= comment.content %>
-              </p>
-            </div>
-          </li>
-          <% end %>               
-        </ul>
-        <%= form_for(@comment) do |f| %>
-        <% if @comment.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-          <ul>
-            <% @comment.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-        <% end %> 
-        <%= f.hidden_field :user_name, value: current_user.name %>
-        <%= f.text_area :content,class:'form-control input-sm',placeholder:'말은 그 무엇보다 강려크하다',style:'width:500px;' %>
-        <%= f.hidden_field :micropost_id, value: micropost.id  %>
-        <span class="input-group-btn">
-          <% store_location %>
-          <%= f.submit('댓글등록',class:'btn btn-default btn-sm',remote: true)%>
-          <% end %>
-        </span>
-      </div>
-    </div>
-  </div>
-  <hr> -->
-
-
-
-
   <!-- blog list -->
   <div class="panel-group" id="arcodian">
-    
+
     <div class="panel panel-default">
       <div class="media blog_list_item" >
         <%=link_to gravatar_for(micropost.user,size:66), micropost.user,class:'pull-left'%>   
@@ -132,47 +48,15 @@
                     <!--댓글 wrap head end-->
 
                     <!--댓글 wrap body 김수겸 14_09_14-->
-                    <div class="panel-body" id="micropost-scroll-div">
+                    <div class="panel-body" id="micropost-scroll-div-<%=micropost.id %>">
                       <ul class="chat" id="micropost-<%=micropost.id %>" >
-                        
+
                         <%= render micropost.comments %>
                         
                       </ul>
                     </div>
-                    <!--댓글 wrap body end-->
 
-                    <!--댓글 wrap footer 김수겸 14_09_14-->
-                    <!-- <div class="panel-footer" >
-                      <div class="input-group" >
-                        <%= form_for(@comment, remote: :true) do |f| %>
-                        <% if @comment.errors.any? %>
-                        <div id="error_explanation">
-                          <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-                          <ul>
-                            <% @comment.errors.full_messages.each do |message| %>
-                            <li><%= message %></li>
-                            <% end %>
-                          </ul>
-                        </div>
-                        <% end %> 
-                        <%= f.hidden_field :user_name, value: current_user.name %>
-                        
-                        <%= f.text_area :content,class:'form-control input-sm',placeholder:'말은 그 무엇보다 강려크하다'%>
-                          </div>
-                        <%= f.hidden_field :micropost_id, value: micropost.id  %>
-                        <span class="input-group-btn">
-                          <% store_location %>
-                          <%= f.submit('댓글등록', class:'btn btn-default btn-sm')%>
-                          <% end %>
-                        </span>
-                      </div>
-                    </div> -->
-
-                   
                     <%= render 'comments/form' , micropost: micropost %>
-            
-
 
                     <!--댓글 wrap footer end-->
                   </div>

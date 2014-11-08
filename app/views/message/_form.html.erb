@@ -1,5 +1,5 @@
 <div  class="form-group">
- <%= simple_form_for(:message, url: {action: "reply"} ) do |f| %>
+ <%= simple_form_for(:message, url: {action: "reply"}, remote: true ) do |f| %>
 
 
  <!--  <%= f.label :subject,'제목' %> -->
@@ -29,21 +29,9 @@ $("#message_submit_btn").on("click",function(){
     return;
   }    
   message_form.submit();
+  $("#message_body").val("");
 });
 <% end %>
 
 
 
-
-
-
-
-<!-- 
-
-= simple_form_for :message, url: reply_conversation_path(conversation) do |f|
-  = f.input :subject
-  = f.input :body
-  .form-actions
-    = f.button :submit, class: 'btn-primary'
-    = submit_tag 'Cancel', type: :reset, class: 'btn btn-danger'
- -->

@@ -1,31 +1,21 @@
-
-
 <% if @micropost %>
-<!-- $('#micropost-<%=@micropost.id %>').html("<%=j render @micropost.comments %>") -->
 $('<%=j render @comment %>').appendTo($("#micropost-<%=@micropost.id %>")).hide().fadeIn('fast');
 $('#comment_form-<%= @micropost.id %>')[0].reset()
 
 $(function(){
-var target_id='#micropost-<%=@micropost.id %>';
-$('#micropost-scroll-div').css('scrollTop', $(target_id).offset().top);
-$('#micropost-scroll-div').animate({ scrollTop: <%=@micropost.comments.size%>*100 }, 2000); 
+/*var target_id='#micropost-<%=@micropost.id %>';*/
+var body_id =<%=@micropost.id %>;
+/*$('#micropost-scroll-div-'+body_id).css('scrollTop', $(target_id).offset().top);*/
+$('#micropost-scroll-div-'+body_id).animate({ scrollTop: <%=@micropost.comments.size%>*100 }, 10); 
 /*window.scrollTo(0, $(target_id).offset().top);*/
 });
-
-
 <% end %>
 
-
-
 <% if @product  %>
-
 $('<%= j render @comment %>').appendTo($("#product-<%=@product.id %>")).hide().fadeIn('fast');
 $('#comment_form')[0].reset()
 
-
-
-
-
+$('#message-scroll-div').animate({scrollTop:99999999}, 10);
 <% end %>
 
 
