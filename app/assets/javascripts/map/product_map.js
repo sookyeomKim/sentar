@@ -1,4 +1,3 @@
-/*document.write("<script  language='javascript' src='https://apis.skplanetx.com/tmap/js?version=1&format=javascript&appKey=30c68bc1-8813-3f13-9c99-d3660cf91545'></script>");  */
 
 var map; //홈쪽 맵 
 //var map_shelter_create;//쉘터생성쪽 맵
@@ -7,9 +6,18 @@ var zoom, mapW, mapH, mapDiv; //맵 초기화시 사용상수
 var lonlat, pr_3857, pr_4326; //좌표변환 관련 상수
 var markers; //레이어 관련 변수
 
-var initialize = function () {
-    map_env();
-    
+function initialize() {
+
+    setVariables();
+    map = new Tmap.Map({
+        div: mapDiv
+    });
+    map.ctrl_panzoom.div.style.top = "50px";
+    /*alert(map.getExtent());*/
+
+
+
+    setLayers();
     shelterLoader();
     /*tmap poi method*/
     $("#sentar_search").on("click", function () { //Poi매서드, 쉘터를 Poi를 이용해 띄워주자
@@ -27,24 +35,15 @@ function onClickMap(evt){
     shelterLoader();
 }*/
 };
-$(initialize);
-$(document).on('page:change', initialize);
-function map_env(){
-    setVariables();
-    map = new Tmap.Map({
-        div: mapDiv
-    });
-    map.ctrl_panzoom.div.style.top = "50px";
-    /*alert(map.getExtent());*/
-    setLayers();
-}
+/*$(initialize);
+$(document).on('page:load', initialize);*/
 
 function setVariables() {
     pr_3857 = new Tmap.Projection("EPSG:3857");
     pr_4326 = new Tmap.Projection("EPSG:4326");
     lonlat = new Tmap.LonLat(14135893.887852, 4518348.1852606);
     zoom = 16;
-    mapDiv = 'map_div';
+    mapDiv = 'map_product';
     //mapDiv_shelter_create = 'map_div_shelter_create';
 }
 
