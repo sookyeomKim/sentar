@@ -13,7 +13,7 @@ gem 'bootstrap-sass', '3.2.0.2' #Twitter-Bootstrap을 레일스 프로젝트에�
 gem 'font-awesome-rails', '~> 4.2.0.0'
 gem 'jquery-ui-rails', '~> 5.0.0'
 
-gem 'jquery-turbolinks'
+
 
 #카트과정
 gem 'acts_as_shopping_cart', '~> 0.2.1'
