@@ -12,10 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require tmap
 //= require jquery-ui
 //= require bootstrap-sprockets
 //= require template/fileupload
 //= require template/dataTables
 //= require template/dataTables_bootstrap
+
 //= require turbolinks
 //= require_tree .
