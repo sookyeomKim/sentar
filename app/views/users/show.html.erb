@@ -87,7 +87,10 @@
   
 <%= render 'home/blog_comment.js' %>
 
-  <script>
-  $(blog_map);
-  $(document).on("page:change",blog_map);
+ <script>
+ var blog_map_call = function(){
+    map_env();
+    blog_map();
+ }
+  $(blog_map_call);
  </script>

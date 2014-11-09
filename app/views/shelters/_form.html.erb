@@ -78,8 +78,9 @@ $("#shelter_reg_btn").on("click",function(){
   shelter_form.submit();
 });
 var shelter_edit = function(){
+  map_env();
+  shelterLoader();
   SetLonlatEvents();
 }
 $(shelter_edit);
-$(document).on('page:change',shelter_edit);
 <% end %>

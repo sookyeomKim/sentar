@@ -52,6 +52,10 @@
 </div>
 <!--main wrap end-->	
 <script>
-$(initialize);
-$(document).on('page:change', initialize);
+var home_map = function(){
+	map_env();
+	total_search();
+	shelterLoader();
+}
+$(home_map);
 </script>

@@ -22,178 +22,152 @@
 					</tbody>
 				</table>
 			</div>
-				<!-- 상품리스트 js 김수겸 14.09.26
-				<script type="text/javascript">
-				var popup_modal = function() {
-					$(".qty_change").click(function(e) {
-						var divTop = e.clientY - 25;
-						var divLeft = e.clientX - 10;
-				
-						$('#popup_modal_wrap').css({
-							"top" : divTop,
-							"left" : divLeft,
-							"position" : "absoulte"
-						}).show();
-					});
-					$('#popup_modal_wrap').mouseleave(function() {
-						$("#popup_modal_wrap").hide();
-					});
-				}
-				$(popup_modal);
-				$(document).on('page:change', popup_modal);
-				</script>
-				상품리스트 js end -->
-				<hr>
-				<div class="price_wrap">
-					<span>주문금액</span><span id="total_price_org"></span><span>+</span><span>배송비</span><span
-					class="total_ship_price"></span><span>=</span><span>결제예정금액</span><span
-					id="total_price"></span><span>원</span>
-				</div>
-				<!--basket end-->
+			<hr>
+			<div class="price_wrap">
+				<span>주문금액</span><span id="total_price_org"></span><span>+</span><span>배송비</span><span
+				class="total_ship_price"></span><span>=</span><span>결제예정금액</span><span
+				id="total_price"></span><span>원</span>
+			</div>
+			<!--basket end-->
 
-				<!--basket js 김수겸 14.09.22-->
-				<%= javascript_tag do %>
-				var basket = function() {
-					call_display_price();
-				}
-				$(basket);
-				$(document).on("page:change", basket);
+			<!--basket js 김수겸 14.09.22-->
+			<%= javascript_tag do %>
+			// 총합계산
+			function call_display_price() {
+			    //옵션별 합계
+			    //종합 가격 정보
 
-				// 총합계산
-				function call_display_price() {
-					//옵션별 합계
-					//종합 가격 정보
+			    tot = {};
+			    tot['deal'] = {}
+			    tot['total_price'] = 0;
+			    tot['total_ship_price'] = 0;
 
-					tot = {};
-					tot['deal'] = {}
-					tot['total_price'] = 0;
-					tot['total_ship_price'] = 0;
+			    $('.deal_length')
+			        .each(
 
-					$('.deal_length')
-					.each(
-						function() {
-							var deal_id = $(this).attr(
-								'data-deal_id');
-							var qty = parseInt($(
-								'input[name="opt[qty][]"][data-deal_id="'
-								+ deal_id + '"]').val());
-							if (tot.deal[deal_id] == undefined) {
-								tot.deal[deal_id] = {};
-								tot.deal[deal_id]['qty'] = 0;
-								tot.deal[deal_id]['price'] = 0;
-							}
+			    function () {
+			        var deal_id = $(this).attr(
+			            'data-deal_id');
+			        var qty = parseInt($(
+			            'input[name="opt[qty][]"][data-deal_id="' + deal_id + '"]').val());
+			        if (tot.deal[deal_id] == undefined) {
+			            tot.deal[deal_id] = {};
+			            tot.deal[deal_id]['qty'] = 0;
+			            tot.deal[deal_id]['price'] = 0;
+			        }
 
-							var option_price = parseInt(deal_info[deal_id]['deal']['option_price_sale']);
+			        var option_price = parseInt(deal_info[deal_id]['deal']['option_price_sale']);
 
-							tot.deal[deal_id]['qty'] += qty;
-							tot.deal[deal_id]['price'] += option_price
-							* qty;
-							tot['total_price'] += option_price
-							* qty;
-						});
+			        tot.deal[deal_id]['qty'] += qty;
+			        tot.deal[deal_id]['price'] += option_price * qty;
+			        tot['total_price'] += option_price * qty;
+			    });
 
-					for ( var deal_id in tot['deal']) {
-						var ship_free = false;
-						var ship_price = parseInt(deal_info[deal_id]['deal']['price_ship']);
-						var ship_price_type = parseInt(deal_info[deal_id]['deal']['ship_price_type']);
-						var apop_price = parseInt(deal_info[deal_id]['deal']['option_price_sale']);
-						//배송조건 : 0:무료,1:유료
-						var deal_sum = parseInt(tot['deal'][deal_id]['price']);
+			    for (var deal_id in tot['deal']) {
+			        var ship_free = false;
+			        var ship_price = parseInt(deal_info[deal_id]['deal']['price_ship']);
+			        var ship_price_type = parseInt(deal_info[deal_id]['deal']['ship_price_type']);
+			        var apop_price = parseInt(deal_info[deal_id]['deal']['option_price_sale']);
+			        //배송조건 : 0:무료,1:유료
+			        var deal_sum = parseInt(tot['deal'][deal_id]['price']);
 
-						$('strong.total_price').each(function() {
-							if ($(this).attr('data-deal_id') == deal_id) {
-								$(this).text(number_format(deal_sum));
-							}
-						});
-						$('strong.apop_price').each(function() {
-							if ($(this).attr('data-deal_id') == deal_id) {
-								$(this).text(number_format(apop_price));
-							}
-						});
+			        $('strong.total_price').each(function () {
+			            if ($(this).attr('data-deal_id') == deal_id) {
+			                $(this).text(number_format(deal_sum));
+			            }
+			        });
+			        $('strong.apop_price').each(function () {
+			            if ($(this).attr('data-deal_id') == deal_id) {
+			                $(this).text(number_format(apop_price));
+			            }
+			        });
 
-						if (parseInt(deal_info[deal_id]['deal']['ship_price_type']) != 1) {
-							ship_free = true;
-						}
+			        if (parseInt(deal_info[deal_id]['deal']['ship_price_type']) != 1) {
+			            ship_free = true;
+			        }
 
-						if (ship_free) {
-							tot['deal'][deal_id]['ship_price'] = 0;
-							tot['total_ship_price'] += 0;
+			        if (ship_free) {
+			            tot['deal'][deal_id]['ship_price'] = 0;
+			            tot['total_ship_price'] += 0;
 
-							} else {
-								tot['deal'][deal_id]['ship_price'] = ship_price;
+			        } else {
+			            tot['deal'][deal_id]['ship_price'] = ship_price;
 
-								tot['total_ship_price'] += ship_price;
+			            tot['total_ship_price'] += ship_price;
 
-							}
+			        }
 
-							if (ship_price_type == 0) {
-								$('.deal_ship_price_' + deal_id).text('무료');
-								} else {
-									var shipPriceHtml = number_format(tot['deal'][deal_id]['ship_price'])
-									+ "원";
-									$('.deal_ship_price_' + deal_id)
-									.html(shipPriceHtml);
-								}
+			        if (ship_price_type == 0) {
+			            $('.deal_ship_price_' + deal_id).text('무료');
+			        } else {
+			            var shipPriceHtml = number_format(tot['deal'][deal_id]['ship_price']) + "원";
+			            $('.deal_ship_price_' + deal_id)
+			                .html(shipPriceHtml);
+			        }
 
-								$(".num_" + deal_id).text(
-								number_format($(".num_" + deal_id).text()));
+			        $(".num_" + deal_id).text(
+			        number_format($(".num_" + deal_id).text()));
 
-							}
+			    }
 
-							var cart_sum_amount = tot['total_price'];
+			    var cart_sum_amount = tot['total_price'];
 
-							var cart_sum_ship = tot['total_ship_price'];
+			    var cart_sum_ship = tot['total_ship_price'];
 
-							var cart_sum_payment = cart_sum_amount + cart_sum_ship;
+			    var cart_sum_payment = cart_sum_amount + cart_sum_ship;
 
 
-							$("#total_price_org").text(number_format(cart_sum_amount));
-							$(".total_ship_price").text(number_format(cart_sum_ship));
-							$("#total_price").text(number_format(cart_sum_payment));
+			    $("#total_price_org").text(number_format(cart_sum_amount));
+			    $(".total_ship_price").text(number_format(cart_sum_ship));
+			    $("#total_price").text(number_format(cart_sum_payment));
 
-							//ex)1000>1,000만들기
-function number_format(str1) {
-	return str1.toString().replace(
-	/(\-?\d+)(\d{3})($|\.\d+)/,
-	function(str, p1, p2, p3) {
-		return number_format(p1) + "," + p2 + ""
-		+ p3;
-	});
-}
+			    //ex)1000>1,000만들기
+			    function number_format(str1) {
+			        return str1.toString().replace(
+			            /(\-?\d+)(\d{3})($|\.\d+)/,
 
-}
+			        function (str, p1, p2, p3) {
+			            return number_format(p1) + "," + p2 + "" + p3;
+			        });
+			    }
 
-/*deal정보를 each문으로 받아와서 객체에 넣어줌*/
-var deal_info = {};
-$('.deal_length')
-.each(
-	function() {
-		var deal_id = $(this).attr('data-deal_id');
-		var deal_qty = $(this)
-		.attr('data-deal_qty');
-		var deal_price = $(this).attr(
-			'data-deal_price');
-		var deal_price_split = deal_price.replace(
-			/,/g, '');
+			}
 
-			deal_info[deal_id] = {};
-			deal_info[deal_id]['deal'] = {};
-			deal_info[deal_id]['deal']['deal_id'] = deal_id;
-			deal_info[deal_id]['deal']['qty'] = deal_qty;
-			deal_info[deal_id]['deal']['option_price_sale'] = deal_price_split;
-			deal_info[deal_id]['deal']['price_ship'] = '2500';
-			deal_info[deal_id]['deal']['ship_price_type'] = '1';
-		});
-		<% end %>
-		<!--basket js end-->
-		<hr>
-		<div>
-			<div class="row">
-				<div class="col-lg-4 col-lg-offset-4">
-					<span><a href="/" class="btn btn-default btn-lg">쇼핑계속하기</a></span>
-					<span><%= link_to '전체구매하기', new_purchase_path(:cart_id => current_user.cart.id) ,class:'btn btn-warning btn-lg'  %></span>
+			/*deal정보를 each문으로 받아와서 객체에 넣어줌*/
+			var deal_info = {};
+			$('.deal_length')
+			    .each(
+
+			function () {
+			    var deal_id = $(this).attr('data-deal_id');
+			    var deal_qty = $(this)
+			        .attr('data-deal_qty');
+			    var deal_price = $(this).attr(
+			        'data-deal_price');
+			    var deal_price_split = deal_price.replace(
+			        /,/g, '');
+
+			    deal_info[deal_id] = {};
+			    deal_info[deal_id]['deal'] = {};
+			    deal_info[deal_id]['deal']['deal_id'] = deal_id;
+			    deal_info[deal_id]['deal']['qty'] = deal_qty;
+			    deal_info[deal_id]['deal']['option_price_sale'] = deal_price_split;
+			    deal_info[deal_id]['deal']['price_ship'] = '2500';
+			    deal_info[deal_id]['deal']['ship_price_type'] = '1';
+			});
+
+
+			$(call_display_price());			
+			<% end %>
+			<!--basket js end-->
+			<hr>
+			<div>
+				<div class="row">
+					<div class="col-lg-4 col-lg-offset-4">
+						<span><a href="/" class="btn btn-default btn-lg">쇼핑계속하기</a></span>
+						<span><%= link_to '전체구매하기', new_purchase_path(:cart_id => current_user.cart.id) ,class:'btn btn-warning btn-lg'  %></span>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
