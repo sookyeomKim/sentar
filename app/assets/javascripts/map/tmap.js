@@ -8,11 +8,15 @@ var lonlat, pr_3857, pr_4326; //좌표변환 관련 상수
 var markers; //레이어 관련 변수
 
 var initialize = function () {
+
     setVariables();
     map = new Tmap.Map({
         div: mapDiv
     });
     map.ctrl_panzoom.div.style.top = "50px";
+    /*alert(map.getExtent());*/
+
+
 
     setLayers();
     shelterLoader();
@@ -26,6 +30,11 @@ var initialize = function () {
             sentar_search();
         }
     });
+    /*map.events.register("mouseup", map, onClickMap)
+ 
+function onClickMap(evt){
+    shelterLoader();
+}*/
 };
 $(initialize);
 $(document).on('page:load', initialize);
@@ -207,6 +216,7 @@ function onErrorLoadPoiData() {
 
 function sentar_search() {
     var selected_option = $("#poi_select option:selected").val();
+
     if (selected_option == 0) {
 
         tData = new Tmap.TData(); //response parameter를 *respnse parameter:sk서버내에 저장되어있는 map정보를 핸들링해줌
@@ -392,7 +402,7 @@ function commerce_shelter_search() {
         var shelter_searchText = $('#searchText').val();
         /*한글깨짐방지*/
         var shelter_list = json.shelters;
-
+        var shelter_empty=0;
         if (shelter_list != '') {
             $.each(shelter_list, function (index) {
                 var shelter_info = shelter_list[index].Shelter;
@@ -402,7 +412,9 @@ function commerce_shelter_search() {
                 var shelter_introduce = shelter_info.introduce;
                 var shelter_lonlat = shelter_info.lonlat;
                 var shelter_kind = shelter_info.kind;
-
+                
+                
+                 
                 lonlat_split(shelter_lonlat);
 
                 var lon = lonlat_split_arr[0];
@@ -413,6 +425,9 @@ function commerce_shelter_search() {
                 if (shelter_searchText == shelter_name) {
                     if (shelter_kind == 'commerce') {
                         var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
+                        if (shelter_searchText == shelter_name) {
+                            shelter_empty=1;
+                        }
                     } else {
                         return;
                     }
@@ -434,17 +449,17 @@ function commerce_shelter_search() {
                 markers.addMarker(shelterMarker);
 
                 /*검색시 줌 설정*/
-                if (shelter_list != '') {
+                /*if (shelter_list != '') {*/
 
                     map.zoomToExtent(markers.getDataExtent());
 
-                } else {
+                /*} else {
 
                     map.setCenter(new Tmap.LonLat(14134074.680985, 4517814.0870894), 15);
 
                     markers.clearMarkers();
 
-                }
+                }*/
 
 
                 shelterMarker.events.register('mouseover', popup, onShelterOver);
@@ -455,8 +470,11 @@ function commerce_shelter_search() {
 
 
             });
+            if(shelter_empty==0){
+                alert("검색결과가 없습니다.");
+            }
         } else {
-            alert("검색한 쉘터가 없습니다.");
+            alert("데이터가 없습니다.");
         }
     }
 }
@@ -479,6 +497,7 @@ function blog_shelter_search() {
         var shelter_searchText = $('#searchText').val();
         /*한글깨짐방지*/
         var shelter_list = json.shelters;
+        var shelter_empty=0;
 
         if (shelter_list != '') {
             $.each(shelter_list, function (index) {
@@ -490,6 +509,10 @@ function blog_shelter_search() {
                 var shelter_lonlat = shelter_info.lonlat;
                 var shelter_kind = shelter_info.kind;
 
+                if (shelter_searchText == shelter_name) {
+                    shelter_empty=1;
+                }
+
                 lonlat_split(shelter_lonlat);
 
                 var lon = lonlat_split_arr[0];
@@ -500,6 +523,9 @@ function blog_shelter_search() {
                 if (shelter_searchText == shelter_name) {
                     if (shelter_kind == 'blog') {
                         var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
+                        if (shelter_searchText == shelter_name) {
+                            shelter_empty=1;
+                        }
                     } else {
                         return;
                     }
@@ -521,18 +547,7 @@ function blog_shelter_search() {
                 markers.addMarker(shelterMarker);
 
                 /*검색시 줌 설정*/
-                if (shelter_list != '') {
-
-                    map.zoomToExtent(markers.getDataExtent());
-
-                } else {
-
-                    map.setCenter(new Tmap.LonLat(14134074.680985, 4517814.0870894), 15);
-
-                    markers.clearMarkers();
-
-                }
-
+                map.zoomToExtent(markers.getDataExtent());
 
                 shelterMarker.events.register('mouseover', popup, onShelterOver);
 
@@ -542,8 +557,11 @@ function blog_shelter_search() {
 
 
             });
+            if(shelter_empty==0){
+                alert("검색결과가 없습니다.");
+            }
         } else {
-            alert("검색한 쉘터가 없습니다.");
+            alert("데이터가 없습니다.");
         }
     }
 }
