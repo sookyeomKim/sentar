@@ -46,7 +46,8 @@
                                                 <td>
                                                     <%=link_to '삭제', product, method: :delete, data: { confirm: '상품을 삭제 하시겠습니까??' } ,class: 'btn btn-warning' %>
                                                 </td>
-                                                <td>수정</td>
+                                                <td>
+                                            <%= link_to("수정", edit_product_path(product) , class: 'btn btn-default') %></td>
                                                 <td>
                                                     <%=product.id %>
                                                 </td>

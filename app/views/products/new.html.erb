@@ -38,6 +38,43 @@
       <%= f.select :category, options_for_select([['음식', '음식'], ['옷', '옷'],['가구', '가구'],['가전', '가전']], 1), {}, { :class => 'form-control' } %>
     </div>
   </div>
+
+  <div class="form-group">
+    <%= f.label :option1 , "옵션1" ,class:'col-lg-2  control-label ' %>
+    <div class="col-lg-10">
+      <%= f.text_area :option1 , class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :detail1 ,'옵션1 상세옵션', class:'col-lg-2  control-label ' %>
+    <div class="col-lg-10">
+      <%= f.text_area :detail1 , class: 'form-control' %>
+    </div>
+  </div>
+
+
+
+
+  <div class="form-group">
+    <%= f.label :option2 , '옵션2',class:'col-lg-2  control-label ' %>
+    <div class="col-lg-10">
+      <%= f.text_area :option2 , class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :detail2, '옵션2 상세옵션', class:'col-lg-2  control-label ' %>
+    <div class="col-lg-10">
+      <%= f.text_area :detail2 , class: 'form-control' %>
+    </div>
+  </div>
+
+
+
+
+
+
   <div class="form-group">
     <%= f.label '메인 이미지',class:'col-lg-2  control-label' %>
     <div class="col-lg-10">

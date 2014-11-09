@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141107232000) do
+ActiveRecord::Schema.define(version: 20141109211840) do
 
   create_table "bulletins", force: true do |t|
     t.string   "title"
@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(version: 20141107232000) do
   end
 
   add_index "commentboards", ["post_id"], name: "index_commentboards_on_post_id"
+
+  create_table "details", force: true do |t|
+    t.string   "name"
+    t.integer  "quantity"
+    t.integer  "option_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "details", ["option_id"], name: "index_details_on_option_id"
 
   create_table "likes", force: true do |t|
     t.integer  "micropost_id"
@@ -142,6 +152,15 @@ ActiveRecord::Schema.define(version: 20141107232000) do
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
 
+  create_table "options", force: true do |t|
+    t.string   "name"
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "options", ["product_id"], name: "index_options_on_product_id"
+
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "content"
@@ -165,6 +184,7 @@ ActiveRecord::Schema.define(version: 20141107232000) do
     t.text     "content"
     t.string   "category"
     t.integer  "quantity"
+    t.integer  "sell_count"
   end
 
   add_index "products", ["user_id", "created_at"], name: "index_products_on_user_id_and_created_at"

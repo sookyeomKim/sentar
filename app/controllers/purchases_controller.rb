@@ -47,7 +47,8 @@
     set_rest
     respond_to do |format|
       if @purchase.save
-        
+        product = @purchase.product
+        product.update_attributes(quantity: product.quantity - 1 , sell_count: product.sell_count + 1)
         # format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
         format.html { redirect_to order_ok_path(type: 'goods', id:@purchase.id)}
         format.json { render :show, status: :created, location: @purchase }
@@ -69,7 +70,9 @@
       @purchase.ordertype = 'cart'
       @purchase.quantity = cart_item.quantity
       set_rest
-      @purchase.save
+      if @purchase.save
+        @product.update_attributes(quantity: @product.quantity - 1 , sell_count: @product.sell_count + @purchase.quantity)
+      end
     end
    
     redirect_to order_ok_path(type: 'cart')
