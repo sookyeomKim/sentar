@@ -114,7 +114,9 @@
 											</form>
 										</div>
 									</header>
-									<div id="map_div" class="google-maps"></div>
+									<div id="map_div" class="google-maps">
+										<input type="hidden" id="current_user_id"data-user_id ="<%= @user.id  %>">
+									</div>
 								</div>
 							</div>
 						</div>
@@ -291,11 +293,10 @@
 
 <script>
 var product_info = function() {
+	product_info_map();
 	var comment_height = $(".info_view_comment").height();
 	var map_height = $(".info_view_map").height();
 	var sum_height = comment_height + map_height + 30;
-	var a = $(window).height();
-	var b = $(document).height();
 	$(window).scroll(function() {
 		var document_scroll = $(window).scrollTop();
 		if (sum_height < document_scroll) {

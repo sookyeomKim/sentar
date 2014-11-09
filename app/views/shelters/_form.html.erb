@@ -2,36 +2,47 @@
 
 <!--쉘터이름,자기소개,쉘터위치,쉘터종류 입력-->
 <div class="row">
-  <div class="col-lg-4 shelter_left_form">
-    <div class="field">
-      <%= f.label :name,"쉘터이름" %>
-      <br>
-      <%= f.text_field :name ,class:"form-control"%>
-    </div>
-    <div class="field">
-      <%= f.label :introduce,"자기소개" %>
-      <br>
-      <%= f.text_field :introduce ,class:"form-control",placeholder: "자기소개 입력하셈"%>
+  <div class="col-lg-4 ">
+    <div class="form-group">
+      <%= f.label :name,"쉘터이름",class:'col-lg-2  control-label shelter_label' %>
+      <div class="col-lg-9 col-lg-offset-1">
+        <%= f.text_field :name ,class:"form-control"%>
+      </div>
+      <div id="shelter_submit_warning1" class="text-danger" style="display:none;">빈칸은 앙대영!!!</div>
     </div>
     
-    <div class="field">
-      <%= f.label :lonlat,"쉘터위치" %>
-      <br>
-      <%= f.text_field :lonlat, id: "lonlat",class:"form-control"%>
+    <div class="form-group">
+      <%= f.label :introduce,"자기소개",class:'col-lg-2  control-label shelter_label' %>
+      <div class="col-lg-9 col-lg-offset-1">
+        <%= f.text_area :introduce ,class:"form-control"%>
+      </div>
+      <div id="shelter_submit_warning2" class="text-danger" style="display:none;">빈칸은 앙대영!!!</div>
     </div>
-    <div class="field">
-      <%= f.label :kind,"쉘터종류" %>
-      <br>
-      <%= f.select :kind, options_for_select([['블로그', 'blog'], ['커머스', 'commerce']], 1), {}, { :class => 'form-control' } %>
+    
+    <div class="form-group">
+      <%= f.label :lonlat,"쉘터위치",class:'col-lg-2  control-label shelter_label' %>
+      <div class="col-lg-9 col-lg-offset-1">
+        <%= f.text_field :lonlat, id: "lonlat",class:"form-control",readonly:"true"%>
+      </div>
+      <div id="shelter_submit_warning3" class="text-danger" style="display:none;">위치선택하세요!!!</div>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :kind,"쉘터종류",class:'col-lg-2  control-label shelter_label' %>
+      <div class="col-lg-9 col-lg-offset-1">
+        <%= f.select :kind, options_for_select([['블로그', 'blog'], ['커머스', 'commerce']], 1), {}, { :class => 'form-control' } %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <!-- <%= f.submit("쉘터설정", class:"btn btn-default btn-round btn-line shelter_reg_btn") %> -->
+      <a class="btn btn-default btn-round btn-line shelter_reg_btn" id="shelter_reg_btn">쉘터설정</a>
     </div>
   </div>
   <!--쉘터이름,자기소개,쉘터위치,쉘터종류 입력 end-->
-<script>
-$(SetLonlatEvents);
-$(document).on('page:load',SetLonlatEvents);
-</script>
+
   <!--쉘터등록map-->
-  <div class="col-lg-8 shelter_right_form">
+  <div class="col-lg-8 ">
     <div id="map_div" style="position:relative; width:100%px; height:400px; "></div>
     <div class="field" style="display:none;">
       <% Shelter.all.each do |shelter| %>
@@ -44,10 +55,31 @@ $(document).on('page:load',SetLonlatEvents);
   </div>
   <!--쉘터등록map end-->
 </div>
-
-<div class="actions">
-  <%= f.submit("쉘터설정", class:"btn btn-default btn-round btn-line shelter_reg_btn") %>
-</div>
 <% end %>
 
-
+<%= javascript_tag do %>
+$("#shelter_reg_btn").on("click",function(){
+  var shelter_form = $(".edit_shelter");
+  var shelter_name = $("#shelter_name").val();
+  var shelter_introduce = $("#shelter_introduce").val();
+  var shelter_lonlat = $("#lonlat").val();
+  if(shelter_name===''){
+    $("#shelter_submit_warning1").css( "display", "inline" ).fadeOut( 1000 );
+    return;
+  }
+  else if(shelter_introduce===""){
+    $("#shelter_submit_warning2").css( "display", "inline" ).fadeOut( 1000 );
+    return;
+  }
+  else if(shelter_lonlat==="0"){
+    $("#shelter_submit_warning3").css( "display", "inline" ).fadeOut( 1000 );
+    return;
+  }
+  shelter_form.submit();
+});
+var shelter_edit = function(){
+  SetLonlatEvents();
+}
+$(shelter_edit);
+$(document).on('page:change',shelter_edit);
+<% end %>
