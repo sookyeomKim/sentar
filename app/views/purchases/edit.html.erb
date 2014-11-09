@@ -1,5 +1,16 @@
-<h1>Editing purchase</h1>
 
+
+
+
+ 
+<% if current_user?(@purchase.product.user) %>
+
+
+<%= render "admin_edit" %>
+  <!--buy_list_main end-->
+
+<% else %>
+<h1>배송지 수정</h1>
 <%= form_for(@purchase) do |f| %>
   <% if @purchase.errors.any? %>
     <div id="error_explanation">
@@ -12,11 +23,10 @@
 
       </ul>
     </div>
-      
-  <% end %>
-        <% if params[:type] = "buyer" %>
+    <% end %>
+
         
-         <%= f.label :수취인 %>
+        <%= f.label :수취인 %>
          <%= f.text_field :receive_name , value: @purchase.receive_name, class: 'form-control' %>
          <%= f.label :주소 %>
          <%= f.text_field :addr, value:@purchase.addr, class: 'form-control' %>
@@ -25,30 +35,7 @@
          <%= f.label :메모 %>
          <%= f.text_field :memo, value: @purchase.memo , class: 'form-control'%>
          
-         <%elsif params[:type] = "admin"%>
-         <%= f.hidden_field :product_id, class: 'form-control' %>
-         <%= f.hidden_field :user_id, class: 'form-control' %>
-          <%= f.label :수취인 %>
-         <%= f.label @purchase.receive_name, class: 'form-control' %>
-          <%= f.label :주소 %>
-         <%= f.label @purchase.addr, class: 'form-control' %>
-         <%= f.label :전화번호 %>
-          <%= f.label @purchase.phone %>
-         <%= f.label :phone, class: 'form-control' %>
-         
-         <%= f.label :memo, class: 'form-control' %>
-          <%= f.label @purchase.memo %>
-          <%= f.label :total_cost %>
-         <%= f.label :total_cost, class: 'form-control' %>
-          <%= f.label :trade_type %>
-         <%= f.label :trade_type, class: 'form-control' %>
-          <%= f.label :payer %>
-         <%= f.label :payer, class: 'form-control' %>
-          <%= f.label :status %>
-          <%= f.text_field :status %>
 
-
-         <% end %>
 
          
 
@@ -59,5 +46,5 @@
 <% end %>
 
 
-<%= link_to 'Show', @purchase %> |
-<%= link_to 'Back', purchases_path %>
+
+<% end %>
