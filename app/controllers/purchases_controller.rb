@@ -120,7 +120,7 @@
     @purchase.destroy
     respond_to do |format|
 
-      format.html { redirect_to purchases_url, notice: '주문이 삭제되었습니다.' }
+      format.html { redirect_to sell_list_path, notice: '주문이 삭제되었습니다.' }
       format.json { head :no_content }
     end
   end

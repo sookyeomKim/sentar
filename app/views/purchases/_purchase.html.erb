@@ -73,7 +73,7 @@
 							<% if purchase.status == 5 %>
 
 							<%= link_to '삭제', purchase_path(purchase), method: :delete,  
-							data: { confirm: '댓글 삭제?' }, class:'btn btn-warning'  %>
+							data: { confirm: '삭제 할까요?' }, class:'btn btn-warning'  %>
 
 							<% else %>
 							<%= link_to '상세보기/수정', edit_purchase_path(purchase), class:'btn btn-warning'  %>
