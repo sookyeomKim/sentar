@@ -1,0 +1,84 @@
+<%= render 'sell_and_buy/snb_category'%>
+<% if logged_in? %>
+<% provide(:title, '상품수정') %>
+<div class="row">
+  <div class="col-md-6">
+  
+    <%= form_for @product , html: { multipart: true } do |f| %>
+    <%= render 'shared/error_messages', object: @product %>
+
+
+  <div class="form-group">
+    <%= f.label :name ,'상품명',class:'col-lg-2  control-label'  %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :price,'상품가격',class:'col-lg-2  control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :price, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :quantity,'상품수량',class:'col-lg-2  control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :quantity, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :content , '내용',class:'col-lg-2  control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_area :content , class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :category,'카테고리',class:'col-lg-2  control-label' %>
+    <div class="col-lg-10">
+      <%= f.select :category, options_for_select([['음식', '음식'], ['옷', '옷'],['가구', '가구'],['가전', '가전']], 1), {}, { :class => 'form-control' } %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :picture ,'메인 이미지',class:'col-lg-2  control-label' %>
+    <div class="col-lg-10">
+      <div class="fileupload fileupload-new" data-provides="fileupload">
+              <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
+              <div>
+                <span class="btn btn-file btn-success"><span class="fileupload-new">이미지선택</span><span class="fileupload-exists">수정</span><%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %></span>
+                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">삭제</a>
+              </div>
+     </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :picture1, '상세 이미지',class:'col-lg-2  control-label' %>
+    <div class="col-lg-10">
+      <div class="fileupload fileupload-new" data-provides="fileupload">
+              <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
+              <div>
+                <span class="btn btn-file btn-success"><span class="fileupload-new">이미지선택</span><span class="fileupload-exists">수정</span><%= f.file_field :picture2, accept: 'image/jpeg,image/gif,image/png' %></span>
+                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">삭제</a>
+              </div>
+     </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-10 col-lg-offset-2">
+      <%= f.submit "상품등록", class: "btn btn-primary" %>
+    </div>
+  </div>
+   <% end %>
+  </div>
+</div>
+
+<%= javascript_tag do %>
+  $('#product_picture').bind('change', function() {
+    size_in_megabytes = this.files[0].size / 1024 / 1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+      //5mb 이상 사이즈시 에러메세지
+    }
+  });
+<% end %>
+<% end %>
+

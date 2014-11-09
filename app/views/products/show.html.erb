@@ -135,12 +135,12 @@
 									<div class="panel-body" style="height:100%; overflow-y:scroll;">
 										<!--옵션-->
 										<div class="deal_info_option_select">
-											<div class="option_select">
+											<!-- <div class="option_select">
 												<%= select_tag"select_commerce_query", options_for_select([["옵션첫번째",0],["1",1],["2",2]]),class:'btn btn-sm'%>
 											</div>
 											<div class="option_select">
 												<%= select_tag"select_commerce_query", options_for_select([["옵션두번째",0],["1",1],["2",2]]),class:'btn btn-sm'%>
-											</div>
+											</div> -->
 										</div>
 										<!--옵션-->
 										<hr>
@@ -148,12 +148,12 @@
 									<div class="panel-footer">
 										<!--버튼-->
 										<div class="deal_info_btn">
-											<%= button_tag(type: 'submit',class:"btn btn-primary") do
+											<!-- <%= button_tag(type: 'submit',class:"btn btn-primary") do
 												content_tag(:strong, '바로구매!')
 												end%>
 												<%= button_tag(type: 'submit',class:"btn btn-default") do
 													content_tag(:strong, '장바구니')
-													end%>
+													end%> -->
 												</div>
 												<!--버튼-->
 											</div>
@@ -198,7 +198,12 @@
 
 														<div class="count">
 															<div class="buy_count" id="buy_count">
-																<span class="bc_num"><%=@product.quantity  %></span>
+																<span class="bc_num">남은수량 :<%=@product.quantity  %></span>
+																<span class="bc_text">개</span>
+															</div>
+															<br>
+															<div class="sell_count" id="buy_count">
+																<span class="bc_num">판매수량 :<%=@product.sell_count  %></span>
 																<span class="bc_text">개</span>
 															</div>
 															<div class="time_count" id="time_count">
@@ -231,10 +236,15 @@
 													<!--옵션-->
 													<hr>
 													<!--버튼-->
+													<% unless @product.quantity == 0 %>
 													<div class="deal_info_btn">
 														<%= link_to '카트에 담기', cart_path(:id => @product.id  ,:amount => 1) , method: :post,class:'btn btn-primary'  %>
 														<%= link_to '구매하기', new_purchase_path(:id => @product.id, :order => 'goods'),class:'btn btn-default'  %>
 													</div>
+													<% else %>
+													품절
+													<% end %>
+
 													<!--버튼-->
 												</div>
 											</div>
@@ -261,7 +271,7 @@
 										</div>
 										
 										<div >
-										<%= image_tag  @product.picture2.url , class:"item_img" if @product.picture?%>
+										<%= image_tag  @product.picture2.url , class:"item_img" if @product.picture2?%>
 										</div>
 										
 									</div>

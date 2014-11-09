@@ -19,20 +19,20 @@ def index
   recipient_emails = conversation_params(:recipients).split(',')
   recipients = User.where(email: recipient_emails).all
 
-  if @conversation = already_have_conversation?(recipients)
+  if recipients.include?(current_user) or recipients.empty?
+    #recipients.delete(current_user)
+    flash[:danger] = "다시 초대해 주세요 :)"
+    redirect_to conversations_path(@conversations)
+  elsif @conversation = already_have_conversation?(recipients)
   body = conversation_params(:body)
   @user.reply_to_conversation( @conversation, body )
-  
+  redirect_to conversation_path(@conversation)
   else
   
  @conversation = @user.send_message(recipients, *conversation_params(:body, :subject)).conversation
-
-
-
-
-  
+ redirect_to conversation_path(@conversation)
 end
-  redirect_to conversation_path(@conversation)
+  
 end
 
 def reply

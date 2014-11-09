@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141107232000) do
+ActiveRecord::Schema.define(version: 20141109133942) do
 
   create_table "bulletins", force: true do |t|
     t.string   "title"
@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(version: 20141107232000) do
     t.text     "content"
     t.string   "category"
     t.integer  "quantity"
+    t.integer  "sell_count"
   end
 
   add_index "products", ["user_id", "created_at"], name: "index_products_on_user_id_and_created_at"
