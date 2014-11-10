@@ -10,11 +10,14 @@
 					<%=link_to "상품등록",new_product_path,class:"mini_nav_list btn btn-primary"%>
 				</li>
 				<li class="list-group-item">
-					<%= link_to '포스팅하기', blog_new_path,class:"mini_nav_list btn btn-primary"%>
+					<%=link_to "상품관리",products_url,class:"mini_nav_list btn btn-primary"%>
 				</li>
 				<li class="list-group-item">
+					<%= link_to '포스팅하기', blog_new_path,class:"mini_nav_list btn btn-primary"%>
+				</li><!-- 
+				<li class="list-group-item">
 					<%= link_to '메세지보내기', conversations_path,class:"mini_nav_list btn btn-primary"%>
-				</li>
+				</li> -->
 				<li class="list-group-item">
 					<%= link_to '공지사항', bulletin_posts_path('공지사항'),class:"mini_nav_list btn btn-primary" %>
 				</li>

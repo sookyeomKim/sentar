@@ -55,7 +55,6 @@
 										<% if @comment.errors.any? %>
 										<div id="error_explanation">
 											<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
 											<ul>
 												<% @comment.errors.full_messages.each do |message| %>
 												<li><%= message %></li>
@@ -102,17 +101,6 @@
 							<div class="box default" >
 								<header style="opacity: 0.7;">
 									<h5>지도</h5>
-									<div class="toolbar">
-										<form method="post" id="main_search" class="form-search">
-											<div class="input-group">
-												<input type="text" class="form-control" placeholder="Search" id="searchText">
-												<span class="input-group-btn">
-													<button type="submit" class="btn btn-default btn-sm">
-														검색
-													</button>&nbsp;&nbsp; </span>
-												</div>
-											</form>
-										</div>
 									</header>
 									<div id="map_div" class="google-maps">
 							<input type="hidden" id="current_user_id"data-user_id ="<%= @product.user_id %>">
@@ -229,25 +217,24 @@
 														</div>
 													</div>
 
-													<hr>
-													<% @product.options.each do |option| %>
-													<div>
-
-													<%= option.name  %> : <%= select_tag option.id, options_from_collection_for_select(option.details, "id", "name"  )  %>
-
-													</div>
-
-													
-
-
-
-													<% end %>
-
-
-												
-												<!--옵션-->
-												
 													<!--옵션-->
+													<hr>
+													<div class="row">
+														<% @product.options.each do |option| %>
+														<div class="form-group">
+													<label for="" class="col-lg-2  control-label" >
+														<%= option.name%>
+													</label>
+													<div class="col-lg-9 col-lg-offset-1">
+													<%= select_tag option.id, options_from_collection_for_select(option.details, "id", "name"  ),class:"form-control"  %>
+													</div>
+														</div>
+														<% end %>
+													</div>
+													<!--옵션-->
+													
+													<script>
+													</script>
 													<hr>
 													<!--버튼-->
 													<% unless @product.quantity == 0 %>
@@ -307,7 +294,6 @@
 var product_info = function() {
 	map_env();
 	product_info_map();
-
 	var comment_height = $(".info_view_comment").height();
 	var map_height = $(".info_view_map").height();
 	var sum_height = comment_height + map_height + 30;
