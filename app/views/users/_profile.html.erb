@@ -13,8 +13,10 @@
 			$(".tfs_tooltip").tooltip();
 		});
 	</script>
+	<% if current_user?(@user) %>
 	<%= link_to '', edit_shelter_path(current_user.shelter),class:"fa fa-cog tfs_tooltip",style: 'position: absolute; top: 0; right: 0; text-decoration:none;margin:5px;color:#000;',data: {toggle: 'tooltip', placement: 'bottom'},title:'프로필설정' %>
 	<!--설정버튼 end-->
+	<% end %>
 
 	<!--자기소개-->
 	<div class="caption">

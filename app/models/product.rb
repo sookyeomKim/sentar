@@ -3,7 +3,7 @@ class Product < ActiveRecord::Base
 	has_many :purchases
 	has_many :comments , dependent: :destroy
 	has_many :cartitems, dependent: :destroy, foreign_key: "item_id", class_name: "CartItem"
-	has_many :options , dependent: :destroy
+	ham_many :options , dependent: :destroy
 	
 
 
