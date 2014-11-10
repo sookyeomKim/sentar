@@ -18,6 +18,7 @@ class Product < ActiveRecord::Base
 	validate :picture_size
 	validates :quantity, presence: :true
 
+	
 
 	attr_accessor :option1,:option2,:detail1,:detail2
 
