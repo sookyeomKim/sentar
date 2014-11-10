@@ -54,7 +54,11 @@
                 <%= select_tag"select_blog_query", options_for_select([["최신등록순",0],["댓글순",1],["추천순",2]]),class:'btn btn-sm btn-default'%>
               </span>
               <span>
-                  <%= link_to '새글쓰기',blog_new_path,class:"btn btn-default"%>
+                <% if current_user?@user %>
+                  <%= link_to '새글쓰기',blog_new_path,class:"btn btn-warning"%>
+                <% else %>
+                  <%= link_to '내 블로그 가기',current_user,class:"btn btn-warning"%>
+                  <% end %>
               </span>
                          </div>
             </div>
