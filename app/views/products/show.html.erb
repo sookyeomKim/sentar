@@ -1,7 +1,7 @@
 <% flash.each do |message_type, message| %>
 <div class="alert alert-<%= message_type %>"><%= message %></div>
 <% end %>
-<div class="content_re">
+<div class="content_re" >
 	<div class="row">
 		<!--좌측 wrap-->
 		<div class="col-lg-5">
@@ -222,11 +222,9 @@
 													<div class="row">
 														<% @product.options.each do |option| %>
 														<div class="form-group">
-													<label for="" class="col-lg-2  control-label" >
-														<%= option.name%>
-													</label>
+													<label for="detail1" id="option1"class="col-lg-2  control-label" ><%= option.name%></label>
 													<div class="col-lg-9 col-lg-offset-1">
-													<%= select_tag option.id, options_from_collection_for_select(option.details, "id", "name"  ),class:"form-control"  %>
+													<%= select_tag "detail1", options_from_collection_for_select(option.details, "id", "name"  ),class:"form-control"  %>
 													</div>
 														</div>
 														<% end %>
@@ -239,8 +237,10 @@
 													<!--버튼-->
 													<% unless @product.quantity == 0 %>
 													<div class="deal_info_btn">
-														<%= link_to '카트에 담기', cart_path(:id => @product.id  ,:amount => 1) , method: :post,class:'btn btn-primary'  %>
-														<%= link_to '구매하기', new_purchase_path(:id => @product.id, :order => 'goods'),class:'btn btn-default'  %>
+														<!-- <%= link_to '카트에 담기', cart_path(:id => @product.id  ,:amount => 1) , method: :post,class:'btn btn-primary'  %> -->
+														<a id="cart_go_btn"class="btn btn-primary"rel="nofollow" data-product_id="<%=@product.id %>">카트에 담기</a>
+														<!-- <%= link_to '구매하기', new_purchase_path(:id => @product.id, :order => 'goods'),class:'btn btn-default'  %> -->
+														<a id="buy_go_btn"class="btn btn-default"rel="nofollow" data-product_id="<%=@product.id %>">구매하기</a>
 													</div>
 													<% else %>
 													품절
@@ -253,7 +253,29 @@
 										</div>
 									</div>
 									<!--아이템 정보 상단 end-->
+									<!-- Vhref="/purchases/new?id=6&amp;order=goods" -->
+									<%= javascript_tag do %>
+											var product_id =  $("#cart_go_btn").attr("data-product_id");
+											var prodict_option1 = $("#option1").text();
+											var prodict_detail1 = $("#detail1 option:selected").text();
+										$("#cart_go_btn").on("click",function(){
+											var result = confirm('장바구니에 넣으시겠습니까?');
+											if(!result) {
+									           return
+									        } else {
+									         location.href="/cart?amount=1&id="+product_id+"&option1="+prodict_option1+"&detail1="+prodict_detail1;
+									        }
+										});
 
+										$("#buy_go_btn").on("click",function(){
+											var result = confirm('바로 구매하시겠습니까?');
+											if(!result) {
+									           return
+									        } else {
+									         location.href="/purchases/new?id="+product_id+"&order=goods&option1="+prodict_option1+"&detail1="+prodict_detail1;
+									        }
+										});
+									<% end %>
 									<!--아이템 정보 하단 김수겸 14_09_15-->
 									<div class="iemp_content_warp" style="margin-top:10px;">
 										<div class="item_explanation">
