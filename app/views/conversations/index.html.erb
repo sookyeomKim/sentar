@@ -7,18 +7,11 @@
 				<ul>
 					<li class="active">	<h2><strong>메세지 목록</strong></h2></li>
 				</ul>
-			
-
-		
-
 			<ul>
 				
 			<!-- <%= form_for(:search, url: :search, method: :post ) do |f| %>
 			
-			<input type="search", placeholder: 'Search', name: 'search'>
-			
-			
-			
+			<input type="search", placeholder: 'Search', name: 'search'>			
 			<% end %> -->
 			</ul>
 			</div>
@@ -167,18 +160,32 @@
 								<%= f.text_field :recipients,class:"form-control",id:'recipients_form' %>
 
 								<!-- <%= f.label :subject,'제목' %> -->
-								<%= f.hidden_field :subject , value: "blanked"  %>
+								<%= f.hidden_field :subject , value: "나불나불"  %>
 
 								<%= f.label :body, '전하고 싶은 말', class: "checkbox inline"  %>
-								<%= f.text_area :body,class:"form-control" %>         
+								<%= f.text_area :body,class:"form-control",id:"message_body" %>         
 
-								<%= f.button '보내기', class: 'btn btn-default' %><!--입력되어진대로 제출한다.-->
+								 <a class="btn btn-default" id="message_submit_btn">보내기</a>
+								 <span id="message_warning" class="text-danger"style="display:none;">빈칸은 앙대영!!!</span>
+								
 								<%= f.button '초기화'	, type: :reset, class: 'btn btn-danger' %><!--입력되어진대로 제출한다.-->
 								<!--<%= link_to '뒤로', conversations_path,class:'btn btn-primary'%>-->
 								<% end %>
 							</div>
 						</div>
 					</div>
+					<%= javascript_tag do %>
+					$("#message_submit_btn").on("click",function(){
+					  var message_form = $(".message");
+					  var text_area = $("#message_body").val();
+					  if(text_area===""){
+					    $("#message_warning").css( "display", "inline" ).fadeOut( 1250 );
+					    return;
+					  }    
+					  message_form.submit();
+					});
+					<% end %>
+
 					<div class="panel" id="arcodian">
 						<div class="panel-heading" style="background-color:#bbb;">
 							<h2 class="accordion-toggle"data-toggle="collapse" data-parent="#accordion" href="#trash" style="cursor:pointer; text-align:center;"><strong>휴지통</strong></h2>

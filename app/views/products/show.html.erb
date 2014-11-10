@@ -115,7 +115,7 @@
 										</div>
 									</header>
 									<div id="map_div" class="google-maps">
-							<input type="hidden" id="current_user_id"data-user_id ="<%= current_user.id %>">
+							<input type="hidden" id="current_user_id"data-user_id ="<%= @product.user_id %>">
 									</div>
 								</div>
 							</div>
@@ -303,7 +303,7 @@
 	</div>
 </div>
 
-<script>
+<%= javascript_tag do %>
 var product_info = function() {
 	map_env();
 	product_info_map();
@@ -331,4 +331,4 @@ var product_info = function() {
 	});
 }
 $(product_info);
-</script>
+<% end %>
