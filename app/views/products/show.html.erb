@@ -136,14 +136,17 @@
 									</div>
 									<div class="panel-body" style="height:100%; overflow-y:scroll;">
 										<!--옵션-->
+										<!-- <%= @product.options.each do |option| %>
+										
 										<div class="deal_info_option_select">
-											<!-- <div class="option_select">
+											<div class="option_select">
 												<%= select_tag"select_commerce_query", options_for_select([["옵션첫번째",0],["1",1],["2",2]]),class:'btn btn-sm'%>
 											</div>
 											<div class="option_select">
 												<%= select_tag"select_commerce_query", options_for_select([["옵션두번째",0],["1",1],["2",2]]),class:'btn btn-sm'%>
-											</div> -->
+											</div> 
 										</div>
+										<% end %> -->
 										<!--옵션-->
 										<hr>
 									</div>
@@ -225,16 +228,25 @@
 															</div>
 														</div>
 													</div>
+
 													<hr>
-													<!--옵션-->
-													<div class="deal_info_option_select">
-														<div class="option_select">
-															<%= select_tag"select_commerce_query", options_for_select([["옵션첫번째",0],["1",1],["2",2]]),class:'btn btn-sm'%>
-														</div>
-														<div class="option_select">
-															<%= select_tag"select_commerce_query", options_for_select([["옵션두번째",0],["1",1],["2",2]]),class:'btn btn-sm'%>
-														</div>
+													<% @product.options.each do |option| %>
+													<div>
+
+													<%= option.name  %> : <%= select_tag option.id, options_from_collection_for_select(option.details, "id", "name"  )  %>
+
 													</div>
+
+													
+
+
+
+													<% end %>
+
+
+												
+												<!--옵션-->
+												
 													<!--옵션-->
 													<hr>
 													<!--버튼-->

@@ -3,6 +3,11 @@ class Product < ActiveRecord::Base
 	has_many :purchases
 	has_many :comments , dependent: :destroy
 	has_many :cartitems, dependent: :destroy, foreign_key: "item_id", class_name: "CartItem"
+	has_many :options , dependent: :destroy
+	
+
+
+
 	default_scope -> { order('created_at DESC') }
 	mount_uploader :picture, PictureUploader
 	mount_uploader :picture2, PictureDetailUploader
@@ -12,7 +17,10 @@ class Product < ActiveRecord::Base
 	validates :price, numericality: true
 	validate :picture_size
 	validates :quantity, presence: :true
-	
+
+
+	attr_accessor :option1,:option2,:detail1,:detail2
+
 def Product.from_users_followed_by(user)
     	following_ids = "SELECT followed_id FROM relationships
                      WHERE  follower_id = :user_id"
@@ -20,6 +28,12 @@ def Product.from_users_followed_by(user)
           user_id: user.id)
 
   end
+
+  
+  	
+
+  	
+  	 
 
  
 

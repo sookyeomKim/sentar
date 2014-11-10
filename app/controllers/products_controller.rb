@@ -35,8 +35,36 @@ class ProductsController < ApplicationController
 	@user ||= current_user
     	@product = @user.products.build(product_params)
     	@product.sell_count = 0
-    	respond_to do |format|
+     
+        
+    	
+
+      respond_to do |format|
+
     	  if @product.save
+
+
+        
+        if @product.option1 
+        @option = @product.options.build(name: @product.option1)
+        if @option.save
+        @details =@product.detail1.split(",")
+        @details.each do |detail| 
+        @option.details.new(name: detail).save
+        end
+        end
+      end
+
+     if @product.option2
+        @option = @product.options.build(name: @product.option2)
+        if @option.save
+        @details =@product.detail2.split(",")
+        @details.each do |detail| 
+        @option.details.new(name: detail).save
+        end
+        end
+      end
+        
     	   flash[:success] = "상품이 등록 되었습니다."
         format.html { redirect_to products_path }
         format.json { render :show, status: :created, location: @product }
@@ -44,8 +72,11 @@ class ProductsController < ApplicationController
         format.html { render :new }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
-     end
-     end
+    end
+     
+     
+   end
+  
 
   	def destroy	
   	@product.update_attribute(:user_id, nil)
@@ -78,7 +109,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-      params.require(:product).permit(:name, :price, :picture, :category, :content, :picture2, :picture3, :quantity)
+      params.require(:product).permit(:name, :price, :picture, :category, :content, :picture2, :picture3, :quantity , :option1, :detail1, :option2, :detail2)
     end
 
     def	set_product
