@@ -4,7 +4,7 @@
 		<span><strong><%= @user.name %></strong>님의 프로필</span>
 	</p>
 	<!--이미지-->
-	<a href="" class="profile"> <%= gravatar_for @user , size: 210  %></a>
+	<%= link_to((gravatar_for @user , size: 210) , @user ) %>
 	<!--이미지 end-->
 
 	<!--설정버튼-->

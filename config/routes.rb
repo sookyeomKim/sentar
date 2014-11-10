@@ -25,7 +25,7 @@ get    'sell_lists'     => 'sell#index'
   get    'signup'   => 'users#new'
   get    'login'    => 'sessions#new'
   delete 'logout'   => 'sessions#destroy'
-  get 'blog'    => 'static_pages#home'
+  get 'shelter_product'    => 'static_pages#home'
    get 'blog_new'    => 'microposts#new'
 resources :users do
   member do

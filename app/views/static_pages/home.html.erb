@@ -41,51 +41,9 @@
     </div>
     <!-- blog side end -->
 
-    <!--blog_list_wrap 김수겸 14.09.19-->
-    <div class="col-lg-10">
-      <div class="right_wrap">
-        <div class="row">
-          <div class="col-lg-12">
-            <!--blog_list_top 김수겸 14.09.19--> 
-            <div class="blog_list_top">
-              <!-- <span style="font-size:20px; font-weight:bold; margin:5px;">쇼핑</span> -->
-              <div class="blog_select_option">
-                <span class="common_select_btn_150px">
-                  <%= select_tag"select_blog_query", options_for_select([["최신등록순",0],["댓글순",1],["추천순",2]]),class:'btn btn-sm btn-default'%>
-                </span>
-                <span>
-                  <%= link_to '새글쓰기',blog_new_path,class:"btn btn-default"%>
-                </span>
-              </div>
-            </div>
-            <!--blog_list_top end-->  
-            <hr style="margin-top:0;">
-            
-            <!--blog_list_content-->
-            <div class="inner">
-              <input type="hidden" id="current_user_id"data-user_id ="<%= @user.id  %>">
-              <%if @microposts.size ==0%>
-              <a href="/blog_new"><h1>새글을 작성해보세요.</h1></a>                   
-              <% end %>
-              <%= render @microposts %>
-            </div>
-            <!--blog_list_content end -->
-
-            
-            <hr>
-            <div class="blog_lsit_bottom">
-
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class = "row">
+      <%= render @products %>
     </div>
-    <!--blog_list_wrap end-->
-  </div>
-</div>
-<!-- 블로그 리스트 end -->
-<%= render 'home/blog_comment.js' %>
-
 <script>
 var blog_map_call = function(){
   map_env();

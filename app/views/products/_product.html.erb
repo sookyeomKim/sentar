@@ -13,13 +13,8 @@
             <strong><%= product.price %></strong>원
           </p>  
           <p>
-
-
-          	<%if current_user?(product.user)%>  
-          	<!-- <%= link_to '삭제', product, method: :delete, data: { confirm: '확실해요?' } ,class:'btn btn-warning' %>
-                      <%= link_to '수정', product, method: :delete, class:'btn btn-warning' %> -->
-            
-          	<% elsif product.quantity == 0  %>
+ 
+          	<%if product.quantity == 0  %>
          
         	<h2>품절</h2>  	
           

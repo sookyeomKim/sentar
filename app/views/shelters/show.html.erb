@@ -24,10 +24,10 @@
 					
 				</div>
 				<div id="label2" class="label">
-					<%=link_to "커머스",commerce_path%>
+					<%=link_to "커머스",shelter_product_path(id: @shelter.user)%>
 				</div>
 				<div id="label3" class="label" href="#">
-					<%= link_to '블로그', blog_path%>
+					<%= link_to '블로그', @shelter.user%>
 					
 				</div>
 				<div id="label4" class="label" href="#"><a href="">호핀</a>

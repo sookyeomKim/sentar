@@ -17,7 +17,6 @@ class UsersController < ApplicationController
   end
   
   def show
-    @mailbox ||= current_user.mailbox
     @user =  User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
     @comment = Comment.new

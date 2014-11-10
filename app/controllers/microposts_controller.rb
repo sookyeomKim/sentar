@@ -11,7 +11,7 @@ class MicropostsController < ApplicationController
   # $ sudo apt-get install imagemagick --fix-missing
     if @micropost.save
       flash[:success] = "게시글이 등록되었습니다.!"
-      redirect_to blog_path
+      redirect_to current_user
     else
       @feed_items = []
       render 'static_pages/home'
@@ -21,7 +21,7 @@ class MicropostsController < ApplicationController
   def destroy
     @micropost.destroy
     flash[:success] = "게시글이 삭제 되었습니다."
-    redirect_to blog_path
+    redirect_to current_user
   end
 
   def new

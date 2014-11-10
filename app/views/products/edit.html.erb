@@ -39,6 +39,36 @@
     </div>
   </div>
   <div class="form-group">
+    <%= f.label :option1 , "옵션1" ,class:'col-lg-2  control-label ' %>
+    <div class="col-lg-10">
+      <%= f.text_area :option1 , class: 'form-control' ,value: @product.options.first.name %>
+    </div>
+  </div>
+ 
+  <div class="form-group">
+    <%= f.label :detail1 ,'옵션1 상세옵션', class:'col-lg-2  control-label ' %>
+    <div class="col-lg-10">
+      <%= f.text_area :detail1 , class: 'form-control', value: @product.options.first.details.map(&:name).join(",") %>
+    </div>
+  </div>
+
+
+   <div class="form-group">
+    <%= f.label :option2 , '옵션2',class:'col-lg-2  control-label ' %>
+    <div class="col-lg-10">
+      <%= f.text_area :option2 , class: 'form-control' ,value: @product.options.last.name%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :detail2, '옵션2 상세옵션', class:'col-lg-2  control-label ' %>
+    <div class="col-lg-10">
+      <%= f.text_area :detail2 , class: 'form-control' , value: @product.options.first.details.map(&:name).join(",") %>
+    </div>
+  </div>
+
+  
+  <div class="form-group">
     <%= f.label :picture ,'메인 이미지',class:'col-lg-2  control-label' %>
     <div class="col-lg-10">
       <div class="fileupload fileupload-new" data-provides="fileupload">
