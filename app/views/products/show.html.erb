@@ -237,33 +237,44 @@
 													<!--버튼-->
 													<% unless @product.quantity == 0 %>
 													<div class="deal_info_btn">
-														<!-- <%= link_to '카트에 담기', cart_path(:id => @product.id  ,:amount => 1) , method: :post,class:'btn btn-primary'  %> -->
-														<a id="cart_go_btn"class="btn btn-primary"rel="nofollow" data-product_id="<%=@product.id %>">카트에 담기</a>
+														<%= link_to '카트에 담기', cart_path(:id => @product.id  ,:amount => 1) , method: :post,class:'btn btn-primary',id:"cart_go_btn","data-product_id"=>@product.id  %> 
+														<!-- <a id="cart_go_btn"class="btn btn-primary"rel="nofollow" data-product_id="<%=@product.id %>">카트에 담기</a> -->
 														<!-- <%= link_to '구매하기', new_purchase_path(:id => @product.id, :order => 'goods'),class:'btn btn-default'  %> -->
 														<a id="buy_go_btn"class="btn btn-default"rel="nofollow" data-product_id="<%=@product.id %>">구매하기</a>
 													</div>
 													<% else %>
 													품절
 													<% end %>
-
 													<!--버튼-->
+
+													
 												</div>
 											</div>
 											<!--아이템 가격정보 end-->
 										</div>
 									</div>
 									<!--아이템 정보 상단 end-->
-									<!-- Vhref="/purchases/new?id=6&amp;order=goods" -->
-									<%= javascript_tag do %>
-											var product_id =  $("#cart_go_btn").attr("data-product_id");
-											var prodict_option1 = $("#option1").text();
-											var prodict_detail1 = $("#detail1 option:selected").text();
+									<script>
+										var product_id;
+										var prodoct_option1;
+										var prodoct_detail1;
+										function product_info_call(){
+											product_id =  $("#cart_go_btn").attr("data-product_id");
+											prodoct_option1 = $("#option1").text();
+											prodoct_detail1 = $("#detail1 option:selected").text();
+											$("#cart_go_btn").prop('href',"/cart?amount=1&id="+product_id+"&option1="+prodoct_option1+"&detail1="+prodoct_detail1);
+										}
+										$(product_info_call);
+
+										$("#detail1").on("click",function(){
+											product_info_call();
+										});
+
 										$("#cart_go_btn").on("click",function(){
+											/*var product_info_form = $("#product_info_form");*/
 											var result = confirm('장바구니에 넣으시겠습니까?');
 											if(!result) {
-									           return
-									        } else {
-									         location.href="/cart?amount=1&id="+product_id+"&option1="+prodict_option1+"&detail1="+prodict_detail1;
+									           return false;
 									        }
 										});
 
@@ -272,10 +283,13 @@
 											if(!result) {
 									           return
 									        } else {
-									         location.href="/purchases/new?id="+product_id+"&order=goods&option1="+prodict_option1+"&detail1="+prodict_detail1;
+									        	product_id =  $("#cart_go_btn").attr("data-product_id");
+											prodoct_option1 = $("#option1").text();
+											prodoct_detail1 = $("#detail1 option:selected").text();
+									         location.href="/purchases/new?id="+product_id+"&order=goods&option1="+prodoct_option1+"&detail1="+prodoct_detail1;
 									        }
 										});
-									<% end %>
+									</script>
 									<!--아이템 정보 하단 김수겸 14_09_15-->
 									<div class="iemp_content_warp" style="margin-top:10px;">
 										<div class="item_explanation">
