@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require gritter
 //= require bootstrap-sprockets
 //= require template/fileupload
 //= require template/dataTables

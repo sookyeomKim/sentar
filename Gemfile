@@ -60,3 +60,5 @@ group :production do
   gem 'unicorn',        '4.8.3'
   gem 'unicorn-worker-killer'
 end
+
+gem "gritter", "1.1.0"
