@@ -1,5 +1,4 @@
 <!-- <h2>Bulletins</h2>
-
 <table class="table">
   <thead>
     <tr>
@@ -8,7 +7,6 @@
       <th>Data actions</th>
     </tr>
   </thead>
-
   <tbody>
     <% @bulletins.each do |bulletin| %>
       <tr>
@@ -23,62 +21,40 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
-
 <%= link_to 'New Bulletin', new_shelter_bulletin_path, class: 'btn btn-default' %>
  -->
 <div class="content_ab">
-
     <div id="carousel-example-captions" class="carousel slide bs-docs-carousel-example">
         <ol class="carousel-indicators">
-          
-         <%@bulletins.count.times.each do |i| %>
-           <li data-target="#carousel-example-captions" data-slide-to="<%=i%>" class="active"></li>
-
-         <% end %> 
-       
-            
+            <%@bulletins.count.times.each do |i| %>
+                <li data-target="#carousel-example-captions" data-slide-to="<%=i%>" class="active"></li>
+                <% end %>
         </ol>
         <div class="carousel-inner">
             <div class="item active">
-                <%=image_tag( "../../../assets/shelter/white_background.png", height: '100%', width: '100%')%>
-                    <div class="carousel-caption">
-                        <div>
+                <%@bulletin=@bulletins.first %>
+                    <%=image_tag( "../../../assets/shelter/white_background.png", height: '100%', width: '100%')%>
+                        <div class="carousel-caption">
+                            <div>
+                                 <h1><%= link_to @bulletin.title, posts_path(:bulletin_id=>@bulletin ) %></h1>
 
-                            <h1><%= link_to @bulletin.title, posts_path(:bulletin_id=>@bulletin ) %></h1>
+                            </div>
                         </div>
-                    </div>
             </div>
-            <div class="item">
-                <%=image_tag( "../../../assets/shelter/white_background.png", height: '100%', width: '100%')%>
-                    <div class="carousel-caption">
-                        <div>
-                            <h1><%= link_to '가입인사', bulletin_posts_path('가입인사') %></li></h1>
-                        </div>
+            <% @bulletins.each do |bulletin| %>
+                <% unless bulletin== @bulletins.first %>
+                    <div class="item">
+                        <%=image_tag( "../../../assets/shelter/white_background.png", height: '100%', width: '100%')%>
+                            <div class="carousel-caption">
+                                <div>
+                                     <h1><%= link_to bulletin.title, posts_path(:bulletin_id=>bulletin) %></h1>
+
+                                </div>
+                            </div>
                     </div>
-            </div>           
-            <div class="item">
-                <%=image_tag( "../../../assets/shelter/white_background.png", height: '100%', width: '100%')%>
-                    <div class="carousel-caption">
-                        <div>
-                            <h1><%= link_to '새소식', bulletin_posts_path('새소식') %></h1>
-                        </div>
-                    </div>
-            </div>
-            <div class="item">
-                <%=image_tag( "../../../assets/shelter/white_background.png", height: '100%', width: '100%')%>
-                    <div class="carousel-caption">
-                        <div>
-    
-                            <h1><%= link_to bulletin.title, posts_path(:bulletin_id=>bulletin) %></h1>
-                        </div>
-                    </div>
-            </div>
-                 
-          <% end %>
-          <% end %>
-          
+                    <% end %>
+                        <% end %>
         </div> <a class="left carousel-control" href="#carousel-example-captions" data-slide="prev">
           <span class="icon-prev"></span>
         </a>
@@ -87,13 +63,4 @@
         </a>
 
     </div>
-
-
-
 </div>
-
-
-
-
-
-
