@@ -61,13 +61,8 @@ end
   end
   private
   def extract_shopping_cart
-<<<<<<< HEAD
      @user ||= current_user
      @cart = @cart || @user.cart || Cart.create(user_id: current_user.id)
-=======
-    
-     @cart = current_user.cart || Cart.create(user_id: @user.id)
->>>>>>> 11c092afe140312aa746de05257e58c4df0fb3c6
   end
 
 

@@ -42,19 +42,13 @@
         </ol>
         <div class="carousel-inner">
             <div class="item active">
-<<<<<<< HEAD
                 <%=image_tag( "../../../assets/shelter/white_background.png", height: '100%', width: '100%')%>
-=======
-              <%@bulletin = @bulletins.first %>
-                <%=image_tag( "../../../assets/shelter/shelter_background.jpg", height: '70%', width: '70%')%>
->>>>>>> 11c092afe140312aa746de05257e58c4df0fb3c6
                     <div class="carousel-caption">
                         <div>
 
                             <h1><%= link_to @bulletin.title, posts_path(:bulletin_id=>@bulletin ) %></h1>
                         </div>
                     </div>
-<<<<<<< HEAD
             </div>
             <div class="item">
                 <%=image_tag( "../../../assets/shelter/white_background.png", height: '100%', width: '100%')%>
@@ -74,14 +68,6 @@
             </div>
             <div class="item">
                 <%=image_tag( "../../../assets/shelter/white_background.png", height: '100%', width: '100%')%>
-=======
-          </div>
-
-          <% @bulletins.each do |bulletin| %>
-          <% unless bulletin == @bulletins.first %>
-       <div class="item">
-                <%=image_tag( "../../../assets/shelter/shelter_background.jpg", height: '70%', width: '70%')%>
->>>>>>> 11c092afe140312aa746de05257e58c4df0fb3c6
                     <div class="carousel-caption">
                         <div>
     
