@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
       has_one :cart , dependent: :destroy
       has_one :shelter, dependent: :destroy
       has_many :bulletins, dependent: :destroy
-      has_many :cart_items , class_name: "CartItem" , foreign_key: "owner_id" 
+      
       has_many :purchases
       has_many :admin_purchases , class_name: "Purchase" , foreign_key: "owener_id"
       has_many :comments , dependent: :destroy 

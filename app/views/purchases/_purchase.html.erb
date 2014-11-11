@@ -37,6 +37,8 @@
 			</script>
 			<tbody>
 
+
+
 				<% if @product = purchase.product %>
 				<tr>
 
@@ -56,6 +58,10 @@
 									<div class="media-body">
 										<div>
 											<%=@product.name %>
+											<% if purchase.option %>
+											<%=purchase.option %> : <%= purchase.detail %>
+											<% end %>
+
 										</div>                                  
 									</div>
 								</div></td>
@@ -103,15 +109,9 @@
 				<% end %>
 
 
-					</tbody>
+			</tbody>
 			</table>
 		</div>
 
 
-	</div>
-	<!--buy_list_main end-->
-
-
-
-</div>
-</div>
+	

@@ -147,8 +147,111 @@
 					</script>
 					<!--date_sort js end-->
 
-					<!--buy_list_main 김수겸 14.09.21-->
+					<!--sell_list_main 김수겸 14.09.21-->
 					<div class="sell_list_main">
+					<div class="sell_list_table">
+		
+
+	
+
+		<table class="table table-hover basket_table">
+			<thead>
+				<tr>
+					<td>주문번호</td>
+					<td>상품/옵션정보</td>
+					<td>주문자</td>
+
+					<td>주문금액</td>
+					<td>주문일시</td>
+					<td>수정/삭제</td> 
+					<td class="">배송상태</td>
+				</tr>
+			</thead>
+			<script>
+			$(function() {
+				$('#total_checkbox').click(function() {
+					$('.sub_checkbox').prop('checked', this.checked);
+					call_display_price();
+				});
+			});
+			</script>
+			<tbody>
+		
+
+
+				<%@purchases.each do |purchase| %>
+				<% @product = purchase.product  %>
+				
+				<tr>
+
+
+					<div class="left_text_align">
+
+						<div class="media">
+						   <div class="media-body">
+
+							<td>
+							<%=purchase.id %>
+							</td>
+							<td class="left_text_align">
+								<div class="media">
+									<a class="pull-left" href="#"> <%= image_tag @product.picture, size:'60x60'%> </a>
+									
+									<div class="media-body">
+										<div>
+											<%=@product.name %>
+											<% if purchase.option %>
+											<%=purchase.option %> : <%= purchase.detail %>
+											<% end %>
+
+										</div>                                  
+									</div>
+								</div></td>
+							<td><%=purchase.payer %></td>
+							
+							<td><%= purchase.total_cost %>원</td>
+							<td><%=purchase.created_at.strftime("%Y년 %m월 %d일") %>   <%= link_to "제품정보", @product  %></td>
+							<td>
+							<div class="buy_order_btn">
+
+							<% if purchase.status == 5 %>
+
+							<%= link_to '삭제', purchase_path(purchase), method: :delete,  
+							data: { confirm: '삭제 할까요?' }, class:'btn btn-warning'  %>
+
+							<% else %>
+							<%= link_to '상세보기/수정', edit_purchase_path(purchase), class:'btn btn-warning'  %>
+
+							
+						
+
+							<% end %>
+										
+							</div>
+							</td>
+							<td>
+								<div class="buy_order_btn">
+								<input type="text" readonly="true" value= '<%=purchase.status_kr %>' style="width:100px;">
+												
+												
+								</div>
+							</td>
+						
+	
+
+														  
+						</div>
+					</div>
+					</tr>
+				
+
+
+				<% end %>
+			</tbody>
+			</table>
+		</div>
+
+					</div>
 
 			<!-- <li><a href="#on_shipping_merchandise" data-toggle="tab">배송중상품</a></li>
 			<li><a href="#shipping_complete_merchandise" data-toggle="tab">배송완료상품</a></li> -->
@@ -168,7 +271,7 @@
 	
 				<!-- <c:forEach begin="1" end="3" step="1"> -->
 
-				<%= render @purchases %>
+				
 				<span class="buy_order_btn">
 
              

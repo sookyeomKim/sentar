@@ -25,7 +25,8 @@
 <% end %>
 </table>
 
-<%= link_to 'Edit', edit_bulletin_post_path(@post.bulletin, @post), class: 'btn btn-default' %>
-<%= link_to 'Back', bulletin_posts_path, class: 'btn btn-default' %>
+<%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-default' %>
+
+<a href="/posts?bulletin_id=<%=@post.bulletin.id  %>">back</a>
 
 <%= render "commentboards/commentboards" %>

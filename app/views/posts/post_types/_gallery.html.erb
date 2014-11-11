@@ -1,7 +1,7 @@
-<h2><%= params[:bulletin_id] %></h2>
+<!-- <h2><%= params[:bulletin_id] %></h2> -->
 <div style='position: absolute;right:0;top:0;'>
-<span><%= link_to '뒤로',  shelter_bulletins_path(current_user.shelter), class: 'btn btn-default btn-lg' %></span>
-<span><%= link_to '사진올리기', new_bulletin_post_path, class: 'btn btn-default btn-lg'%></span>
+ <%= link_to '뒤로', shelter_bulletins_path(@bulletin.shelter), class: 'btn btn-default btn-lg' %>
+    <%= link_to '이미지업로드', new_post_path(bulletin_id: @bulletin), class: 'btn btn-default btn-lg'%>
 </div>
 <!--gallery-->
 
@@ -10,13 +10,17 @@
     <% @posts.each do | post | %>
     <div class="col-sm-6 col-md-2">
       <div class="image_info_toggle">
-        <a href="#" class="thumbnail image_info" ><%= image_tag(post.picture_url) if post.picture? %></a>
+        
+
+        <%= image_tag(post.picture_url) %> <%= link_to("삭제", post , method: :delete, remote: :true,
+        data: {confirm: "확실해요?"}) %>
+        <%= link_to(post.title, post ) %>
         <div class="image_info_hover" style="display:none;">
           <div>
             <p>
-              <strong><%= link_to post.title, [post.bulletin, post],style:'color:#fff !important;'%></strong>
-              <strong><%= link_to '', edit_bulletin_post_path(post.bulletin, post), class:'fa fa-cog',style:'position: absolute;top:0;right:20px;margin:2px;color:#fff !important;' %></strong>
-              <strong><%= link_to '', [post.bulletin, post], method: :delete, data: { confirm: '사진을 삭제하시겠습니까?' }, class:'fa fa-times',style:'position: absolute;top:0;right:0;margin:2px;color:#fff !important;' %></strong>
+              <strong><%= link_to post.title,  post ,style:'color:#fff !important;'%></strong>
+              <strong><%= link_to '', edit_post_path(post), class:'fa fa-cog',style:'position: absolute;top:0;right:20px;margin:2px;color:#fff !important;' %></strong>
+              <strong><%= link_to '',post, method: :delete, remote: :true, data: { confirm: '삭제하시겠습니까?' }, class:'fa fa-times',style:'position: absolute;top:0;right:0;margin:2px;color:#fff !important;' %></strong>
             </p>
           </div>
           <div class="info_text">

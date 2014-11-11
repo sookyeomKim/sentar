@@ -1,13 +1,16 @@
-<%= simple_form_for([@post.bulletin, @post]) do |f| %>
+<%= simple_form_for( @post) do |f| %>
   <%= f.error_notification %>
   <div class="form-group">
     <%= f.label :title,'제목',class:'col-lg-2  control-label' %>
     <div class="col-lg-10">
       <%= f.text_field :title, class: 'form-control' %>
     </div>
-  </div>
+  
+    <%= f.hidden_field :bulletin_id , value: @bulletin.id %>
+
+
   <div class="form-group">
-    <%= f.label :content,'내용',class:'col-lg-2  control-label' %>
+    <%= f.label :content,'내용',class:'col-lg-2  control-label' , class: 'form-control' %>
     <div class="col-lg-10">
       <%= f.text_area :content, class: 'form-control'%>
     </div>
@@ -36,7 +39,7 @@
   <div class="form-group">
     <div class="col-md-10 col-md-offset-2">
       <span><%= f.button :submit,'등록', class: 'btn btn-warning' %></span>
-      <span><%= link_to '뒤로', bulletin_posts_path, class: 'btn btn-default' %></span>
+      <span><%= link_to '뒤로', @post, class: 'btn btn-default' %></span>
     </div>
   </div>
   

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109211840) do
+ActiveRecord::Schema.define(version: 20141111011535) do
 
   create_table "bulletins", force: true do |t|
     t.string   "title"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20141109211840) do
     t.float    "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "option"
+    t.string   "detail"
   end
 
   add_index "cart_items", ["item_id"], name: "index_cart_items_on_item_id"
@@ -208,6 +210,8 @@ ActiveRecord::Schema.define(version: 20141109211840) do
     t.integer  "owener_id"
     t.integer  "quantity"
     t.string   "ordertype"
+    t.string   "option"
+    t.string   "detail"
   end
 
   create_table "relationships", force: true do |t|
