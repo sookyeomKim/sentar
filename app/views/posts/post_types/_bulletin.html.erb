@@ -1,8 +1,8 @@
 <div class="container"style="margin-top:5px;">
-  <h1><%= params[:bulletin_id] %></h1>
+  <!-- <h1><%= params[:bulletin_id] %></h1> -->
   <div style='position: absolute;right:0;top:0;'>
-    <%= link_to '뒤로', shelter_bulletins_path(current_user.shelter), class: 'btn btn-default btn-lg' %>
-    <%= link_to '새글쓰기', new_bulletin_post_path, class: 'btn btn-default btn-lg'%>
+    <%= link_to '뒤로', shelter_bulletins_path(@bulletin.shelter), class: 'btn btn-default btn-lg' %>
+    <%= link_to '새글쓰기', new_post_path(bulletin_id: @bulletin), class: 'btn btn-default btn-lg'%>
   </div>
   <div class="col-lg-12"style="margin-top:10px;">
     <div class=" dadan_2">
@@ -11,15 +11,15 @@
         <a class="pull-left" href=""> <!--img-->  </a>   
         <div class="media-body">
           <h4 class="media-heading">
-            <strong><%= link_to post.title, [post.bulletin, post]%></strong>
+            <strong><%= link_to post.title, post%></strong>
             <span class="blog_timestamp">
               <span><i class="fa fa-comment"></i></span>
               <span><%= post.commentboards.size %></span>
-              <%= link_to '', edit_bulletin_post_path(post.bulletin, post), class:'fa fa-cog'%>
-              <%= link_to '', [post.bulletin, post], method: :delete, data: { confirm: '사진을 삭제하시겠습니까?' }, class:'fa fa-times'%>
+              <%= link_to '', edit_post_path(post), class:'fa fa-cog'%>
+              <%= link_to '', post, method: :delete, remote: :true,  data: { confirm: '삭제하시겠습니까?' }, class:'fa fa-times'%>
             </span>            
           </h4>
-          여기 이름 넣어야 해
+          <%= post.id %>
           <span class="blog_timestamp" style="font-size:10px;"><%=time_ago_in_words(post.created_at)%> ago</span>
         </div>
       </div>

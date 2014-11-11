@@ -1,7 +1,7 @@
-<h2><%= params[:bulletin_id] %></h2>
+<!-- <h2><%= params[:bulletin_id] %></h2> -->
 <div style='position: absolute;right:0;top:0;'>
-  <span><%= link_to '뒤로', shelter_bulletins_path(current_user.shelter), class: 'btn btn-default btn-lg' %></span>
-  <span><%= link_to '새글쓰기', new_bulletin_post_path, class: 'btn btn-default btn-lg'%></span>
+   <%= link_to '뒤로', shelter_bulletins_path(@bulletin.shelter), class: 'btn btn-default btn-lg' %>
+    <%= link_to '새글쓰기', new_post_path(bulletin_id: @bulletin), class: 'btn btn-default btn-lg'%>
 </div>
 <div class="container">
   <div class="col-lg-8 col-lg-offset-2"style="margin-top:50px;">
@@ -16,9 +16,9 @@
               <%= post.title %>
             </a>
             <span class="blog_timestamp">
-              <%= link_to 'Show', [post.bulletin, post], class:'btn btn-default' %>
-              <strong><%= link_to '', edit_bulletin_post_path(post.bulletin, post), class:'fa fa-cog',style:'color:#fff;'%></strong>
-              <strong><%= link_to '', [post.bulletin, post], method: :delete, data: { confirm: '사진을 삭제하시겠습니까?' }, class:'fa fa-times',style:'color:#fff;'%></strong> 
+              <%= link_to 'Show', post, class:'btn btn-default' %>
+              <strong><%= link_to '', edit_post_path(post), class:'fa fa-cog',style:'color:#fff;'%></strong>
+              <strong><%= link_to '', post, remote: :true, method: :delete, data: { confirm: '삭제하시겠습니까?' }, class:'fa fa-times',style:'color:#fff;'%></strong> 
             </span>            
           </h4>
           <a href="" target="">수교미</a>
@@ -39,7 +39,7 @@
                 
           </div>
           <div>
-            허ㅡㅓㅡ
+           
           </div>
           <hr>
           <div class="row">

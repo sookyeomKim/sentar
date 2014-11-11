@@ -132,9 +132,9 @@ resources :shelters do
   resources :bulletins
 end
 
-resources :bulletins do
-  resources :posts
-end
+resources :bulletins 
+
+resources :posts
 
 resources :posts do
   resources :commentboards, only: [:create, :destroy]
