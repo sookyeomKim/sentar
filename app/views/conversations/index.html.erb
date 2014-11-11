@@ -155,7 +155,7 @@
 						<% end %>
 						<div class="">
 							<div  class="">
-								<%= form_for(:conversation, url: :conversations, method: :post) do |f| %>
+								<%= form_for(:conversation, url: :conversations, method: :post,:html => {:id=>"conversation"}) do |f| %>
 								<%= f.label :recipients,'받는사람(친구 목록을 눌러보아요 :)' %>
 								<%= f.text_field :recipients,class:"form-control",id:'recipients_form' %>
 
@@ -164,8 +164,8 @@
 
 								<%= f.label :body, '전하고 싶은 말', class: "checkbox inline"  %>
 								<%= f.text_area :body,class:"form-control",id:"message_body" %>         
-
-								 <a class="btn btn-default" id="message_submit_btn">보내기</a>
+								
+								<%= f.button '보내기', class: 'btn btn-default',id:"conversation_submit_btn"%>
 								 <span id="message_warning" class="text-danger"style="display:none;">빈칸은 앙대영!!!</span>
 								
 								<%= f.button '초기화'	, type: :reset, class: 'btn btn-danger' %><!--입력되어진대로 제출한다.-->
@@ -175,14 +175,12 @@
 						</div>
 					</div>
 					<%= javascript_tag do %>
-					$("#message_submit_btn").on("click",function(){
-					  var message_form = $(".message");
+					$("#conversation_submit_btn").on("click",function(){
 					  var text_area = $("#message_body").val();
 					  if(text_area===""){
 					    $("#message_warning").css( "display", "inline" ).fadeOut( 1250 );
-					    return;
+					    return false;
 					  }    
-					  message_form.submit();
 					});
 					<% end %>
 

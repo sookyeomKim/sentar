@@ -19,7 +19,7 @@
               <span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span id="like-<%= micropost.id %>"><%= micropost.likes.count %></span>
               &nbsp; <span><strong><i class="fa fa-comment"></i></strong></span>
               <span><%= micropost.comments.count %></span>
-              <span id="<%=micropost.id%>"><%= link_to '좋구만', like_micropost_path(micropost), method: :post, remote:true ,class:"btn btn-default btn-xs like_btn"%></span>
+              <span id="like_btn_<%=micropost.id%>"><%= link_to '좋구만', like_micropost_path(micropost), method: :post, remote:true ,class:"btn btn-default btn-xs like_btn"%></span>
             </div>               
           </div>
         </div>

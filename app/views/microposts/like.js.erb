@@ -1,4 +1,8 @@
 
 
 $("#like-<%= @micropost.id %>").html('<%= @micropost.likes.count %>')
-
+/*$("#like_btn_<%= @micropost.id %> a").html("좋구만취소")
+<%if @micropost.likes.count ==0%>
+$("#like_btn_<%= @micropost.id %> a").html("좋구만")
+<%end%>
+*/
