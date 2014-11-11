@@ -15,7 +15,8 @@
 <%= f.text_area :content,class:'form-control input-sm',id:"comment_textarea-#{micropost.id}"%>
 
 <%= f.hidden_field :micropost_id, value: micropost.id  %>
-<span><!-- <a class="btn btn-default blog_comment_submit_btn" id="<%= micropost.id  %>">댓글등록</a> --><%= f.submit('댓글등록', class:'btn btn-default btn-sm blog_comment_submit_btn',id:micropost.id)%></span>
+<span><a class="btn btn-default blog_comment_submit_btn" id="<%= micropost.id  %>">댓글등록</a>
+	<!-- <%= f.submit('댓글등록', class:'btn btn-default btn-sm blog_comment_submit_btn',id:micropost.id)%> --></span>
 <span id="blog_comment_warning<%= micropost.id  %>" class="text-danger" style="display:none;">빈칸은 앙대영!!!</span>
 
 <% end %>
