@@ -1,4 +1,4 @@
-<!-- error message -->
+	<!-- error message -->
 <%= form_for(@purchase) do |f| %>
 <% if @purchase.errors.any? %>
 <div id="error_explanation">
@@ -19,9 +19,11 @@
 <table class="table table-hover basket_table">
 	<thead>
 		<tr>
-			<th colspan="2">상품명</th>
+			<th>사진</th>
+			<th >상품명</th>
 			<th>수량</th>
 			<th>가격</th>
+			<th>비고</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -36,20 +38,24 @@
 			<td><span><%=@product.name %></span></td>
 			<td><span><%= @purchase.quantity %></span></td>
 			<td><span><strong><%=@purchase.total_cost  %></strong>원</span></td>
+			<% if @option %>
+			<td><span><%= @option %> : <%= @detail %></span></td>
+			<% end %>
 			<legend>총 가격 <%= @purchase.total_cost %></legend>
 		</tr>
 		<% else %>
 		<%= f.hidden_field :ordertype, class: 'form-control', value: 'cart'  %>
-		<% @cart_items = current_user.cart_items  %>
+		<% @cart_items = current_user.cart.cart_items  %>
 		<% @cart_items.each  do |cart_item| %>
 		<tr>
 			<td><span><%= image_tag cart_item.product.picture.url , size: "50x50" if cart_item.product.picture?%></span></td>
 			<td><span><%=cart_item.product.name %></span></td>
 			<td><span><%=cart_item.quantity %></span></td>
 			<td><span><strong><%=cart_item.price * cart_item.quantity%></strong></span></td>
+			<td><span><%= cart_item.option %> : <%= cart_item.detail %></span></td>
 		</tr>
 		<% end %>
-		<legend>총 가격 <%= current_user.cart.total + 2500 %> 원</legend>
+		<legend>총 가격 <%= current_user.cart.total  %> 원</legend>
 		<% end %>
 	</tbody>
 </table>
@@ -91,6 +97,16 @@
 			<%= f.text_field :memo, class: 'form-control' %>
 		</div>
 	</div>
+	<div class="form-group">
+		<div class="col-lg-10">
+			<%= f.hidden_field :option , value: @option ,  class: 'form-control' %>
+			<%= f.hidden_field :detail , value: @detail , class: 'form-control' %>
+
+		</div>
+	</div>
+
+
+
 </fieldset>
 
 

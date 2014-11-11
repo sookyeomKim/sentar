@@ -5,6 +5,12 @@ class CartsController < ApplicationController
      @product = Product.find(params[:id])
     #@product = Product.first
     @cart.add(@product, @product.price, params[:amount].to_i)
+
+    if params[:option1]
+    @item = @cart.cart_items.find_by(item_id: @product.id)
+    @item.update_attributes(option: params[:option1], detail: params[:detail1])
+    end
+
     redirect_to cart_path
   
   end
@@ -16,7 +22,7 @@ class CartsController < ApplicationController
 
   def change_qty
    id = params[:id]
-   @cart = @user.cart
+   @cart = current_user.cart
    @product = Product.find(id)
    @cart_item = @cart.cart_items.find_by(item_id: id)
    if(params[:type] == 'up')
@@ -55,8 +61,8 @@ end
   end
   private
   def extract_shopping_cart
-     @user ||= current_user
-     @cart = @cart || @user.cart || Cart.create(user_id: @user.id)
+    
+     @cart = current_user.cart || Cart.create(user_id: @user.id)
   end
 
 

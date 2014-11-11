@@ -17,6 +17,8 @@
   def new
     order = params[:order]
     if order == 'goods' 
+    @option = params[:option1]
+    @detail = params[:detail1]
     @product = Product.find(params[:id])
     @purchase = @product.purchases.new(user_id: current_user.id, total_cost: @product.price)
     if (quantity = params[:quantity].to_i)
@@ -26,7 +28,10 @@
   
 
     else
-
+    if current_user.cart.total == 0
+    flash[:danger] = "상품이 없습니다"
+    redirect_to cart_path 
+    end
     @purchase = Purchase.new
     end
     
@@ -58,7 +63,7 @@
       end
     end
   else
-    @cart_items = current_user.cart_items
+    @cart_items = current_user.cart.cart_items
     order_info = Purchase.new(purchase_params)
     @cart_items.each do |cart_item|
       @product = cart_item.product
@@ -69,6 +74,8 @@
       @purchase.memo = order_info.memo
       @purchase.ordertype = 'cart'
       @purchase.quantity = cart_item.quantity
+      @purchase.option = cart_item.option
+      @purchase.detail = cart_item.detail
       set_rest
       if @purchase.save
         @product.update_attributes(quantity: @product.quantity - 1 , sell_count: @product.sell_count + @purchase.quantity)
@@ -108,7 +115,7 @@
   def update
     respond_to do |format|
       if @purchase.update(purchase_params)
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully updated.' }
+        format.html { redirect_to @purchase, notice: '상품이 변경 되었습니다.' }
         format.json { render :show, status: :ok, location: @purchase }
       else
         format.html { render :edit }
@@ -137,7 +144,8 @@
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_params
-       params.require(:purchase).permit(:product_id, :user_id, :receive_name, :addr, :phone, :memo, :total_cost, :trade_type, :payer, :status, :ship_cost, :ship_company, :trans_num, :quantity, :ordertype)
+       params.require(:purchase).permit(:product_id, :user_id, :receive_name, :addr, :phone, :memo, :total_cost, :trade_type, :payer, :status, :ship_cost, :ship_company,
+        :trans_num, :quantity, :ordertype, :option, :detail)
      
     end
     def set_rest

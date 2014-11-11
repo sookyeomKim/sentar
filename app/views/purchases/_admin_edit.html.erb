@@ -95,23 +95,12 @@
         <% if current_user?(@purchase.product.user) %>
         
         
-       <!--  <%= f.label "수취인" %>
-       <%= f.label @purchase.receive_name, class: 'form-control' %>
-       <%= f.label "주소" %>
-       <%= f.label @purchase.addr, class: 'form-control' %>
-       <%= f.label "전화번호" %>
-       <%= f.label @purchase.phone , class: 'form-control'%>
-        <%= f.label "메모" %>
-         <%= f.label @purchase.memo , class: 'form-control' %>
-        <%= f.label :total_cost %>
-        <%= f.label @purchase.total_cost, class: 'form-control' %>
-        <%= f.label "결제방법" %>
-        <%= f.label "무통장입금", class: 'form-control'%> 
-         <%= f.label "결제자" %>
-        <%= f.label  @purchase.payer, class: 'form-control'%>  -->
-         
+     
+
           <%= f.label :status %>
-          <%= f.text_field :status , value: @purchase.status_kr %>
+          <%= f.text_field :status , value: @purchase.status  %>
+         
+        
 
       
          <%else%>
@@ -128,9 +117,10 @@
 
          <% end %>
 
-         
+   <div>0:입금확인중,1:발송준비,2:발송완료,3:배송중,4:배송완료
 
-
+</div>      
+  
   <div class="actions">
     <%= f.submit "상태 변경" %>
   </div>
