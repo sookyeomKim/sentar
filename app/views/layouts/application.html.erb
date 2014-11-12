@@ -19,6 +19,7 @@
 
   
   <script>
+    
 var pusher = new Pusher('272fd5c5d1a8969702f3')
 
 
@@ -40,7 +41,7 @@ var channel2 = pusher.subscribe('private-channel');
 
 channel2.bind('private-event', function (data) {
 
-    alert('private private!!!!')
+    alert('private-channel')
 
 
 });
@@ -80,8 +81,15 @@ channel3.bind('my-event', function (data) {
 
         });
     } else if (data.type == 'new_purchase') {
-        alert('new_purchase')
-    } 
+        $.gritter.add({
+
+            title: data.title,
+            text: data.message,
+            image: data.url
+
+        });
+    }
+
 });
 <% end %>
   </script>

@@ -52,7 +52,11 @@
     set_rest
     respond_to do |format|
       if @purchase.save
-      
+
+        
+        title = "#{current_user.name}님이 상품(#{@purchase.product.name})을 구매하였습니다 "
+        message = "#{current_user.name}님이 상품#{@purchase.product.name}을 구매하였습니다 " + "<a href ='/sell_list'>보러가기</a> "
+        Pusher.trigger("mychannel-#{@purchase.product.user.id}", 'my-event', {:type => "new_purchase", :title=>title , :message => message, :url => current_user.gravatar_url } )
         product = @purchase.product
         product.update_attributes(quantity: product.quantity - 1 , sell_count: product.sell_count + 1)
         # format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
@@ -79,6 +83,10 @@
       @purchase.detail = cart_item.detail
       set_rest
       if @purchase.save
+        title = "#{current_user.name}님이 상품(#{@purchase.product.name})을 구매하였습니다 "
+        message = "#{current_user.name}님이 상품#{@purchase.product.name}을 구매하였습니다 " + "<a href ='/sell_list'>보러가기</a> "
+        Pusher.trigger("mychannel-#{@purchase.product.user.id}", 'my-event', {:type => "new_purchase", :title=>title , :message => message, :url => current_user.gravatar_url } )
+
         @product.update_attributes(quantity: @product.quantity - 1 , sell_count: @product.sell_count + @purchase.quantity)
       end
     end

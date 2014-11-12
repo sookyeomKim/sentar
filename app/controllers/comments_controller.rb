@@ -37,11 +37,15 @@ class CommentsController < ApplicationController
     @comment.user_name = current_user.name
     
     respond_to do |format|
+      
+
       if @comment.save
+        if @comment.micropost
         unless current_user?@micropost.user
         title = "#{@current_user.name}님이 댓글을 달았습니다."
         message = @comment.content
         Pusher.trigger("mychannel-#{@micropost.user.id}", 'my-event', {:type => "new_comment", :title=>title , :message => message, :url => current_user.gravatar_url } )
+        end
         end
         format.html { redirect_back_or root_path}
         #format.json { render :show, status: :created, location: @comment }
