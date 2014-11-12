@@ -147,7 +147,13 @@
       var modi_btn_id = modi_current_Target.attr("id");
       var modi_btn_id_number = modi_btn_id.replace(/[^0-9]/g, "");
       var modi_text = $("#modi_text_"+modi_btn_id_number).val();
+      if(modi_text===""){
+        alert("빈칸은 앙대영");
+        return;
+      }
       var modified_text = $("#detail1_"+modi_btn_id_number).find(".ad_option_text").text(modi_text);      
+      var modi_text = $("#modi_text_"+modi_btn_id_number).val("");
+      $("#modi_form_"+modi_btn_id_number).slideUp('fast');
       refresh_detail1_val();
   });
   function refresh_detail1_val(){

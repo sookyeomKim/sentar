@@ -14,7 +14,7 @@ function map_env(){
     map = new Tmap.Map({
         div: mapDiv
     });
-   
+    
     map_css();
     /*alert(map.getExtent());*/
     setLayers();
@@ -77,10 +77,8 @@ function total_search() {
     });
     
 };
-/*$(initialize);
-$(document).on('page:change', initialize);*/
 
-/*좌표값말고 다른것도 받아도된다*/
+/**/
 function shelterLoader() {
     var current_id = $("#current_user_id").attr("data-user_id");
     icon_size();
@@ -116,7 +114,6 @@ function shelterLoader() {
 
             var lon = lonlat_split_arr[0];
             var lat = lonlat_split_arr[1];
-
             //icon img넣는 곳
             if (main_location <= 44) {
                 if(current_id==shelter_id){
@@ -183,12 +180,11 @@ function event_shelterLoader() {
             var shelter_introduce = shelter_info.introduce;
             var shelter_lonlat = shelter_info.lonlat;
             var shelter_kind = shelter_info.kind;
-
+            
             lonlat_split(shelter_lonlat);
 
             var lon = lonlat_split_arr[0];
             var lat = lonlat_split_arr[1];
-
             //icon img넣는 곳
             if (main_location <= 44) {
                 if(current_id==shelter_id){
