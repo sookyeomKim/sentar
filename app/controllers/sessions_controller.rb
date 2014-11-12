@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       # Log the user in and redirect to the user's show page.
       if user.activated?
       log_in user
-      title = "#{@current_user.name}님이 로그인 하였습니다."
+      title = "#{current_user.name}님이 로그인 하였습니다."
       message = "<a href='/users/#{current_user.id}' >방문하기</a>"
 
       current_user.followers.each do |follower|
