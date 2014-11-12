@@ -69,6 +69,16 @@ class User < ActiveRecord::Base
  # 만약 attribute = "activation" 이면 send("#{attribute}_digest") = "activation_digest"  
 
   end
+
+  def gravatar_url(options = { size: 50 }) 
+
+
+   gravatar_id = Digest::MD5::hexdigest(self.email.downcase) #그라바타는  MD5 hash 이용
+   size = options[:size]
+   return gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
+  
+    
+  end
   
    # Forgets a user.
   def forget

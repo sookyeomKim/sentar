@@ -26,20 +26,40 @@ def index
   elsif @conversation = already_have_conversation?(recipients)
   body = conversation_params(:body)
   @user.reply_to_conversation( @conversation, body )
+   @conversation = @user.send_message(recipients, *conversation_params(:body, :subject)).conversation
+title = "#{current_user.name}님이 답장을 보냈습니다. "
+message = body + "<a href ='/conversations/#{@conversation.id}'>보러가기</a> "
+Pusher.trigger("mychannel-#{current_user.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url } )
   redirect_to conversation_path(@conversation)
+  
   else
   
  @conversation = @user.send_message(recipients, *conversation_params(:body, :subject)).conversation
+title = "#{current_user.name}님이 메세지를 보냈습니다. "
+message = @conversation.last_message.body + "<a href ='/conversations'>보러가기</a> "
+Pusher.trigger("mychannel-#{current_user.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url } )
  redirect_to conversation_path(@conversation)
 end
+
   
 end
 
 def reply
+
   
   @receipt= @user.reply_to_conversation(conversation, *message_params(:body, :subject))
-  
+  title = "#{current_user.name}님이 답장을 보냈습니다. "
+  message = @receipt.message.body + "<a href ='/conversations/#{conversation.id}'>보러가기</a> "
 
+
+  conversation.participants.each do |participant|
+
+  unless current_user?participant
+
+  Pusher.trigger("mychannel-#{participant.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url } )
+
+  end
+  end
   respond_to do |format|
       format.html { redirect_to conversation_path(conversation) }
       format.js

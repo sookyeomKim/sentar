@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  get 'pusher/auth'
+
+  
+  get "pusher", :to => "pusher#test"
+  
+  match '/pusher/auth', :controller => 'pusher', :action => 'auth' , via: [:get, :post]
 
   get 'commentboards/create'
 

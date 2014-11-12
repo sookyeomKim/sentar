@@ -52,6 +52,7 @@
     set_rest
     respond_to do |format|
       if @purchase.save
+      
         product = @purchase.product
         product.update_attributes(quantity: product.quantity - 1 , sell_count: product.sell_count + 1)
         # format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }

@@ -9,6 +9,15 @@ module UsersHelper
   end
 end
 
+ def gravatar_for_url(user, options = { size: 50 }) 
+    if user 
+  gravatar_id = Digest::MD5::hexdigest(user.email.downcase) #그라바타는  MD5 hash 이용
+  size = options[:size]
+  gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
+  return gravatar_url
+  end
+end
+
 def gravatar_for_circle(user, options = { size: 50 })
    if user
   	gravatar_id = Digest::MD5::hexdigest(user.email.downcase) #그라바타는  MD5 hash 이용

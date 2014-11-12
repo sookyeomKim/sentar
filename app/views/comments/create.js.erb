@@ -10,6 +10,7 @@ var body_id =<%=@micropost.id %>;
 $('#micropost-scroll-div-'+body_id).animate({ scrollTop: <%=@micropost.comments.size%>*100 }, 10); 
 /*window.scrollTo(0, $(target_id).offset().top);*/
 
+
 });
 
 <!-- <%= add_gritter("댓글을 등록하였습니다.") %>

@@ -5,7 +5,8 @@ before_action :logged_in_user
   def create
   	@user = User.find(params[:followed_id])
     current_user.follow(@user)
-    Pusher.trigger('my-channel', 'my-event', {:message => @user.name})
+
+    Pusher.trigger("mychannel-#{@user.id}", 'my-event', {:type => "new_follower", :name=> current_user.name, :url => @user.gravatar_url })
      respond_to do |format|
       format.html { redirect_to @user }
       format.js
