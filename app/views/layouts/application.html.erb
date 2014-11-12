@@ -41,10 +41,16 @@ var channel2 = pusher.subscribe('private-channel');
 
 channel2.bind('private-event', function (data) {
 
-    alert('private-channel')
+   
+
+    $("#like-3").html('100')
+    $("#like-4").html('200')
+    $("#like-1").html('200')
 
 
 });
+
+
 
 <%if current_user %>
 var current_user = <%= current_user.id %>
@@ -63,6 +69,10 @@ channel3.bind('my-event', function (data) {
             image: data.url
 
         });
+        
+
+
+
     } else if (data.type == 'new_message') {
         $.gritter.add({
 
