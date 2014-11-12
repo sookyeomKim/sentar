@@ -14,7 +14,7 @@ function map_env(){
     map = new Tmap.Map({
         div: mapDiv
     });
-    /*map.events.register("mouseup", map, event_shelterLoader); */
+   
     map_css();
     /*alert(map.getExtent());*/
     setLayers();
