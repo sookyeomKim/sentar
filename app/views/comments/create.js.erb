@@ -2,14 +2,18 @@
 $('<%=j render @comment %>').appendTo($("#micropost-<%=@micropost.id %>")).hide().fadeIn('fast');
 $('#comment_form-<%= @micropost.id %>')[0].reset()
 
+
 $(function(){
 /*var target_id='#micropost-<%=@micropost.id %>';*/
 var body_id =<%=@micropost.id %>;
 /*$('#micropost-scroll-div-'+body_id).css('scrollTop', $(target_id).offset().top);*/
 $('#micropost-scroll-div-'+body_id).animate({ scrollTop: <%=@micropost.comments.size%>*100 }, 10); 
 /*window.scrollTo(0, $(target_id).offset().top);*/
+
 });
-<%= add_gritter("댓글을 등록하였습니다.") %>
+
+<!-- <%= add_gritter("댓글을 등록하였습니다.") %>
+ 
 <% end %>
 
 <% if @product  %>

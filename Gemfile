@@ -62,3 +62,5 @@ group :production do
 end
 
 gem "gritter", "1.1.0"
+
+gem "pusher"

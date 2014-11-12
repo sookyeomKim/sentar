@@ -10,6 +10,48 @@
       </script>
     <![endif]-->
   <script  language='javascript' src='https://apis.skplanetx.com/tmap/js?version=1&format=javascript&appKey=30c68bc1-8813-3f13-9c99-d3660cf91545'></script>
+   <!-- <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+     <script src="realtime-notifications/src/lib/gritter/js/jquery.gritter.min.js"></script>
+     <link href="realtime-notifications/src/lib/gritter/css/jquery.gritter.css"rel="stylesheet" type="text/css" /> -->
+  <script src="//js.pusher.com/2.2/pusher.min.js"></script>
+  <script src="realtime-notifications/src/PusherNotifier.js"></script>
+  
+
+
+  <script type="text/javascript">
+    var pusher = new Pusher('272fd5c5d1a8969702f3');
+    var channel = pusher.subscribe('my-channel');
+
+    channel.bind('my-event', function(data) {
+    $.gritter.add({
+  // (string | mandatory) the heading of the notification
+  title: '새로운 팔로잉!',
+  // (string | mandatory) the text inside the notification
+  text: data.message
+  
+  
+});
+
+    
+    });
+
+
+  </script> 
+
+
+
+
+ <script type="text/javascript">  
+    $(function() {
+    var pusher = new Pusher('272fd5c5d1a8969702f3');
+    var channel = pusher.subscribe('my_notifications');
+    var notifier = new PusherNotifier(channel);
+    );
+</script>
+
+ 
+
+
   <%= render 'layouts/shim' %>
 </head>
 <body class="padTop53">
