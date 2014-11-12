@@ -58,4 +58,15 @@ var home_map = function(){
 	shelterLoader();
 }
 $(home_map);
+$("#map_div").bind('mousewheel', function(event) {
+    if (event.originalEvent.wheelDelta > 0) {
+
+        /*console.log('Scroll up');*/
+        event_shelterLoader();
+    }
+    else {
+        /*console.log('Scroll down');*/
+        event_shelterLoader();
+    }
+});
 </script>

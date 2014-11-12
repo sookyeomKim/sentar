@@ -6,7 +6,7 @@ var zoom, mapW, mapH, mapDiv; //맵 초기화시 사용상수
 //var mapDiv_shelter_create;
 var lonlat, pr_3857, pr_4326; //좌표변환 관련 상수
 var markers; //레이어 관련 변수
-
+var size;
 
 function map_env(){
     setVariables();
@@ -14,7 +14,7 @@ function map_env(){
     map = new Tmap.Map({
         div: mapDiv
     });
-
+   
     map_css();
     /*alert(map.getExtent());*/
     setLayers();
@@ -46,7 +46,24 @@ function map_css(){
     lonlat = map.getLonLatFromViewPortPx(coordX, coordY);
     lonlat.transform(pr_3857, pr_4326);
 }*/
-
+function icon_size(){
+    var map_zoom = map.getZoom();
+    /*console.log(map_zoom);*/
+    if(map_zoom<(1||2)){
+        size=new Tmap.Size(2, 2);    
+    }else if(map_zoom<(5||6)){
+        size=new Tmap.Size(10,10);    
+    }else if(map_zoom<(9||10)){
+        size=new Tmap.Size(18,18);    
+    }else if(map_zoom<(13||14)){
+        size=new Tmap.Size(26,26);    
+    }else if(map_zoom<(17||18)){
+        size=new Tmap.Size(36,36);    
+    }else{
+    size=new Tmap.Size(48, 48);
+    }
+    return size;
+}
 function total_search() {
     /*tmap poi method*/
     $("#sentar_search").on("click", function () { //Poi매서드, 쉘터를 Poi를 이용해 띄워주자
@@ -58,11 +75,7 @@ function total_search() {
             sentar_search();
         }
     });
-    /*map.events.register("mouseup", map, onClickMap)
- 
-function onClickMap(evt){
-    shelterLoader();
-}*/
+    
 };
 /*$(initialize);
 $(document).on('page:change', initialize);*/
@@ -70,7 +83,7 @@ $(document).on('page:change', initialize);*/
 /*좌표값말고 다른것도 받아도된다*/
 function shelterLoader() {
     var current_id = $("#current_user_id").attr("data-user_id");
-    var size = new Tmap.Size(35, 35);
+    icon_size();
     var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
 
     /*ajax쉘터 정보들 받아오기*/
@@ -90,17 +103,6 @@ function shelterLoader() {
 
         var shelter_list = json.shelters;
 
-
-        /* var state = true;
-            $("#view_commerce").click(function () {
-                    state=false;
-            });
-            $("#view_blog").click(function () {
-                    state=true;
-                });*/
-
-        //var shelters_count=shelter_list.length;
-
         $.each(shelter_list, function (index) {
             var shelter_info = shelter_list[index].Shelter;
 
@@ -109,16 +111,6 @@ function shelterLoader() {
             var shelter_introduce = shelter_info.introduce;
             var shelter_lonlat = shelter_info.lonlat;
             var shelter_kind = shelter_info.kind;
-            /*if(state){
-                if(shelter_kind=='commerce'){
-                    return;
-                }
-            }
-            else if(!state){
-                if(shelter_kind=='blog'){
-                    return;
-                }
-            }*/
 
             lonlat_split(shelter_lonlat);
 
@@ -146,27 +138,84 @@ function shelterLoader() {
             markers.addMarker(shelterMarker);
 
             if (main_location <= 44) {
-                shelterMarker.events.register('mouseover', popup, onShelterOver);
-
-                shelterMarker.events.register('mouseout', popup, onShelterOut);
 
                 shelterMarker.events.register('click', popup, onShelterClick);
             }
             if(current_id!=shelter_id){
-            return;
-        }else{
-            map.setCenter(new Tmap.LonLat(lon,lat), 15);
-        }
+                return;
+            }else{
+                map.setCenter(new Tmap.LonLat(lon,lat), 15);
+            }
 
         });        
     }
     /*ajax쉘터 정보들 받아오기 end*/
 }
 
+function event_shelterLoader() {
+    markers.clearMarkers();
+    var current_id = $("#current_user_id").attr("data-user_id");
+    icon_size();
+    var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
 
-function onShelterOver(e) {}
+    /*ajax쉘터 정보들 받아오기*/
+    $.ajax({
+        type: "GET",
+        url: "/shelters.json",
+        async: false,
+        dataType: "json",
+        success: response_json,
+        error: function (e) {
+            alert("error");
+        }
+    });
 
-function onShelterOut(e) {}
+    function response_json(json) {
+        var main_location = location.toString().length;
+
+        var shelter_list = json.shelters;
+
+        $.each(shelter_list, function (index) {
+            var shelter_info = shelter_list[index].Shelter;
+
+            var shelter_id = shelter_info.id;
+            var shelter_name = shelter_info.name;
+            var shelter_introduce = shelter_info.introduce;
+            var shelter_lonlat = shelter_info.lonlat;
+            var shelter_kind = shelter_info.kind;
+
+            lonlat_split(shelter_lonlat);
+
+            var lon = lonlat_split_arr[0];
+            var lat = lonlat_split_arr[1];
+
+            //icon img넣는 곳
+            if (main_location <= 44) {
+                if(current_id==shelter_id){
+            var shelterIcon = new Tmap.IconHtml("<img src='../../assets/shelter/myhome.png'/>", size, offset); //marker                        
+            }else{
+                var shelterIcon = new Tmap.IconHtml("<img src='assets/shelter/shelter.PNG'/>", size, offset); //marker                  
+            }
+            } else if (main_location >= 55) {
+                var shelterIcon = new Tmap.IconHtml("<img src='../../assets/shelter/shelter.PNG'/>", size, offset); //marker                    
+            }
+            var shelterMarker = new Tmap.Markers(new Tmap.LonLat(lon, lat), shelterIcon);
+
+            var popup;
+            popup = new Tmap.Popup("shelter", new Tmap.LonLat(lon, lat),
+            new Tmap.Size(200, 250),
+                "<div id='shelter_id_" + shelter_id + "'class='panel panel-info' style='width:100%;height:100%;'>" + "<div class='panel-heading'>" + "<span><a href='/shelters/" + shelter_id + "'><strong>" + shelter_name + "</strong>님의 미니쉘터</a></span>" + "</div>" + "<div class='panel-body'>" + "<span>" + shelter_introduce + "</span>" + "<span>" + shelter_kind + "</span>" + "</div>" + "</div>", true);
+            map.addPopup(popup);
+            popup.hide();
+            markers.addMarker(shelterMarker);
+
+            if (main_location <= 44) {
+                shelterMarker.events.register('click', popup, onShelterClick);
+            }
+        });        
+    }
+}
+
 
 function onShelterClick(e) {
     /*여기에 쉘터마커 클릭했을 때 쉘터로 이동하는거 만들기*/
@@ -193,7 +242,7 @@ function onClickMap(e) {
 
 
     /*marker*/
-    var size = new Tmap.Size(21, 25);
+    icon_size();
     var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
     var icon = new Tmap.IconHtml('<img src="../../assets/shelter/shelter.PNG" style="z-index:9999px"/>', size, offset);
     /*var icon = new Tmap.IconHtml('<div class="shelter" style="border:10px solid black;"><div onClick="test1()" style="text-decoration: none;  color: RED; font-size: 9pt;">AAAAAAAAA</div><div onClick="test2()"><img src="img/d.png" /></div><div onClick="test3()" style="text-decoration: none;    color: BLUE;    font-size: 9pt;">QQQQQQQQQQQQQQQQQQQqQ</div></div>',size,offset);*/
@@ -255,7 +304,7 @@ function sentar_search() {
 function onCompleteLoadGetPOIDataFromSearch() {
     /*html공간선언*/
     $("#searchResult").html(""); //수정 : 이부분 커머스 검색라인으로 옴기자
-    var size = new Tmap.Size(50, 50);
+    icon_size();
     var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
 
     /*일반지역검색*/
@@ -386,7 +435,7 @@ function onMarkerOut(e) {
 }
 
 function commerce_shelter_search() {
-    var size = new Tmap.Size(35, 35);
+    icon_size();
     var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
     $.ajax({
         type: "GET",
@@ -463,10 +512,6 @@ function commerce_shelter_search() {
                 }*/
 
 
-                shelterMarker.events.register('mouseover', popup, onShelterOver);
-
-                shelterMarker.events.register('mouseout', popup, onShelterOut);
-
                 shelterMarker.events.register('click', popup, onShelterClick);
 
 
@@ -481,7 +526,7 @@ function commerce_shelter_search() {
 }
 
 function blog_shelter_search() {
-    var size = new Tmap.Size(35, 35);
+    icon_size();
     var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
     $.ajax({
         type: "GET",
@@ -550,10 +595,6 @@ function blog_shelter_search() {
                 /*검색시 줌 설정*/
                 map.zoomToExtent(markers.getDataExtent());
 
-                shelterMarker.events.register('mouseover', popup, onShelterOver);
-
-                shelterMarker.events.register('mouseout', popup, onShelterOut);
-
                 shelterMarker.events.register('click', popup, onShelterClick);
 
 
@@ -580,7 +621,7 @@ function lonlat_split(shelter_lonlat) {
 /*blog해당 유저 쉘터 띄우기*/
 function blog_map() {
     var blog_id = $("#current_user_id").attr("data-user_id");
-    var size = new Tmap.Size(35, 35);
+    icon_size();
     var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
 
     /*ajax쉘터 정보들 받아오기*/
@@ -628,10 +669,6 @@ function blog_map() {
             popup.hide();
             markers.addMarker(shelterMarker);
 
-            shelterMarker.events.register('mouseover', popup, onShelterOver);
-
-            shelterMarker.events.register('mouseout', popup, onShelterOut);
-
             shelterMarker.events.register('click', popup, onShelterClick);
 
             /*var my_lon;
@@ -654,7 +691,7 @@ function blog_map() {
 
 function product_info_map() {
     var product_info_id = $("#current_user_id").attr("data-user_id");
-    var size = new Tmap.Size(35, 35);
+    icon_size();
     var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
 
     /*ajax쉘터 정보들 받아오기*/
@@ -701,10 +738,6 @@ function product_info_map() {
             map.addPopup(popup);
             popup.hide();
             markers.addMarker(shelterMarker);
-
-            shelterMarker.events.register('mouseover', popup, onShelterOver);
-
-            shelterMarker.events.register('mouseout', popup, onShelterOut);
 
             shelterMarker.events.register('click', popup, onShelterClick);
 
