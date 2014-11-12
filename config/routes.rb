@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'pusher/auth'
+
   get 'commentboards/create'
 
   get 'commentboards/destroy'
 
   resources :comments,   only: [ :create, :destroy]
+
+
 
   get 'sell_and_buy/main'
 
