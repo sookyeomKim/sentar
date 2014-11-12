@@ -51,8 +51,9 @@
                     <div class="panel-body" id="micropost-scroll-div-<%=micropost.id %>">
                       <ul class="chat" id="micropost-<%=micropost.id %>" >
 
+                        <%if micropost.comments %>
                         <%= render micropost.comments %>
-                        
+                        <%end %>
                       </ul>
                     </div>
 

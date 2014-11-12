@@ -12,12 +12,14 @@ $('#micropost-scroll-div-'+body_id).animate({ scrollTop: <%=@micropost.comments.
 
 
 });
-
-<!-- <%= add_gritter("댓글을 등록하였습니다.") %>
- 
 <% end %>
 
+
+ 
+
+
 <% if @product  %>
+
 $('<%= j render @comment %>').appendTo($("#product-<%=@product.id %>")).hide().fadeIn('fast');
 $('#comment_form')[0].reset()
 

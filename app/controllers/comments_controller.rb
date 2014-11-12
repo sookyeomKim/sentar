@@ -37,12 +37,27 @@ class CommentsController < ApplicationController
     @comment.user_name = current_user.name
     
     respond_to do |format|
+      
+
       if @comment.save
-        unless current_user?@micropost.user
+        if @micropost
+       
         title = "#{@current_user.name}님이 댓글을 달았습니다."
-        message = @comment.content
+        message = @comment.content + "<a href='/users/#{@micropost.user.id}/?from_pusher=#{@micropost.id}' >답장하러가기</a>"
         Pusher.trigger("mychannel-#{@micropost.user.id}", 'my-event', {:type => "new_comment", :title=>title , :message => message, :url => current_user.gravatar_url } )
+       
+        elsif @product
+       
+        title = "#{@current_user.name}님이 #{ @product.name }상품에 댓글을 달았습니다."
+        message = @comment.content + "<a href='/products/#{@product.id}' >답장하러가기</a>"
+        Pusher.trigger("mychannel-#{@product.user.id}", 'my-event', {:type => "new_comment", :title=>title , :message => message, :url => current_user.gravatar_url } )  
+      
+        
         end
+
+
+
+        
         format.html { redirect_back_or root_path}
         #format.json { render :show, status: :created, location: @comment }
         format.js
