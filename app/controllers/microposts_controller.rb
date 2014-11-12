@@ -43,6 +43,7 @@ class MicropostsController < ApplicationController
    @micropost = Micropost.find(params[:id])
    if current_user.already_liked?(@micropost) 
    @micropost.likes.find_by(user_id: current_user.id).destroy
+   @micropost = Micropost.find(params[:id])
    respond_to do |format|
       format.html { redirect_back_or root_path}
       format.js
@@ -50,6 +51,10 @@ class MicropostsController < ApplicationController
    
  else
   @micropost.likes.create(user_id: current_user.id)
+  @micropost = Micropost.find(params[:id])
+  title = "#{current_user.name}님이 #{@micropost.user.name}님의 글을 좋아합니다."
+        message = simple_format(@micropost.content) + "<a href='/users/#{@micropost.user.id}/?from_pusher=#{@micropost.id}' >보러가기</a>"
+        Pusher.trigger("mychannel-#{current_user.id}", 'my-event', {:type => "like", :title=>title , :message => message, :url => current_user.gravatar_url } )
   respond_to do |format|
       format.html { redirect_back_or root_path }
       format.js

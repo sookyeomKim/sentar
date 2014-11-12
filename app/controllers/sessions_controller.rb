@@ -9,6 +9,13 @@ class SessionsController < ApplicationController
       # Log the user in and redirect to the user's show page.
       if user.activated?
       log_in user
+      title = "#{@current_user.name}님이 로그인 하였습니다."
+      message = "<a href='/users/#{current_user.id}' >방문하기</a>"
+
+      current_user.followers.each do |follower|
+      Pusher.trigger("mychannel-#{follower.id}", 'my-event', {:type => "following_login", :title=>title , :message => message, :url => current_user.gravatar_url } )  
+      end
+
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       #로그인상태 유지가 체크(1) 되었을경우 , 0 = 체크 안되었을 경우
       redirect_back_or root_url

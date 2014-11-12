@@ -41,12 +41,6 @@ var channel2 = pusher.subscribe('private-channel');
 
 channel2.bind('private-event', function (data) {
 
-   
-
-    $("#like-3").html('100')
-    $("#like-4").html('200')
-    $("#like-1").html('200')
-
 
 });
 
@@ -100,6 +94,25 @@ channel3.bind('my-event', function (data) {
         });
     }
     else if (data.type == 'new_product_purchase') {
+        $.gritter.add({
+
+            title: data.title,
+            text: data.message,
+            image: data.url
+
+        });
+    }
+    else if (data.type == 'like') {
+        $.gritter.add({
+
+            title: data.title,
+            text: data.message,
+            image: data.url
+
+        });
+    }
+
+     else if (data.type == 'following_login') {
         $.gritter.add({
 
             title: data.title,
