@@ -11,25 +11,25 @@
   <div class="form-group">
     <%= f.label :name ,'상품명',class:'col-lg-2  control-label '  %>
     <div class="col-lg-10">
-      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.text_field :name, class: 'form-control',id:"name" %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :price,'상품가격',class:'col-lg-2  control-label ' %>
     <div class="col-lg-10">
-      <%= f.text_field :price, class: 'form-control' %>
+      <%= f.text_field :price, class: 'form-control',id:"price" %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :quantity,'상품수량',class:'col-lg-2  control-label ' %>
     <div class="col-lg-10">
-      <%= f.text_field :quantity, class: 'form-control' %>
+      <%= f.text_field :quantity, class: 'form-control',id:"quantity" %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :content , '내용',class:'col-lg-2  control-label ' %>
     <div class="col-lg-10">
-      <%= f.text_area :content , class: 'form-control' %>
+      <%= f.text_area :content , class: 'form-control',id:"content" %>
     </div>
   </div>
   <div class="form-group">
@@ -42,7 +42,7 @@
   <div class="form-group">
     <%= f.label :option1 , "옵션1" ,class:'col-lg-2  control-label ' %>
     <div class="col-lg-10">
-      <%= f.text_field :option1 , class: 'form-control' %>
+      <%= f.text_field :option1 , class: 'form-control',id:"option1" %>
     </div>
   </div>
 
@@ -50,13 +50,76 @@
     <%= f.label :detail1 ,'상세옵션', class:'col-lg-2  control-label ' %>
 
     <div class="col-lg-10">
-      <%= f.text_field :detail1 , placeholder: "콤마(,)로 구분해주세요(s,m,l)", class: 'form-control' %>
+      <div class="input-group">
+          <input name="reservation" id="detail1_text" class="form-control" type="text">
+          <span class="input-group-addon" id="detail1_add_btn" style="cursor:pointer;"><i class="fa fa-plus"></i></span>
+          <span class="input-group-addon" id="detail1_del_btn" style="cursor:pointer;"><i class="fa fa-refresh"></i></span>
+      </div>
+      <div class="chat-panel">
+          <div class="panel-body">
+            <div class="prodcut_ad_option">
+              <ul class="prodcut_ad_option_ul">
+               <!-- <li class='prodcut_ad_option_item'id='detail1_"+deatail_index+"'>
+                     <div class='ad_option_text'>ddd
+                     </div>
+                     <div class='ad_option_del_btn' id='"+deatail_index+"'style='cursor:pointer;'>
+                     <a class='fa fa-trash ad_option_del_icon'></a>
+                     </div>
+                     </li> -->
+      
+              </ul>
+            </div>
+          </div>
+      </div>
+      <%= f.hidden_field :detail1,id:"hidden_detail1"%>
     </div>
   </div>
 
-<script>
-  
-</script>
+<%= javascript_tag do  %>
+  var deatail_index = 0;  
+  $("#detail1_add_btn").on("click",function(){
+    var detail1_text = $("#detail1_text").val();
+    if(detail1_text===""){
+      alert("nono");
+      return;
+    }
+    $(".prodcut_ad_option_ul").append("<li class='prodcut_ad_option_item'id='detail1_"+deatail_index+"'>"
+      +"<div class='ad_option_text'>"
+      +detail1_text
+      +"</div>"
+      /*+"<div class='ad_option_del_btn' id='"+deatail_index+"'style='cursor:pointer;'>"
+      +"<a class='fa fa-trash ad_option_del_icon'></a>"
+      +"</div>"*/
+      +"</li>"
+      );
+    var hidden_dtail1_length = $(".prodcut_ad_option_item").length;
+    if(hidden_dtail1_length==1){
+      $("#hidden_detail1").val($("#hidden_detail1").val()+detail1_text);
+    }else{
+      $("#hidden_detail1").val($("#hidden_detail1").val()+","+detail1_text);
+    }
+    $("#detail1_text").val("");
+    deatail_index++;
+  });
+  $("#detail1_del_btn").on("click",function(){
+    if($("#hidden_detail1").val()===''){
+      alert("등록된 상세옵션이 없습니다.")
+      return;
+    }
+    var result = confirm('옵션을 초기화하시겠습니까?');
+    if(!result) {
+           return;
+    }
+    deatail_index = 0;
+    $(".prodcut_ad_option_ul").html("");
+    $("#hidden_detail1").val("");
+  });
+
+  function hidden_detail1_reset(){
+    $("#hidden_detail1").val("");    
+  }
+  $(hidden_detail1_reset);
+<% end %>
 
 
  <!--  <div class="form-group">
@@ -72,11 +135,6 @@
      <%= f.text_area :detail2 , placeholder: "콤마(,)로 구분해주세요(s,m,l)", class: 'form-control' %>
    </div>
  </div> -->
-
-
-
-
-
 
   <div class="form-group">
     <%= f.label '메인 이미지',class:'col-lg-2  control-label' %>
@@ -104,14 +162,27 @@
   </div>
   <div class="form-group">
     <div class="col-lg-10 col-lg-offset-2">
-      <%= f.submit "상품등록", class: "btn btn-primary" %>
+      <%= f.submit "상품등록", class: "btn btn-primary",id:"product_reg_btn"%>
     </div>
   </div>
    <% end %>
   </div>
 </div>
 
-<%= javascript_tag do %>
+<%= javascript_tag do %><!-- 
+  $("#product_reg_btn").on("click",function(){
+    var name = $("#name").val();
+    var price = $("#price").val();
+    var quantity = $("#quantity").val();
+    var content = $("#content").val();
+    var option1 = $("#option1").val();
+    var detail1 = $("#detail1").val();
+    var product_picture = $("#product_picture").val();
+    if((name||price||quantity||content||option1||detail1||product_picture)==""){
+      alert("빈칸을 모두 입력해주세요.");
+      return false;
+    }
+  }); -->
   $('#product_picture').bind('change', function() {
     size_in_megabytes = this.files[0].size / 1024 / 1024;
     if (size_in_megabytes > 5) {
