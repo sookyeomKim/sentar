@@ -19,97 +19,71 @@
 
   
   <script>
-  var pusher = new Pusher('272fd5c5d1a8969702f3')
+var pusher = new Pusher('272fd5c5d1a8969702f3')
 
 
-   var sentar_channel = pusher.subscribe('sentar_channel');
+var sentar_channel = pusher.subscribe('sentar_channel');
 
-    sentar_channel.bind('sentar-event', function(data) {
+sentar_channel.bind('sentar-event', function (data) {
     $.gritter.add({
-  // (string | mandatory) the heading of the notification
-  title: '전체알림!',
-  // (string | mandatory) the text inside the notification
-  text: '전체 유저들에게 다 보이기.',
+        // (string | mandatory) the heading of the notification
+        title: '전체알림!',
+        // (string | mandatory) the text inside the notification
+        text: '전체 유저들에게 다 보이기.',
 
-  image: '<%=gravatar_for_url current_user %>'
-  });
+        image: '<%=gravatar_for_url current_user %>'
+    });
 
-  });
+});
 
-    var channel2 = pusher.subscribe('private-channel');
+var channel2 = pusher.subscribe('private-channel');
 
-    channel2.bind('private-event', function(data) {
-   
-   alert('private private!!!!') 
+channel2.bind('private-event', function (data) {
 
-    
-  });
-   
-  <% if current_user %>
-   var current_user = <%= current_user.id %>
-     var channel3 = pusher.subscribe('mychannel-<%=current_user.id%>');
-
-    channel3.bind('my-event', function(data) {
-
-      
-     
-      if( data.type == 'new_follower') { //새로운 팔로워
-       
-       $.gritter.add({
-      // (string | mandatory) the heading of the notification
-      title: '새로운 팔로잉!!',
-      // (string | mandatory) the text inside the notification
-      
-      text: data.name + '님이 팔로잉을 하였습니다' + "<a href=/users/"+current_user+"/following>확인하러가기</a>" , 
-
-      
-
-      image: data.url
+    alert('private private!!!!')
 
 
+});
 
-      });
-      }
-      
-      else if( data.type == 'new_message'){
+<%if current_user %>
+var current_user = <%= current_user.id %>
+var channel3 = pusher.subscribe('mychannel-<%=current_user.id%>');
+
+channel3.bind('my-event', function (data) {
+    if (data.type == 'new_follower') { //새로운 팔로워
+
         $.gritter.add({
-      
-      title: data.title,
-      text: data.message,
-      image: data.url
-      
-      });
-     }
+            // (string | mandatory) the heading of the notification
+            title: '새로운 팔로잉!!',
+            // (string | mandatory) the text inside the notification
 
-      else if( data.type == 'new_comment'){
-         $.gritter.add({
-      // (string | mandatory) the heading of the notification
-      title: data.title,
-      // (string | mandatory) the text inside the notification
-      
-      text: data.message,
+            text: data.name + '님이 팔로잉을 하였습니다' + "<a href=/users/" + current_user + "/following>확인하러가기</a>",
 
+            image: data.url
 
-      image: data.url
+        });
+    } else if (data.type == 'new_message') {
+        $.gritter.add({
 
-      });
-       
-      }
-      else if( data.type == 'new_purchase'){
-      alert('new_purchase')
-      }
-      
+            title: data.title,
+            text: data.message,
+            image: data.url
 
-   
-   
+        });
+    } else if (data.type == 'new_comment') {
+        $.gritter.add({
+            // (string | mandatory) the heading of the notification
+            title: data.title,
+            // (string | mandatory) the text inside the notification
+            text: data.message,
+            image: data.url
 
-  <% end %>
-    
-  });
-
-
-
-
+        });
+    } else if (data.type == 'new_purchase') {
+        alert('new_purchase')
+    } 
+});
+<% end %>
   </script>
 
 
