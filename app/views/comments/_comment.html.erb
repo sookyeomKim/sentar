@@ -8,7 +8,7 @@
 				<%if current_user?(@user) || current_user?(comment.micropost.user) %>					
 				<%= link_to '', comment_path(comment), method: :delete,  data: { confirm: '댓글 삭제?' },remote: :true, class:'fa fa-times-circle' %>
 				<% end %>
-				<i class="icon-time"></i> <%=time_ago_in_words(comment.created_at)%> ago
+				
 			</small>
 		</div>
 		<p><%= simple_format(comment.content) %></p>

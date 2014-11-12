@@ -89,6 +89,16 @@ channel3.bind('my-event', function (data) {
 
         });
     }
+    else if (data.type == 'new_product_purchase') {
+        $.gritter.add({
+
+            title: data.title,
+            text: data.message,
+            image: data.url
+
+        });
+    }
+
 
 });
 <% end %>

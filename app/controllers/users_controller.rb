@@ -18,7 +18,12 @@ class UsersController < ApplicationController
   
   def show
     @user =  User.find(params[:id])
+    if params[:from_pusher]
+    @single_post = Micropost.find(params[:from_pusher])
+    else
     @microposts = @user.microposts.paginate(page: params[:page])
+    end
+
     @comment = Comment.new
   end
 

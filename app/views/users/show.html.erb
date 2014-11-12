@@ -68,10 +68,15 @@
             <!--blog_list_content-->
             <div class="inner">
                 <input type="hidden" id="current_user_id"data-user_id ="<%= @user.id  %>">
+                  
+                   <%unless @single_post %>
+                  <%= render @microposts %>
                    <%if @microposts.size ==0%>
                    <a href="/blog_new"><h1>새글을 작성해보세요.</h1></a>                   
                    <% end %>
-                  <%= render @microposts %>
+                  <% else %>
+                  <%= render @single_post %>
+                  <% end %>
             </div>
             <!--blog_list_content end -->
 
