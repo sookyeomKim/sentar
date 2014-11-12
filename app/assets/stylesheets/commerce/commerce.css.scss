@@ -74,25 +74,32 @@
 			height: 50px;
 			.ad_option_text{
 				display: inline-block;
-				width: calc(100% - 0px); 
+				width: calc(100% - 100px); 
 				height: 50px;
 				background: transparent;
 				position: absolute;
 				padding: 12.5px;
 				font-weight: bold;
-				border-bottom: 1px;
 			}
 			.ad_option_del_btn{
 				float: right;
-				border-bottom: 1px;
-				a{
+				.ad_option_del_icon{
 					position: absolute;
-					width: 100px; height: 50px;						
+					width: 50px; height: 50px;						
 					right: 0px;
 					font-size: 0 !important;
 					line-height: 0 !important;
+					font-size: 20pt !important;
+					line-height: 25px !important;
+					color: #000;
+					padding:12.5px;
 				}
-				.ad_option_del_icon{
+				.ad_option_modi_icon{
+					position: absolute;
+					width: 50px; height: 50px;						
+					right: 50px;
+					font-size: 0 !important;
+					line-height: 0 !important;
 					font-size: 20pt !important;
 					line-height: 25px !important;
 					color: #000;

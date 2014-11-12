@@ -59,37 +59,37 @@
           <div class="panel-body">
             <div class="prodcut_ad_option">
               <ul class="prodcut_ad_option_ul">
-               <!-- <li class='prodcut_ad_option_item'id='detail1_"+deatail_index+"'>
-                     <div class='ad_option_text'>ddd
-                     </div>
-                     <div class='ad_option_del_btn' id='"+deatail_index+"'style='cursor:pointer;'>
-                     <a class='fa fa-trash ad_option_del_icon'></a>
-                     </div>
-                     </li> -->
-      
               </ul>
             </div>
           </div>
       </div>
-      <%= f.hidden_field :detail1,id:"hidden_detail1"%>
+      <%= f.hidden_field :detail1,id:"hidden_detail1", value: @product.options.first.details.map(&:name).join(",")%>
     </div>
   </div>
 
-<%= javascript_tag do  %>
-  var deatail_index = 0;  
+<script>
+  var deatail_index = 0; 
+
   $("#detail1_add_btn").on("click",function(){
     var detail1_text = $("#detail1_text").val();
     if(detail1_text===""){
-      alert("nono");
+      alert("비었다");
       return;
     }
     $(".prodcut_ad_option_ul").append("<li class='prodcut_ad_option_item'id='detail1_"+deatail_index+"'>"
       +"<div class='ad_option_text'>"
       +detail1_text
       +"</div>"
-      /*+"<div class='ad_option_del_btn' id='"+deatail_index+"'style='cursor:pointer;'>"
-      +"<a class='fa fa-trash ad_option_del_icon'></a>"
-      +"</div>"*/
+      +"<div class='ad_option_del_btn'style='cursor:pointer;'>"
+      +"<a class='fa fa-trash ad_option_del_icon' id='"+deatail_index+"'></a>"
+      +"<a class='fa fa-pencil ad_option_modi_icon accordion-toggle'href='#modi_form_"+deatail_index+"'data-toggle='collapse' data-parent='#accordion'></a>"
+      +"</div>"
+      +"</li>"
+      +"<li class='panel-collapse collapse' id='modi_form_"+deatail_index+"'>"
+      +"<div class='input-group modi_form'>"
+      +"<input id='modi_text_"+deatail_index+"' class='form-control' type='text'>"
+      +"<span class='input-group-addon modi_btn' id='modi_btn_"+deatail_index+"' style='cursor:pointer;'><i class='fa fa-gavel'></i></span>"
+      +"</div>"
       +"</li>"
       );
     var hidden_dtail1_length = $(".prodcut_ad_option_item").length;
@@ -101,6 +101,7 @@
     $("#detail1_text").val("");
     deatail_index++;
   });
+
   $("#detail1_del_btn").on("click",function(){
     if($("#hidden_detail1").val()===''){
       alert("등록된 상세옵션이 없습니다.")
@@ -115,26 +116,69 @@
     $("#hidden_detail1").val("");
   });
 
-  function hidden_detail1_reset(){
-    $("#hidden_detail1").val("");    
+  $(".prodcut_ad_option_ul").delegate(".ad_option_del_icon","click",function(event){
+    var detail1_del = confirm("정말 옵션을 삭제하시겠습니까?");
+    if(!detail1_del){
+      return;
+    }
+    var current_Target = $(event.currentTarget);
+    var current_id = current_Target.attr("id");
+    var current_text = $("#detail1_"+current_id).find(".ad_option_text").text();
+     $("#detail1_"+current_id).remove();
+     $("#modi_form_"+current_id).remove();
+     refresh_detail1_val();
+  });
+  $(".prodcut_ad_option_ul").delegate(".modi_btn","click",function(event){
+      var modi_current_Target = $(event.currentTarget);
+      var modi_btn_id = modi_current_Target.attr("id");
+      var modi_btn_id_number = modi_btn_id.replace(/[^0-9]/g, "");
+      var modi_text = $("#modi_text_"+modi_btn_id_number).val();
+      var modified_text = $("#detail1_"+modi_btn_id_number).find(".ad_option_text").text(modi_text);      
+      refresh_detail1_val();
+  });
+
+  function refresh_detail1_val(){
+    var remain_dtail1_length = $(".prodcut_ad_option_item").length;
+     if(remain_dtail1_length==0){
+      $("#hidden_detail1").val("");
+     }else{
+      $("#hidden_detail1").val("");
+      for(var i=0;i<remain_dtail1_length;i++){
+        var remain_detail = $(".prodcut_ad_option_item").eq(i).find("div").text();
+        if(i==0){
+          $("#hidden_detail1").val($("#hidden_detail1").val()+remain_detail);
+        }else{
+          $("#hidden_detail1").val($("#hidden_detail1").val()+","+remain_detail);
+        }
+      }
+     }
   }
-  $(hidden_detail1_reset);
-<% end %>
 
-
- <!--  <div class="form-group">
-   <%= f.label :option2 , '옵션2',class:'col-lg-2  control-label ' %>
-   <div class="col-lg-10">
-     <%= f.text_area :option2 , class: 'form-control' %>
-   </div>
- </div>
- 
- <div class="form-group">
-   <%= f.label :detail2, '옵션2 상세옵션', class:'col-lg-2  control-label ' %>
-   <div class="col-lg-10">
-     <%= f.text_area :detail2 , placeholder: "콤마(,)로 구분해주세요(s,m,l)", class: 'form-control' %>
-   </div>
- </div> -->
+  function hidden_detail1_call(){
+    var hidden_detail1_val = $("#hidden_detail1").val();
+    var hidden_detail1_val_arr = hidden_detail1_val.split(",");
+    var hidden_detail1_val_arr_length = hidden_detail1_val_arr.length;
+    for(var i=0;i<hidden_detail1_val_arr_length;i++){
+    $(".prodcut_ad_option_ul").append("<li class='prodcut_ad_option_item'id='detail1_"+i+"'>"
+      +"<div class='ad_option_text'>"
+      +hidden_detail1_val_arr[i]
+      +"</div>"
+      +"<div class='ad_option_del_btn'style='cursor:pointer;'>"
+      +"<a class='fa fa-trash ad_option_del_icon' id='"+i+"'></a>"
+      +"<a class='fa fa-pencil ad_option_modi_icon accordion-toggle'href='#modi_form_"+i+"'data-toggle='collapse' data-parent='#accordion'></a>"
+      +"</div>"
+      +"</li>"
+      +"<li class='panel-collapse collapse' id='modi_form_"+i+"'>"
+      +"<div class='input-group modi_form'>"
+      +"<input id='modi_text_"+i+"' class='form-control' type='text'>"
+      +"<span class='input-group-addon modi_btn' id='modi_btn_"+i+"' style='cursor:pointer;'><i class='fa fa-gavel'></i></span>"
+      +"</div>"
+      +"</li>"
+      );
+    }
+  }
+  $(hidden_detail1_call);
+</script>
 
   <div class="form-group">
     <%= f.label '메인 이미지',class:'col-lg-2  control-label' %>
@@ -169,21 +213,7 @@
   </div>
 </div>
 
-<%= javascript_tag do %><!-- 
-  $("#product_reg_btn").on("click",function(){
-    var name = $("#name").val();
-    var price = $("#price").val();
-    var quantity = $("#quantity").val();
-    var content = $("#content").val();
-    var option1 = $("#option1").val();
-    var detail1 = $("#detail1").val();
-    var product_picture = $("#product_picture").val();
-    alert(product_picture);
-    if((name||price||quantity||content||option1||detail1||product_picture)==""){
-      alert("빈칸을 모두 입력해주세요.");
-      return false;
-    }
-  }); -->
+<%= javascript_tag do %>
   $('#product_picture').bind('change', function() {
     size_in_megabytes = this.files[0].size / 1024 / 1024;
     if (size_in_megabytes > 5) {
