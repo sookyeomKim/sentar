@@ -47,21 +47,23 @@ function map_css(){
     lonlat.transform(pr_3857, pr_4326);
 }*/
 function icon_size(){
-    var map_zoom = map.getZoom();
-    /*console.log(map_zoom);*/
+    /*var map_zoom = map.getZoom();
+    console.log(map_zoom);
     if(map_zoom<(1||2)){
         size=new Tmap.Size(2, 2);    
     }else if(map_zoom<(5||6)){
-        size=new Tmap.Size(10,10);    
+        size=new Tmap.Size(7,7);    
     }else if(map_zoom<(9||10)){
-        size=new Tmap.Size(18,18);    
+        size=new Tmap.Size(14,14);    
     }else if(map_zoom<(13||14)){
-        size=new Tmap.Size(26,26);    
+        size=new Tmap.Size(22,22);    
     }else if(map_zoom<(17||18)){
-        size=new Tmap.Size(36,36);    
+        size=new Tmap.Size(32,32);    
     }else{
     size=new Tmap.Size(48, 48);
     }
+    return size;*/
+    size=new Tmap.Size(35, 32);
     return size;
 }
 function total_search() {
@@ -109,7 +111,9 @@ function shelterLoader() {
             var shelter_introduce = shelter_info.introduce;
             var shelter_lonlat = shelter_info.lonlat;
             var shelter_kind = shelter_info.kind;
-
+            if(shelter_lonlat==='0'){
+                return;
+            }
             lonlat_split(shelter_lonlat);
 
             var lon = lonlat_split_arr[0];
@@ -150,7 +154,8 @@ function shelterLoader() {
 }
 
 function event_shelterLoader() {
-    markers.clearMarkers();
+    /*markers.clearMarkers();*/
+    /*markers.removeMarker();*/
     var current_id = $("#current_user_id").attr("data-user_id");
     icon_size();
     var offset = new Tmap.Pixel(-(size.w / 2), -size.h);
@@ -180,7 +185,9 @@ function event_shelterLoader() {
             var shelter_introduce = shelter_info.introduce;
             var shelter_lonlat = shelter_info.lonlat;
             var shelter_kind = shelter_info.kind;
-            
+            if(shelter_lonlat==='0'){
+                return;
+            }
             lonlat_split(shelter_lonlat);
 
             var lon = lonlat_split_arr[0];
@@ -458,8 +465,9 @@ function commerce_shelter_search() {
                 var shelter_introduce = shelter_info.introduce;
                 var shelter_lonlat = shelter_info.lonlat;
                 var shelter_kind = shelter_info.kind;
-                
-                
+                if(shelter_lonlat==='0'){
+                    return;
+                }
                  
                 lonlat_split(shelter_lonlat);
 
@@ -514,6 +522,8 @@ function commerce_shelter_search() {
             });
             if(shelter_empty==0){
                 alert("검색결과가 없습니다.");
+                shelter_empty=0;
+                return;
             }
         } else {
             alert("데이터가 없습니다.");
@@ -550,9 +560,8 @@ function blog_shelter_search() {
                 var shelter_introduce = shelter_info.introduce;
                 var shelter_lonlat = shelter_info.lonlat;
                 var shelter_kind = shelter_info.kind;
-
-                if (shelter_searchText == shelter_name) {
-                    shelter_empty=1;
+                if(shelter_lonlat==='0'){
+                    return;
                 }
 
                 lonlat_split(shelter_lonlat);
@@ -597,6 +606,8 @@ function blog_shelter_search() {
             });
             if(shelter_empty==0){
                 alert("검색결과가 없습니다.");
+                shelter_empty=0;
+                return;
             }
         } else {
             alert("데이터가 없습니다.");
@@ -643,6 +654,9 @@ function blog_map() {
             var shelter_introduce = shelter_info.introduce;
             var shelter_lonlat = shelter_info.lonlat;
             var shelter_kind = shelter_info.kind;
+            if(shelter_lonlat==='0'){
+                    return;
+            }
 
             lonlat_split(shelter_lonlat);
 
@@ -713,6 +727,9 @@ function product_info_map() {
             var shelter_introduce = shelter_info.introduce;
             var shelter_lonlat = shelter_info.lonlat;
             var shelter_kind = shelter_info.kind;
+            if(shelter_lonlat==='0'){
+                    return;
+            }
 
             lonlat_split(shelter_lonlat);
 
