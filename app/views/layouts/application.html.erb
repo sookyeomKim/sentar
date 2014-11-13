@@ -19,27 +19,9 @@
 
   
   <script>
-
+function alram(){
 var pusher = new Pusher('272fd5c5d1a8969702f3')
 
-
-var sentar_channel = pusher.subscribe('sentar_channel');
-
-sentar_channel.bind('sentar-event', function (data) {
-    $.gritter.add({
-        // (string | mandatory) the heading of the notification
-        title: '전체알림!',
-        // (string | mandatory) the text inside the notification
-        text: '전체 유저들에게 다 보이기.',
-
-        image: '<%=gravatar_for_url current_user %>'
-    });
-
-});
-
-
-
-function alram(){
 var channel = pusher.subscribe('presence-sentar');  //멤버들의 접속상태와 프로필을 담고 있는 채널
 
 channel.bind('pusher:subscription_succeeded', function(members) { //인증이 완료되고 접속이 되었을 경우
@@ -82,6 +64,19 @@ channel.bind('pusher:member_removed', function(member) {
 
 });
 }
+var sentar_channel = pusher.subscribe('sentar_channel');
+
+sentar_channel.bind('sentar-event', function (data) {
+    $.gritter.add({
+        // (string | mandatory) the heading of the notification
+        title: '전체알림!',
+        // (string | mandatory) the text inside the notification
+        text: '전체 유저들에게 다 보이기.',
+
+        image: '<%=gravatar_for_url current_user %>'
+    });
+
+});
 
 
 
