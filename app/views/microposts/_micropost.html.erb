@@ -19,7 +19,16 @@
               <span><strong><i class="fa fa-thumbs-up"></i></i></strong></span> <span id="like-<%= micropost.id %>"><%= micropost.likes.count %></span>
               &nbsp; <span><strong><i class="fa fa-comment"></i></strong></span>
               <span><%= micropost.comments.count %></span>
-             <%= render 'microposts/like_form' , micropost: micropost %>
+              
+
+
+      <% if current_user.already_liked?(micropost) %>
+      <%= render 'microposts/unlike_form' , micropost: micropost %>
+      <% else %>
+      <%= render 'microposts/like_form' , micropost: micropost %>
+      <% end %>
+
+            
             </div>               
           </div>
         </div>
