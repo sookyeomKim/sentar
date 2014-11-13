@@ -19,7 +19,7 @@
 
   
   <script>
-function alram(){
+
 var pusher = new Pusher('272fd5c5d1a8969702f3')
 
 
@@ -38,12 +38,8 @@ sentar_channel.bind('sentar-event', function (data) {
 });
 
 
-var ONLINE_MEMBERS
 
-
-
-
-
+function alram(){
 var channel = pusher.subscribe('presence-sentar');  //멤버들의 접속상태와 프로필을 담고 있는 채널
 
 channel.bind('pusher:subscription_succeeded', function(members) { //인증이 완료되고 접속이 되었을 경우
@@ -85,7 +81,7 @@ channel.bind('pusher:member_removed', function(member) {
   
 
 });
-
+}
 
 
 
@@ -178,18 +174,9 @@ channel3.bind('my-event', function (data) {
 
 });
 <% end %>
-}
-$(alram);
+
 
   </script>
-
-
-
-
-
-
- 
-
 
   <%= render 'layouts/shim' %>
 </head>
