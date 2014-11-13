@@ -18,49 +18,10 @@
   
 
   
-
-
-
-<% if current_user %>
-<script>
-    
-var pusher = new Pusher('272fd5c5d1a8969702f3')
-
-
-var chat_channel = pusher.subscribe('private-<%=current_user.id %>');
-
-chat_channel.bind('chat-event', function (data) {
-
- <% if @conversation %>
-     <% @receipt = (@conversation.receipts_for current_user).last %>
-
-     alert(data.message)
-
-     $("#message_list-<%=@conversation.id %>").html("hello")
-
-    var message_id = <%=@receipt.message.id%>;
-    var test = $("#mci_"+message_id).offset().top;
-
-    $('#message-scroll-div').animate({scrollTop:99999999}, 10);
-
-
-<% end %>
-});
-
-
-
-
-
-
-
-
-
-
   <script>
 function alram(){
 var pusher = new Pusher('272fd5c5d1a8969702f3')
 var channel = pusher.subscribe('presence-sentar');  //멤버들의 접속상태와 프로필을 담고 있는 채널
-
 channel.bind('pusher:subscription_succeeded', function(members) { //인증이 완료되고 접속이 되었을 경우
 var login_user;
 var user_name;
@@ -79,72 +40,56 @@ var user_name;
     });
     //add_member(member.id, member.info); 
   });
-
 })
-
 channel.bind('pusher:member_added', function(member) {
   // for example:
-
  
   //add_member(member.id, member.info);
-
-
 });
-
-
-
 channel.bind('pusher:member_removed', function(member) {
   // for example:
   //remove_member(member.id, member.info);
-
   
-
 });
 }
 var sentar_channel = pusher.subscribe('sentar_channel');
-
 sentar_channel.bind('sentar-event', function (data) {
     $.gritter.add({
         // (string | mandatory) the heading of the notification
         title: '전체알림!',
         // (string | mandatory) the text inside the notification
         text: '전체 유저들에게 다 보이기.',
-
         image: '<%=gravatar_for_url current_user %>'
     });
-
 });
-
-<% end %>
-
 <%if current_user %>
 var current_user = <%= current_user.id %>
 var channel3 = pusher.subscribe('mychannel-<%=current_user.id%>');
-
 channel3.bind('my-event', function (data) {
     if (data.type == 'new_follower') { //새로운 팔로워
-
         $.gritter.add({
             // (string | mandatory) the heading of the notification
             title: '새로운 팔로잉!!',
             // (string | mandatory) the text inside the notification
-
             text: data.name + '님이 팔로잉을 하였습니다' + "<a href=/users/" + current_user + "/following>확인하러가기</a>",
-
             image: data.url
-
         });
     } else if (data.type == 'new_message') {
         $.gritter.add({
-
             title: data.title,
             text: data.message,
             image: data.url
-
         });
-
-     
-
+      <% if @conversation %>
+      <% @new_conversation = current_user.mailbox.conversations.find(@conversation.id) %>
+      <% @receipts = @new_conversation.receipts_for current_user %>
+      <% @receipt = @receipts.last %>
+      $('<%= j render "message/message", message: @receipt.message %>').appendTo($("#message_list-<%=@receipt.conversation.id %>")).hide().fadeIn('fast')
+      var message_id = <%=@receipt.message.id%>;
+      var test = $("#mci_"+message_id).offset().top;
+      $('#message-scroll-div').animate({scrollTop:99999999}, 10);
+      
+      <% end %>    
     } else if (data.type == 'new_comment') {
         $.gritter.add({
             // (string | mandatory) the heading of the notification
@@ -152,57 +97,43 @@ channel3.bind('my-event', function (data) {
             // (string | mandatory) the text inside the notification
             text: data.message,
             image: data.url
-
         });
     } else if (data.type == 'new_purchase') {
         $.gritter.add({
-
             title: data.title,
             text: data.message,
             image: data.url
-
         });
     }
     else if (data.type == 'new_product_purchase') {
         $.gritter.add({
-
             title: data.title,
             text: data.message,
             image: data.url
-
         });
     }
     else if (data.type == 'like') {
         $.gritter.add({
-
             title: data.title,
             text: data.message,
             image: data.url
-
         });
     }
-
      else if (data.type == 'following_login') {
         $.gritter.add({
-
             title: data.title,
             text: data.message,
             image: data.url
-
         });
     }
-
-
 });
 <% end %>
-
-
   </script>
 
   <%= render 'layouts/shim' %>
 </head>
 <body class="padTop53">
-<div id="wrap">	
+<div id="wrap"> 
 <%= render "layouts/header"  %>
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
@@ -214,3 +145,30 @@ channel3.bind('my-event', function (data) {
 </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+/*var chat_channel = pusher.subscribe('private-<%=current_user.id %>');
+
+chat_channel.bind('chat-event', function (data) {
+
+ <% if @conversation %>
+     <% @receipt = (@conversation.receipts_for current_user).last %>
+
+     alert(data.message)
+
+     $("#message_list-<%=@conversation.id %>").html("hello")
+
+    var message_id = <%=@receipt.message.id%>;
+    var test = $("#mci_"+message_id).offset().top;
+
+    $('#message-scroll-div').animate({scrollTop:99999999}, 10);
+
+
+<% end %>
+});*/
