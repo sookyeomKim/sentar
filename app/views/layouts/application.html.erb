@@ -20,14 +20,12 @@
   
   <script>
 function alram(){
-var pusher = new Pusher('272fd5c5d1a8969702f3')
+var pusher = new Pusher('37d5027632186dcd7679')
 var channel = pusher.subscribe('presence-sentar');  //멤버들의 접속상태와 프로필을 담고 있는 채널
 channel.bind('pusher:subscription_succeeded', function(members) { //인증이 완료되고 접속이 되었을 경우
 var login_user;
 var user_name;
  $("#all_users").text(members.count);
-/*var all_user = $(".user_list_item").length;*/
-/*alert(all_user);*/
   members.each(function(member) {
     login_user = member.info.name;
     $(".user_list_item").each(function(index){
@@ -51,16 +49,20 @@ channel.bind('pusher:member_removed', function(member) {
   //remove_member(member.id, member.info);
   
 });
-var sentar_channel = pusher.subscribe('sentar_channel');
+
+
+/*var sentar_channel = pusher.subscribe('sentar_channel');
 sentar_channel.bind('sentar-event', function (data) {
     $.gritter.add({
         // (string | mandatory) the heading of the notification
         title: '전체알림!',
         // (string | mandatory) the text inside the notification
         text: '전체 유저들에게 다 보이기.',
-        image: '<%=gravatar_for_url current_user %>'
+        image: '<%#=gravatar_for_url current_user %>'
     });
 });
+*/
+
 <%if current_user %>
 var chat_channel = pusher.subscribe('private-<%=current_user.id %>');
 chat_channel.bind('chat-event', function (data) {
@@ -90,6 +92,10 @@ channel3.bind('my-event', function (data) {
             text: data.message,
             image: data.url
         });
+       
+        alert("test") 
+       
+
     } else if (data.type == 'new_comment') {
         $.gritter.add({
             // (string | mandatory) the heading of the notification

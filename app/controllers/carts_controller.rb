@@ -4,7 +4,7 @@ class CartsController < ApplicationController
   def create
      @product = Product.find(params[:id])
     #@product = Product.first
-    @cart.add(@product, @product.price, params[:amount].to_i)
+    @cart.add(@product, @product.price, params[:quantity1].to_i)
 
     if params[:option1]
     @item = @cart.cart_items.find_by(item_id: @product.id)

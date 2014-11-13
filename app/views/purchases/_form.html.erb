@@ -29,11 +29,6 @@
 	<tbody>
 		<%if params[:order] == 'goods'  %>
 		<tr>
-			<% unless params[:quantity] %>
-			<% @purchase.total_cost = @product.price %>
-			<% @purchase.quantity = 1 %>
-			<% end %>
-			
 			<td><span><%= image_tag @product.picture.url , size: "50x50" if @product.picture?%></span></td>
 			<td><span><%=@product.name %></span></td>
 			<td><span><%= @purchase.quantity %></span></td>
@@ -65,7 +60,7 @@
 <fieldset>
 	<%= f.hidden_field :product_id, class: 'form-control' %>
 	<%= f.hidden_field :user_id, class: 'form-control' %>
-	<%= f.hidden_field :quantity, class: 'form-control', value: 1 %> <!--  수량부분 값 받아줘야함 -->
+	<%= f.hidden_field :quantity, class: 'form-control' %> <!--  수량부분 값 받아줘야함 -->
 	<%= f.hidden_field :total_cost, class: 'form-control' %>
 	<div class="form-group">
 		<%= f.label :receive_name,'수취인',class:'col-lg-2  control-label' %>
