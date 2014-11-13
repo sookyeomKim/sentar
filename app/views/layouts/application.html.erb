@@ -18,27 +18,37 @@
   
 
   
-  <script>
+
+
+<% if current_user %>
+<script>
     
 var pusher = new Pusher('272fd5c5d1a8969702f3')
 
 
-var sentar_channel = pusher.subscribe('sentar_channel');
+var chat_channel = pusher.subscribe('private-<%=current_user.id %>');
 
-sentar_channel.bind('sentar-event', function (data) {
-    $.gritter.add({
-        // (string | mandatory) the heading of the notification
-        title: '전체알림!',
-        // (string | mandatory) the text inside the notification
-        text: '전체 유저들에게 다 보이기.',
+chat_channel.bind('chat-event', function (data) {
 
-        image: '<%=gravatar_for_url current_user %>'
-    });
+ <% if @conversation %>
+     <% @receipt = (@conversation.receipts_for current_user).last %>
 
+     alert(data.message)
+
+     $("#message_list-<%=@conversation.id %>").html("hello")
+
+    var message_id = <%=@receipt.message.id%>;
+    var test = $("#mci_"+message_id).offset().top;
+
+    $('#message-scroll-div').animate({scrollTop:99999999}, 10);
+
+
+<% end %>
 });
 
 
-var ONLINE_MEMBERS
+
+
 
 
 
@@ -80,7 +90,7 @@ channel.bind('pusher:member_removed', function(member) {
 });
 
 
-
+<% end %>
 
 <%if current_user %>
 var current_user = <%= current_user.id %>
@@ -112,18 +122,7 @@ channel3.bind('my-event', function (data) {
 
         });
 
-      <% if @conversation %>
-      <% @new_conversation = current_user.mailbox.conversations.find(@conversation.id) %>
-      <% @receipts = @new_conversation.receipts_for current_user %>
-      <% @receipt = @receipts.last %>
-      $('<%= j render "message/message", message: @receipt.message %>').appendTo($("#message_list-<%=@receipt.conversation.id %>")).hide().fadeIn('fast')
-
-      var message_id = <%=@receipt.message.id%>;
-      var test = $("#mci_"+message_id).offset().top;
-
-      $('#message-scroll-div').animate({scrollTop:99999999}, 10);
-      
-      <% end %>    
+     
 
     } else if (data.type == 'new_comment') {
         $.gritter.add({
