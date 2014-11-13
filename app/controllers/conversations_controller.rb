@@ -30,7 +30,7 @@ def index
     title = "#{current_user.name}님이 답장을 보냈습니다. "
     message = body + "<a href ='/conversations/#{@conversation.id}'>보러가기</a> "
     recipients.each do |recipient|
-    Pusher.trigger("mychannel-#{recipient.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url } )
+    Pusher.trigger("mychannel-#{recipient.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url, :id=>@conversation.id } )
     end 
   redirect_to conversation_path(@conversation)
   
@@ -62,7 +62,7 @@ def reply
 
   unless current_user?participant
 
-  Pusher.trigger("mychannel-#{participant.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url } )
+  Pusher.trigger("mychannel-#{participant.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url , :id=>@receipt.id , :c_id=> @receipt.conversation.id } )
 
   end
   end
