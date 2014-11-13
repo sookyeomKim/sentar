@@ -77,7 +77,7 @@ end
 def show
   
   conversation.mark_as_read(@user)
-  
+  Pusher.trigger("mychannel-#{current_user.id}", 'my-event', {:type => "is_read", :title=>"title" , :message => "message", :url => current_user.gravatar_url , :c_id=> '@receipt.id' } )
 
 end
 
@@ -111,7 +111,7 @@ def conversation
   # id = params[:id].to_i
   # if ids.include?id
 
-  @conversation ||= mailbox.conversations.find(params[:id])
+  @conversation = mailbox.conversations.find(params[:id])
 
 # else
 #   flash[:danger] = "다른 유저들의 방은 안되여 :("

@@ -14,13 +14,21 @@
      <script src="realtime-notifications/src/lib/gritter/js/jquery.gritter.min.js"></script>
      <link href="realtime-notifications/src/lib/gritter/css/jquery.gritter.css"rel="stylesheet" type="text/css" /> -->
   <script src="//js.pusher.com/2.2/pusher.min.js"></script>
-  <script src="realtime-notifications/src/PusherNotifier.js"></script>
-  
+
+
+
+
+
+
 
   
   <script>
+  
+
+
+
 function alram(){
-var pusher = new Pusher('37d5027632186dcd7679')
+var pusher = new Pusher('a49249ec2328f5c4474d')
 var channel = pusher.subscribe('presence-sentar');  //멤버들의 접속상태와 프로필을 담고 있는 채널
 channel.bind('pusher:subscription_succeeded', function(members) { //인증이 완료되고 접속이 되었을 경우
 var login_user;
@@ -64,7 +72,16 @@ sentar_channel.bind('sentar-event', function (data) {
 });
 */
 
+
+
+
 <%if current_user %>
+
+
+
+
+
+
 
 
 
@@ -86,9 +103,7 @@ channel3.bind('my-event', function (data) {
             image: data.url
         });
        
-        alert("test") 
-       
-
+      
     } else if (data.type == 'new_comment') {
         $.gritter.add({
             // (string | mandatory) the heading of the notification
@@ -124,6 +139,18 @@ channel3.bind('my-event', function (data) {
             text: data.message,
             image: data.url
         });
+    }else if (data.type == 'is_read') {
+        // $.gritter.add({
+        //     title: data.title,
+        //     text: data.message,
+        //     image: data.url
+        // });
+
+     $('#read_count').html("123345")
+   
+  
+
+
     }
 
 
@@ -133,6 +160,10 @@ channel3.bind('my-event', function (data) {
 
 <% end %>
 }
+
+
+
+
   </script>
 
   <%= render 'layouts/shim' %>
@@ -150,3 +181,12 @@ channel3.bind('my-event', function (data) {
 </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+ 

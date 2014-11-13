@@ -16,6 +16,7 @@
 			<% if read_counts(message) > 1  %>
 			<div class="message_content_main well" style="">
 				<% else %>
+				
 				<div class="message_content_main well" style="background: rgb(247,241,220); /* Old browsers */
 				background: -moz-radial-gradient(center, ellipse cover,  rgba(247,241,220,1) 0%, rgba(255,189,168,1) 100%); /* FF3.6+ */
 				background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(247,241,220,1)), color-stop(100%,rgba(255,189,168,1))); /* Chrome,Safari4+ */
@@ -25,6 +26,7 @@
 				background: radial-gradient(ellipse at center,  rgba(247,241,220,1) 0%,rgba(255,189,168,1) 100%); /* W3C */
 				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f1dc', endColorstr='#ffbda8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 				">
+				
 				<% end %>
 				<%= simple_format(message.body) %>
 			</div>
@@ -32,11 +34,9 @@
 				<% if conversation.participants.size == 2 %> <!-- 일대일 대화일 경우 -->
 				<% if read_counts(message) > 1  %>
 				읽음
-				<% else %>
-				안 읽음
 				<% end %>
 				<%else %> <!-- 그룹 대화일 경우 -->
-				<%=read_counts(message) %>명 읽음
+				<span id=read_count> <%=read_counts(message) - 1 %>명읽음 </div>
 				<% end %></div>
 			</div>
 		</div>
