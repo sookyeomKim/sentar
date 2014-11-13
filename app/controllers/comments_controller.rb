@@ -41,17 +41,17 @@ class CommentsController < ApplicationController
 
       if @comment.save
         if @micropost
-       
+        unless current_user?@micropost.user
         title = "#{@current_user.name}님이 댓글을 달았습니다."
         message = @comment.content + "<a href='/users/#{@micropost.user.id}/?from_pusher=#{@micropost.id}' >답장하러가기</a>"
         Pusher.trigger("mychannel-#{@micropost.user.id}", 'my-event', {:type => "new_comment", :title=>title , :message => message, :url => current_user.gravatar_url } )
-       
+        end
         elsif @product
-       
+       unless current_user?@product.user
         title = "#{@current_user.name}님이 #{ @product.name }상품에 댓글을 달았습니다."
         message = @comment.content + "<a href='/products/#{@product.id}' >답장하러가기</a>"
         Pusher.trigger("mychannel-#{@product.user.id}", 'my-event', {:type => "new_comment", :title=>title , :message => message, :url => current_user.gravatar_url } )  
-      
+      end
         
         end
 

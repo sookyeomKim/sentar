@@ -27,9 +27,11 @@ def index
   body = conversation_params(:body)
   @user.reply_to_conversation( @conversation, body )
    @conversation = @user.send_message(recipients, *conversation_params(:body, :subject)).conversation
-title = "#{current_user.name}님이 답장을 보냈습니다. "
-message = body + "<a href ='/conversations/#{@conversation.id}'>보러가기</a> "
-Pusher.trigger("mychannel-#{current_user.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url } )
+    title = "#{current_user.name}님이 답장을 보냈습니다. "
+    message = body + "<a href ='/conversations/#{@conversation.id}'>보러가기</a> "
+    recipients.each do |recipient|
+    Pusher.trigger("mychannel-#{recipient.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url } )
+    end 
   redirect_to conversation_path(@conversation)
   
   else
@@ -37,7 +39,11 @@ Pusher.trigger("mychannel-#{current_user.id}", 'my-event', {:type => "new_messag
  @conversation = @user.send_message(recipients, *conversation_params(:body, :subject)).conversation
 title = "#{current_user.name}님이 메세지를 보냈습니다. "
 message = @conversation.last_message.body + "<a href ='/conversations'>보러가기</a> "
-Pusher.trigger("mychannel-#{current_user.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url } )
+
+recipients.each do |recipient|
+    Pusher.trigger("mychannel-#{recipient.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url } )
+end
+
  redirect_to conversation_path(@conversation)
 end
 

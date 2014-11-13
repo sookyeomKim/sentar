@@ -1,8 +1,10 @@
 
 
 $("#like-<%= @micropost.id %>").html('<%= @micropost.likes.count %>')
-/*$("#like_btn_<%= @micropost.id %> a").html("좋구만취소")
-<%if @micropost.likes.count ==0%>
-$("#like_btn_<%= @micropost.id %> a").html("좋구만")
-<%end%>
-*/
+
+
+<% if current_user.already_liked?(@micropost) %>
+$("#like_btn_<%=@micropost.id%>").html('<%= j render 'microposts/unlike_form' , micropost: @micropost %> ')
+<% else %>
+$("#like_btn_<%=@micropost.id%>").html('<%= j render 'microposts/like_form' , micropost: @micropost %> ')
+<% end %>
