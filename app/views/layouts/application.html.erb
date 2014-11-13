@@ -113,7 +113,8 @@ channel3.bind('my-event', function (data) {
         });
 
       <% if @conversation %>
-      <% @receipts = @conversation.receipts_for current_user %>
+      <% @new_conversation = current_user.mailbox.conversations.find(@conversation.id) %>
+      <% @receipts = @new_conversation.receipts_for current_user %>
       <% @receipt = @receipts.last %>
       $('<%= j render "message/message", message: @receipt.message %>').appendTo($("#message_list-<%=@receipt.conversation.id %>")).hide().fadeIn('fast')
 
