@@ -79,7 +79,7 @@
                             -->
 
                             <li class="dropdown">
-                                <a class="dropdown-toggle"  data-toggle="dropdown"  href="/users"> <span class="label label-warning" id="all_users"></span> <i class="fa fa-users"></i>&nbsp; </a>
+                                <a class="dropdown-toggle"  data-toggle="dropdown" href="/users"> <span class="label label-warning" id="all_users"></span> <i class="fa fa-users"></i>&nbsp; </a>
                             </li>
                             <!--메세지-->
                             <% @current_user ||= current_user %>
@@ -97,7 +97,7 @@
                                     <li style="margin-bottom: 20px;">
                                         <div class="message_wrap">
                                             <span class="message_wrap_center">
-                                                
+
                                                 <%= gravatar_for conversation.last_sender %>
                                                 <span class="text_split"><%= link_to conversation.last_message.body , conversation_path(conversation)%></span>
                                                 <span class="message_wrap_right"><%= link_to "", trash_conversation_path(conversation), method: :post,class:'fa fa-trash' %></span>
@@ -106,7 +106,7 @@
                                         <li class="divider"></li>
                                         <% end %>
                                         <% end %>
-                                        
+
                                         <li>
                                             <%= link_to '모든 메세지 보기', conversations_path,class:"text-center"%>
                                         </li>
@@ -127,7 +127,7 @@
                                     <% end %>
                                 </li>
                                 <!--친구 end-->
-                                
+
                                 <!--profile-->
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle profile" data-toggle="dropdown">

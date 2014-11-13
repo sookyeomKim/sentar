@@ -47,7 +47,6 @@ var ONLINE_MEMBERS
 var channel = pusher.subscribe('presence-sentar');  //멤버들의 접속상태와 프로필을 담고 있는 채널
 
 channel.bind('pusher:subscription_succeeded', function(members) { //인증이 완료되고 접속이 되었을 경우
-<<<<<<< HEAD
 var login_user;
 var user_name;
  $("#all_users").text(members.count);
@@ -67,17 +66,7 @@ var user_name;
         );
       }
     });
-    //add_member(member.id, member.info);   
-=======
-
- // alert(" 접속중이 회원수 : " + members.count)
-  
-  members.each(function(member) {
-    
-    //add_member(member.id, member.info);
-   
-    
->>>>>>> ed668cb42e12c0a9b59c87cf7aff94f769fed6b0
+    //add_member(member.id, member.info); 
   });
 
 })
@@ -121,10 +110,6 @@ channel3.bind('my-event', function (data) {
             image: data.url
 
         });
-        
-
-
-
     } else if (data.type == 'new_message') {
         $.gritter.add({
 
