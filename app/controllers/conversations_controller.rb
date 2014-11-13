@@ -41,7 +41,7 @@ title = "#{current_user.name}님이 메세지를 보냈습니다. "
 message = @conversation.last_message.body + "<a href ='/conversations'>보러가기</a> "
 
 recipients.each do |recipient|
-    Pusher.trigger("private-#{recipient.id}", 'chat-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url } )
+    Pusher.trigger("mychannel-#{recipient.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url } )
 end
 
  redirect_to conversation_path(@conversation)
@@ -62,7 +62,7 @@ def reply
 
   unless current_user?participant
 
-  Pusher.trigger("private-#{current_user.id}", 'chat-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url , :c_id=> @receipt.id } )
+  Pusher.trigger("mychannel-#{current_user.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url , :c_id=> @receipt.id } )
 
   end
   end
