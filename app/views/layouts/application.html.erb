@@ -20,6 +20,7 @@
   
 
 
+
 <% if current_user %>
 <script>
     
@@ -55,17 +56,28 @@ chat_channel.bind('chat-event', function (data) {
 
 
 
+  <script>
+function alram(){
+var pusher = new Pusher('272fd5c5d1a8969702f3')
 var channel = pusher.subscribe('presence-sentar');  //멤버들의 접속상태와 프로필을 담고 있는 채널
 
 channel.bind('pusher:subscription_succeeded', function(members) { //인증이 완료되고 접속이 되었을 경우
-
- // alert(" 접속중이 회원수 : " + members.count)
-  
+var login_user;
+var user_name;
+ $("#all_users").text(members.count);
+/*var all_user = $(".user_list_item").length;*/
+/*alert(all_user);*/
   members.each(function(member) {
-    
-    //add_member(member.id, member.info);
-   
-    
+    login_user = member.info.name;
+    $(".user_list_item").each(function(index){
+      user_name = $(".user_name:eq("+index+")").text();
+      if(user_name==login_user){
+        $(".user_in_out:eq("+index+")").css("color",
+          "rgba(0,255,0,0.5)"
+        );
+      }
+    });
+    //add_member(member.id, member.info); 
   });
 
 })
@@ -88,7 +100,20 @@ channel.bind('pusher:member_removed', function(member) {
   
 
 });
+}
+var sentar_channel = pusher.subscribe('sentar_channel');
 
+sentar_channel.bind('sentar-event', function (data) {
+    $.gritter.add({
+        // (string | mandatory) the heading of the notification
+        title: '전체알림!',
+        // (string | mandatory) the text inside the notification
+        text: '전체 유저들에게 다 보이기.',
+
+        image: '<%=gravatar_for_url current_user %>'
+    });
+
+});
 
 <% end %>
 
@@ -109,10 +134,6 @@ channel3.bind('my-event', function (data) {
             image: data.url
 
         });
-        
-
-
-
     } else if (data.type == 'new_message') {
         $.gritter.add({
 
@@ -174,15 +195,9 @@ channel3.bind('my-event', function (data) {
 
 });
 <% end %>
+
+
   </script>
-
-
-
-
-
-
- 
-
 
   <%= render 'layouts/shim' %>
 </head>
