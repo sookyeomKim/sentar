@@ -26,8 +26,6 @@ channel.bind('pusher:subscription_succeeded', function(members) { //인증이 �
 var login_user;
 var user_name;
  $("#all_users").text(members.count);
-/*var all_user = $(".user_list_item").length;*/
-/*alert(all_user);*/
   members.each(function(member) {
     login_user = member.info.name;
     $(".user_list_item").each(function(index){
@@ -145,30 +143,3 @@ channel3.bind('my-event', function (data) {
 </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-/*var chat_channel = pusher.subscribe('private-<%=current_user.id %>');
-
-chat_channel.bind('chat-event', function (data) {
-
- <% if @conversation %>
-     <% @receipt = (@conversation.receipts_for current_user).last %>
-
-     alert(data.message)
-
-     $("#message_list-<%=@conversation.id %>").html("hello")
-
-    var message_id = <%=@receipt.message.id%>;
-    var test = $("#mci_"+message_id).offset().top;
-
-    $('#message-scroll-div').animate({scrollTop:99999999}, 10);
-
-
-<% end %>
-});*/
