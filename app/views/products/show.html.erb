@@ -221,15 +221,21 @@
 													<!--옵션-->
 													<hr>
 													<div class="row">
-														<% @product.options.each do |option| %>
+													<% @product.options.each do |option| %>	
+														
+													<% if option.name.presence %>
 														<div class="form-group">
 													<label for="detail1" id="option1"class="col-lg-2  control-label" ><%= option.name%></label>
+													
+													
 													<div class="col-lg-9 col-lg-offset-1">
+
 													<%= select_tag "detail1", options_from_collection_for_select(option.details, "id", "name"  ),class:"form-control"  %>
 													</div>
 														</div>
-														<% end %>
+													<% end %>
 													</div>
+													<% end %>
 													<!--옵션-->
 													<hr>
 														<div class="row">
@@ -242,10 +248,11 @@
 														</div>
 													<hr>
 													<!--버튼-->
+
 													<% unless @product.quantity == 0 %>
 													<div class="deal_info_btn">
 														<%= link_to '카트에 담기', cart_path(:id => @product.id  ,:amount => 1) , method: :post,class:'btn btn-primary',id:"cart_go_btn","data-product_id"=>@product.id  %> 
-														<!-- <a id="cart_go_btn"class="btn btn-primary"rel="nofollow" data-product_id="<%=@product.id %>">카트에 담기</a> -->
+														<a id="cart_go_btn"class="btn btn-primary"rel="nofollow" data-product_id="<%=@product.id %>">카트에 담기</a> 
 														<!-- <%= link_to '구매하기', new_purchase_path(:id => @product.id, :order => 'goods'),class:'btn btn-default'  %> -->
 														<a id="buy_go_btn"class="btn btn-default"rel="nofollow" data-product_id="<%=@product.id %>">구매하기</a>
 													</div>
