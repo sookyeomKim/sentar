@@ -137,12 +137,6 @@
 			<div  class="">
 				<%= form_for(:conversation, url: :conversations, method: :post,:html => {:id=>"conversation"}) do |f| %>
 				<%= f.label :recipients,'받는사람(친구 목록을 눌러보아요 :)' %>
-				<%= f.hidden_field :recipients,class:"form-control",id:'recipients_form' %>
-
-				<!-- <%= f.label :subject,'제목' %> -->
-				<%= f.text_area :subject , value: "나불나불"  %>
-
-				<%= f.label :body, '전하고 싶은 말', class: "checkbox inline"  %>
 				<div class="chat_panel">
 					<div class="panel-body">
 						<div class="friend_list">
@@ -155,8 +149,13 @@
 						</div>
 					</div>
 				</div>
+				<%= f.hidden_field :recipients,class:"form-control",id:'recipients_form' %>
 
-				<%= f.hidden_field :body,class:"form-control",id:"message_body" %>         
+				<!-- <%= f.label :subject,'제목' %> -->
+				<%= f.hidden_field :subject , value: "나불나불"  %>
+
+				<%= f.label :body, '전하고 싶은 말', class: "checkbox inline"  %>
+				<%= f.text_area :body,class:"form-control",id:"message_body" %>
 
 				<%= f.button '보내기', class: 'btn btn-default',id:"conversation_submit_btn"%>
 				<span id="message_warning" class="text-danger"style="display:none;">빈칸은 앙대영!!!</span>
@@ -194,9 +193,6 @@
 					}
 				}
 			});
-
-
-
 
 	$("#conversation_submit_btn").on("click",function(){
 		var text_area = $("#message_body").val();
