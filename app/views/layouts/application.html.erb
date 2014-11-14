@@ -35,7 +35,6 @@ var login_user;
 var user_name;
  $("#all_users").text(members.count);
   members.each(function(member) {
-    alert(member.info.name);
     login_user = member.info.name;
     $(".user_list_item").each(function(index){
       user_name = $(".user_name:eq("+index+")").text();
@@ -51,6 +50,7 @@ var user_name;
 channel.bind('pusher:member_added', function(member) {
 
   var member_id = member.id;
+  alert(member_id);
   $(".user_list_item").each(function(index){
       if(member_id==index){
         $(".user_in_out:eq("+index+")").css("color",
