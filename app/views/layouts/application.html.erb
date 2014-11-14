@@ -52,38 +52,12 @@ var user_name;
 channel.bind('pusher:member_added', function(member) {
  var in_member_id = Number(member.id);
  $("#user_in_out_"+in_member_id).css("color","rgba(0,255,0,0.5)");
-  /*var member_id = member.id;
-  alert(member_id);
-  $(".user_list_item").each(function(index){
-      if(member_id==index){
-        $(".user_in_out:eq("+index+")").css("color",
-          "rgba(0,255,0,0.5)"
-        );
-      }
-    });*/
-  //add_member(member.id, member.info);
 });
 channel.bind('pusher:member_removed', function(member) {
-  // for example:
-  //remove_member(member.id, member.info);
   var out_member_id = Number(member.id);
  $("#user_in_out_"+out_member_id).css("color","rgba(255,0,0,0.5)");
   
 });
-
-
-/*var sentar_channel = pusher.subscribe('sentar_channel');
-sentar_channel.bind('sentar-event', function (data) {
-    $.gritter.add({
-        // (string | mandatory) the heading of the notification
-        title: '전체알림!',
-        // (string | mandatory) the text inside the notification
-        text: '전체 유저들에게 다 보이기.',
-        image: '<%#=gravatar_for_url current_user %>'
-    });
-});
-*/
-
 
 
 
