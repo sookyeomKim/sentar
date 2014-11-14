@@ -141,13 +141,13 @@
 					<div class="panel-body">
 						<div class="friend_list">
 							<ul class="friend_list_ul">
-								<li class='friend_list_item'id=''>
+								<!-- <li class='friend_list_item'id=''>
 									<div class='friend_list_text'>ddd
 									</div>
 									<div class='friend_list_del_btn'style='cursor:pointer;' >
 										<a class='fa fa-trash friend_list_del_icon'></a>
 									</div>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 					</div>
@@ -177,7 +177,6 @@
 		var form_val_split =form_val.split(',');
 		var form_val_split_length = form_val_split.length;
 		var current_user_email = current_Target.html();
-		alert(current_user_email);
 		var current_user_name = current_Target.parent().find("span:eq(1)").text();
 		for(var i=0; i<form_val_split_length;i++){
 			if(form_val===''){
@@ -225,7 +224,7 @@
 	     }else{
 	      $("#recipients_form").val("");
 	      for(var i=0;i<remain_friend_list_length;i++){
-	        var remain_friend_list = $(".friend_list_item").eq(i).find("div:eq(0) span:eq(1)").text();
+	        var remain_friend_list = $(".friend_list_item").eq(i).find("div:eq(0) span:eq(0)").text();
 	        if(i==0){
 	          $("#recipients_form").val($("#recipients_form").val()+remain_friend_list);
 	        }else{
@@ -235,7 +234,7 @@
 	     }
 	});
 	$("#firend_reset").on("click",function(){
-		$(".friend_list_ul").remove();
+		$(".friend_list_ul").html("");
 		$("#recipients_form").val("");
 	});
 
