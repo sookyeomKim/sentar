@@ -24,7 +24,9 @@
   
   <script>
   
-
+$(window).on("click",function(){
+  $("#user_in_out_").css("color","rgba(0,255,0,0.5)");
+});
 
 
 function alram(){
@@ -52,24 +54,13 @@ channel.bind('pusher:member_added', function(member) {
  
  var in_member_id = member.id;
  $("#user_in_out_"+in_member_id).css("color","rgba(0,255,0,0.5)");
-  /*var member_id = member.id;
-  alert(member_id);
-  $(".user_list_item").each(function(index){
-      if(member_id==index){
-        $(".user_in_out:eq("+index+")").css("color",
-          "rgba(0,255,0,0.5)"
-        );
-      }
-    });*/
-  //add_member(member.id, member.info);
 });
 channel.bind('pusher:member_removed', function(member) {
-  // for example:
-  //remove_member(member.id, member.info);
   var out_member_id = member.id;
  $("#user_in_out_"+out_member_id).css("color","rgba(255,0,0,0.5)");
   
 });
+
 
 
 channel.bind('test-event', function(member) {
@@ -93,6 +84,7 @@ sentar_channel.bind('sentar-event', function (data) {
     });
 });
 */
+
 
 
 
