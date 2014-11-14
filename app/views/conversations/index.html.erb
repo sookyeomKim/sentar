@@ -127,7 +127,7 @@
 			<% if current_user.following.any? %>
 			<ul id="friend_list" class="message_friends_wrap panel-collapse collapse">
 				<li>
-					<p class="text-danger">이메일을 클릭하세요.</p>
+					<span class="text-danger">이메일을 클릭하세요.</span><span><a class="btn btn-default btn-xs"id="firend_reset">전부삭제</a></span>
 				</li>
 				<%= render current_user.following %>
 			</ul>
@@ -163,7 +163,7 @@
 				<%= f.button '보내기', class: 'btn btn-default',id:"conversation_submit_btn"%>
 				<span id="message_warning" class="text-danger"style="display:none;">빈칸은 앙대영!!!</span>
 
-				<%= f.button '초기화'	, type: :reset, class: 'btn btn-danger' %><!--입력되어진대로 제출한다.-->
+				<%= f.button '내용초기화'	, type: :reset, class: 'btn btn-danger btn-sm' %><!--입력되어진대로 제출한다.-->
 				<!--<%= link_to '뒤로', conversations_path,class:'btn btn-primary'%>-->
 				<% end %>
 			</div>
@@ -172,10 +172,12 @@
 	<script>
 	var friend_list_index = 0;
 	$('.user_email').on('click',function(event){
+		var current_Target = $(event.currentTarget);
 		var form_val = $('#recipients_form').val();
 		var form_val_split =form_val.split(',');
 		var form_val_split_length = form_val_split.length;
-		var current_user_email = $(event.currentTarget).html();
+		var current_user_email = current_Target.html();
+		var current_user_name = current_Target.parent().find("span:eq(1)").text();
 		for(var i=0; i<form_val_split_length;i++){
 			if(form_val===''){
 				$('#recipients_form').val($('#recipients_form').val()+current_user_email);
@@ -192,7 +194,12 @@
 		}
 		$(".friend_list_ul").append("<li class='friend_list_item'id='friend_list_item"+friend_list_index+"'>"
 			+"<div class='friend_list_text'>"
+			+"<span>"
 			+current_user_email
+			+"</span>"
+			+"<span>"
+			+"("+current_user_name+")"
+			+"</span>"
 			+"</div>"
 			+"<div class='friend_list_del_btn'style='cursor:pointer;' >"
 			+"<a class='fa fa-trash friend_list_del_icon'id='"+friend_list_index+"'></a>"
@@ -203,12 +210,13 @@
 	});
 
 	$(".friend_list_ul").delegate(".friend_list_del_icon","click",function(event){
-		var result = confirm('제외시키겠습니까?');
+		var current_Target = $(event.currentTarget);
+    		var current_id = current_Target.attr("id");
+    		var current_text = $("#friend_list_item"+current_id).find("div:eq(0) span:eq(0)").text();
+		var result = confirm(current_text+'를 제외시키겠습니까?');
 		    if(!result) {
 		           return;
 		    }
-		var current_Target = $(event.currentTarget);
-    		var current_id = current_Target.attr("id");
     		$("#friend_list_item"+current_id).remove();
     		var remain_friend_list_length = $(".friend_list_item").length;
 	     if(remain_friend_list_length==0){
@@ -224,6 +232,10 @@
 	        }
 	      }
 	     }
+	});
+	$("#firend_reset").on("click",function(){
+		$(".friend_list_ul").remove();
+		$("#recipients_form").val("");
 	});
 
 	$("#conversation_submit_btn").on("click",function(){
