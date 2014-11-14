@@ -24,7 +24,7 @@
   
   <script>
 function alram(){
-var pusher = new Pusher('02d90faab8b070521a56')
+var pusher = new Pusher('a49249ec2328f5c4474d')
 var channel = pusher.subscribe('presence-sentar');  //멤버들의 접속상태와 프로필을 담고 있는 채널
 channel.bind('pusher:subscription_succeeded', function(members) { //인증이 완료되고 접속이 되었을 경우
 var login_user;
@@ -40,33 +40,33 @@ var user_name;
           "rgba(0,255,0,0.5)"
         );
       }
-      $("#user_in_out_"+out_member_id).text("gkgkgkgk");
+     
     });
     //add_member(member.id, member.info); 
+     var triggered = channel.trigger('client-event', { id: member.id });
   });
+
+
+
 })
 channel.bind('pusher:member_added', function(member) {
 
 
- $("#user_in_out_"+member.id).text("gkgkgkgk");
- 
- 
+
+ var in_member_id = member.id;
+ $("#user_in_out_"+in_member_id).css("color","rgba(0,255,0,0.5)");
+
 });
 
 
 channel.bind('pusher:member_removed', function(member) {
   var out_member_id = member.id;
 
- 
- /*$("#user_in_out_"+ou t_member_id).css("color","rgba(255,0,0,0.5)");*/
-  $("#user_in_out_"+out_member_id).text("test!!!!!!!!!!!!!");
-
-
 });
 
 
 
-channel.bind('test-event', function(data) {
+channel.bind('client-event', function(data) {
 
 
  $("#user_in_out_"+ data.id).text("from session controller");

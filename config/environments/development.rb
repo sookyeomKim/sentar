@@ -40,8 +40,8 @@ Rails.application.configure do
 
   require 'pusher'
 
- Pusher.app_id = '96508'
-  Pusher.key    = 'bc9b9c78d6d9abb18e7c'
-  Pusher.secret = 'c3abdc15e10296c8d781'
+ Pusher.app_id = '96416'
+  Pusher.key    = 'a49249ec2328f5c4474d'
+  Pusher.secret = '247615e156ccedebb1f2'
   
 end
