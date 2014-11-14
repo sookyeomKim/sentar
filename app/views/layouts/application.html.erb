@@ -35,6 +35,7 @@ var channel = pusher.subscribe('presence-sentar');  //멤버들의 접속상태�
 channel.bind('pusher:subscription_succeeded', function(members) { //인증이 완료되고 접속이 되었을 경우
 var login_user;
 var user_name;
+
  $("#all_users").text(members.count);
   members.each(function(member) {
     login_user = member.info.name;
@@ -45,25 +46,23 @@ var user_name;
           "rgba(0,255,0,0.5)"
         );
       }
+      $("#user_in_out_"+out_member_id).text("gkgkgkgk");
     });
     //add_member(member.id, member.info); 
   });
 })
 channel.bind('pusher:member_added', function(member) {
 
-
+ $("#user_in_out_"+member.id).text("gkgkgkgk");
  
- var in_member_id = member.id;
- /*$("#user_in_out_"+in_member_id).css("color","rgba(0,255,0,0.5)");*/
-
- $("#user_in_out_"+in_member_id).text("test!");
+ 
 
 });
 
 
 channel.bind('pusher:member_removed', function(member) {
   var out_member_id = member.id;
-
+ 
  /*$("#user_in_out_"+ou t_member_id).css("color","rgba(255,0,0,0.5)");*/
   $("#user_in_out_"+out_member_id).text("dd");
 
@@ -72,11 +71,9 @@ channel.bind('pusher:member_removed', function(member) {
 
 
 channel.bind('test-event', function(data) {
-  // for example:
-  //remove_member(member.id, member.info);
 
-  $("#user_in_out_"+data.id).text("dd");
- 
+
+ $("#user_in_out_"+data.id).text("from session controller");
   
 });
 

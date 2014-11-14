@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
 
       current_user.followers.each do |follower|
       Pusher.trigger("mychannel-#{follower.id}", 'my-event', {:type => "following_login", :title=>title , :message => message, :url => current_user.gravatar_url } )  
+      Pusher["presence-sentar"].trigger("test-event", {:id => current_user.id })
       end
 
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)

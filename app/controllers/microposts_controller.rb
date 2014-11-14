@@ -55,6 +55,7 @@ class MicropostsController < ApplicationController
   title = "#{current_user.name}님이 #{@micropost.user.name}님의 글을 좋아합니다."
   message = @micropost.content + "<a href='/users/#{@micropost.user.id}/?from_pusher=#{@micropost.id}' >보러가기</a>"
   Pusher.trigger("mychannel-#{@micropost.user.id}", 'my-event', {:type => "like", :title=>title , :message => message, :url => current_user.gravatar_url } )
+ Pusher["presence-sentar"].trigger("test-event", {:id => current_user.id })
   @micropost.user.notify("#{current_user.name}님이 #{@micropost.user.name}님의 글을 좋아합니다.", "/users/#{@micropost.user.id}/?from_pusher=#{@micropost.id}" )
   end
   @micropost = Micropost.find(params[:id])
