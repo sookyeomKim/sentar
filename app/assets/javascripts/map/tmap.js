@@ -1,8 +1,6 @@
-/*document.write("<script  language='javascript' src='https://apis.skplanetx.com/tmap/js?version=1&format=javascript&appKey=30c68bc1-8813-3f13-9c99-d3660cf91545'></script>");  */
-
 var map; //홈쪽 맵 
 //var map_shelter_create;//쉘터생성쪽 맵
-var zoom, mapW, mapH, mapDiv; //맵 초기화시 사용상수
+var mapDiv; //맵 초기화시 사용상수zoom, mapW, mapH, 
 //var mapDiv_shelter_create;
 var lonlat, pr_3857, pr_4326; //좌표변환 관련 상수
 var markers; //레이어 관련 변수

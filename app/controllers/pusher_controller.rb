@@ -1,8 +1,4 @@
-require 'pusher'
 
-Pusher.app_id = '96196'
-Pusher.key = '37d5027632186dcd7679'
-Pusher.secret = '0db9ca86ee7b48b91596'
 
 
 
