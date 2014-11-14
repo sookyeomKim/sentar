@@ -56,7 +56,7 @@
                         var notify_count = $("#notify-count").text();
                         notify_count--;
                         $("#notify-count").text(notify_count);
-                        current_target.remove();
+                        current_target.parent().parent().html().remove();
                     });
                 </script>
 
