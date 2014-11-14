@@ -1,6 +1,6 @@
 <li class="user_list_item">
-  <span><%=link_to gravatar_for user %></span><!--  프로필 사진 -->
-  <span class="user_name"><%=link_to user.name, user %></span><!--  유저 이름   -->
+  <span><%=link_to gravatar_for(user,size:50),user.shelter %></span><!--  프로필 사진 -->
+  <span class="user_name"><%=link_to user.name, user.shelter %></span><!--  유저 이름   -->
   <span class="user_email" id="user_email_id_<%= user.id%>"><%= user.email %></span>
   <span class=""><i class="fa fa-circle user_in_out" style="color:rgba(255,0,0,0.5);"></i></span>
 

@@ -49,7 +49,18 @@ var user_name;
 })
 channel.bind('pusher:member_added', function(member) {
   // for example:
- 
+ members.each(function(member) {
+    login_user = member.info.name;
+    $(".user_list_item").each(function(index){
+      user_name = $(".user_name:eq("+index+")").text();
+      if(user_name==login_user){
+        $(".user_in_out:eq("+index+")").css("color",
+          "rgba(0,255,0,0.5)"
+        );
+      }
+    });
+    //add_member(member.id, member.info); 
+  });
   //add_member(member.id, member.info);
 });
 channel.bind('pusher:member_removed', function(member) {
