@@ -153,6 +153,18 @@ class User < ActiveRecord::Base
 
   end
 
+  def unread_notify_counts
+   count = 0  
+   notifications = mailbox.notifications
+  notifications.each do |receipt|
+     unless receipt.is_read?self
+      count += 1
+     end
+   end
+   return count
+
+  end
+
   
 
   private

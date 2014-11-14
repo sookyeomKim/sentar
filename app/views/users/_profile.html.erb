@@ -29,6 +29,7 @@
 			<p>
 				<%= render 'shared/stats' %>
 				<%= render 'users/follow_form' if logged_in? %>
+				<%= link_to("메세지보내기", new_conversation_path(receiver_id: @user.id) , class: "btn btn-primary") unless current_user?@user %>
 			</p>	
 		</div>
 	</div>
