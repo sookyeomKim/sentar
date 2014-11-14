@@ -141,10 +141,13 @@
 					<div class="panel-body">
 						<div class="friend_list">
 							<ul class="friend_list_ul">
-								<li class="friend_list_item">
-									<div></div>
-									<div></div>
-								</li>
+								<!-- <li class='friend_list_item'id=''>
+									<div class='friend_list_text'>ddd
+									</div>
+									<div class='friend_list_del_btn'style='cursor:pointer;' >
+										<a class='fa fa-trash friend_list_del_icon'></a>
+									</div>
+								</li> -->
 							</ul>
 						</div>
 					</div>
@@ -166,14 +169,9 @@
 			</div>
 		</div>
 	</div>
-	<%= javascript_tag do %>
+	<script>
+	var friend_list_index = 0;
 	$('.user_email').on('click',function(event){
-
-
-
-
-
-
 		var form_val = $('#recipients_form').val();
 		var form_val_split =form_val.split(',');
 		var form_val_split_length = form_val_split.length;
@@ -181,18 +179,52 @@
 		for(var i=0; i<form_val_split_length;i++){
 			if(form_val===''){
 				$('#recipients_form').val($('#recipients_form').val()+current_user_email);
+			}else{
+				if(form_val_split[i]===current_user_email){
+					alert("이미 추가하셨습니다.")
+					return;
 				}else{
-					if(form_val_split[i]===current_user_email){
-						alert("이미 추가하셨습니다.")
-						return;
-						}else{
-							if(form_val_split_length==i+1){
-								$('#recipients_form').val($('#recipients_form').val()+','+current_user_email);
-							}					
-						}
-					}
+					if(form_val_split_length==i+1){
+						$('#recipients_form').val($('#recipients_form').val()+','+current_user_email);
+					}					
 				}
-			});
+			}
+		}
+		$(".friend_list_ul").append("<li class='friend_list_item'id='friend_list_item"+friend_list_index+"'>"
+			+"<div class='friend_list_text'>"
+			+current_user_email
+			+"</div>"
+			+"<div class='friend_list_del_btn'style='cursor:pointer;' >"
+			+"<a class='fa fa-trash friend_list_del_icon'id='"+friend_list_index+"'></a>"
+			+"</div>"
+			+"</li>"
+			);
+		friend_list_index++;
+	});
+
+	$(".friend_list_ul").delegate(".friend_list_del_icon","click",function(event){
+		var result = confirm('제외시키겠습니까?');
+		    if(!result) {
+		           return;
+		    }
+		var current_Target = $(event.currentTarget);
+    		var current_id = current_Target.attr("id");
+    		$("#friend_list_item"+current_id).remove();
+    		var remain_friend_list_length = $(".friend_list_item").length;
+	     if(remain_friend_list_length==0){
+	      $("#recipients_form").val("");
+	     }else{
+	      $("#recipients_form").val("");
+	      for(var i=0;i<remain_friend_list_length;i++){
+	        var remain_friend_list = $(".friend_list_item").eq(i).find("div:eq(0)").text();
+	        if(i==0){
+	          $("#recipients_form").val($("#recipients_form").val()+remain_friend_list);
+	        }else{
+	          $("#recipients_form").val($("#recipients_form").val()+","+remain_friend_list);
+	        }
+	      }
+	     }
+	});
 
 	$("#conversation_submit_btn").on("click",function(){
 		var text_area = $("#message_body").val();
@@ -201,7 +233,7 @@
 			return false;
 		}    
 	});
-	<% end %>
+	</script>
 
 	<div class="panel" id="arcodian">
 		<div class="panel-heading" style="background-color:#bbb;">

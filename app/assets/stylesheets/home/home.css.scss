@@ -272,3 +272,37 @@
 		}
 	}
 }
+
+.friend_list{
+	position: relative;
+	.friend_list_ul{
+		position: relative;
+		.friend_list_item{
+			clear: both;
+			height: 50px;
+			.friend_list_text{
+				display: inline-block;
+				width: calc(100% - 100px); 
+				height: 50px;
+				background: transparent;
+				position: absolute;
+				padding: 12.5px;
+				font-weight: bold;
+			}
+			.friend_list_del_btn{
+				float: right;
+				.friend_list_del_icon{
+					position: absolute;
+					width: 50px; height: 50px;						
+					right: 0px;
+					font-size: 0 !important;
+					line-height: 0 !important;
+					font-size: 20pt !important;
+					line-height: 25px !important;
+					color: #000;
+					padding:12.5px;
+				}
+			}
+		}	
+	}
+}
