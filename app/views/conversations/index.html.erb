@@ -127,7 +127,7 @@
 			<% if current_user.following.any? %>
 			<ul id="friend_list" class="message_friends_wrap panel-collapse collapse">
 				<li>
-					<span class="text-danger">이메일을 클릭하세요.</span><span><a class="btn btn-default btn-xs"id="firend_reset">전부삭제</a></span>
+					<span class="text-danger">이메일을 클릭하세요.</span>
 				</li>
 				<%= render current_user.following %>
 			</ul>
@@ -136,18 +136,12 @@
 		<div class="">
 			<div  class="">
 				<%= form_for(:conversation, url: :conversations, method: :post,:html => {:id=>"conversation"}) do |f| %>
-				<%= f.label :recipients,'받는사람(친구 목록을 눌러보아요 :)' %>
+				<span><%= f.label :recipients,'받는사람(친구 목록을 눌러보아요 :)' %></span><span><a class="btn btn-default btn-xs"id="firend_reset">전부삭제</a></span>
 				<div class="chat_panel">
 					<div class="panel-body">
 						<div class="friend_list">
 							<ul class="friend_list_ul">
-								<!-- <li class='friend_list_item'id=''>
-									<div class='friend_list_text'>ddd
-									</div>
-									<div class='friend_list_del_btn'style='cursor:pointer;' >
-										<a class='fa fa-trash friend_list_del_icon'></a>
-									</div>
-								</li> -->
+								
 							</ul>
 						</div>
 					</div>

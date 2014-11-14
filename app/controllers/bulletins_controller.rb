@@ -39,7 +39,7 @@ class BulletinsController < ApplicationController
 
     respond_to do |format|
       if @bulletin.save
-        format.html { render :show }#redirect_to [@shelter.bulletin, @bulletin], notice: 'Bulletin was successfully created.' }
+        format.html { render :index }#redirect_to [@shelter.bulletin, @bulletin], notice: 'Bulletin was successfully created.' }
         format.json { render :show, status: :created, location: @bulletin }
       else
         format.html { render :new }

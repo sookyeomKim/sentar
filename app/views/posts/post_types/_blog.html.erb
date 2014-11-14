@@ -12,7 +12,7 @@
         <a class="pull-left" href=""> <!--img-->  </a>   
         <div class="media-body">
           <h4 class="media-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse2" target="">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= post.id %>" target="">
               <%= post.title %>
             </a>
             <span class="blog_timestamp">
@@ -33,13 +33,13 @@
       </div>
 
       
-      <div id="collapse2" class="panel-collapse collapse">
+      <div id="collapse<%= post.id %>" class="panel-collapse collapse">
         <div class="panel-body">
           <div>
                 
           </div>
           <div>
-            내용
+            <%= post.content %>
           </div>
           <hr>
           <div class="row">

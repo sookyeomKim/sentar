@@ -4,7 +4,7 @@
     <%= link_to '뒤로', shelter_bulletins_path(@bulletin.shelter), class: 'btn btn-default btn-lg' %>
     <%= link_to '새글쓰기', new_post_path(bulletin_id: @bulletin), class: 'btn btn-default btn-lg'%>
   </div>
-  <div class="col-lg-12"style="margin-top:10px;">
+  <div class="col-lg-12"style="margin-top:50px;">
     <div class=" dadan_2">
       <% @posts.each do |post| %>
       <div class="media post_list_item">
@@ -19,7 +19,7 @@
               <%= link_to '', post, method: :delete, remote: :true,  data: { confirm: '삭제하시겠습니까?' }, class:'fa fa-times'%>
             </span>            
           </h4>
-          <%= post.id %>
+          <!-- <%= post.id %> -->
           <span class="blog_timestamp" style="font-size:10px;"><%=time_ago_in_words(post.created_at)%> ago</span>
         </div>
       </div>
