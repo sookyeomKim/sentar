@@ -10,8 +10,14 @@ class ConversationsController < ApplicationController
 def index
    @mailbox ||= mailbox
    @conversations = @mailbox.conversations.paginate(page: params[:page], per_page: 7  )
-
    
+ end
+
+ def new
+  if params[:receiver_id]
+  receiver_user = User.find(params[:receiver_id]) 
+  @email = receiver_user.email
+ end
  end
 
 
@@ -20,19 +26,29 @@ def index
   recipients = User.where(email: recipient_emails).all
 
   if recipients.include?(current_user) or recipients.empty?
-    #recipients.delete(current_user)
+    
     flash[:danger] = "다시 초대해 주세요 :)"
     redirect_to conversations_path(@conversations)
   elsif @conversation = already_have_conversation?(recipients)
-  body = conversation_params(:body)
-  @user.reply_to_conversation( @conversation, body )
+  @body = conversation_params(:body)
+  @user.reply_to_conversation( @conversation, @body )
+
+  else
    @conversation = @user.send_message(recipients, *conversation_params(:body, :subject)).conversation
-    title = "#{current_user.name}님이 답장을 보냈습니다. "
-    message = body + "<a href ='/conversations/#{@conversation.id}'>보러가기</a> "
+   title = "#{current_user.name}님이 답장을 보냈습니다. "
+    message = @body + "<a href ='/conversations/#{@conversation.id}'>보러가기</a> "
     recipients.each do |recipient|
-    Pusher.trigger("mychannel-#{recipient.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url, :id=>@conversation.id } )
-    end 
-  redirect_to conversation_path(@conversation)
+    Pusher.trigger("mychannel-#{recipient.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url, :id=>@conversation.id } ) 
+     
+
+  recipient.notify("#{current_user.name}님이 메세지를 보냈습니다." , "/conversations/#{@conversation.id}")
+  
+
+  end
+    
+
+  end 
+  
   
   else
   
@@ -42,13 +58,14 @@ message = @conversation.last_message.body + "<a href ='/conversations'>보러가
 
 recipients.each do |recipient|
     Pusher.trigger("mychannel-#{recipient.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url } )
+    recipient.notify("#{current_user.name}님이 메세지를 보냈습니다." , "/conversations/#{@conversation.id}")
+     
 end
 
  redirect_to conversation_path(@conversation)
 end
 
   
-end
 
 def reply
 
@@ -56,14 +73,15 @@ def reply
   @receipt= @user.reply_to_conversation(conversation, *message_params(:body, :subject))
   title = "#{current_user.name}님이 답장을 보냈습니다. "
   message = @receipt.message.body + "<a href ='/conversations/#{conversation.id}'>보러가기</a> "
-
+  
 
   conversation.participants.each do |participant|
 
   unless current_user?participant
 
-  Pusher.trigger("mychannel-#{current_user.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url , :c_id=> @receipt.id } )
-
+  Pusher.trigger("mychannel-#{participant.id}", 'my-event', {:type => "new_message", :title=>title , :message => message, :url => current_user.gravatar_url , :c_id=> @receipt.id } )
+  participant.notify("#{current_user.name}님이 답장을 보냈습니다. " , "/conversations/#{conversation.id}")
+  
   end
   end
   respond_to do |format|

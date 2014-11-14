@@ -72,7 +72,10 @@
                    <%unless @single_post %>
                   <%= render @microposts %>
                    <%if @microposts.size ==0%>
+                   <h2>등록된 글이 없습니다.</h2>
+                   <% if current_user?@user %>
                    <a href="/blog_new"><h1>새글을 작성해보세요.</h1></a>                   
+                   <% end %>
                    <% end %>
                   <% else %>
                   <%= render @single_post %>

@@ -27,63 +27,37 @@
         </div>
 
         <% if logged_in? %>
+         <% @current_user ||= current_user %>
+         <% @mailbox ||=@current_user.mailbox %>
         <!-- 알람,딴집가기,내집가기  김수겸 14.09.01-->
         <ul class="nav navbar-nav navbar-right">                
-            알람
+            
             <li class="dropdown">
                 <a class="dropdown-toggle"
-                data-toggle="dropdown" href="#alarm"> <span class="label label-info">2</span> <i class="fa fa-bell"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
+                data-toggle="dropdown" href="#alarm"> <span class="label label-info"><%=@current_user.unread_notify_counts  %></span> <i class="fa fa-bell"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
+
+                        
                 <ul class="dropdown-menu dropdown-alerts">
-                    <li>
-                        <a href="#">
+                    <% @mailbox.notifications.each do |notification|  %>
+                         <li>
+                        <a href="<%= notification.body %>">
                             <div>
-                                <i class="icon-comment"></i> New Comment <span class="pull-right text-muted small"> 4 minutes ago</span>
+                                <i class="icon-comment"></i><%= notification.subject %> <span class="pull-right text-muted small"> <%= time_ago_in_words(notification.created_at) %> ago</span>
                             </div> </a>
                         </li>
                         <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="icon-twitter info"></i> 3 New Follower <span class="pull-right text-muted small"> 9 minutes ago</span>
-                                </div> </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="icon-envelope"></i> Message Sent <span class="pull-right text-muted small"> 20 minutes ago</span>
-                                    </div> </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="#">
-                                        <div>
-                                            <i class="icon-tasks"></i> New Task <span class="pull-right text-muted small"> 1 Hour ago</span>
-                                        </div> </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="#">
-                                            <div>
-                                                <i class="icon-upload"></i> Server Rebooted <span class="pull-right text-muted small"> 2 Hour ago</span>
-                                            </div> </a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a class="text-center" href="#"> <strong>See All Alerts</strong> <i class="icon-angle-right"></i> </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                알람end
 
-                           
+                    <% end %>
+                    </ul>
+                    </li>
+                                
+                            
 
                             <li class="dropdown">
                                 <a class="dropdown-toggle" href="/users"> <span class="label label-warning" id="all_users"></span> <i class="fa fa-users"></i>&nbsp; </a>
                             </li>
                             <!--메세지-->
-                            <% @current_user ||= current_user %>
-                            <% @mailbox ||=@current_user.mailbox %>
+                           
                             <% @header_conversations = @mailbox.inbox unless @mailbox.nil? %>
                             <li class="dropdown">
                                 <a class="dropdown-toggle"  data-toggle="dropdown" href="#"> <span class="label label-success"><%=@current_user.unread_inbox_count   %></span> <i class="fa fa-envelope"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>

@@ -2,8 +2,9 @@
   <div class="tab-content">
     <div  class="tab-pane active">
       <%= form_for(:conversation, url: :conversations, method: :post) do |f| %>
-      <%= f.label :recipients,'받는사람' %>
-      <%= f.text_field :recipients,class:"form-control" %>
+      
+      <%= f.label :recipients,'받는사람'  %>
+      <%= f.text_field :recipients,class:"form-control" , value: @email %>
 
       <%= f.label :subject,'제목' %>
       <%= f.text_field :subject,class:"form-control" %>

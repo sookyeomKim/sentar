@@ -53,6 +53,9 @@ def read_counts(message)
 end
 
 
+
+
+
 def count_unread_message_in(conversation)
 	receipts = conversation.receipts_for current_user
 
