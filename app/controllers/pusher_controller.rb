@@ -15,7 +15,7 @@ protect_from_forgery :except => :auth # stop rails CSRF protection for this acti
 
 
 def test
-Pusher["presence-sentar"].trigger("pusher:member_added", {:type => "new_purchase"})
+Pusher["presence-sentar"].trigger("test-event", {:id => current_user.id })
 render :text => "test pusher"
 end
 
