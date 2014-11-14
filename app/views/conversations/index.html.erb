@@ -137,10 +137,10 @@
 			<div  class="">
 				<%= form_for(:conversation, url: :conversations, method: :post,:html => {:id=>"conversation"}) do |f| %>
 				<%= f.label :recipients,'받는사람(친구 목록을 눌러보아요 :)' %>
-				<%= f.text_field :recipients,class:"form-control",id:'recipients_form' %>
+				<%= f.hidden_field :recipients,class:"form-control",id:'recipients_form' %>
 
 				<!-- <%= f.label :subject,'제목' %> -->
-				<%= f.hidden_field :subject , value: "나불나불"  %>
+				<%= f.text_area :subject , value: "나불나불"  %>
 
 				<%= f.label :body, '전하고 싶은 말', class: "checkbox inline"  %>
 				<div class="chat_panel">
