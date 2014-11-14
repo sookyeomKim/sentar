@@ -36,7 +36,7 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle"
-                data-toggle="dropdown" href="#alarm"> <span class="label label-info"><%=@current_user.unread_notify_counts  %></span> <i class="fa fa-bell"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
+                data-toggle="dropdown" href="#alarm"> <span class="label label-info", id = "notify-count"><%=@current_user.unread_notify_counts  %></span> <i class="fa fa-bell"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
 
                         
                 <ul class="dropdown-menu dropdown-alerts">
@@ -63,7 +63,7 @@
                            
                             <% @header_conversations = @mailbox.inbox unless @mailbox.nil? %>
                             <li class="dropdown">
-                                <a class="dropdown-toggle"  data-toggle="dropdown" href="#"> <span class="label label-success"><%=@current_user.unread_inbox_count   %></span> <i class="fa fa-envelope"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
+                                <a class="dropdown-toggle"  data-toggle="dropdown" href="#"> <span class="label label-success" id = "unread_count"><%=@current_user.unread_inbox_count   %></span> <i class="fa fa-envelope"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
                                 <ul class="dropdown-menu dropdown-messages">
 
                                     <% @header_conversations.each do |conversation| %>

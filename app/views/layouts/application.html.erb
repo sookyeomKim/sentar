@@ -50,6 +50,8 @@ var user_name;
   });
 })
 channel.bind('pusher:member_added', function(member) {
+
+ 
  var in_member_id = member.id;
  /*$("#user_in_out_"+in_member_id).css("color","rgba(0,255,0,0.5)");*/
  $("#user_in_out_"+in_member_id).text("test");
@@ -59,6 +61,32 @@ channel.bind('pusher:member_removed', function(member) {
  /*$("#user_in_out_"+out_member_id).css("color","rgba(255,0,0,0.5)");*/
   $("#user_in_out_"+out_member_id).text("");
 });
+
+
+
+channel.bind('test-event', function(member) {
+  // for example:
+  //remove_member(member.id, member.info);
+
+ $('#user_in_out_'+member.id).html("123123123")
+ 
+  
+});
+
+
+/*var sentar_channel = pusher.subscribe('sentar_channel');
+sentar_channel.bind('sentar-event', function (data) {
+    $.gritter.add({
+        // (string | mandatory) the heading of the notification
+        title: '전체알림!',
+        // (string | mandatory) the text inside the notification
+        text: '전체 유저들에게 다 보이기.',
+        image: '<%#=gravatar_for_url current_user %>'
+    });
+});
+*/
+
+
 
 
 
@@ -81,6 +109,14 @@ channel3.bind('my-event', function (data) {
             image: data.url
         });
        
+       
+        var count = Number($("#unread_count").text()) + 1
+        var notify_count =  Number($("#notify-count").text()) + 1  
+          $("#unread_count").html(count)
+          $("#notify-count").html(count)
+          
+          
+        
       
     } else if (data.type == 'new_comment') {
         $.gritter.add({
