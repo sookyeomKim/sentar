@@ -28,7 +28,7 @@
 
 
 function alram(){
-var pusher = new Pusher('a49249ec2328f5c4474d')
+var pusher = new Pusher('02d90faab8b070521a56')
 var channel = pusher.subscribe('presence-sentar');  //멤버들의 접속상태와 프로필을 담고 있는 채널
 channel.bind('pusher:subscription_succeeded', function(members) { //인증이 완료되고 접속이 되었을 경우
 var login_user;
