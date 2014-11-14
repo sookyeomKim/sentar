@@ -48,8 +48,8 @@ var user_name;
   });
 })
 channel.bind('pusher:member_added', function(member) {
-
-  var member_id = member.id;
+ alert("test");
+  /*var member_id = member.id;
   alert(member_id);
   $(".user_list_item").each(function(index){
       if(member_id==index){
@@ -57,7 +57,7 @@ channel.bind('pusher:member_added', function(member) {
           "rgba(0,255,0,0.5)"
         );
       }
-    });
+    });*/
   //add_member(member.id, member.info);
 });
 channel.bind('pusher:member_removed', function(member) {
