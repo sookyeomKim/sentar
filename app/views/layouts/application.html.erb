@@ -46,17 +46,14 @@ var user_name;
 channel.bind('pusher:member_added', function(member) {
  var in_member_id = member.id;
  $("#user_in_out_"+in_member_id).css("color","rgba(0,255,0,0.5)");
-
  /*$("#user_in_out_"+in_member_id).text("test!");*/
-
 });
 
 
 channel.bind('pusher:member_removed', function(member) {
   var out_member_id = member.id;
- $("#user_in_out_"+ou t_member_id).css("color","rgba(255,0,0,0.5)");
-  /*$("#user_in_out_"+out_member_id).text("test!!!!!!!!!!!!!");*/
-
+ $("#user_in_out_"+out_member_id).css("color","rgba(255,0,0,0.5)");
+  /*$("#user_in_out_"+out_member_id).text("dd");*/
 });
 
 
