@@ -27,128 +27,133 @@
         </div>
 
         <% if logged_in? %>
-         <% @current_user ||= current_user %>
-         <% @mailbox ||=@current_user.mailbox %>
-        <!-- 알람,딴집가기,내집가기  김수겸 14.09.01-->
+        <% @current_user ||= current_user %>
+        <% @mailbox ||=@current_user.mailbox %>
+        <!-- 알람,모든유저,메시지,내집가기  김수겸 14.09.01-->
         <ul class="nav navbar-nav navbar-right">                
 
             <!-- 알람 -->
-
             <li class="dropdown">
                 <a class="dropdown-toggle"
                 data-toggle="dropdown" href="#alarm"> <span class="label label-info", id = "notify-count"><%=@current_user.unread_notify_counts  %></span> <i class="fa fa-bell"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
 
-                        
+
                 <ul class="dropdown-menu dropdown-alerts">
                     <% @mailbox.notifications.each do |notification|  %>
-                         <li>
+                    <li>
                         <a href="<%= notification.body %>">
                             <div>
                                 <i class="icon-comment"></i><%= notification.subject %> <span class="pull-right text-muted small"> <%= time_ago_in_words(notification.created_at) %> ago</span>
                             </div> </a>
                         </li>
                         <li class="divider"></li>
-
-
-                    <% end %>
+                        <% end %>
                     </ul>
-                    </li>
-                                
-                            
+                </li>
+                <script>
+                    $(".dropdown-alerts li a").on("click",function(event){
+                        var current_target = $(event.currentTarget);
+                        var notify_count = $("#notify-count").text();
+                        notify_count--;
+                        $("#notify-count").text(notify_count);
+                        current_target.remove();
+                    });
+                </script>
 
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" href="/users"> <span class="label label-warning" id="all_users"></span> <i class="fa fa-users"></i>&nbsp; </a>
+                <!-- 모든유저 -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="/users"> <span class="label label-warning" id="all_users"></span> <i class="fa fa-users"></i>&nbsp; </a>
+                </li>
+
+                <!--메세지-->                
+                <% @header_conversations = @mailbox.inbox unless @mailbox.nil? %>
+                <li class="dropdown">
+                    <a class="dropdown-toggle"  data-toggle="dropdown" href="#"> <span class="label label-success" id = "unread_count"><%=@current_user.unread_inbox_count   %></span> <i class="fa fa-envelope"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
+                    <ul class="dropdown-menu dropdown-messages">
+
+                        <% @header_conversations.each do |conversation| %>
+                        <% if conversation.is_unread?(@current_user) %>
+
+                        <% body = conversation.last_message.body %>
+
+                        <li style="margin-bottom: 20px;">
+                            <div class="message_wrap">
+                                <span class="message_wrap_center">
+
+                                    <%= gravatar_for conversation.last_sender %>
+                                    <span class="text_split"><%= link_to conversation.last_message.body , conversation_path(conversation)%></span>
+                                    <span class="message_wrap_right"><%= link_to "", trash_conversation_path(conversation), method: :post,class:'fa fa-trash' %></span>
+                                </div>
                             </li>
-                            <!--메세지-->
-                           
-                            <% @header_conversations = @mailbox.inbox unless @mailbox.nil? %>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle"  data-toggle="dropdown" href="#"> <span class="label label-success" id = "unread_count"><%=@current_user.unread_inbox_count   %></span> <i class="fa fa-envelope"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
-                                <ul class="dropdown-menu dropdown-messages">
+                            <li class="divider"></li>
+                            <% end %>
+                            <% end %>
 
-                                    <% @header_conversations.each do |conversation| %>
-                                    <% if conversation.is_unread?(@current_user) %>
+                            <li>
+                                <%= link_to '모든 메세지 보기', conversations_path,class:"text-center"%>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--메세지 end-->
 
-                                    <% body = conversation.last_message.body %>
+                    <!--친구-->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle"
+                        data-toggle="dropdown" href="#"> <i class="fa fa-user"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
 
-                                    <li style="margin-bottom: 20px;">
-                                        <div class="message_wrap">
-                                            <span class="message_wrap_center">
+                        <% if @current_user.following.any? %>
+                        <ul class="dropdown-menu dropdown-friend" id="buddy_list">
+                            <%= render @current_user.following %>
 
-                                                <%= gravatar_for conversation.last_sender %>
-                                                <span class="text_split"><%= link_to conversation.last_message.body , conversation_path(conversation)%></span>
-                                                <span class="message_wrap_right"><%= link_to "", trash_conversation_path(conversation), method: :post,class:'fa fa-trash' %></span>
-                                            </div>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <% end %>
-                                        <% end %>
+                        </ul>
+                        <% end %>
+                    </li>
+                    <!--친구 end-->
 
-                                        <li>
-                                            <%= link_to '모든 메세지 보기', conversations_path,class:"text-center"%>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!--메세지 end-->
-
-                                <!--친구-->
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle"
-                                    data-toggle="dropdown" href="#"> <i class="fa fa-user"></i>&nbsp; <i class="fa fa-sort-desc"></i> </a>
-
-                                    <% if @current_user.following.any? %>
-                                    <ul class="dropdown-menu dropdown-friend" id="buddy_list">
-                                        <%= render @current_user.following %>
-
-                                    </ul>
-                                    <% end %>
-                                </li>
-                                <!--친구 end-->
-
-                                <!--profile-->
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle profile" data-toggle="dropdown">
-                                        <div class="avatar">
-                                            <%= gravatar_for @current_user%>
-                                        </div>
-                                        <div class="user-mini pull-left">
-                                            <span class="welcome">Welcome</span>
-                                            <span><%= @current_user.name %></span>
-                                        </div> </a>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <%= link_to "내집가기",shelter_path(@current_user)%>
-                                            </li>
-                                            <li>
-                                                <%=link_to "내블로그가기",@current_user%>                             
-                                            </li>
-                                            <li>
-                                                <%=link_to "내커머스가기",commerce_path%> 
-                                            </li>
-                                            <li>
-                                                <%= link_to "계정설정", edit_user_path(@current_user) %>
-                                            </li>
-                                            <li>
-                                                <%= link_to("모든유저보기", users_path ) %>
-                                            </li>
-                                            <li>
-                                                <%= link_to "로그아웃", logout_path, method: "delete" %>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!--profile end-->
-                                </ul>
-                                <!-- 알람,딴집가기,내집가기 end -->
-                                <% else %>
-                                <%= link_to "Log in", login_path,class:"login_btn btn btn-info btn-round btn-line" %>
-                                <% end %>
+                    <!--profile-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle profile" data-toggle="dropdown">
+                            <div class="avatar">
+                                <%= gravatar_for @current_user%>
                             </div>
-                        </div>
-                    </div>
-                    <!-- 상단네비게이션창 end -->
+                            <div class="user-mini pull-left">
+                                <span class="welcome">Welcome</span>
+                                <span><%= @current_user.name %></span>
+                            </div> </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <%= link_to "내집가기",shelter_path(@current_user)%>
+                                </li>
+                                <li>
+                                    <%=link_to "내블로그가기",@current_user%>                             
+                                </li>
+                                <li>
+                                    <%=link_to "내커머스가기",commerce_path%> 
+                                </li>
+                                <li>
+                                    <%= link_to "계정설정", edit_user_path(@current_user) %>
+                                </li>
+                                <li>
+                                    <%= link_to("모든유저보기", users_path ) %>
+                                </li>
+                                <li>
+                                    <%= link_to "로그아웃", logout_path, method: "delete" %>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--profile end-->
+                    </ul>
+                    <!-- 알람,딴집가기,내집가기 end -->
+                    <% else %>
+                    <%= link_to "Log in", login_path,class:"login_btn btn btn-info btn-round btn-line" %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <!-- 상단네비게이션창 end -->
 
-                    <%= render 'conversations/text_split.js' %>
+        <%= render 'conversations/text_split.js' %>
 
-                    <script>
-                    $(alram);
-                    </script>
+        <script>
+        $(alram);
+        </script>
