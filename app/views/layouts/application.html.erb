@@ -50,11 +50,13 @@ var user_name;
 channel.bind('pusher:member_added', function(member) {
   // for example:
  
+  alert('들어왔을때')
   //add_member(member.id, member.info);
 });
 channel.bind('pusher:member_removed', function(member) {
   // for example:
   //remove_member(member.id, member.info);
+ alert('나갔을때')
   
 });
 
