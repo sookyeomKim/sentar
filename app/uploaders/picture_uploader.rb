@@ -4,7 +4,7 @@ class PictureUploader < CarrierWave::Uploader::Base
 
 #유저딴 이미지 업로드
   include CarrierWave::MiniMagick #이미지 크기조절 젬을 include시켜준다. 자바랑 헷갈리면 안되는게 루비는 이런식으로 다중상속이 가능하다.
-  process resize_to_limit: [400, 400]
+  process resize_to_limit: [215, 215]
 
 
 

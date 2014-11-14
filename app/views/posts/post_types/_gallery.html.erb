@@ -5,16 +5,12 @@
 </div>
 <!--gallery-->
 
-<div class="blog_list_content_image" style="margin-top:50px;">
+<div class="blog_list_content_image">
   <div class="row">
     <% @posts.each do | post | %>
     <div class="col-sm-6 col-md-2">
       <div class="image_info_toggle">
-        
-
-        <%= image_tag(post.picture_url) %> <%= link_to("삭제", post , method: :delete, remote: :true,
-        data: {confirm: "확실해요?"}) %>
-        <%= link_to(post.title, post ) %>
+        <%= image_tag(post.picture_url) %>
         <div class="image_info_hover" style="display:none;">
           <div>
             <p>

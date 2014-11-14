@@ -7,197 +7,218 @@
 				<ul>
 					<li class="active">
 						<h2><strong>메세지 목록</strong></h2></li>
-				</ul>
-			<ul>
-				
+					</ul>
+					<ul>
+
 			<!-- <%= form_for(:search, url: :search, method: :post ) do |f| %>
 			
 			<input type="search", placeholder: 'Search', name: 'search'>			
 			<% end %> -->
-			</ul>
-			</div>
-			
-			
-			<div class="conversation_list" style="padding:0 !important;margin-top:54px;">
-				<ul class="conversation_list_ul">
-					<%@conversations.each do |conversation| %>
+		</ul>
+	</div>
 
-					<% receipts = conversation.receipts_for current_user %>
-					<% last_message = receipts.last.message %>
-					<% unless conversation.is_trashed?(current_user) %>
-					<% participants = conversation.participants %> <!-- 대화 참여자 -->
-					<% is_group = true %>	
-					
-					<% if read_counts(last_message) > 1 %>
-					<li class="conversation_list_item">
-						<% else %>
-						<li class="conversation_list_item" style="
-						background: rgb(249,82,82); /* Old browsers */
-						background: -moz-linear-gradient(-45deg,  rgba(249,82,82,1) 12%, rgba(244,129,46,1) 26%, rgba(219,240,67,1) 40%, rgba(149,211,63,1) 54%, rgba(82,146,229,1) 68%, rgba(59,82,127,1) 82%, rgba(206,65,234,1) 94%); /* FF3.6+ */
-						background: -webkit-gradient(linear, left top, right bottom, color-stop(12%,rgba(249,82,82,1)), color-stop(26%,rgba(244,129,46,1)), color-stop(40%,rgba(219,240,67,1)), color-stop(54%,rgba(149,211,63,1)), color-stop(68%,rgba(82,146,229,1)), color-stop(82%,rgba(59,82,127,1)), color-stop(94%,rgba(206,65,234,1))); /* Chrome,Safari4+ */
-						background: -webkit-linear-gradient(-45deg,  rgba(249,82,82,1) 12%,rgba(244,129,46,1) 26%,rgba(219,240,67,1) 40%,rgba(149,211,63,1) 54%,rgba(82,146,229,1) 68%,rgba(59,82,127,1) 82%,rgba(206,65,234,1) 94%); /* Chrome10+,Safari5.1+ */
-						background: -o-linear-gradient(-45deg,  rgba(249,82,82,1) 12%,rgba(244,129,46,1) 26%,rgba(219,240,67,1) 40%,rgba(149,211,63,1) 54%,rgba(82,146,229,1) 68%,rgba(59,82,127,1) 82%,rgba(206,65,234,1) 94%); /* Opera 11.10+ */
-						background: -ms-linear-gradient(-45deg,  rgba(249,82,82,1) 12%,rgba(244,129,46,1) 26%,rgba(219,240,67,1) 40%,rgba(149,211,63,1) 54%,rgba(82,146,229,1) 68%,rgba(59,82,127,1) 82%,rgba(206,65,234,1) 94%); /* IE10+ */
-						background: linear-gradient(135deg,  rgba(249,82,82,0.7) 12%,rgba(244,129,46,0.7) 26%,rgba(219,240,67,0.7) 40%,rgba(149,211,63,0.7) 54%,rgba(82,146,229,0.7) 68%,rgba(59,82,127,0.7) 82%,rgba(206,65,234,0.7) 94%); /* W3C */
-						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f95252', endColorstr='#ce41ea',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
-						">
+	<div class="conversation_list" style="padding:0 !important;margin-top:54px;">
+		<ul class="conversation_list_ul">
+			<%@conversations.each do |conversation| %>
+
+			<% receipts = conversation.receipts_for current_user %>
+			<% last_message = receipts.last.message %>
+			<% unless conversation.is_trashed?(current_user) %>
+			<% participants = conversation.participants %> <!-- 대화 참여자 -->
+			<% is_group = true %>	
+
+			<% if read_counts(last_message) > 1 %>
+			<li class="conversation_list_item">
+				<% else %>
+				<li class="conversation_list_item" style="
+				background: rgb(249,82,82); /* Old browsers */
+				background: -moz-linear-gradient(-45deg,  rgba(249,82,82,1) 12%, rgba(244,129,46,1) 26%, rgba(219,240,67,1) 40%, rgba(149,211,63,1) 54%, rgba(82,146,229,1) 68%, rgba(59,82,127,1) 82%, rgba(206,65,234,1) 94%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, right bottom, color-stop(12%,rgba(249,82,82,1)), color-stop(26%,rgba(244,129,46,1)), color-stop(40%,rgba(219,240,67,1)), color-stop(54%,rgba(149,211,63,1)), color-stop(68%,rgba(82,146,229,1)), color-stop(82%,rgba(59,82,127,1)), color-stop(94%,rgba(206,65,234,1))); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(-45deg,  rgba(249,82,82,1) 12%,rgba(244,129,46,1) 26%,rgba(219,240,67,1) 40%,rgba(149,211,63,1) 54%,rgba(82,146,229,1) 68%,rgba(59,82,127,1) 82%,rgba(206,65,234,1) 94%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(-45deg,  rgba(249,82,82,1) 12%,rgba(244,129,46,1) 26%,rgba(219,240,67,1) 40%,rgba(149,211,63,1) 54%,rgba(82,146,229,1) 68%,rgba(59,82,127,1) 82%,rgba(206,65,234,1) 94%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(-45deg,  rgba(249,82,82,1) 12%,rgba(244,129,46,1) 26%,rgba(219,240,67,1) 40%,rgba(149,211,63,1) 54%,rgba(82,146,229,1) 68%,rgba(59,82,127,1) 82%,rgba(206,65,234,1) 94%); /* IE10+ */
+				background: linear-gradient(135deg,  rgba(249,82,82,0.7) 12%,rgba(244,129,46,0.7) 26%,rgba(219,240,67,0.7) 40%,rgba(149,211,63,0.7) 54%,rgba(82,146,229,0.7) 68%,rgba(59,82,127,0.7) 82%,rgba(206,65,234,0.7) 94%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f95252', endColorstr='#ce41ea',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+				">
+				<% end %>
+				<ul class="conversation_list_item_left">
+					<li>	
+						<% participants.each do |participant| %>
+						<%unless current_user?(participant) %>
+						<% if participants.size  <= 2 %>
+						<%=link_to gravatar_for_circle2(participant,size: 50), participant%>
+						<% elsif participants.size  <=5 %>
+						<%=link_to gravatar_for_circle2(participant,size: 25), participant,style:"height:25px !important;"%>
+						<% elsif participants.size  > 5 %>
+						<% unless participant.id  > 5 %>
+						<a href="#user_view_<%= conversation.id%>"data-toggle="collapse" data-parent="#accordion" class="accordion-toggle" style="height:25px !important;"><%= gravatar_for_circle2(participant,size: 25) %></a>
 						<% end %>
-						<ul class="conversation_list_item_left">
-							<li>	
-								<% participants.each do |participant| %>
-								<%unless current_user?(participant) %>
-								<% if participants.size  <= 2 %>
-								<%=link_to gravatar_for_circle2(participant,size: 50), participant%>
-								<% elsif participants.size  <=5 %>
-								<%=link_to gravatar_for_circle2(participant,size: 25), participant,style:"height:25px !important;"%>
-								<% elsif participants.size  > 5 %>
-								<% unless participant.id  > 5 %>
-								<a href="#user_view_<%= conversation.id%>"data-toggle="collapse" data-parent="#accordion" class="accordion-toggle" style="height:25px !important;"><%= gravatar_for_circle2(participant,size: 25) %></a>
-								<% end %>
-								<% end %>
-								<% end %>
-								<% end %>
-							</li>
-						</ul>
-						<div>
-							<span>								
-								<a href="conversations/<%=conversation.id  %>">
-									<span class="text_split"><%= conversation.last_message.body  %></span>
-									<span><% if current_user?(conversation.last_message.sender) %>
-										<%=gravatar_for_circle2(current_user, size: 25) %>
-										<% elsif is_group  %>
-										<%=gravatar_for_circle(conversation.last_sender, size: 25) %>
-										<%end%></span>
-									</a>
-									<!-- <%= link_to conversation.last_message.body, conversation_path(conversation),class:"text_split"%> -->
-								</span>
-								<span class="index_message_info vertical_array_menu">
-									<ul>
-										<li>
-											<strong>
-												<%=time_ago_in_words(conversation.last_message.created_at)%> ago	
-											</strong>
-										</li>
-										<li>
-											<span style="float:right;margin:5px;">
-												<% if read_counts(last_message) > 1 %>
-												읽음
-												<% end %>
-												<i class="label label-warning"><%=count_unread_message_in conversation %></i>
-											</span>
-										</li>
-									</ul>
-								</span>
-							</div>
-							<ol>	
+						<% end %>
+						<% end %>
+						<% end %>
+					</li>
+				</ul>
+				<div>
+					<span>								
+						<a href="conversations/<%=conversation.id  %>">
+							<span class="text_split"><%= conversation.last_message.body  %></span>
+							<span><% if current_user?(conversation.last_message.sender) %>
+								<%=gravatar_for_circle2(current_user, size: 25) %>
+								<% elsif is_group  %>
+								<%=gravatar_for_circle(conversation.last_sender, size: 25) %>
+								<%end%></span>
+							</a>
+							<!-- <%= link_to conversation.last_message.body, conversation_path(conversation),class:"text_split"%> -->
+						</span>
+						<span class="index_message_info vertical_array_menu">
+							<ul>
 								<li>
-									<%= link_to "", trash_conversation_path(conversation),data: { confirm: "휴지통으로 버리시겠습니까?" } ,method: :post,class:'fa fa-trash trash_btn' %>
+									<strong>
+										<%=time_ago_in_words(conversation.last_message.created_at)%> ago	
+									</strong>
 								</li>
-							</ol>
-						</li>
-						<li>
-							<% if participants.size  > 5 %>
-							<div class="panel-collapse collapse" id="user_view_<%= conversation.id%>">
-								<% participants.each do |participant| %>
-								<%unless current_user?(participant) %>
-								<%=link_to gravatar_for_circle2(participant,size: 50), participant%>
-								<% end %>
-								<% end %>
-							</div>
-							<% end %>
-						</li>
-						<% end %>					
-						<% end %>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- 메세지 목록 end-->
-
-		<%= render 'text_split.js' %>
-
-		<!-- 친구목록 -->
-		<div class="col-lg-6">
-			<div class="panel" id="arcodian">
-				<div class="panel-heading">
-					<h2 class="accordion-toggle"data-toggle="collapse" data-parent="#accordion" href="#friend_list" style="cursor:pointer; text-align:center;"><strong>친구목록</strong></h2>
-				</div>
-				<div style="background-color:#f0f0f0;">
-					<% if current_user.following.any? %>
-					<ul id="friend_list" class="message_friends_wrap panel-collapse collapse">
-						<li>
-							<p class="text-danger">이메일을 클릭하세요.</p>
-						</li>
-						<%= render current_user.following %>
-					</ul>
-					<% end %>
-				</div>
-				<%= javascript_tag do %>
-				$('.user_email').on('click',function(event){
-					var form_val = $('#recipients_form').val();
-					var form_val_split =form_val.split(',');
-					var form_val_split_length = form_val_split.length;
-					var current_user_email = $(event.currentTarget).html();
-					for(var i=0; i<form_val_split_length;i++){
-						if(form_val===''){
-							$('#recipients_form').val($('#recipients_form').val()+current_user_email);
-							}else{
-								if(form_val_split[i]===current_user_email){
-									alert("이미 추가하셨습니다.")
-									return;
-									}else{
-										if(form_val_split_length==i+1){
-											$('#recipients_form').val($('#recipients_form').val()+','+current_user_email);
-										}					
-									}
-								}
-							}
-						});
-						<% end %>
-						<div class="">
-							<div  class="">
-								<%= form_for(:conversation, url: :conversations, method: :post,:html => {:id=>"conversation"}) do |f| %>
-								<%= f.label :recipients,'받는사람(친구 목록을 눌러보아요 :)' %>
-								<%= f.text_field :recipients,class:"form-control",id:'recipients_form' %>
-
-								<!-- <%= f.label :subject,'제목' %> -->
-								<%= f.hidden_field :subject , value: "나불나불"  %>
-
-								<%= f.label :body, '전하고 싶은 말', class: "checkbox inline"  %>
-								<%= f.text_area :body,class:"form-control",id:"message_body" %>         
-								
-								<%= f.button '보내기', class: 'btn btn-default',id:"conversation_submit_btn"%>
-								 <span id="message_warning" class="text-danger"style="display:none;">빈칸은 앙대영!!!</span>
-								
-								<%= f.button '초기화'	, type: :reset, class: 'btn btn-danger' %><!--입력되어진대로 제출한다.-->
-								<!--<%= link_to '뒤로', conversations_path,class:'btn btn-primary'%>-->
-								<% end %>
-							</div>
-						</div>
+								<li>
+									<span style="float:right;margin:5px;">
+										<% if read_counts(last_message) > 1 %>
+										읽음
+										<% end %>
+										<i class="label label-warning"><%=count_unread_message_in conversation %></i>
+									</span>
+								</li>
+							</ul>
+						</span>
 					</div>
-					<%= javascript_tag do %>
-					$("#conversation_submit_btn").on("click",function(){
-					  var text_area = $("#message_body").val();
-					  if(text_area===""){
-					    $("#message_warning").css( "display", "inline" ).fadeOut( 1250 );
-					    return false;
-					  }    
-					});
+					<ol>	
+						<li>
+							<%= link_to "", trash_conversation_path(conversation),data: { confirm: "휴지통으로 버리시겠습니까?" } ,method: :post,class:'fa fa-trash trash_btn' %>
+						</li>
+					</ol>
+				</li>
+				<li>
+					<% if participants.size  > 5 %>
+					<div class="panel-collapse collapse" id="user_view_<%= conversation.id%>">
+						<% participants.each do |participant| %>
+						<%unless current_user?(participant) %>
+						<%=link_to gravatar_for_circle2(participant,size: 50), participant%>
+						<% end %>
+						<% end %>
+					</div>
 					<% end %>
+				</li>
+				<% end %>					
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- 메세지 목록 end-->
 
-					<div class="panel" id="arcodian">
-						<div class="panel-heading" style="background-color:#bbb;">
-							<h2 class="accordion-toggle"data-toggle="collapse" data-parent="#accordion" href="#trash" style="cursor:pointer; text-align:center;"><strong>휴지통</strong></h2>
-						</div>
-						<div>
-							<ul id="trash" class="message_friends_wrap panel-collapse collapse">
-								<%= render 'trash' %>
+<%= render 'text_split.js' %>
+
+<!-- 친구목록 -->
+<div class="col-lg-6">
+	<div class="panel" id="arcodian">
+		<div class="panel-heading">
+			<h2 class="accordion-toggle"data-toggle="collapse" data-parent="#accordion" href="#friend_list" style="cursor:pointer; text-align:center;"><strong>친구목록</strong></h2>
+		</div>
+		<div style="background-color:#f0f0f0;">
+			<% if current_user.following.any? %>
+			<ul id="friend_list" class="message_friends_wrap panel-collapse collapse">
+				<li>
+					<p class="text-danger">이메일을 클릭하세요.</p>
+				</li>
+				<%= render current_user.following %>
+			</ul>
+			<% end %>
+		</div>
+		<div class="">
+			<div  class="">
+				<%= form_for(:conversation, url: :conversations, method: :post,:html => {:id=>"conversation"}) do |f| %>
+				<%= f.label :recipients,'받는사람(친구 목록을 눌러보아요 :)' %>
+				<%= f.text_field :recipients,class:"form-control",id:'recipients_form' %>
+
+				<!-- <%= f.label :subject,'제목' %> -->
+				<%= f.hidden_field :subject , value: "나불나불"  %>
+
+				<%= f.label :body, '전하고 싶은 말', class: "checkbox inline"  %>
+				<div class="chat_panel">
+					<div class="panel-body">
+						<div class="friend_list">
+							<ul class="friend_list_ul">
+								<li class="friend_list_item">
+									<div></div>
+									<div></div>
+								</li>
 							</ul>
 						</div>
 					</div>
 				</div>
-				<!-- 친구목록 end-->
+
+				<%= f.hidden_field :body,class:"form-control",id:"message_body" %>         
+
+				<%= f.button '보내기', class: 'btn btn-default',id:"conversation_submit_btn"%>
+				<span id="message_warning" class="text-danger"style="display:none;">빈칸은 앙대영!!!</span>
+
+				<%= f.button '초기화'	, type: :reset, class: 'btn btn-danger' %><!--입력되어진대로 제출한다.-->
+				<!--<%= link_to '뒤로', conversations_path,class:'btn btn-primary'%>-->
+				<% end %>
 			</div>
-			<!-- conversation end-->
+		</div>
+	</div>
+	<%= javascript_tag do %>
+	$('.user_email').on('click',function(event){
+
+
+
+
+
+
+		var form_val = $('#recipients_form').val();
+		var form_val_split =form_val.split(',');
+		var form_val_split_length = form_val_split.length;
+		var current_user_email = $(event.currentTarget).html();
+		for(var i=0; i<form_val_split_length;i++){
+			if(form_val===''){
+				$('#recipients_form').val($('#recipients_form').val()+current_user_email);
+				}else{
+					if(form_val_split[i]===current_user_email){
+						alert("이미 추가하셨습니다.")
+						return;
+						}else{
+							if(form_val_split_length==i+1){
+								$('#recipients_form').val($('#recipients_form').val()+','+current_user_email);
+							}					
+						}
+					}
+				}
+			});
+
+
+
+
+	$("#conversation_submit_btn").on("click",function(){
+		var text_area = $("#message_body").val();
+		if(text_area===""){
+			$("#message_warning").css( "display", "inline" ).fadeOut( 1250 );
+			return false;
+		}    
+	});
+	<% end %>
+
+	<div class="panel" id="arcodian">
+		<div class="panel-heading" style="background-color:#bbb;">
+			<h2 class="accordion-toggle"data-toggle="collapse" data-parent="#accordion" href="#trash" style="cursor:pointer; text-align:center;"><strong>휴지통</strong></h2>
+		</div>
+		<div>
+			<ul id="trash" class="message_friends_wrap panel-collapse collapse">
+				<%= render 'trash' %>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- 친구목록 end-->
+</div>
+<!-- conversation end-->
 
