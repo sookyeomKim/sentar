@@ -23,12 +23,6 @@
 
   
   <script>
-  
-$(window).on("click",function(){
-  $("#user_in_out_").css("color","rgba(0,255,0,0.5)");
-});
-
-
 function alram(){
 var pusher = new Pusher('02d90faab8b070521a56')
 var channel = pusher.subscribe('presence-sentar');  //멤버들의 접속상태와 프로필을 담고 있는 채널
@@ -53,18 +47,20 @@ var user_name;
 })
 channel.bind('pusher:member_added', function(member) {
 
+
  $("#user_in_out_"+member.id).text("gkgkgkgk");
  
  
-
 });
 
 
 channel.bind('pusher:member_removed', function(member) {
   var out_member_id = member.id;
+
  
  /*$("#user_in_out_"+ou t_member_id).css("color","rgba(255,0,0,0.5)");*/
   $("#user_in_out_"+out_member_id).text("test!!!!!!!!!!!!!");
+
 
 });
 
