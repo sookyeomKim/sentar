@@ -31,6 +31,7 @@ function alram(){
 var pusher = new Pusher('02d90faab8b070521a56')
 var channel = pusher.subscribe('presence-sentar');  //멤버들의 접속상태와 프로필을 담고 있는 채널
 channel.bind('pusher:subscription_succeeded', function(members) { //인증이 완료되고 접속이 되었을 경우
+alert('connected')
 var login_user;
 var user_name;
  $("#all_users").text(members.count);
@@ -48,8 +49,10 @@ var user_name;
   });
 })
 channel.bind('pusher:member_added', function(member) {
-  // for example:
- members.each(function(member) {
+var login_user;
+var user_name;
+ $("#all_users").text(members.count);
+  members.each(function(member) {
     login_user = member.info.name;
     $(".user_list_item").each(function(index){
       user_name = $(".user_name:eq("+index+")").text();
@@ -66,6 +69,7 @@ channel.bind('pusher:member_added', function(member) {
 channel.bind('pusher:member_removed', function(member) {
   // for example:
   //remove_member(member.id, member.info);
+ 
   
 });
 
