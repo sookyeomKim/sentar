@@ -48,7 +48,8 @@ var user_name;
   });
 })
 channel.bind('pusher:member_added', function(member) {
- alert(member.id);
+ var in_member_id = member.id;
+ $(".user_in_out_"+in_member_id).css("color","rgba(0,255,0,0.5)");
   /*var member_id = member.id;
   alert(member_id);
   $(".user_list_item").each(function(index){
@@ -63,7 +64,8 @@ channel.bind('pusher:member_added', function(member) {
 channel.bind('pusher:member_removed', function(member) {
   // for example:
   //remove_member(member.id, member.info);
- 
+  var out_member_id = member.id;
+ $(".user_in_out_"+out_member_id).css("color","rgba(255,0,0,0.5)");
   
 });
 
