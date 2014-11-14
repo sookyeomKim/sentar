@@ -1,4 +1,8 @@
+require 'pusher'
 
+Pusher.app_id = '96507'
+Pusher.key = '02d90faab8b070521a56'
+Pusher.secret = 'cd2a54b829853d9fec6c'
 
 
 
